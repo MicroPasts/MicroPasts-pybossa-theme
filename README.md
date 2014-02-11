@@ -4,12 +4,6 @@ server](https://github.com/findsorguk/pybossa).
 
 ![AHRC funded](http://crowdfunded.micropasts.org/assets/about/ahrc.png)
 
-# Installing and Upgrading
-
-This theme is automatically grabbed and installed in the PyBossa server when
-you clone the server with the option **--recursive**, as this theme is included
-as a sub-module in PyBossa.
-
 # Creating a new theme
 
 In order to create a new theme, fork this repository and make all the required
