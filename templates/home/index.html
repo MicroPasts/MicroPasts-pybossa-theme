@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-      <div class="banner">
+      <div class="jumbotron">
         <div class="row">
-          <div class="span4">
+          <div class="col-md-4">
               <h1>{{ brand }}</h1>
               {% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
           </div>
-          <div class="span8">
+          <div class="col-md-8">
             <ul class="featured">
                 {% for f in featured %}
                 <li><a href={{ url_for('app.details', short_name=f.short_name)}}>
@@ -31,20 +31,20 @@
 
       <section class="grey get-started">
         <div class="row">
-          <div class="span4">
-              <h2><i class="icon-play-circle"></i> {{ _('Get Started') }}</h2>
+          <div class="col-md-4">
+              <h2><i class="glyphicon glyphicon-play-circle"></i> {{ _('Get Started') }}</h2>
             <p>{{ _('It\'s really simple to start contributing.') }}</p>
           </div>
-          <div class="span8">
-              <a href="{{url_for('app.index')}}" class="btn btn-info btn-large"><i class="icon-ok-sign"></i>{{ _(' Start Contributing') }}</a> <a href="{{url_for('app.new')}}" class="btn btn-primary btn-large"><i class="icon-plus-sign"></i> {{ _('Create an App') }}</a>
+          <div class="col-md-8">
+              <a href="{{url_for('app.index')}}" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-ok-sign"></i>{{ _(' Start Contributing') }}</a> <a href="{{url_for('app.new')}}" class="btn btn-lg"><i class="glyphicon glyphicon-plus-sign"></i> {{ _('Create an App') }}</a>
           </div>
       </section>
       
       <section>
-        <h2><i class="icon-th"></i>{{ _('Most Active Applications') }}</h2>
+        <h2><i class="glyphicon glyphicon-th"></i>{{ _('Most Active Applications') }}</h2>
         <div class="row">
           {% for app in top_apps %}
-          <div class="span3">
+          <div class="col-md-3">
             <div class="app box">
                 {% if app.info.thumbnail %}
                 <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{app.info.thumbnail}})"></a>
@@ -53,17 +53,17 @@
                 {% endif %}
                 <h3>{{app.name | truncate(20, true)}}</h3>
                 <p>{{app.description | truncate(32, true)}}</p>
-                <p><a href="{{url_for('app.details',short_name=app.short_name)}}" class="btn btn-mini btn-info">Info</a> <a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-mini btn-primary">{{ _('Start') }}</a></p>
+                <p><a href="{{url_for('app.details',short_name=app.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-xs btn-primary">{{ _('Start') }}</a></p>
             </div>
           </div>
           {% endfor %}
           {% for i in range(4-top_apps|count)%}
-          <div class="span3">
+          <div class="col-md-3">
             <div class="app box">
                 <a href="#" class="image" style="background-image:url({{url_for('static',filename='img/placeholder.png')}})"></a>
                 <h3>{{ _('Your application') }}</h3>
                 <p>{{ _('could be here!') }}</p>
-                <p><a href="{{url_for('app.new')}}" class="btn btn-mini btn-primary">{{ _('Create an app') }}</a></p>
+                <p><a href="{{url_for('app.new')}}" class="btn btn-xs btn-primary">{{ _('Create an app') }}</a></p>
             </div>
           </div>
           {% endfor %}

@@ -32,41 +32,41 @@
 {% endmacro %}
 
 {% macro render_app_local_nav(app, active_link, current_user) -%}
-<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
-    <li {% if active_link=="info"%}class="active"{% endif %}><a href="{{url_for('app.details', short_name=app.short_name)}}"><i class="icon-chevron-right"></i> {{_('Info')}}</a></li>
-    <li {% if active_link=="contribute"%}class="active"{% endif %}><a href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="icon-chevron-right"></i> {{_('Contribute')}}</a></li>
-    <li {% if active_link=="tasks"%}class="active"{% endif %}><a href="{{url_for('app.tasks', short_name=app.short_name)}}"><i class="icon-chevron-right"></i> {{_('Tasks')}}</a></li>
-    <li {% if active_link=="stats"%}class="active"{% endif %}><a href="{{url_for('app.show_stats', short_name=app.short_name)}}"><i class="icon-chevron-right"></i> {{_('Statistics')}}</a></li>
+<ul data-spy="affix" data-offset-top="200px" class="nav list-group bs-docs-sidenav affix-top">
+    <li {% if active_link=="info"%}class="active"{% endif %}><a href="{{url_for('app.details', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Info')}}</a></li>
+    <li {% if active_link=="contribute"%}class="active"{% endif %}><a href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Contribute')}}</a></li>
+    <li {% if active_link=="tasks"%}class="active"{% endif %}><a href="{{url_for('app.tasks', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Tasks')}}</a></li>
+    <li {% if active_link=="stats"%}class="active"{% endif %}><a href="{{url_for('app.show_stats', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Statistics')}}</a></li>
     {% if ( current_user.is_authenticated() and current_user.id == app.owner_id ) or current_user.admin %}
-    <li {% if active_link=="settings"%}class="active"{% endif %}><a href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="icon-chevron-right"></i> {{_('Settings')}}</a></li>
+    <li {% if active_link=="settings"%}class="active"{% endif %}><a href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Settings')}}</a></li>
     {% endif %}
 </ul>
 {% endmacro %}
 
 {% macro render_app_summary(app, n_tasks, overall_progress, last_activity, current_user) -%}
-<div class="row-fluid">
-    <div class="span2">
+<div class="row">
+    <div class="col-md-2">
         {% if app.info.thumbnail %}
         <img class="img-polaroid" src="{{app.info.thumbnail}}" onerror="imgError(this);"/>
         {% else %}
         <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder.png')}}"/>
         {% endif %}
     </div>
-    <div class="span8">
+    <div class="col-md-8">
       <ul style="list-style-type: none; font-size: 16px;">
         {% if current_user.id == app.owner_id %}
-        <li><strong><i class="icon-cog"></i> {{ _('ID') }}</strong>: {{ app.id }}</li>
+        <li><strong><i class="glyphicon glyphicon-cog"></i> {{ _('ID') }}</strong>: {{ app.id }}</li>
         {% endif %}
-        <li><strong><i class="icon-info-sign"></i> {{ _('Description') }}</strong>: {{ app['description'] }}</li>
-        <li><strong><i class="icon-ok"></i> {{ _('Creation Date') }}</strong>: {{ app.created[0:10] }}</li>
-        <li><strong><i class="icon-time"></i> {{ _('Last Activity') }}</strong>: {{ last_activity}}</li>
-        <li><strong><i class="icon-cogs"></i> {{ _('Overall progress') }}</strong>: {{ overall_progress | round | int }}% {{ _('completed') }}</li>
-        <li><strong><i class="icon-tasks"></i> <a href="{{url_for('app.tasks',short_name=app.short_name)}}">{{ _('Tasks') }}</strong></a> ({{ n_tasks }})</li>
+        <li><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ app['description'] }}</li>
+        <li><strong><i class="glyphicon glyphicon-ok"></i> {{ _('Creation Date') }}</strong>: {{ app.created[0:10] }}</li>
+        <li><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: {{ last_activity}}</li>
+        <li><strong><i class="glyphicon glyphicon-cogs"></i> {{ _('Overall progress') }}</strong>: {{ overall_progress | round | int }}% {{ _('completed') }}</li>
+        <li><strong><i class="glyphicon glyphicon-tasks"></i> <a href="{{url_for('app.tasks',short_name=app.short_name)}}">{{ _('Tasks') }}</strong></a> ({{ n_tasks }})</li>
         {% if not current_user.is_anonymous() %}
         <li>{% if app.hidden == 1 %}
-            <i class="icon icon-eye-close"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('Yes') }}
+            <i class="glyphicon glyphicon-eye-close"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('Yes') }}
         {% else %} 
-            <i class="icon icon-eye-open"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('No') }}
+            <i class="glyphicon glyphicon-eye-open"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('No') }}
         {% endif %}
         </li>
         {% endif %}
@@ -76,48 +76,48 @@
 {% endmacro %}
 
 {% macro render_app_short_summary(app, current_user) -%}
-<div class="row-fluid well well-small">
-    <div class="span3">
+<div class="row well well-small">
+    <div class="col-md-3">
         {% if app.info.thumbnail %}
         <img class="img-polaroid" src="{{app.info.thumbnail}}" onerror="imgError(this);" style="max-width:100px"/>
         {% else %}
         <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder.png')}}" style="max-width:100px"/>
         {% endif %}
     </div>
-    <div class="span9">
+    <div class="col-md-9">
         <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
         <p>{{ app['description'] }}</p>
-        <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="icon-wrench"></i> {{ _('Settings') }}</a>
+        <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-wrench"></i> {{ _('Settings') }}</a>
     </div>
 </div>
 {% endmacro %}
 
 {% macro render_app_admin_featured(app, current_user) -%}
-<div class="row-fluid well well-small">
-    <div class="span3">
+<div class="row well well-small">
+    <div class="col-md-3">
         {% if app.info.thumbnail %}
         <img class="img-polaroid" src="{{app.info.thumbnail}}" onerror="imgError(this);" style="max-width:100px"/>
         {% else %}
         <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder.png')}}" style="max-width:100px"/>
         {% endif %}
     </div>
-    <div class="span9">
+    <div class="col-md-9">
         <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
         <p>{{ app['description'] }}</p>
-        <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="icon-wrench"></i> {{ _('Settings') }}</a>
+        <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-wrench"></i> {{ _('Settings') }}</a>
         {% if app.featured == app.id %}
         <button id="appBtnDel{{app.id}}" class="btn btn-danger" onclick="del({{app.id}})">
-                <i id="app{{app.id}}" class="icon-remove"></i> {{ _('Remove from Featured!') }}
+                <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
         </button>
         <button id="appBtnAdd{{app.id}}" class="btn btn-primary" onclick="add({{app.id}})" style="display:none;">
-                <i id="app{{app.id}}" class="icon-plus"></i> {{ _('Add to Featured!') }}
+                <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
         </button>
         {% else %}
         <button id="appBtnAdd{{app.id}}" class="btn btn-primary" onclick="add({{app.id}})">
-                <i id="app{{app.id}}" class="icon-plus"></i> {{ _('Add to Featured!') }}
+                <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
         </button>
         <button id="appBtnDel{{app.id}}" class="btn btn-danger" onclick="del({{app.id}})" style="display:none;">
-                <i id="app{{app.id}}" class="icon-remove"></i> {{ _('Remove from Featured!') }}
+                <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
         </button>
         {% endif %}
     </div>
@@ -126,31 +126,31 @@
 
 
 {% macro show_app(data, category, current_user) -%}
-<div class="project-item row-fluid {{class}} well">
+<div class="project-item row {{class}} well">
     <h2><a href="{{ url_for('app.details', short_name = data.app.short_name) }}">{{ data.app.name }}</a></h2>
-    <div class="row-fluid">
-        <div class="span3">
+    <div class="row">
+        <div class="col-md-3">
             {% if data.app.info.thumbnail %}
             <img class="thumbnail" src="{{ data.app.info.thumbnail }}" style="max-width:100px; max-height:100px" onerror="imgError(this);">
             {% else %}
             <img class="thumbnail" src="{{url_for('static', filename='img/placeholder.png')}}" style="max-width:100px;">
             {% endif %}
         </div> <!-- End of span3 -->
-        <div id="data" class="span9">
-            <p style="margin:0"><strong><i class="icon-info-sign"></i> {{ _('Description') }}</strong>: {{ data.app.description }}</p>
-            <p style="margin:0"><strong><i class="icon-ok"></i> {{ _('Creation Date') }}</strong>: <span class="date">{{ data.app.created[0:10] }}</span></p>
+        <div id="data" class="col-md-9">
+            <p style="margin:0"><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ data.app.description }}</p>
+            <p style="margin:0"><strong><i class="glyphicon glyphicon-ok"></i> {{ _('Creation Date') }}</strong>: <span class="date">{{ data.app.created[0:10] }}</span></p>
             {% if data.app.last_activity_raw != None %}
-            <p style="margin:0"><strong><i class="icon-time"></i> {{ _('Last Activity') }}</strong>: {{ data.last_activity}}</p>
+            <p style="margin:0"><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: {{ data.last_activity}}</p>
             <span class="activity" style="display:none;">{{data.last_activity_raw}}</span>
             {% endif %}
-            <p style="margin:0"><strong><i class="icon-cogs"></i> {{ _('Overall progress') }}</strong>: <span class="progress">{{ data.overall_progress | round | int }}</span>% completed</p>
+            <p style="margin:0"><strong><i class="glyphicon glyphicon-cogs"></i> {{ _('Overall progress') }}</strong>: <span class="progress">{{ data.overall_progress | round | int }}</span>% completed</p>
             {% if data.app.owner_id == current_user.id %}
-            <p style="margin:0"><strong><i class="icon-user"></i> {{ _('Created by') }}</strong>: {{ _('Me') }}</p>
+            <p style="margin:0"><strong><i class="glyphicon glyphicon-user"></i> {{ _('Created by') }}</strong>: {{ _('Me') }}</p>
             {% else %}
-            <p style="margin:0"><strong><i class="icon-user"></i> {{ _('Created by') }}</strong>: {{ data.app.owner }}</p>
+            <p style="margin:0"><strong><i class="glyphicon glyphicon-user"></i> {{ _('Created by') }}</strong>: {{ data.app.owner }}</p>
             {% endif %}
             {% if class != "app-draft" %}
-            <p style="margin:0"><a class="btn btn-primary" href="{{ url_for('app.presenter', short_name = data.app.short_name) }}"><i class="icon icon-white icon-ok"></i> {{ _('Try it!') }}</a></p>
+            <p style="margin:0"><a class="btn btn-primary" href="{{ url_for('app.presenter', short_name = data.app.short_name) }}"><i class="glyphicon glypicon-white glyphicon-ok"></i> {{ _('Try it!') }}</a></p>
             {% endif %}
         </div> <!-- end of id=data class=span8 -->
     </div> <!--end of class=row -->
@@ -204,11 +204,11 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_overall_progress(app, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
-<div class="row-fluid">
-    <div class="span1"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
+<div class="row">
+    <div class="col-md-1"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
     <h2><strong> {{_('Overall progress')}}</strong>: {{ overall_progress | round | int }}% {{_('completed')}}
         {% if show_contribute_btn %}
-        <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-primary pull-right"><i class="icon-thumbs-up" style="color:white;"></i> {{ _('Start Contributing Now!') }}</a>
+        <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-thumbs-up" style="color:wglyphicon glyphicon;"></i> {{ _('Start Contributing Now!') }}</a>
         {% elif show_n_tasks %}
         <span class="pull-right"><strong>{{n_tasks}}</strong> {{_('Tasks')}}</span>
         {% endif %}
@@ -219,11 +219,11 @@ function imgError(image) {
 
 {% macro render_grid_apps(apps, title) %}
     <div class="banner">
-        <div class="row-fluid">
-            <div class="span4">
+        <div class="row">
+            <div class="col-md-4">
                 <h1>{{title}}</h1>
             </div>
-            <div class="span8">
+            <div class="col-md-8">
               <ul class="featured">
                   {% for app in apps %}
                   <li><a href={{ url_for('app.details', short_name=app.short_name)}}>
@@ -248,7 +248,7 @@ function imgError(image) {
 
 {% macro render_loading(text) %}
 <div class="row">
-    <div class="span12">
+    <div class="col-md-12">
         <div id="loading" class="alert alert-info" style="display:none;">
             <img src="{{url_for('static', filename='img/loading.gif')}}"/> {{text}}
         </div>
