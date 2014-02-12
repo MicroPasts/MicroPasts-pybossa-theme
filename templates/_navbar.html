@@ -10,8 +10,8 @@
           <a class="brand" href="{{ url_for('home') }}"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}"></a>
          </div>
          
-          <div class="nav-collapse collapse">
-            <ul class="nav  navbar-nav">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
               <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Community') }}</a></li>
               <li {% if active_page == 'applications' %} class="active" {% endif %}><a href="{{ url_for('app.index') }}">{{ _('Applications') }}</a></li>
               <li {% if active_page == 'create' %} class="active" {% endif %}><a href="{{ url_for('app.new') }}">{{ _('Create') }}</a></li>
@@ -19,7 +19,7 @@
             </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
-            <ul class="nav secondary-nav pull-right">
+            <ul class="nav navbar-nav navbar-right">
               <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon icon-user"></i> {{ current_user.name | truncate(6,true) }} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ url_for('account.profile') }}"><i class="icon icon-user"></i> {{ _('My Profile') }}</a></li>
@@ -37,7 +37,7 @@
           {% endif %}
 
             {% if current_user.is_anonymous() %}
-            <ul class="nav secondary-nav pull-right">
+            <ul class="nav navbar-nav navbar-right">
               <li><a href="{{ url_for('account.signin') }}"><i class="icon icon-white icon-signin"></i> {{ _('Sign in') }}</a></li>
             </ul>
             {% endif %}
