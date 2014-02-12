@@ -6,18 +6,18 @@
 {% block content %}
 <div class="row">
     {% if app %}
-    <div class="span3">
+    <div class="col-md-3">
         {{ helper.render_app_local_nav(app, 'settings', current_user) }}
     </div>
     <!-- Application -->
-    <div class="span9">
+    <div class="col-md-9">
         <h1><strong>{{ app.name }}</strong>: {{ _('Settings') }}</h1>
         {{ helper.render_app_summary(app, n_tasks, overall_progress, last_activity, current_user) }}
         <h2>{{ _('Application Settings') }}</h2>
         <div class="btn-group">
-            <a class="btn" href="{{ url_for('app.update', short_name = app.short_name) }}"><i class="icon-edit icon-white"></i> {{ _('Edit the application details') }}</a>
-            <a class="btn" href="{{ url_for('app.task_settings', short_name = app.short_name) }}"><i class="icon-wrench icon-white"></i> {{ _('Task Settings') }}</a>
-            <a class="btn" href="{{ url_for('app.delete', short_name = app.short_name) }}"><i class="icon-trash icon-white"></i> {{ _('Delete the application') }}</a>
+            <a class="btn" href="{{ url_for('app.update', short_name = app.short_name) }}"><i class="glyphicon glyphicon-icon-edit glyphicon-white"></i> {{ _('Edit the application details') }}</a>
+            <a class="btn" href="{{ url_for('app.task_settings', short_name = app.short_name) }}"><i class="glyphicon glyphicon-wrench glyphicon-white"></i> {{ _('Task Settings') }}</a>
+            <a class="btn" href="{{ url_for('app.delete', short_name = app.short_name) }}"><i class="glyphicon glyphicon-trash glyphicon-white"></i> {{ _('Delete the application') }}</a>
         </div>
     </div>
     {% else %}
