@@ -4,6 +4,6 @@
       <input type="hidden" name="ie" value="ISO-8859-1" />
       <div class="input-group">
       <input type="text" name="q" class="col-md-2 search-query" placeholder="{{_('Search')}}"  />
-      <button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+      <button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-search"></i></button>
       </div>
 </form>
