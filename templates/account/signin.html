@@ -32,15 +32,15 @@
 <hr>
 
 {% from "_formhelpers.html" import render_field %}
-  <form id="signin" method="post" class="form-horizontal" action="">
+  <form role="form" id="signin" method="post" class="form-horizontal" action="">
     {{ form.hidden_tag() }}
     {% if auth.twitter or auth.facebook%}
     <legend>{{ _('Or Sign in with your PyBossa account') }}</legend>
     {% else %}
     <legend>{{ _('Sign in with your PyBossa account') }}</legend>
     {% endif %}
-      {{ render_field(form.email, placeholder="") }}
-      {{ render_field(form.password, placeholder="") }}
+      {{ render_field(form.email, placeholder="", class_="form-control") }}
+      {{ render_field(form.password, placeholder="", class_="form-control") }}
     <div>
       <input type="submit" value="{{ _('Sign in') }}" class="btn btn-primary btn-lg" />
       <input type="reset" value="{{ _('Cancel') }}" class="btn btn-info btn-lg" />

@@ -11,9 +11,9 @@
     </div>
     <div class="col-md-9">
         <h1><strong>{{ _('Application') }}</strong>: {{ _('Create a new application') }}</h1>
-    <form class="form-horizontal" method="post" action="{{ url_for('app.new') }}">
+    <form class="form-horizontal" role="form" method="post" action="{{ url_for('app.new') }}">
         {{ form.hidden_tag() }}
-        <fieldset>
+        <div class="form-group">
             {{ render_field(form.name, class_="form-control", placeholder= _('The name of the application')) }}
             {{ render_field(form.short_name, class_="form-control", placeholder=_('Short name or slug for the application')) }}
             {{ render_field(form.description, class_="form-control", placeholder=_('Give some details about the application'))}}
@@ -26,7 +26,7 @@
                 <input type="submit" value={{_('Create the application')}} class="btn btn-primary" />
                 <a href="{{url_for('account.profile')}}" class="btn btn-primary">{{_('Cancel')}}</a>
             </div>
-        </fieldset>
+        </div>
     </form>
     </div>
 </div>

@@ -12,14 +12,14 @@
 </p>
 
   <legend>{{ _('Create an account') }}</legend>
-  <form method="post" class="form-horizontal" action="{{ url_for('account.register') }}">
+  <form role="form" method="post" class="form-horizontal" action="{{ url_for('account.register') }}">
       {{ form.hidden_tag() }}
       <fieldset>
-      {{ render_field(form.fullname, placeholder= _('Your full name')) }}
-      {{ render_field(form.username, placeholder= _('Your username')) }}
-      {{ render_field(form.email_addr, placeholder= _('Your email address')) }}
-      {{ render_field(form.password, placeholder= _('Enter a password')) }}
-      {{ render_field(form.confirm, placeholder= _('Re-enter the same password')) }}
+      {{ render_field(form.fullname, placeholder= _('Your full name'), class_="form-control") }}
+      {{ render_field(form.username, placeholder= _('Your username'), class_="form-control") }}
+      {{ render_field(form.email_addr, placeholder= _('Your email address'), class_="form-control") }}
+      {{ render_field(form.password, placeholder= _('Enter a password'), class_="form-control") }}
+      {{ render_field(form.confirm, placeholder= _('Re-enter the same password'), class_="form-control") }}
       <div>
         <input type="submit" value="{{ _('Create an account') }}" class="btn btn-primary btn-lg" />
         <input type="reset" value="{{ _('Cancel') }}" class="btn btn-lg btn-default" />

@@ -13,7 +13,7 @@
         <div class="alert alert-warning">
             <strong>{{ _('Note') }}</strong>{{ _(' If you reset the API key, you will need to use the new generated key for any API call.') }}
         </div>
-        <form class="form-horizontal" method="post" action="{{ url_for('account.reset_api_key')}}">
+        <form role="form" class="form-horizontal" method="post" action="{{ url_for('account.reset_api_key')}}">
         <h3><strong>{{ _('Do you want to reset your personal API Key?') }}</strong></h3>
         <div>
           <input type="submit" class="btn btn-sm btn-default" value="Yes"/>

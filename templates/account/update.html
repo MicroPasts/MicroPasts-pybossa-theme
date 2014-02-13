@@ -11,17 +11,17 @@
     </div>
     <div class="col-md-9">
         <h1><strong>{{current_user.fullname}}</strong>: {{ _('Update your profile') }}</h1>
-        <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile') }}">
+        <form role="form" method="post" class="form-horizontal" action="{{ url_for('account.update_profile') }}">
             <fieldset>
             {{ form.id }}
             {{ form.hidden_tag() }}
-            {{ render_field(form.fullname, placeholder= _('my full name') ) }}
-            {{ render_field(form.name, placeholder= _('myusername') ) }}
-            {{ render_field(form.email_addr, placeholder= _('hello@mywebsite.org') ) }}
+            {{ render_field(form.fullname, placeholder= _('my full name'), class_="form-control" ) }}
+            {{ render_field(form.name, placeholder= _('myusername'), class_="form-control" ) }}
+            {{ render_field(form.email_addr, placeholder= _('hello@mywebsite.org'), class_="form-control" ) }}
             {{ render_field(form.locale) }}
             <hr>
             <h2>External Services</h2>
-            {{ render_field(form.ckan_api) }}
+            {{ render_field(form.ckan_api, class_="form-control") }}
             <div>
                 <img class="img-circle" src="{{ current_user.email_addr | gravatar(size=25)}}">
                 <a href="http://www.gravatar.com">{{ _('Change your avatar at Gravatar.com') }}</a>. {{ _('We are using') }} {{current_user.email_addr}}
