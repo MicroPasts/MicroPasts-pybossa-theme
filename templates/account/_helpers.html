@@ -41,7 +41,7 @@
         <h2><i class="glyphicon glyphicon-envelope"></i> {{_('E-mail')}}: <small>{{ user.email_addr }}</small></h2>
         {% endif %}
         {% if user.rank %}
-        <h2><i class="glyphicon glyphicon-trophy"></i> {{ _('Rank')}}: <small>
+        <h2><i class="glyphicon glyphicon-list-alt"></i> {{ _('Rank')}}: <small>
                 {% if private %}
                 <a href="{{url_for('leaderboard.index')}}">
                 {% endif %}
