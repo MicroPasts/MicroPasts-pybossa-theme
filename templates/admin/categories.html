@@ -14,11 +14,11 @@
         <div class="row">
             <div id="add" class="col-md-12">
                 {% from "_formhelpers.html" import render_field %}
-                <form class="form-horizontal" method="POST" action="{{url_for('admin.categories')}}">
+                <form role="form" class="form-horizontal" method="POST" action="{{url_for('admin.categories')}}">
                     {{form.hidden_tag()}}
                     <fieldset>
-                    {{ render_field(form.name, placeholder= _('Category name')) }}
-                    {{ render_field(form.description, placeholder= _('Category description')) }}
+                    {{ render_field(form.name, placeholder= _('Category name'), class_="form-control") }}
+                    {{ render_field(form.description, placeholder= _('Category description'), class_="form-control") }}
                     <div>
                         <button type="submit" class="btn btn-primary">{{_('Add Category')}}</button>
                     </div>
