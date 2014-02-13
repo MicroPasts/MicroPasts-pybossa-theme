@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="background">
+
       <div class="jumbotron">
         <div class="row">
           <div class="col-md-4">
@@ -21,13 +23,15 @@
                     </a>
                 </li>
                 {% endfor %}
-                {% for number in range(18 - featured|count) %}
+                {% for number in range(4 - featured|count) %}
                 <li></li>
                 {% endfor %}
             </ul>
           </div>
         </div>
       </div>
+
+</div>
 
       <section class="grey get-started">
         <div class="row">
