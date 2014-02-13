@@ -63,7 +63,7 @@
         <h2><i class="glyphicon glyphicon-key"></i> {{ _('API key') }}: <small>{{ user.api_key }}</small></h2>
         {% endif %}
         {% if private and not settings%}
-        <a href="{{ url_for('account.public_profile', name=user.name) }}" class="btn btn-inverse"><i class="icon glyphicon glyphicon-globe"></i> {{ _('See your public profile') }}</a>
+        <a href="{{ url_for('account.public_profile', name=user.name) }}" class="btn btn-default"><i class="icon glyphicon glyphicon-globe"></i> {{ _('See your public profile') }}</a>
         <a href="{{ url_for('account.settings') }}" class="btn btn-primary"><i class="icon glyphicon glyphicon-user"></i> {{ _('Edit your profile') }}</a>
         {% endif %}
     </div>
