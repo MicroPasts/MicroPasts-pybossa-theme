@@ -10,14 +10,14 @@
     </div>
   <div class="col-md-9">
       <legend><strong>{{app.name}}</strong>: Update the application</legend>
-    <form class="form-horizontal" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}">
+    <form role="form" class="form-horizontal" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}">
       <fieldset>
         {{form.id}}
         {{ form.hidden_tag() }}
-        {{ render_field(form.name, class_="input-xlarge", placeholder="The name of the application") }}
-        {{ render_field(form.short_name, class_="input-xlarge", placeholder="Short name or slug for the application") }}
-        {{ render_field(form.description, class_="input-xlarge", placeholder="Give some details about the application")}}
-        {{ render_field(form.thumbnail, class_="input-xlarge", placeholder="Paste the direct link to your app icon")}}
+        {{ render_field(form.name, class_="input-xlarge", placeholder="The name of the application", class_="form-control") }}
+        {{ render_field(form.short_name, class_="input-xlarge", placeholder="Short name or slug for the application", class_="form-control") }}
+        {{ render_field(form.description, class_="input-xlarge", placeholder="Give some details about the application", class_="form-control")}}
+        {{ render_field(form.thumbnail, class_="input-xlarge", placeholder="Paste the direct link to your app icon", class_="form-control")}}
         {{ render_field(form.allow_anonymous_contributors)}}
         {{ render_field(form.category_id)}}
         {{ render_field(form.long_description, class_="input-xlarge", placeholder="Explain the application (you can use HTML code!)")}}
