@@ -1,4 +1,4 @@
-<form class="navbar-form form-search pull-right" action="/search">
+<form class="navbar-form form-search pull-right" role="form" action="/search">
       <input type="hidden" name="cx" value="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:YYYYYYYYYYY"/>
       <input type="hidden" name="cof" value="FORID:10" />
       <input type="hidden" name="ie" value="ISO-8859-1" />
