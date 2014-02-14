@@ -21,13 +21,13 @@
 
                 <form role="form" id="task_scheduler" class="form-horizontal" method="post" action="{{ url_for('app.task_scheduler', short_name=app.short_name) }}">
                     {{ form.hidden_tag() }}
-                    <fieldset>
-                        {{ render_field(form.sched, class_="col-md-4", placeholder="Task scheduler for your app")}}
+                    <div class="form-group">
+                        {{ render_field(form.sched, class_="col-md-4", placeholder="Task scheduler for your app", class_="form-control" )}}
                         <div>
-                            <input type="submit" value={{_('Set redundancy')}} class="btn btn-primary" />
+                            <input type="submit" value="{{_('Set redundancy')}}" class="btn btn-primary" />
                             <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn btn-info">{{_('Cancel')}}</a>
                         </div>
-                    </fieldset>
+                    </div>
                 </form>
             </div><!-- span9 -->
         </div>
