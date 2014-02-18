@@ -11,14 +11,14 @@
           </div>
 		</div>
         
-        <div class="row well">
+        <div class="row well" >
         	<div class="col-md-4">
         		<img src="{{url_for('static', filename="img/MP_SOCIALMEDIA.jpg")}}" />
         	</div>
         	<div class="col-md-8">
         	<h2>{{ title }}</h2>
 			{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
-
+			<div id="banner">
         	<h2><i class="glyphicon glyphicon-th"></i> Featured projects</h2>
         	<ul class="featured">
                 {% for f in featured %}
@@ -37,7 +37,7 @@
                 {% for number in range(4 - featured|count) %}
                 <li></li>
                 {% endfor %}
-            </ul>
+            </ul></div>
                    	</div>	 
         </div>
         
