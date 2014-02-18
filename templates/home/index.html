@@ -40,7 +40,8 @@
             <p>{{ _('It\'s really simple to start contributing.') }}</p>
           </div>
           <div class="col-md-8">
-              <a href="{{url_for('app.index')}}" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-ok-sign"></i>{{ _(' Start Contributing') }}</a>                 {% if current_user.is_authenticated() %}
+              <a href="{{url_for('app.index')}}" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-ok-sign"></i>{{ _(' Start Contributing') }}</a>
+              {% if current_user.is_authenticated() %}
                 {% if current_user.admin == 1 %}<a href="{{url_for('app.new')}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-plus-sign"></i> {{ _('Create an App') }}</a>{% endif %}{% endif %}
           </div>
       </section>
@@ -71,7 +72,7 @@
                 {% if current_user.is_authenticated() %}
                 {% if current_user.admin == 1 %}
                 <p><a href="{{url_for('app.new')}}" class="btn btn-xs btn-primary">{{ _('Create an app') }}</a></p>
-                {% endif % }
+                {% endif %}
                 {% endif %}
             </div>
           </div>
