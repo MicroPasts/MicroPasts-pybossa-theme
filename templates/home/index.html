@@ -3,13 +3,25 @@
 {% block content %}
 <div class="background">
 
-      <div class="jumbotron">
+      
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-12">
               <h1>{{ brand }} : {{ title }}</h1>
-              <img src="{{url_for('static', filename="img/MP_SOCIALMEDIA.jpg")}}" />
+              
           </div>
-          <div class="col-md-8">
+		</div>
+        
+        <div class="row">
+        	<div class="col-md-4">
+        		<img src="{{url_for('static', filename="img/MP_SOCIALMEDIA.jpg")}}" />
+        	</div>
+        	<div class="col-md-8">
+			{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
+        	</div>	
+        </div>
+        
+        <div class="row">
+        
             <ul class="featured">
                 {% for f in featured %}
                 <li><a href={{ url_for('app.details', short_name=f.short_name)}}>
@@ -27,9 +39,9 @@
                 <li></li>
                 {% endfor %}
             </ul>
-          </div>
+            
         </div>
-      </div>
+
 
 </div>
 
