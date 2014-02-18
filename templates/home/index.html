@@ -4,23 +4,24 @@
 <div class="background">
 
       
-        <div class="row">
-          <div class="col-md-12">
-              <h1>{{ brand }} : {{ title }}</h1>
+        <div class="row jumbotron">
+          <div class="col-md-12 ">
+              <h1>{{ brand }}</h1>
               
           </div>
 		</div>
         
-        <div class="row">
+        <div class="row well">
         	<div class="col-md-4">
         		<img src="{{url_for('static', filename="img/MP_SOCIALMEDIA.jpg")}}" />
         	</div>
         	<div class="col-md-8">
+        	<h2>{{ title }}</h2>
 			{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
         	</div>	
         </div>
         
-        <div class="row">
+        <div class="row well">
         
             <ul class="featured">
                 {% for f in featured %}
