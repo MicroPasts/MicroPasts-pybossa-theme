@@ -2,12 +2,28 @@ This is an implementation of the MicroPasts theme for the AHRC funded MicroPasts
 project. [Pybossa
 server](https://github.com/findsorguk/pybossa).
 
+Funded by
+=========
 ![AHRC funded](http://crowdfunded.micropasts.org/assets/about/ahrc.png)
+
+Partners
+========
+![British Museum](http://crowdsourced.micropasts.org/static/img/bm_logo.png)
+![UCL](http://crowdsourced.micropasts.org/static/img/black.jpg)
 
 # Creating a new theme
 
 In order to create a new theme, fork this repository and make all the required
 changes in the **templates** and **static** folder.
+
+# Install theme
+
+In settings_local.py add the line below or amend if present:
+
+THEME = 'theme name'
+
+Clone this repo to themes folder and pull changes when made.
+
 
 # Useful Links
 
