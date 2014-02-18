@@ -6,8 +6,8 @@
       <div class="jumbotron">
         <div class="row">
           <div class="col-md-4">
-              <h1>{{ brand }}</h1>
-              {% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
+              <h1>{{ brand }} : {{ title }}</h1>
+              <img src="{{url_for('static', filename="img/MP_SOCIALMEDIA.jpg")}}" />
           </div>
           <div class="col-md-8">
             <ul class="featured">
