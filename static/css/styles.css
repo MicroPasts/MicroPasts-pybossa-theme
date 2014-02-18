@@ -297,7 +297,7 @@ ul.users li a {
 .featured {
   margin: -6px 0px 0px 0px;
   border-left: solid 2px #FFF;
-  height: 309px;
+  height: 200px;
   overflow: hidden;
 }
 .featured li {
@@ -306,7 +306,7 @@ ul.users li a {
   width: 103px;
   height: 103px;
   background-color: #FFF;
-  background-image: url(../img/placeholder.png);
+  background-image: url(../img/placeholder-head.png);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 97px 97px;
