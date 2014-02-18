@@ -19,13 +19,11 @@
         	<h2>{{ title }}</h2>
 			{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
         	</div>	
-        </div>
-        
-        <div class="row well">
-        
-            <ul class="featured">
+        	<h3>Featured projects</h3>
+        	<ul class="featured">
                 {% for f in featured %}
-                <li><a href={{ url_for('app.details', short_name=f.short_name)}}>
+                <li>
+                <a href={{ url_for('app.details', short_name=f.short_name)}}>
                     {% if f.info.thumbnail %}
                     <img src="{{f.info.thumbnail}}">
                     {% else %}
@@ -42,7 +40,7 @@
             </ul>
             
         </div>
-
+        
 
 </div>
 
