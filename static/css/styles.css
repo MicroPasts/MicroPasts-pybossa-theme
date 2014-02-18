@@ -343,3 +343,7 @@ ul.users li a {
     min-width: 100px;
     min-height: 100px;
 }
+
+.btn-pad {
+	padding-top: 20px;
+}
