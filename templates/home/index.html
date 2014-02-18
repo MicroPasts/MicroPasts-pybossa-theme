@@ -6,7 +6,7 @@
       
         <div class="row jumbotron">
           <div class="col-md-12 ">
-              <h1>{{ brand }}</h1>
+              <h1>{{ brand }}: Crowdsourcing</h1>
               
           </div>
 		</div>
@@ -18,8 +18,8 @@
         	<div class="col-md-8">
         	<h2>{{ title }}</h2>
 			{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
-        	</div>	
-        	<h3>Featured projects</h3>
+
+        	<h2><i class="glyphicon glyphicon-th"></i> Featured projects</h2>
         	<ul class="featured">
                 {% for f in featured %}
                 <li>
@@ -38,7 +38,7 @@
                 <li></li>
                 {% endfor %}
             </ul>
-            
+                   	</div>	 
         </div>
         
 
@@ -58,7 +58,7 @@
       </section>
 
       <section>
-        <h2><i class="glyphicon glyphicon-th"></i>{{ _('Most Active Applications') }}</h2>
+        <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
         <div class="row">
           {% for app in top_apps %}
           <div class="col-md-3">
