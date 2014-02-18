@@ -291,6 +291,6 @@ ul.users li a {
 	height: 80px;
 	background-color: #000;
 }
-
-
+.glyphicon-inverse {
+	color: #fff;
 }
