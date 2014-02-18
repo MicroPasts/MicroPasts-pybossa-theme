@@ -294,13 +294,13 @@ ul.users li a {
 	color: #fff;
 }
 
-.banner .featured {
+.featured {
   margin: -6px 0px 0px 0px;
   border-left: solid 2px #FFF;
   height: 309px;
   overflow: hidden;
 }
-.banner .featured li {
+.featured li {
   display: block;
   float: left;
   width: 103px;
@@ -311,21 +311,21 @@ ul.users li a {
   background-position: right bottom;
   background-size: 97px 97px;
 }
-.banner .featured li a {
+.featured li a {
   display: block;
   margin: 6px 0px 0px 6px;
   text-decoration: none;
 }
-.banner .featured li a h3 {
+.featured li a h3 {
   margin: 2px 6px 0px 6px;
   color: #333333;
   font-size: 12px;
 }
-.banner .featured li a .label {
+.featured li a .label {
   margin: 6px;
   display: inline-block;
 }
-.banner .featured li a:hover {
+.featured li a:hover {
   position: absolute;
   margin: -2px 0px 0px -2px;
   -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.8);
@@ -334,13 +334,13 @@ ul.users li a {
   width: 112px;
   z-index: 2;
 }
-.banner .featured li a:hover img {
+.featured li a:hover img {
   border: solid 6px #FFF;
   -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
   width: 100px;
 }
-.banner .featured li img {
+.featured li img {
     min-width: 100px;
     min-height: 100px;
 }
