@@ -6,10 +6,11 @@ Funded by
 =========
 ![AHRC funded](http://crowdfunded.micropasts.org/assets/about/ahrc.png)
 
-Partners
-========
-![British Museum](http://crowdsourced.micropasts.org/static/img/bm_logo.png)
+Funded Partners
+===============
+![British Museum](http://finds.org.uk/images/logos/bm_logo.png)
 ![UCL](http://crowdsourced.micropasts.org/static/img/black.jpg)
+![Portable Antiquities Scheme](http://www.dayofarchaeology.com/wp-content/uploads/2011/05/pasrgbsize4.jpg)
 
 # Creating a new theme
 
