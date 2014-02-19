@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "basePlate.html" %}
 
 {% block content %}
 <div class="background">
@@ -57,7 +57,7 @@
           </div>
       </section>
 
-      <section>
+      <section class="grey">
         <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
         <div class="row">
           {% for app in top_apps %}
