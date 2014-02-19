@@ -6,15 +6,14 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-md-9 col-md-offset-2">
+  <div class="col-md-12">
       {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
       {% else %}
-      <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small><a class="pull-right btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="glyphicon glyphicon-list-alt" style="color:white"></i> {{ _('Leaderboard') }}</a></h1>
+      <h1>{{ _('Contributors') }} <small>{{total}} {{ _('registered users') }}</small><a class="pull-right btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="glyphicon glyphicon-list-alt" style="color:white"></i> {{ _('Leaderboard') }}</a></h1>
       {% if accounts %}
-      <ul class="thumbnails">
       {% for account in accounts %}
-      <li> 
+      <div class="col-xs-6 col-md-3">
       <a href="{{url_for('account.public_profile', name=account.name)}}" class="img-thumbnail" rel='popover' title="<strong>{{account['fullname']}}</strong>" data-content="
               <ul style='list-style-type:none; margin-left:0px;'>
                 <li><strong><i class='glyphicon glyphicon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
@@ -28,11 +27,10 @@
                   </ul>
                 </li>
                 {% endif %}
-              </ul>
               ">
                 <img class="img-circle" src="{{account['email_addr'] | gravatar(size=90)}}">
         </a>
-      </li>
+      </div>
       {% endfor %}
       </ul>
     {% endif %}
