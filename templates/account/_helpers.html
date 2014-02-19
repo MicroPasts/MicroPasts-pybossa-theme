@@ -1,5 +1,5 @@
 {% macro render_account_local_nav(current_user, active_link) -%}
-<ul data-spy="affix" data-offset-top="200px" class="nav nav-pills nav-stacked affix-top">
+<ul data-spy="affix" data-offset-top="200px" class="nav nav-pills nav-stacked">
     <li {% if active_link=="profile"%}class="active"{% endif %}><a href="{{url_for('account.profile')}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Profile') }}</a></li>
     <li {% if active_link=="applications"%}class="active"{% endif %}><a href="{{url_for('account.applications')}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Applications') }}</a></li>
     {% if current_user.admin %}
