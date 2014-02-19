@@ -19,7 +19,6 @@
               {% endif %}
               <li {% if active_page == 'about' %} class="active" {% endif %}><a href="{{ url_for('about')}}">{{ _('About') }}</a></li>
               <li><a href="http://community.micropasts.org" title="Our community forum">Community forum</a></li>
-              <li><a href="http://research.micropasts.org" title="Our reseach blog">Research blog</a></li>
             </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
