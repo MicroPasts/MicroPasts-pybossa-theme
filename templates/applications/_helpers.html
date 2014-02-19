@@ -45,14 +45,12 @@
 
 {% macro render_app_summary(app, n_tasks, overall_progress, last_activity, current_user) -%}
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-12">
         {% if app.info.thumbnail %}
         <img class="img-polaroid" src="{{app.info.thumbnail}}" onerror="imgError(this);"/>
         {% else %}
         <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder.png')}}"/>
         {% endif %}
-    </div>
-    <div class="col-md-8">
       <ul style="list-style-type: none; font-size: 16px;">
         {% if current_user.id == app.owner_id %}
         <li><strong><i class="glyphicon glyphicon-cog"></i> {{ _('ID') }}</strong>: {{ app.id }}</li>
