@@ -32,7 +32,7 @@
 {% endmacro %}
 
 {% macro render_app_local_nav(app, active_link, current_user) -%}
-<ul data-spy="affix" data-offset-top="200px" class="nav nav-pills nav-stacked">
+<ul class="nav nav-pills nav-stacked">
     <li {% if active_link=="info"%}class="active"{% endif %}><a href="{{url_for('app.details', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Info')}}</a></li>
     <li {% if active_link=="contribute"%}class="active"{% endif %}><a href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Contribute')}}</a></li>
     <li {% if active_link=="tasks"%}class="active"{% endif %}><a href="{{url_for('app.tasks', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Tasks')}}</a></li>
