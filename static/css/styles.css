@@ -338,3 +338,6 @@ padding: 20px;
 .imageLead {
 	background: url("http://farm5.staticflickr.com/4137/4771894054_1c5d80cdff_o.jpg");
 }
+.progress {
+	padding-left: 0px;
+}
