@@ -37,12 +37,14 @@
                             {% endif %}
                         </div>
                         {% if task_pct >= 100 %}
-                        <div class="progress progress-success progress-striped col-md-5"> 
-                                <div class="bar" style="width:{{ task_pct }}%;"></div>
+                        <div class="progress col-md-5"> 
+                                <div class="progress-bar" role="progressbar"  aria-valuenow="{{ task_pct }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ task_pct }}%;"></div>
+                                <span class="sr-only">{{ task_pct }}% Complete</span>
                         </div>
                         {% else %}
-                        <div class="progress progress-info progress-striped col-md-5"> 
-                                <div class="bar" style="width:{{ task_pct }}%;"></div>
+                        <div class="progress col-md-5">  
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ task_pct }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ task_pct }}%;"></div>
+                                <span class="sr-only">{{ task_pct }}% Complete</span>
                         </div>
                         {% endif %}
                         <div class="col-md-4">
