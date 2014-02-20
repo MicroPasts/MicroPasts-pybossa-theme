@@ -345,3 +345,6 @@ padding: 20px;
 	.logoFooter {
 	padding-top:10px;
 }
+.footerLinks li {
+	display: inline;
+}
