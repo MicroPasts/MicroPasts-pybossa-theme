@@ -49,7 +49,7 @@
         {% if app.info.thumbnail %}
         <img class="img-polaroid" src="{{app.info.thumbnail}}" onerror="imgError(this);"/>
         {% else %}
-        <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder.png')}}"/>
+        <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}"/>
         {% endif %}
     </div>
     <div class="col-md-8">
@@ -81,7 +81,7 @@
         {% if app.info.thumbnail %}
         <img class="img-polaroid" src="{{app.info.thumbnail}}" onerror="imgError(this);" style="max-width:100px"/>
         {% else %}
-        <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder.png')}}" style="max-width:100px"/>
+        <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" style="max-width:100px"/>
         {% endif %}
     </div>
     <div class="col-md-9">
@@ -98,7 +98,7 @@
         {% if app.info.thumbnail %}
         <img class="img-polaroid" src="{{app.info.thumbnail}}" onerror="imgError(this);" style="max-width:100px"/>
         {% else %}
-        <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder.png')}}" style="max-width:100px"/>
+        <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" style="max-width:100px"/>
         {% endif %}
     </div>
     <div class="col-md-9">
@@ -133,7 +133,7 @@
             {% if data.app.info.thumbnail %}
             <img class="thumbnail" src="{{ data.app.info.thumbnail }}" style="max-width:100px; max-height:100px" onerror="imgError(this);">
             {% else %}
-            <img class="thumbnail" src="{{url_for('static', filename='img/placeholder.png')}}" style="max-width:100px;">
+            <img class="thumbnail" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" style="max-width:100px;">
             {% endif %}
         </div> <!-- End of span3 -->
         <div id="data" class="col-md-9">
@@ -161,7 +161,7 @@
 <script>
 function imgError(image) {
     image.onerror = "";
-    image.src = "{{url_for('static', filename='img/placeholder.png')}}";
+    image.src = "{{url_for('static', filename='img/placeholder-head-grey.png')}}";
     return true;
 }
 </script>
@@ -194,7 +194,7 @@ function imgError(image) {
     {% if app.info.thumbnail %}
     <img class="img-polaroid" src="{{app.info.thumbnail}}" style="max-width:60px;" onerror="imgError(this);">
     {% else %}
-    <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder.png')}}" style="max-width:60px;" onerror="imgError(this);">
+    <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" style="max-width:60px;" onerror="imgError(this);">
     {% endif %}
     {% if subtitle %}
     <strong>{{ app.name }}</strong>: {{subtitle}}</h1>
