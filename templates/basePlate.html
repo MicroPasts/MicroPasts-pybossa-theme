@@ -62,37 +62,19 @@
     </div>
     {% endif %}
     <footer>
-    {% if not enforce_privacy %}
+    {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
+        {% if not enforce_privacy %}
     <div id="footer_links" class="container">
         <div class="row">
-            <div class="col-md-3">
-                <ul>
-                    <li><strong>{{ _('Resources') }}</strong></li>
-                    <li><i class="glyphicon glyphicon-link glyphicon-inverse"></i> <a href="{{url_for('help.api')}}">API</a></li>
-                    <li><i class="glyphicon glyphicon-link glyphicon-inverse"></i> <a href="{{url_for('stats.index')}}">{{ _('Stats') }}</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-3">
-                <ul>
-                    <li><strong>{{ _('Technologies') }}</strong></li>
-                    <li><i class="glyphicon glyphicon-link glyphicon-inverse"></i> <a href="http://ckan.org">{{ _('CKAN') }}</a></li>
-                    <li><i class="glyphicon glyphicon-link glyphicon-inverse"></i> <a href="http://dev.pybossa.com/">{{ _('Pybossa') }}</a></li>
-                </ul>
-            </div>
-            
-            <div class="col-md-3">
-                <ul>
+                <ul class="footerLinks">
                     <li><strong>{{ _('Contacts &amp; social media') }}</strong></li>
                     <li><i class="glyphicon glyphicon-envelope glyphicon-inverse"></i> <a href="mailto:{{contact_email}}">{{ _('Email') }}</a></li>
                     <li><i class="icon-twitter glyphicon-inverse"></i> <a href="http://twitter.com/{{contact_twitter}}">{{ _('Twitter') }}</a></li>
                     <li><i class="icon-facebook glyphicon-inverse"></i> <a href="http://facebook.com/{{contact_facebook}}">{{ _('Facebook') }}</a></li>
                 </ul>
-            </div>
         </div>
     </div>
     {% endif %}
-    {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
     </footer>
     <!-- Le javascript
     ================================================== -->
