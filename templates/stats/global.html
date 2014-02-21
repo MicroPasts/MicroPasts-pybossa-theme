@@ -43,8 +43,8 @@ h3 > small {
                     <h2>Users</h2>
                     <div class="row">
                         <div class="col-md-6">
-                            <h3>{{ _('Anonymous users') }}: <small>{{stats.n_anon}}</small></h3>
-                            <h3>{{ _('Authenticated users') }}: <small>{{stats.n_auth}}</small></h3>
+                            <h3>{{ _('Anonymous users') }}: {{stats.n_anon}}</h3>
+                            <h3>{{ _('Authenticated users') }}: {{stats.n_auth}}</h3>
                             <h3>{{ _('Total') }}: {{stats.n_total_users}}</h3>
                             <a class="btn btn-lg btn-info" href="{{url_for('leaderboard.index')}}"><i class="gylphicon gylphicon-icon-trophy"></i> {{ _('Leaderboard') }}</a>
                             {% if top5_users_24_hours %}
@@ -89,8 +89,8 @@ h3 > small {
                     <h2>{{ _('Applications') }}</h2>
                     <div class="row">
                         <div class="col-md-6">
-                            <h3>{{ _('Published Applications') }}: <small>{{stats.n_published_apps}}</small></h3>
-                            <h3>{{ _('Draft Applications') }}: <small>{{stats.n_draft_apps}}</small></h3>
+                            <h3>{{ _('Published Applications') }}: {{stats.n_published_apps}}</h3>
+                            <h3>{{ _('Draft Applications') }}: {{stats.n_draft_apps}}</h3>
                             <h3>{{ _('Total') }}: {{stats.n_total_apps}}</h3>
                             {% if top5_apps_24_hours %}
                             <hr>
@@ -135,8 +135,8 @@ h3 > small {
                     <h2>{{ _('Tasks and Answers') }}</h2>
                     <div class="row">
                         <div class="col-md-6">
-                            <h3>{{ _('Number of Tasks') }}: <small>{{stats.n_tasks}}</small></h3>
-                            <h3>{{ _('Number of Task Runs') }}: <small>{{stats.n_task_runs}}</small></h3>
+                            <h3>{{ _('Number of Tasks') }}: {{stats.n_tasks}}</h3>
+                            <h3>{{ _('Number of Task Runs') }}: {{stats.n_task_runs}}</h3>
                         </div>
                         <div id="tasks" class="col-md-6" style="height:400px;"></div>
                      <script>
