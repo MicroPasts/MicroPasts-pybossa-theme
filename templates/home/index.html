@@ -104,7 +104,7 @@
                 " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
                 <img class="img-circle" src="{{user.email_addr|gravatar(size=90)}}">
            </a>
-           <span class="label label-success">{{user.task_runs}}</span> <small>{{_('Tasks')}}</small>
+           <span class="label label-success">{{user.task_runs}}</span> {{_('Tasks')}}
           </li>
           {% endfor %}
         </ul>
