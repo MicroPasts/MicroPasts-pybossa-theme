@@ -1,5 +1,5 @@
 {% macro render_field(field, addon, prepend, tooltip) %}
-    <div class="control-group {% if field.errors %} error {% endif %}">
+    <div class="form-group {% if field.errors %} error {% endif %}">
         {% if tooltip %}
         {{ field.label(class="control-label", style='width:148px') }}
         <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
