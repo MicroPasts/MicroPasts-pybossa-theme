@@ -11,14 +11,14 @@
     <div class="col-md-9" style="min-height:400px;">
         <h1><strong>Admin Site</strong></h1>
         <div class="row">
-            <div id="featured-apps" class="col-md-6 well">
+            <div id="featured-apps" class="col-md-4 well">
                 <h2><i class="glyphicon glyphicon-star"></i> {{_('Featured Applications')}}</h2>
                 <p>{{_('Show applications in the front page')}}</p>
                 <a href="{{url_for('admin.featured')}}" class="btn btn-primary">
                     {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
                 </a>
             </div>
-            <div id="categories" class="col-md-6 well">
+            <div id="categories" class="col-md-4 col-md-offset2 well">
                 <h2><i class="glyphicon glyphicon-check"></i> {{_('Categories')}}</h2>
                 <p>{{_('Manage application categories')}}</p>
                 <a href="{{url_for('admin.categories')}}" class="btn btn-primary">
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="row">
-            <div id="users" class="col-md-6 well">
+            <div id="users" class="col-md-4 well">
                 <h2><i class="glyphicon glyphicon-user"></i> {{_('Administrators')}}</h2>
                 <p>{{_('Manage administrators')}}</p>
                 <a href="{{url_for('admin.users')}}" class="btn btn-primary">
