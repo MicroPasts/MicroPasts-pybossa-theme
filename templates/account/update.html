@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-9">
         <h1><strong>{{current_user.fullname}}</strong>: {{ _('Update your profile') }}</h1>
-        <form role="form" method="post" class="form-horizontal" action="{{ url_for('account.update_profile') }}">
+        <form role="form" method="post"  action="{{ url_for('account.update_profile') }}">
             <fieldset>
             {{ form.id }}
             {{ form.hidden_tag() }}

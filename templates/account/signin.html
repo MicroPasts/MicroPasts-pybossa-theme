@@ -32,7 +32,7 @@
 <hr>
 
 {% from "_formhelpers.html" import render_field %}
-  <form role="form" id="signin" method="post" class="form-horizontal" action="">
+  <form role="form" id="signin" method="post"  action="">
     {{ form.hidden_tag() }}
     {% if auth.twitter or auth.facebook%}
     <legend>{{ _('Or Sign in with your PyBossa account') }}</legend>

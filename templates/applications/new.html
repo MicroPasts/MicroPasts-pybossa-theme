@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-9">
         <h1><strong>{{ _('Application') }}</strong>: {{ _('Create a new application') }}</h1>
-    <form class="form-horizontal" role="form" method="post" action="{{ url_for('app.new') }}">
+    <form  role="form" method="post" action="{{ url_for('app.new') }}">
         {{ form.hidden_tag() }}
         <div class="form-group">
             {{ render_field(form.name, class_="form-control", placeholder= _('The name of the application')) }}

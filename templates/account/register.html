@@ -12,7 +12,7 @@
 </p>
 
   <legend>{{ _('Create an account') }}</legend>
-  <form role="form" method="post" class="form-horizontal" action="{{ url_for('account.register') }}">
+  <form role="form" method="post"  action="{{ url_for('account.register') }}">
       {{ form.hidden_tag() }}
       <fieldset>
       {{ render_field(form.fullname, placeholder= _('Your full name'), class_="form-control") }}
