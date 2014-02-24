@@ -10,12 +10,14 @@
     </div>
     <div class="col-md-9">
         <h1><strong>{{_('User')}}</strong>: {{ user.fullname }}</h1>
+        <div class="btn-grp">
         {{ helper.render_user_profile(user, "settings") }}
         <a href="{{ url_for('account.update_profile') }}" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-user"></i> {{ _('Update your profile') }}</a>
         <a href="{{ url_for('account.reset_api_key') }}" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-key"></i> {{ _('Reset the API Key') }}</a>
         {% if(not (user.twitter_user_id or user.facebook_user_id or user.google_user_id)) %}
         <a href="{{ url_for('account.change_password') }}" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-lock"></i> {{ _(' Change your Password') }}</a>
         {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}
