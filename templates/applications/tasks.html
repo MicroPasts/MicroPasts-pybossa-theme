@@ -16,31 +16,31 @@
                 <hr>
                 {% if app.owner_id == current_user.id or (current_user.is_authenticated() and current_user.admin)%}
                 <div class="row">
-                    <div id="import_tasks" class="col-md-6 well">
+                    <div id="import_tasks" class="col-md-5 well">
                         <h2><i class="glyphicon glyphicon-upload"></i> {{_('Import Tasks')}}</h2>
                         <p>{{_('Import tasks from templates, GDrive, or CSV')}}</p>
                         <a href="{{url_for('app.import_task', short_name=app.short_name)}}" class="btn btn-primary">{{_('Import')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
-                    <div id="export_tasks" class="col-md-6 well">
+                    <div id="export_tasks" class="col-md-5 well col-md-offset-2">
                         <h2><i class="glyphicon glyphicon-download"></i> {{_('Export Tasks')}}</h2>
                         <p>{{_('Export tasks to JSON, CSV or a CKAN server')}}</p>
                         <a href="{{url_for('app.export_to', short_name=app.short_name)}}" class="btn btn-primary">{{_('Export')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
                 <div class="row">
-                    <div id="task_presenter" class="col-md-6 well">
+                    <div id="task_presenter" class="col-md-5 well">
                         <h2><i class="glyphicon glyphicon-edit"></i> {{_('Task Presenter')}}</h2>
                         <p>{{_('Edit the task presenter')}}</p>
                         <a href="{{url_for('app.task_presenter_editor', short_name=app.short_name)}}" class="btn btn-primary">{{_('Editor')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
-                    <div id="task_settings" class="col-md-6 well">
+                    <div id="task_settings" class="col-md-5 col-md-offset-2 well">
                         <h2><i class="glyphicon glyphicon-cog"></i> {{_('Settings')}}</h2>
                         <p>{{_('Configure the task scheduler, redundancy, etc.')}}</p>
                         <a href="{{url_for('app.task_settings', short_name=app.short_name)}}" class="btn btn-primary">Settings <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
                 <div class="row">
-                    <div id="task_browse" class="col-md-6 well">
+                    <div id="task_browse" class="col-md-5 well">
                         <h2><i class="glyphicon glyphicon-road"></i> {{_('Browse')}}</h2>
                         <p>{{_('Check the status of the tasks')}}</p>
                         <a href="{{url_for('app.tasks_browse', short_name=app.short_name)}}" class="btn btn-primary">Browse <i class="glyphicon glyphicon-chevron-right"></i></a>
@@ -48,12 +48,12 @@
                 </div>
                 {% else %}
                 <div class="row">
-                    <div id="task_browse" class="col-md-6 well">
+                    <div id="task_browse" class="col-md-5  well">
                         <h2><i class="glyphicon glyphicon-road"></i> {{_('Browse')}}</h2>
                         <p>{{_('Check the status of the tasks')}}</p>
                         <a href="{{url_for('app.tasks_browse', short_name=app.short_name)}}" class="btn btn-primary">Browse <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
-                    <div id="export_tasks" class="col-md-6 well">
+                    <div id="export_tasks" class="col-md-5 col-md-offset-2 well">
                         <h2><i class="glyphicon glyphicon-download"></i> {{_('Export Tasks')}}</h2>
                         <p>{{_('Export tasks to JSON, CSV or a CKAN server')}}</p>
                         <a href="{{url_for('app.export_to', short_name=app.short_name)}}" class="btn btn-primary">{{_('Export')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
