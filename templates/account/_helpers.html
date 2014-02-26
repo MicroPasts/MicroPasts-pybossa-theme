@@ -33,7 +33,7 @@
 {% macro render_user_profile(user, settings, private=True) %}
 <div class="row">
     <div class="col-md-3">
-        <img class="img-circle" src="{{ user.email_addr | gravatar(size=164)}}">
+        <img class="img-circle" src="{{ user.email_addr | gravatar(size=164,default='http://crowdsourced.micropasts.org/static/img/gravdef.png')}}">
     </div>
     <div class="col-md-9">
         <h2><i class="glyphicon glyphicon-user"></i> {{ _('Username')}}: {{ user.name }}</h2>
@@ -41,7 +41,7 @@
         <h2><i class="glyphicon glyphicon-envelope"></i> {{_('E-mail')}}: {{ user.email_addr }}</h2>
         {% endif %}
         {% if user.rank %}
-        <h2><i class="glyphicon glyphicon-list-alt"></i> {{ _('Rank')}}: 
+        <h2><i class="glyphicon glyphicon-list-alt"></i> {{ _('Rank')}}:
                 {% if private %}
                 <a href="{{url_for('leaderboard.index')}}">
                 {% endif %}
@@ -51,7 +51,7 @@
                 {{ user.rank }}
                 {% endif %}
                 {% if private %}</a>{% endif %}
-                
+
         </h2>
         {% else %}
         <h2><i class="glyphicon glyphicon-trophy"></i> {{ _('Rank') }}: {{ _('The user has not contributed a task yet') }}</h2>
@@ -89,7 +89,7 @@
             {% else %}
             <li class="active">
                 <a href="#">{{ page }}</a>
-            </li>  
+            </li>
             {% endif %}
           {% endif %}
         {%- endfor %}

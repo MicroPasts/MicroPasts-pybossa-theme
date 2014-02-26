@@ -3,14 +3,14 @@
 {% block content %}
 <div class="background">
 
-      
+
         <div class="row jumbotron">
           <div class="col-md-12 ">
               <h1>{{ brand }}: Crowdsourcing</h1>
-              
+
           </div>
 		</div>
-        
+
         <div class="row well" >
         	<div class="col-md-4">
         		<img src="{{url_for('static', filename="img/MP_SQUARE_notype.png")}}" />
@@ -38,9 +38,9 @@
                 <li></li>
                 {% endfor %}
             </ul></div>
-                   	</div>	 
+                   	</div>
         </div>
-        
+
 
 </div>
 
@@ -102,7 +102,7 @@
                 <br/>
                 <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
                 " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
-                <img class="img-circle" src="{{user.email_addr|gravatar(size=90)}}">
+                <img class="img-circle" src="{{user.email_addr|gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/gravdef.png')}}">
            </a>
            <span class="label label-success">{{user.task_runs}}</span> {{_('Tasks')}}
           </li>
