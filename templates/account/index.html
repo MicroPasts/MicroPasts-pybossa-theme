@@ -28,7 +28,7 @@
                 </li>
                 {% endif %}
               ">
-                <img class="img-circle" src="{{account['email_addr'] | gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/gravdef.png')}}">
+                <img class="img-circle" src="{{account['email_addr'] | gravatar(size=90,default=urlencode('http://crowdsourced.micropasts.org/static/img/gravdef.png'))}}">
         </a>
       </div>
       {% endfor %}
