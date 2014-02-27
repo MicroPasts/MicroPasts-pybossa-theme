@@ -115,6 +115,8 @@ body {
 }
 section.grey {
   position: relative;
+  display: block;
+  width:100%;
 }
 section.grey,
 section.grey:before,
