@@ -1,7 +1,7 @@
 {% macro render_admin_user(user) %}
 <div class="row well well-small">
     <div class="col-md-2">
-        <img class="img-circle" src="{{user.email_addr | gravatar(size=100,default='gravatar.png')}}">
+        <img class="img-circle" src="{{user.email_addr | gravatar(size=100,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
     </div>
     <div class="col-md-10">
         <h2>{{user.fullname}} (Username: {{user.name}})</h2>
