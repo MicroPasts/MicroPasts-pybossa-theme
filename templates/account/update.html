@@ -23,7 +23,7 @@
             <h2>External Services</h2>
           <!--  {{ render_field(form.ckan_api, class_="form-control") }}  -->
             <div>
-                <img class="img-circle" src="{{ current_user.email_addr | gravatar(size=50,default='gravatar.png')}}">
+                <img class="img-circle" src="{{ current_user.email_addr | gravatar(size=50,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
                 <a class="btn btn-sm btn-default" href="http://www.gravatar.com">{{ _('Change your avatar at Gravatar.com.') }}</a> <p>{{ _('We are using the current email address of: ') }} {{current_user.email_addr}}</p>
                 <hr>
                 <span class="label label-warning"><i class="glyphicon glyphicon-white glyphicon-star"></i> {{ _('Note') }}</span> {{ _('If you change your') }} <strong>{{ _('user name') }}</strong> {{ _('you will be asked to sign in again.') }}

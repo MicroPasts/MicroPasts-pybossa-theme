@@ -33,7 +33,7 @@
 {% macro render_user_profile(user, settings, private=True) %}
 <div class="row">
     <div class="col-md-3">
-        <img class="img-circle" src="{{ user.email_addr | gravatar(size=164,default='gravatar.png')}}">
+        <img class="img-circle" src="{{ user.email_addr | gravatar(size=164,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
     </div>
     <div class="col-md-9">
         <h2><i class="glyphicon glyphicon-user"></i> {{ _('Username')}}: {{ user.name }}</h2>
