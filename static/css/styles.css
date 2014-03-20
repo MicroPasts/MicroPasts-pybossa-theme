@@ -352,3 +352,7 @@ ul.users li a {
 .btn-group {
     margin-bottom:20px;
 }
+.jumbotron h1 {
+   line-height: 63px;
+   text-align: center;
+}
