@@ -45,7 +45,7 @@
 </div>
 
 
-      <section class="grey">
+      <div class="row">
         <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
         <div class="row">
           {% for app in top_apps %}
@@ -77,10 +77,10 @@
           </div>
           {% endfor %}
         </div>
-      </section>
+      </div>
 
       {% if top_users %}
-      <section id="top_users" class="grey">
+      <div id="top_users" class="row">
         <h2><i class="icon-group"></i>{{ _('Most Active Volunteers') }}</h2>
         <ul class="users">
             {% for user in top_users %}
@@ -96,7 +96,7 @@
           </li>
           {% endfor %}
         </ul>
-      </section>
+      </div>
       {% endif %}
 <script>
 $("a[rel=popover]").popover({
