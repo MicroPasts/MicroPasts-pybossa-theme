@@ -45,7 +45,7 @@
 </div>
 
 
-      <div class="row">
+      <div class="well">
         <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
         <div class="row">
           {% for app in top_apps %}
@@ -80,7 +80,7 @@
       </div>
 
       {% if top_users %}
-      <div id="top_users" class="row">
+      <div id="top_users" class="well">
         <h2><i class="icon-group"></i>{{ _('Most Active Volunteers') }}</h2>
         <ul class="users">
             {% for user in top_users %}
