@@ -44,18 +44,6 @@
 
 </div>
 
-      <section class="grey get-started">
-        <div class="row">
-          <div class="col-md-4">
-              <h2><i class="glyphicon glyphicon-play-circle"></i> {{ _('Get Started') }}</h2>
-            <p>{{ _('It\'s really simple to start contributing.') }}</p>
-          </div>
-          <div class="col-md-8 btn-pad">
-              <a href="{{url_for('app.index')}}" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-ok-sign"></i>{{ _(' Start Contributing') }}</a>
-              {% if current_user.is_authenticated() %}
-                {% if current_user.admin == 1 %}<a href="{{url_for('app.new')}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-plus-sign"></i> {{ _('Create an App') }}</a>{% endif %}{% endif %}
-          </div>
-      </section>
 
       <section class="grey">
         <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
