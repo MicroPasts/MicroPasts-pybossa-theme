@@ -30,15 +30,14 @@
                 {% for f in featured %}
           <div class="col-md-3">
             <div class="app box">
-                <a href={{ url_for('app.details', short_name=f.short_name)}}>
-                    {% if f.info.thumbnail %}
-                    <img src="{{f.info.thumbnail}}">
-                    {% else %}
-                    <img src="{{url_for('static', filename="img/placeholder.dark.png")}}">
-                    {% endif %}
-                    <h3>{{f.name}}</h3>
-                    <span class="label label-info">{{ _('Info') }}</span>
-                    </a>
+{% if f.info.thumbnail %}
+                <a href="{{url_for('f.details', short_name=f.short_name)}}" class="image" style="background-image:url({{f.info.thumbnail}})"></a>
+                {% else %}
+                <a href="{{url_for('f.details', short_name=f.short_name)}}" class="image" style="background-image:url({{url_for('static',filename='placeholder-head-grey.png')}})"></a>
+                {% endif %}
+                <h3>{{app.name | truncate(20, true)}}</h3>
+                <p>{{app.description | truncate(32, true)}}</p>
+                <p><a href="{{url_for('f.details',short_name=app.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('f.presenter',short_name=f.short_name)}}" class="btn btn-xs btn-primary">{{ _('Start') }}</a></p>
 	     </div>
 	          </div>
                 {% endfor %}
