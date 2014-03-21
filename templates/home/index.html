@@ -24,28 +24,6 @@
 
 </div>
 
-	<div class="well row">
-        	<h2><i class="glyphicon glyphicon-th"></i> Featured projects</h2>
-		<div class="row">
-                {% for f in featured %}
-          <div class="col-md-3">
-            <div class="app box">
-	     {% if f.info.thumbnail %}
-                <a href="{{url_for('f.details', short_name=f.short_name)}}" class="image" style="background-image:url({{f.info.thumbnail}})"></a>
-                {% else %}
-                <a href="{{url_for('f.details', short_name=f.short_name)}}" class="image" style="background-image:url({{url_for('static',filename='placeholder-head-grey.png')}})"></a>
-                {% endif %}
-                <h3>{{f.name | truncate(20, true)}}</h3>
-                <p>{{f.description | truncate(32, true)}}</p>
-                <p><a href="{{url_for('f.details',short_name=f.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('f.presenter',short_name=f.short_name)}}" class="btn btn-xs btn-primary">{{ _('Start') }}</a></p>
-	     </div>
-	          </div>
-                {% endfor %}
-
-          </div>
-            </div>
-
-
       <div class="row well">
         <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
         <div class="row">
