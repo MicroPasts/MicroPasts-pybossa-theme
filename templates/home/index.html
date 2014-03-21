@@ -26,9 +26,10 @@
 
 	<div class="well row">
         	<h2><i class="glyphicon glyphicon-th"></i> Featured projects</h2>
-        	<ul class="featured">
+		<div class="row">
                 {% for f in featured %}
-                <li>
+          <div class="col-md-3">
+            <div class="app box">
                 <a href={{ url_for('app.details', short_name=f.short_name)}}>
                     {% if f.info.thumbnail %}
                     <img src="{{f.info.thumbnail}}">
@@ -38,12 +39,11 @@
                     <h3>{{f.name}}</h3>
                     <span class="label label-info">{{ _('Info') }}</span>
                     </a>
-                </li>
+	     </div>
+	          </div>
                 {% endfor %}
-                {% for number in range(4 - featured|count) %}
-                <li></li>
-                {% endfor %}
-            </ul>
+
+          </div>
             </div>
 
 
