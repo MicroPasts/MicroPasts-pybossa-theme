@@ -18,7 +18,13 @@
         	<div class="col-md-8">
         	<h2>{{ title }}</h2>
 			{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
-			<div id="banner">
+        	</div>
+        </div>
+
+
+</div>
+
+	<div class="well row">
         	<h2><i class="glyphicon glyphicon-th"></i> Featured projects</h2>
         	<ul class="featured">
                 {% for f in featured %}
@@ -37,12 +43,8 @@
                 {% for number in range(4 - featured|count) %}
                 <li></li>
                 {% endfor %}
-            </ul></div>
-                   	</div>
-        </div>
-
-
-</div>
+            </ul>
+            </div>
 
 
       <div class="row well">
