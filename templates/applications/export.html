@@ -13,12 +13,12 @@
         {{ helper.render_app_title(app, subtitle=_('Export All Tasks and Task Runs'))}}
         <p>{{ _('You can export and download') }} <strong>{{ _('all the available') }}</strong> {{ _('Tasks and Task Runs \(the submitted answers by the users\) in CSV or JSON formats.') }}</p>
         <div class="row">
-            <div id="csv" class="col-md-6 well">
+            <div id="csv" class="col-md-5 well">
                 <h2>Export in CSV format</h2>
                 <a href={{url_for('app.export_to', short_name=app.short_name, type='task', format='csv')}} class="btn btn-lg btn-primary">{{ _('Tasks') }}</a>
                 <a href={{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}} class="btn btn-lg btn-primary">{{ _('Task Runs') }}</a>
             </div>
-            <div id="json" class="col-md-6 well">
+            <div id="json" class="col-md-5 col-md-offset-2 well">
                 <h2>Export in JSON format</h2>
                 <a href={{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}} class="btn btn-lg btn-primary">{{ _('Tasks') }}</a>
                 <a href={{url_for('app.export_to', short_name=app.short_name, type='task_run', format='json')}} class="btn btn-lg btn-primary">{{ _('Task Runs') }}</a>
@@ -27,7 +27,7 @@
         </div>
         <div class="row">
             {% if current_user.is_authenticated() and app.owner_id == current_user.id %}
-            <div id="ckan" class="col-md-6 well">
+            <div id="ckan" class="col-md-5 well">
                 {% if ckan_name %}
                 <h2>Export to the {{ckan_name}}</h2>
                 {% else %}
