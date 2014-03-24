@@ -124,7 +124,7 @@
 
 
 {% macro show_app(data, category, current_user) -%}
-<div class="project-item row {{class}} well">
+<div class="project-item row {{class}} well col-md-8">
     <h2><a href="{{ url_for('app.details', short_name = data.app.short_name) }}">{{ data.app.name }}</a></h2>
     <div class="row">
         <div class="col-md-3">
