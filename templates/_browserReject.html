@@ -1,0 +1,41 @@
+<script type="text/javascript">
+$(document).ready(function() {
+    initMenus();
+    $('a[rel*=lightbox]').lightBox();
+    
+    $.reject({
+		reject: { msie7: true, msie8:true }, 
+		 header: 'Your internet browser is not supported by this website',  
+		    // Paragraph 1  
+		    paragraph1: 'Your browser is out of date, and may not be compatible with '+  
+		                'our website. We suggest one of the browsers '+  
+		                'found below, but you might need your network administrator to install it.',  
+		    close: true, // Allow closing of window  
+		    // Message displayed below closing link  
+		    closeMessage: '<strong>By ignoring this notice you acknowledge that your experience '+  
+		                    'on this website may be degraded</strong>',  
+		    closeLink: 'Close This Window', // Text for closing link  
+		    closeURL: '#', // Close URL  
+		    closeESC: true, // Allow closing of window with esc key  
+		closeCookie: true, // Set cookie to remember close for this session
+	    // Cookie settings are only used if closeCookie is true  
+	    cookieSettings: {  
+	        // Path for the cookie to be saved on  
+	        // Should be root domain in most cases  
+	        path: '/',  
+	        // Expiration Date (in seconds)  
+	        // 0 (default) means it ends with the current session  
+	        expires: 0 
+	    },  
+	  
+	    imagePath: './static/vendor/jReject/images/', // Path where images are located  
+	    overlayBgColor: '#000', // Background color for overlay  
+	    overlayOpacity: 0.5, // Background transparency (0-1)  
+	  
+	    // Fade in time on open ('slow','medium','fast' or integer in ms)  
+	    fadeInTime: 'fast',  
+	    // Fade out time on close ('slow','medium','fast' or integer in ms)  
+	    fadeOutTime: 'fast',  
+	  
+	});
+</script>
