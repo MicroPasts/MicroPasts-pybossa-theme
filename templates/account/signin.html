@@ -48,9 +48,9 @@
   </form>
 
 <div class="row">
-    <div class="btn-grp">
-        <a href="{{ url_for('account.register') }}" class="btn btn-success"><i class="glyphicon-white glyphicon glyphicon-user"></i>{{ _(' Create a new account!') }}</a>
-        <a href="{{ url_for('account.forgot_password') }}" class="btn btn-success">{{ _('Forgot Password') }}</a>
+    <div class="btn-group col-md-12">
+        <a role="button" href="{{ url_for('account.register') }}" class="btn btn-success"><i class="glyphicon-white glyphicon glyphicon-user"></i>{{ _(' Create a new account!') }}</a>
+        <a role="button" href="{{ url_for('account.forgot_password') }}" class="btn btn-success">{{ _('Forgot Password') }}</a>
     </div>
 </div>
 {% endblock %}
