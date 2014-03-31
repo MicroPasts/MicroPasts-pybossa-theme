@@ -350,7 +350,8 @@ ul.users li a {
     display: inline;
 }
 .btn-group {
-    margin-bottom:20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 .jumbotron h1 {
    line-height: 63px;
