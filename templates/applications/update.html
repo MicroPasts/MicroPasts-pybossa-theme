@@ -34,8 +34,8 @@
         {{ render_field(form.short_name, class_="form-control", placeholder="Short name or slug for the application") }}
         {{ render_field(form.description, class_="form-control", placeholder="Give some details about the application")}}
         {{ render_field(form.thumbnail, class_="form-control", placeholder="Paste the direct link to your app icon")}}
-        {{ render_field(form.allow_anonymous_contributors)}}
-        {{ render_field(form.category_id)}}
+        {{ render_field(form.allow_anonymous_contributors, class_="form-control")}}
+        {{ render_field(form.category_id, class_="form-control")}}
         {{ render_field(form.long_description, class_="form-control", placeholder="Explain the application (you can use HTML code!)")}}
         {{ render_field(form.hidden, tooltip="Do you want to hide your app?")}}
         <div class="form-actions">
