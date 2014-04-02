@@ -26,7 +26,9 @@
             {% endif %}
         {% else %}
             <h2>{{ _('You have not created an application') }}</h2>
+            {% if current_user.admin == 1 %}
             <a href="{{url_for('app.new')}}" class="btn btn-primary">{{ _('Create an Application') }}</a>
+            {% endif %}
         {% endif %}
     </div>
 </div>
