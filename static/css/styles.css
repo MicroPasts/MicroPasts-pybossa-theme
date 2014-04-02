@@ -285,9 +285,8 @@ ul.users li a {
   display: block;
   float: left;
   width: 103px;
-  height: 103px;
+  height: 150px;
   background-color: #FFF;
-  background-image: url(../img/placeholder-head-grey.png);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 97px 97px;
