@@ -156,7 +156,6 @@ section.grey:after {
   display: block;
   width: 100%;
   height: 138px;
-  background-image: url(../img/placeholder-head-grey.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -198,16 +197,14 @@ body > footer .container {
 .banner .featured {
   margin: -6px 0px 0px 0px;
   border-left: solid 2px #FFF;
-  height: 309px;
   overflow: hidden;
 }
 .banner .featured li {
   display: block;
   float: left;
   width: 103px;
-  height: 103px;
+  height: 150px;
   background-color: #FFF;
-  background-image: url(../img/placeholder-head-grey.png);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 97px 97px;
