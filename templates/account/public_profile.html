@@ -10,19 +10,19 @@
         {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
         {% else %}
-        <section id="user-data">
+        <div class="row" id="user-data">
             <h1><strong>{{user.fullname}}</strong></h1>
             {{ helper.render_user_profile(user, settings=False, private=False) }}
-        </section>
+        </div>
         {% if apps_created %}
-        <section id="created-apps" style="margin-top:10px;">
+        <div class="row" id="created-apps" >
             {{render_grid_apps(apps_created, "Created Applications")}}
-        </section>
+        </div>
         {% endif %}
         {% if apps %}
-        <section id="contributed-apps" style="margin-top:10px;">
+        <div class="row" id="contributed-apps" >
             {{render_grid_apps(apps, "Contributions")}}
-        </section>
+        </div>
         {% endif %}
         {% endif %}
     </div>
