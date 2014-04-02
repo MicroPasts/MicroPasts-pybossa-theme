@@ -96,23 +96,7 @@ body {
   width: 100%;
   margin-left: -10px;
 }
-.banner:before,
-.banner:after {
-  content: "";
-  position: absolute;
-  background-color: #f7f7f7;
-  top: 0;
-  bottom: 0;
-  width: 9999px;
-}
-.banner:before {
-  right: 100%;
-  border-right: solid 10px #FFF;
-}
-.banner:after {
-  left: 100%;
-  border-left: solid 10px #FFF;
-}
+
 section.grey {
   position: relative;
   display: block;
