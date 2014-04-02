@@ -17,7 +17,7 @@
             {% else %}
             <li class="active">
                 <a href="#">{{ page }}</a>
-            </li>  
+            </li>
             {% endif %}
           {% endif %}
         {%- endfor %}
@@ -63,7 +63,7 @@
         {% if not current_user.is_anonymous() %}
         <li>{% if app.hidden == 1 %}
             <i class="glyphicon glyphicon-eye-close"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('Yes') }}
-        {% else %} 
+        {% else %}
             <i class="glyphicon glyphicon-eye-open"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('No') }}
         {% endif %}
         </li>
@@ -226,7 +226,7 @@ function imgError(image) {
                   {% for app in apps %}
                   <li><a href={{ url_for('app.details', short_name=app.short_name)}}>
                       {% if app.info.thumbnail %}
-                      <img src="{{app.info.thumbnail}}" style="min-height:100px; min-width:100px;">
+                      <img src="{{app.info.thumbnail}}" >
                       {% else %}
                       <img src="{{url_for('static', filename="img/placeholder.dark.png")}}">
                       {% endif %}

@@ -226,21 +226,7 @@ body > footer .container {
   margin: 6px;
   display: inline-block;
 }
-.banner .featured li a:hover {
-  position: absolute;
-  margin: -2px 0px 0px -2px;
-  -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.8);
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.8);
-  background-color: #FFF;
-  width: 112px;
-  z-index: 2;
-}
-.banner .featured li a:hover img {
-  border: solid 6px #FFF;
-  -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
-  width: 100px;
-}
+
 .banner .featured li img {
     min-width: 100px;
     min-height: 100px;
