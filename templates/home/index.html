@@ -69,7 +69,7 @@
                 <br/>
                 <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
                 " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
-                <img class="img-circle" src="{{user.email_addr|gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
+                <img class="img-circle" height="90" width="90" src="{{user.email_addr|gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
            </a>
            <span class="label label-success">{{user.task_runs}}</span> {{_('Tasks')}}
           </li>
