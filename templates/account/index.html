@@ -16,10 +16,10 @@
       {% for account in accounts %}
       <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-                <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90">
+                <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90" alt="Avatar for {{account['fullname']}}"  />
         <div class="caption">
-           <ul style='list-style-type:none; margin-left:0px;'>
-                <li><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></li>
+         <h4><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></h4>
+              <ul style='list-style-type:none; margin-left:0px;'>
                 <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
                 <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
                 {% if account.apps %}
@@ -32,7 +32,7 @@
                 </li>
                 {% endif %}
               </ul>
-          
+          </div>
         </div>
       </div>
         
@@ -41,6 +41,7 @@
       </row>
     {% endif %}
     <div class="span9">
+        {{ pagination }}
         {% if pagination.pages > 1 %}
             {{ helper.render_pagination(pagination) }}
         {% endif %}
