@@ -6,35 +6,37 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-9 col-md-offset-2">
       {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
       {% else %}
-      <h1>{{ _('Contributors') }} {{total}} {{ _('registered users') }}<a class="pull-right btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="glyphicon glyphicon-list-alt" style="color:white"></i> {{ _('Leaderboard') }}</a></h1>
+      <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small><a class="pull-right btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a></h1>
       {% if accounts %}
+      <ul class="thumbnails">
       {% for account in accounts %}
-      <div class="col-xs-6 col-md-3">
-      <a href="{{url_for('account.public_profile', name=account.name)}}" class="img-thumbnail" rel='popover' title="<strong>{{account['fullname']}}</strong>" data-content="
+      <li> 
+      <a href="{{url_for('account.public_profile', name=account.name)}}" class="thumbnail" rel='popover' title="<strong>{{account['fullname']}}</strong>" data-content="
               <ul style='list-style-type:none; margin-left:0px;'>
-                <li><strong><i class='glyphicon glyphicon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
-                <li><strong><i class='glyphicon glyphicon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
+                <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
+                <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
                 {% if account.apps %}
-                <li><strong><i class='glyphicon glyphicon-certificate'></i> Owner of</strong>
+                <li><strong><i class='icon-certificate'></i> Owner of</strong>
                   <ul style='list-style-type:none'>
                       {% for app in account.apps %}
-                      <li><i class='glyphicon glyphicon-chevron-right'></i> {{ app.name | truncate(18, true)}}</li>
+                      <li><i class='icon-chevron-right'></i> {{ app.name | truncate(18, true)}}</li>
                       {% endfor %}
                   </ul>
                 </li>
                 {% endif %}
+              </ul>
               ">
-                <img class="img-rounded" height="90" width="90" src="{{account['email_addr'] | gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
+                <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90">
         </a>
-      </div>
+      </li>
       {% endfor %}
       </ul>
     {% endif %}
-    <div class="col-md-9">
+    <div class="span9">
         {% if pagination.pages > 1 %}
             {{ helper.render_pagination(pagination) }}
         {% endif %}
