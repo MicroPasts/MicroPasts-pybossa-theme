@@ -16,7 +16,7 @@
       {% for account in accounts %}
       <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-                <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90" alt="Avatar for {{account['fullname']}}"  />
+                <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90" alt="Avatar for {{account['fullname']}}" class="img-rounded"  />
         <div class="caption">
          <p><strong></strong><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></strong></p>
               <ul style='list-style-type:none; margin-left:0px;'>
