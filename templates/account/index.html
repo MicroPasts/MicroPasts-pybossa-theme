@@ -40,11 +40,13 @@
       {% endfor %}
       </div>
     {% endif %}
+      {% if pagination.has_next %}
     <div class="span9">
         {% if pagination.pages > 1 %}
             {{ helper.render_pagination(pagination) }}
         {% endif %}
     </div>
+      {% endif %}
     {% endif %}
   </div>
 </div>
