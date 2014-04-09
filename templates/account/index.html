@@ -18,7 +18,7 @@
       <div class="thumbnail">
                 <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90" alt="Avatar for {{account['fullname']}}"  />
         <div class="caption">
-         <h4><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></h4>
+         <p><strong></strong><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></strong></p>
               <ul style='list-style-type:none; margin-left:0px;'>
                 <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
                 <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
