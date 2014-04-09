@@ -41,7 +41,7 @@
       </div>
     {% endif %}
       {% if pagination.has_next %}
-      {{ pagination.info|safe }}
+      {{ pagination.info }}
     <div class="span9">
         {% if pagination.pages > 1 %}
             {{ helper.render_pagination(pagination) }}
