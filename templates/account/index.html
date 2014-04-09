@@ -12,9 +12,10 @@
       {% else %}
       <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small><a class="pull-right btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a></h1>
       {% if accounts %}
-      <ul class="thumbnails">
+      <div class="row">
       {% for account in accounts %}
-      <li> 
+      <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
       <a href="{{url_for('account.public_profile', name=account.name)}}" class="thumbnail" rel='popover' title="<strong>{{account['fullname']}}</strong>" data-content="
               <ul style='list-style-type:none; margin-left:0px;'>
                 <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
@@ -32,9 +33,11 @@
               ">
                 <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90">
         </a>
-      </li>
+      </div>
+        
+      </div>
       {% endfor %}
-      </ul>
+      </row>
     {% endif %}
     <div class="span9">
         {% if pagination.pages > 1 %}
