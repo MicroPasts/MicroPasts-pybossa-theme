@@ -10,7 +10,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{config.DESCRIPTION}}">
     <meta name="author" content="The MicroPasts team">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		
+		<!-- Open Graph tags -->
+    <meta property="og:title" content="{{ title | safe}}" />
+    <meta property="og:url" content="{{ request.base_url }}" />
+    <meta property="og:image" content="http://crowdsourced.micropasts.org/static/img/MP_SQUARE_notype.png" />
+    <meta property="og:site_name" content="MicroPasts: Crowd Sourcing platform" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:description" content="{{config.TWITTER_DESC}}" />
+    <meta property="fb:admins" content="688811070" />
+    <meta property="fb:app_id" content="1376278705957324" />
+    
+    <!-- Twitter card tags -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@micropasts" />
+    <meta name="twitter:title" content="{{ title | safe }}" />
+    <meta name="twitter:description" content="{{config.TWITTER_DESC}}" />
+    <meta name="twitter:creator" content="@micropasts" />
+    <meta name="twitter:image:src" content="http://crowdsourced.micropasts.org/static/img/MP_SQUARE_notype.png">
 
     <!-- Le styles -->
     <link href="{{url_for('static', filename='vendor/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
