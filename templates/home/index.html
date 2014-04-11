@@ -25,7 +25,7 @@
 </div>
 
       <div class="row well">
-        <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
+        <!-- <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
         <div class="row">
           {% for app in top_apps %}
           <div class="col-md-3">
@@ -55,7 +55,16 @@
             </div>
           </div>
           {% endfor %}
+        </div> -->
+        {% for app in top_apps %}
+        <div class="col-lg-4">
+          <img class="img-circle" src="{{app.info.thumbnail}" style="width: 140px; height: 140px;">
+          <h2>{{app.name}}</h2>
+          <p>{{app.description | truncate(32, true)}}</p>
+          <p><a href="{{url_for('app.details',short_name=app.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-xs btn-primary">{{ _('Start') }}</a></p>
         </div>
+        {% endfor %}
+        
       </div>
 
       {% if top_users %}
