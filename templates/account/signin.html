@@ -10,23 +10,23 @@
 </p>
 {% if next is not none%}
   {% if auth.twitter %}
-  <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-info"><i class="glyphicon glyphicon-twitter"></i> {{ _('Sign in with Twitter') }}</a>
+  <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-info"><i class="glyphicon-inverse icon-twitter"></i> {{ _('Sign in with Twitter') }}</a>
   {% endif %}
   {% if auth.facebook %}
-  <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-primary"><i class="glyphicon glyphicon-facebook"></i> {{ _('Sign in with Facebook') }}</a>
+  <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-primary"><i class="glyphicon-inverse icon-facebook"></i> {{ _('Sign in with Facebook') }}</a>
   {% endif %}
   {% if auth.google %}
-  <a href="{{ url_for('google.login') }}" class="btn btn-warning"><i class="glyphicon glyphicon-google-plus"></i> {{ _('Sign in with Google') }}</a>
+  <a href="{{ url_for('google.login') }}" class="btn btn-warning"><i class="glyphicon-inverse icon-google-plus"></i> {{ _('Sign in with Google') }}</a>
   {% endif %}
 {% else %}
   {% if auth.twitter %}
-  <a href="{{ url_for('twitter.login') }}" class="btn btn-info"><i class="glyphicon glyphicon-twitter"></i> {{ _('Sign in with Twitter') }}</a>
+  <a href="{{ url_for('twitter.login') }}" class="btn btn-info"><i class="glyphicon-inverse icon-twitter"></i> {{ _('Sign in with Twitter') }}</a>
   {% endif %}
   {% if auth.facebook %}
-  <a href="{{ url_for('facebook.login') }}" class="btn btn-primary"><i class="glyphicon glyphicon-facebook"></i> {{ _('Sign in with Facebook') }}</a>
+  <a href="{{ url_for('facebook.login') }}" class="btn btn-primary"><i class="glyphicon-inverse icon-facebook"></i> {{ _('Sign in with Facebook') }}</a>
   {% endif %}
   {% if auth.google %}
-  <a href="{{ url_for('google.login') }}" class="btn btn-warning"><i class="glyphicon glyphicon-google-plus"></i> {{ _('Sign in with Google') }}</a>
+  <a href="{{ url_for('google.login') }}" class="btn btn-warning"><i class="glyphicon-inverse icon-google-plus"></i> {{ _('Sign in with Google') }}</a>
   {% endif %}
 {% endif %}
 <hr>
@@ -42,15 +42,15 @@
       {{ render_field(form.email, placeholder="", class_="form-control") }}
       {{ render_field(form.password, placeholder="", class_="form-control") }}
     <div>
-      <input type="submit" value="{{ _('Sign in') }}" class="btn btn-primary btn-lg" />
-      <input type="reset" value="{{ _('Cancel') }}" class="btn btn-info btn-lg" />
+      <input type="submit" value="{{ _('Sign in') }}" class="btn btn-primary btn-sm" />
+      <input type="reset" value="{{ _('Cancel') }}" class="btn btn-info btn-sm" />
     </div>
   </form>
 
 <div class="row">
-    <div class="col-md-12 centreText">
-        <a href="{{ url_for('account.register') }}" class="btn btn-success"><i class="glyphicon-white glyphicon glyphicon-user"></i>{{ _(' Create a new account!') }}</a>
-        <a href="{{ url_for('account.forgot_password') }}" class="btn btn-success">{{ _('Forgot Password') }}</a>
+    <div class="btn-group col-md-12">
+        <a role="button" href="{{ url_for('account.register') }}" class="btn btn-success"><i class="glyphicon-white glyphicon glyphicon-user"></i>{{ _(' Create a new account!') }}</a>
+        <a role="button" href="{{ url_for('account.forgot_password') }}" class="btn btn-success">{{ _('Forgot Password') }}</a>
     </div>
 </div>
 {% endblock %}

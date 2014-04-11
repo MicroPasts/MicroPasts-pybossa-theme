@@ -18,46 +18,13 @@
         	<div class="col-md-8">
         	<h2>{{ title }}</h2>
 			{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
-			<div id="banner">
-        	<h2><i class="glyphicon glyphicon-th"></i> Featured projects</h2>
-        	<ul class="featured">
-                {% for f in featured %}
-                <li>
-                <a href={{ url_for('app.details', short_name=f.short_name)}}>
-                    {% if f.info.thumbnail %}
-                    <img src="{{f.info.thumbnail}}">
-                    {% else %}
-                    <img src="{{url_for('static', filename="img/placeholder.dark.png")}}">
-                    {% endif %}
-                    <h3>{{f.name}}</h3>
-                    <span class="label label-info">{{ _('Info') }}</span>
-                    </a>
-                </li>
-                {% endfor %}
-                {% for number in range(4 - featured|count) %}
-                <li></li>
-                {% endfor %}
-            </ul></div>
-                   	</div>
+        	</div>
         </div>
 
 
 </div>
 
-      <section class="grey get-started">
-        <div class="row">
-          <div class="col-md-4">
-              <h2><i class="glyphicon glyphicon-play-circle"></i> {{ _('Get Started') }}</h2>
-            <p>{{ _('It\'s really simple to start contributing.') }}</p>
-          </div>
-          <div class="col-md-8 btn-pad">
-              <a href="{{url_for('app.index')}}" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-ok-sign"></i>{{ _(' Start Contributing') }}</a>
-              {% if current_user.is_authenticated() %}
-                {% if current_user.admin == 1 %}<a href="{{url_for('app.new')}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-plus-sign"></i> {{ _('Create an App') }}</a>{% endif %}{% endif %}
-          </div>
-      </section>
-
-      <section class="grey">
+      <div class="row well">
         <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
         <div class="row">
           {% for app in top_apps %}
@@ -68,7 +35,7 @@
                 {% else %}
                 <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{url_for('static',filename='placeholder-head-grey.png')}})"></a>
                 {% endif %}
-                <h3>{{app.name | truncate(20, true)}}</h3>
+                <h3>{{app.name}}</h3>
                 <p>{{app.description | truncate(32, true)}}</p>
                 <p><a href="{{url_for('app.details',short_name=app.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-xs btn-primary">{{ _('Start') }}</a></p>
             </div>
@@ -78,8 +45,8 @@
           <div class="col-md-3">
             <div class="app box">
                 <a href="#" class="image" style="background-image:url({{url_for('static',filename='img/placeholder-head-grey.png')}})"></a>
-                <h3>{{ _('Your application') }}</h3>
-                <p>{{ _('could be here!') }}</p>
+                <h3>{{ _('Application coming soon') }}</h3>
+                <p>{{ _('Start participating!') }}</p>
                 {% if current_user.is_authenticated() %}
                 {% if current_user.admin == 1 %}
                 <p><a href="{{url_for('app.new')}}" class="btn btn-xs btn-primary">{{ _('Create an app') }}</a></p>
@@ -89,10 +56,10 @@
           </div>
           {% endfor %}
         </div>
-      </section>
+      </div>
 
       {% if top_users %}
-      <section id="top_users" class="grey">
+      <div id="top_users" class="row well">
         <h2><i class="icon-group"></i>{{ _('Most Active Volunteers') }}</h2>
         <ul class="users">
             {% for user in top_users %}
@@ -102,13 +69,13 @@
                 <br/>
                 <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
                 " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
-                <img class="img-circle" src="{{user.email_addr|gravatar(size=90,default='http%3A%2F%2Fcrowdsourced.micropasts.org%2Fstatic%2Fimg%2Fgravdef.png')}}">
+                <img class="img-rounded" height="90" width="90" src="{{user.email_addr|gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
            </a>
            <span class="label label-success">{{user.task_runs}}</span> {{_('Tasks')}}
           </li>
           {% endfor %}
         </ul>
-      </section>
+      </div>
       {% endif %}
 <script>
 $("a[rel=popover]").popover({

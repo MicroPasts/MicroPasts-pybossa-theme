@@ -88,31 +88,8 @@ body {
   font-size: 13px;
 }
 
-.banner {
-  background-color: #f7f7f7;
-  position: relative;
-  margin-bottom: 15px;
-  padding: 0px 0px 0px 10px;
-  width: 100%;
-  margin-left: -10px;
-}
-.banner:before,
-.banner:after {
-  content: "";
-  position: absolute;
-  background-color: #f7f7f7;
-  top: 0;
-  bottom: 0;
-  width: 9999px;
-}
-.banner:before {
-  right: 100%;
-  border-right: solid 10px #FFF;
-}
-.banner:after {
-  left: 100%;
-  border-left: solid 10px #FFF;
-}
+
+
 section.grey {
   position: relative;
   display: block;
@@ -156,7 +133,6 @@ section.grey:after {
   display: block;
   width: 100%;
   height: 138px;
-  background-image: url(../img/placeholder-head-grey.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -198,16 +174,14 @@ body > footer .container {
 .banner .featured {
   margin: -6px 0px 0px 0px;
   border-left: solid 2px #FFF;
-  height: 309px;
   overflow: hidden;
 }
 .banner .featured li {
   display: block;
   float: left;
   width: 103px;
-  height: 103px;
+  height: 150px;
   background-color: #FFF;
-  background-image: url(../img/placeholder-head-grey.png);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 97px 97px;
@@ -226,21 +200,7 @@ body > footer .container {
   margin: 6px;
   display: inline-block;
 }
-.banner .featured li a:hover {
-  position: absolute;
-  margin: -2px 0px 0px -2px;
-  -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.8);
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.8);
-  background-color: #FFF;
-  width: 112px;
-  z-index: 2;
-}
-.banner .featured li a:hover img {
-  border: solid 6px #FFF;
-  -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
-  width: 100px;
-}
+
 .banner .featured li img {
     min-width: 100px;
     min-height: 100px;
@@ -302,9 +262,8 @@ ul.users li a {
   display: block;
   float: left;
   width: 103px;
-  height: 103px;
+  height: 150px;
   background-color: #FFF;
-  background-image: url(../img/placeholder-head-grey.png);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 97px 97px;
@@ -350,5 +309,19 @@ ul.users li a {
     display: inline;
 }
 .btn-group {
-    margin-bottom:20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.jumbotron h1 {
+   line-height: 63px;
+   text-align: center;
+}
+.container {
+  margin-bottom:10px;
+}
+.footerLinks a {
+  color: #ffffff;
+}
+#created-apps, #contributed-apps {
+    margin-top: 10px;
 }

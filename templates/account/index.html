@@ -6,50 +6,52 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-9 col-md-offset-2">
       {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
       {% else %}
-      <h1>{{ _('Contributors') }} {{total}} {{ _('registered users') }}<a class="pull-right btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="glyphicon glyphicon-list-alt" style="color:white"></i> {{ _('Leaderboard') }}</a></h1>
+      <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small></h1>
+      <div class="btn-group">
+      <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
+      </div>
       {% if accounts %}
+      <div class="row">
       {% for account in accounts %}
-      <div class="col-xs-6 col-md-3">
-      <a href="{{url_for('account.public_profile', name=account.name)}}" class="img-thumbnail" rel='popover' title="<strong>{{account['fullname']}}</strong>" data-content="
+      <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+                <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90" alt="Avatar for {{account['fullname']}}" class="img-rounded"  />
+        <div class="caption">
+         <h4 class="lead"><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></h4>
               <ul style='list-style-type:none; margin-left:0px;'>
-                <li><strong><i class='glyphicon glyphicon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
-                <li><strong><i class='glyphicon glyphicon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
+                <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
+                <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
                 {% if account.apps %}
-                <li><strong><i class='glyphicon glyphicon-certificate'></i> Owner of</strong>
+                <li><strong><i class='icon-certificate'></i> Owner of</strong>
                   <ul style='list-style-type:none'>
                       {% for app in account.apps %}
-                      <li><i class='glyphicon glyphicon-chevron-right'></i> {{ app.name | truncate(18, true)}}</li>
+                      <li><i class='icon-chevron-right'></i> {{ app.name | truncate(18, true)}}</li>
                       {% endfor %}
                   </ul>
                 </li>
                 {% endif %}
-              ">
-                <img class="img-circle" src="{{account['email_addr'] | gravatar(size=90,default='http%3A%2F%2Fcrowdsourced.micropasts.org%2Fstatic%2Fimg%2Fgravdef.png')}}">
-        </a>
+              </ul>
+          </div>
+        </div>
+
+        
       </div>
       {% endfor %}
-      </ul>
+      </div>
     {% endif %}
-    <div class="col-md-9">
-        {% if pagination.pages > 1 %}
+      {% if pagination.has_next %}
+      {{ pagination.info }}
+    <div class="span9">
+        {% if pagination.pages > 2 %}
             {{ helper.render_pagination(pagination) }}
         {% endif %}
     </div>
+      {% endif %}
     {% endif %}
   </div>
 </div>
-
-<script>
-$("a[rel=popover]").popover({
-        html: true,
-        animate: true,
-        trigger: 'hover',
-        placement: 'bottom'
-                });
-
-</script>
 {% endblock %}

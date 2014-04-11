@@ -3,53 +3,38 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-12">
+    <div class="span12">
         <section id="overview">
             <h1><strong>{{brand}}</strong>: Licenses</h1>
             <p>
-            <strong>{{brand}}</strong> uses the free and open source framework
+            The <strong>{{brand}}</strong> crowd-sourcing platform uses the free and open source framework
             <a href="http://dev.pybossa.com">PyBossa</a> which is released under the 
-            <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero general public license version 3.0</a>.
+            <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License version 3.0</a> 
+            and all of the source code for the applications is hosted in <a href="http://github.com/PyBossa/pybossa">Github</a>.
+            </p>
+        
+            <p>
+            For datasets, we make a distinction between <em>source</em> data and <em>derived</em> data. Our crowd-sourcing
+            applications use digital <em>source</em> data (for example photographs, scanned documents) to allow 
+            contributors to complete research tasks such as the development of 3D models, photo-tagging and transcription. 
+            This <em>source</em> data will typically b available through a fully open <a href="http://creativecommons.org/about/cc0">CC0</a> license  or a
+	    <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a> license, but in some cases might be 
+	    placed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC</a>
+            or <a href="https://creativecommons.org/licenses/by-nd/4.0/">CC BY-ND</a> licenses when the institutions 
+            owning the archaeological or archival material have asked that commercial use is prohibited without further 
+            consultation (we hope that this will be infrequent).
+            </p>
+      
+            <p>
+            All the <em>derived</em> data, produced with the help of volunteers
+            via crowd-sourcing, is licensed under an open CC0 or CC BY license, depending on case-by-case agreements 
+            with our partners.
+            </p>
+      
+            <p>
+            Check the application's pages for further details about which specific licenses have been applied.
             </p>
 
-            <p>
-            The source code is hosted in <a href="http://github.com/PyBossa/pybossa">Github</a>.
-            </p>
-        </section>
-        <hr>
-        <section id="applications">
-            <h1>Applications</h1>
-            <p>
-            Most of the applications will have an open source license, like:
-            <ul>
-                <li><a href="http://github.com/PyBossa/app-flickrperson">Flickr Person Finder</a></li>
-                <li><a href="https://github.com/PyBossa/app-geocoding">Urban Parks</a></li>
-                <li><a href="https://github.com/PyBossa/pdftranscribe">PDF Transcribe</a>, or</li>
-                <li><a href="https://github.com/PyBossa/app-soundcloud">Sound Cloud</a></li>
-            </ul>
-            </p>
-            <p>
-            Bear in mind that some applications will have a different open source license, 
-            so check the application description page for more details about the license or
-            contact the creators of the application.
-            </p>
-        </section>
-        <hr>
-        <section id="data">
-            <h1>Data</h1>
-            <p>
-            All the generated data by the volunteers are, unless otherwise stated,
-            under the <a href="http://opendatacommons.org/licenses/odbl/">Open Data Commons License</a>. Check the description
-            the application's page for further details about which license is going
-            to be applied.
-            </p>
-        </section>
-        <hr>
-        <section id="content">
-            <h1>General Content</h1>
-            <p>
-            All the General Content of the page is under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons License BY-SA 3.0 Unported</a>.
-            </p>
         </section>
 
     </div>
