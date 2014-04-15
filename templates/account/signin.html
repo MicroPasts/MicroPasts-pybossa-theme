@@ -35,9 +35,9 @@
   <form role="form" id="signin" method="post"  action="">
     {{ form.hidden_tag() }}
     {% if auth.twitter or auth.facebook%}
-    <legend>{{ _('Or Sign in with your PyBossa account') }}</legend>
+    <legend>{{ _('Or sign in with the account you created on this site') }}</legend>
     {% else %}
-    <legend>{{ _('Sign in with your PyBossa account') }}</legend>
+    <legend>{{ _('Or sign in with the account you created on this site') }}</legend>
     {% endif %}
       {{ render_field(form.email, placeholder="", class_="form-control") }}
       {{ render_field(form.password, placeholder="", class_="form-control") }}

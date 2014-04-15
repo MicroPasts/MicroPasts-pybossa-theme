@@ -11,6 +11,7 @@
         {{ privacy.render_lock_page() }}
       {% else %}
       <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small></h1>
+      <p>We only show you people who have contributed to our projects. Their avatars are powered by Gravatar.</p>
       <div class="btn-group">
       <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
       </div>
@@ -19,9 +20,9 @@
       {% for account in accounts %}
       <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-                <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90" alt="Avatar for {{account['fullname']}}" class="img-rounded"  />
+                <img src="{{account['email_addr'] | gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}" width="90" height="90" alt="Avatar for {{account['fullname']}}" class="img-rounded"  />
         <div class="caption">
-         <h4 class="lead"><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></h4>
+         <h4 class="lead"><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']  | truncate(10, true)}}</a></h4>
               <ul style='list-style-type:none; margin-left:0px;'>
                 <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
                 <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>

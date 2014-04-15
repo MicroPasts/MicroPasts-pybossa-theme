@@ -6,7 +6,7 @@
 
         <div class="row jumbotron">
           <div class="col-md-12 ">
-              <h1>{{ brand }}: Crowdsourcing</h1>
+              <h1>{{ brand }}: Crowd-sourcing</h1>
 
           </div>
 		</div>
@@ -25,7 +25,7 @@
 </div>
 
       <div class="row well">
-        <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
+        <!-- <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
         <div class="row">
           {% for app in top_apps %}
           <div class="col-md-3">
@@ -55,7 +55,17 @@
             </div>
           </div>
           {% endfor %}
+        </div> -->
+        {% for app in top_apps %}
+        <div class="col-md-3 center">
+          <img class="img-circle" src="{{app.info.thumbnail}}" style="width: 140px; height: 140px;">
+          <h2>{{app.name}}</h2>
+          <!-- <p>{{app.description | truncate(32, true)}}</p> -->
+          <p>{{app.description}}</p>
+          <p><a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-primary">{{ _('Start') }}</a></p>
         </div>
+        {% endfor %}
+        
       </div>
 
       {% if top_users %}

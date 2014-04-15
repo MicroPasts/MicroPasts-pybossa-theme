@@ -325,3 +325,6 @@ ul.users li a {
 #created-apps, #contributed-apps {
     margin-top: 10px;
 }
+.center {
+  text-align: center;
+}
