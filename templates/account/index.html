@@ -19,7 +19,7 @@
       {% for account in accounts %}
       <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-                <img src="{{account['email_addr'] | gravatar(size=90)}}" width="90" height="90" alt="Avatar for {{account['fullname']}}" class="img-rounded"  />
+                <img src="{{account['email_addr'] | gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}" width="90" height="90" alt="Avatar for {{account['fullname']}}" class="img-rounded"  />
         <div class="caption">
          <h4 class="lead"><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']  | truncate(10, true)}}</a></h4>
               <ul style='list-style-type:none; margin-left:0px;'>
