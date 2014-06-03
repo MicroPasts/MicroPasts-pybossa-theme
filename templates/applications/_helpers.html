@@ -216,31 +216,26 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_grid_apps(apps, title) %}
-    <div class="banner">
+
         <div class="row">
-            <div class="col-md-4">
-                <h1>{{title}}</h1>
-            </div>
-            <div class="col-md-8">
-              <ul class="featured">
-                  {% for app in apps %}
-                  <li><a href={{ url_for('app.details', short_name=app.short_name)}}>
+            <h1>{{title}}</h1>
+            <div class="col-md-12">
+                {% for app in apps %}
+                <div class="col-md-3 center">
+                    <a href={{ url_for('app.details', short_name=app.short_name)}}>
                       {% if app.info.thumbnail %}
-                      <img src="{{app.info.thumbnail}}" >
+                      <img src="{{app.info.thumbnail}}" class="img-circle" >
                       {% else %}
-                      <img src="{{url_for('static', filename="img/placeholder.dark.png")}}">
+                      <img src="{{url_for('static', filename="img/placeholder.dark.png")}}" class="img-circle">
                       {% endif %}
-                      <h3>{{app.name}}</h3>
-                      </a>
-                  </li>
-                  {% endfor %}
-                  {% for number in range(18 - apps |count) %}
-                  <li></li>
-                  {% endfor %}
-              </ul>
+                    </a>
+                <h2>{{app.name}}</h2>
+                <p>{{app.info}}</p>
+                </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
+
 {% endmacro %}
 
 {% macro render_loading(text) %}
