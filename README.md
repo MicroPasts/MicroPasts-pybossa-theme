@@ -4,7 +4,7 @@ server](https://github.com/findsorguk/pybossa).
 
 Funded by
 =========
-![AHRC funded](http://crowdfunded.micropasts.org/assets/about/ahrc.png)
+![AHRC funded](http://oac.lib.bris.ac.uk/Dserve/images/AHRC%20Logo%20Gray%20LScape2.JPG)
 
 Funded Partners
 ===============
