@@ -31,9 +31,9 @@
         {% else %}
         <h1>
         {% if app.info.thumbnail %}
-            <img class="img-polaroid" src="{{app.info.thumbnail}}" style="max-width:60px;" onerror="imgError(this);"> 
+            <img class="img-polaroid" src="{{app.info.thumbnail}}" style="max-width:60px;" onerror="imgError(this);">
         {% else %}
-            <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" style="max-width:60px;" onerror="imgError(this);"> 
+            <img class="img-polaroid" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" style="max-width:60px;" onerror="imgError(this);">
         {% endif %}
         <strong>{{ app.name }}</strong>: {{_('Statistics')}}</h1>
         <br/>
@@ -111,18 +111,18 @@
                     function drawGraph(opts) {
                         // Clone the options, so the 'options' variable always keeps intact.
                         var o = Flotr._.extend(Flotr._.clone(options), opts || {});
-                        
+
                         // Return a new graph.
                         return Flotr.draw(
                         dayStatsTotalContainer, [{ data:appStats.dayStats[3]['values'],label:appStats.dayStats[3]['label']}, { data:appStats.dayStats[4]['values'],label:appStats.dayStats[4]['label']} , { data:appStats.dayStats[5]['values'],label:appStats.dayStats[5]['label']}], o);
                     }
-                        
+
                         // Actually draw the graph.
                         graph = drawGraph();
-                        
+
                         // Hook into the 'flotr:select' event.
                         Flotr.EventAdapter.observe(dayStatsTotalContainer, 'flotr:select', function(area) {
-                        
+
                             // Draw graph with new area
                             graph = drawGraph({
                                 xaxis: {
@@ -181,18 +181,18 @@
                     function drawGraph(opts) {
                         // Clone the options, so the 'options' variable always keeps intact.
                         var o = Flotr._.extend(Flotr._.clone(options), opts || {});
-                        
+
                         // Return a new graph.
                         return Flotr.draw(
                         dayStatsContainer, [{data: appStats.dayStats[1]['values'], label:appStats.dayStats[1]['label']},{ data:appStats.dayStats[2]['values'],label:appStats.dayStats[2]['label'] }, { data:appStats.dayStats[0]['values'],label:appStats.dayStats[0]['label']} ], o);
                     }
-                        
+
                         // Actually draw the graph.
                         graph = drawGraph();
-                        
+
                         // Hook into the 'flotr:select' event.
                         Flotr.EventAdapter.observe(dayStatsContainer, 'flotr:select', function(area) {
-                        
+
                             // Draw graph with new area
                             graph = drawGraph({
                                 xaxis: {
@@ -249,7 +249,7 @@
                         var container = document.getElementById('userAnsStats');
                         var graph = Flotr.draw(container, [
                             {data:[appStats.userStats['values'][0]['value']], label:appStats.userStats['values'][0]['label']},
-                            {data:[appStats.userStats['values'][1]['value']],  label:appStats.userStats['values'][1]['label']}], 
+                            {data:[appStats.userStats['values'][1]['value']],  label:appStats.userStats['values'][1]['label']}],
                             {
                             pie     : {show: true, explode: 2},
                             grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
@@ -301,10 +301,10 @@
                         var container = document.getElementById('userAnonStats');
                         var graph = Flotr.draw(container, [
                             {data:[[0, appStats.userAnonStats['top5'][0]['tasks'] ]],  label:'{{_('User')}} 1'},
-                            {data:[[0, appStats.userAnonStats['top5'][1]['tasks'] ]],  label:'{{_('User')}} 2'}, 
-                            {data:[[0, appStats.userAnonStats['top5'][2]['tasks'] ]],  label:'{{_('User')}} 3'}, 
-                            {data:[[0, appStats.userAnonStats['top5'][3]['tasks'] ]],  label:'{{_('User')}} 4'}, 
-                            {data:[[0, appStats.userAnonStats['top5'][4]['tasks'] ]],  label:'{{_('User')}} 5'}], 
+                            {data:[[0, appStats.userAnonStats['top5'][1]['tasks'] ]],  label:'{{_('User')}} 2'},
+                            {data:[[0, appStats.userAnonStats['top5'][2]['tasks'] ]],  label:'{{_('User')}} 3'},
+                            {data:[[0, appStats.userAnonStats['top5'][3]['tasks'] ]],  label:'{{_('User')}} 4'},
+                            {data:[[0, appStats.userAnonStats['top5'][4]['tasks'] ]],  label:'{{_('User')}} 5'}],
                             {
                             pie     : {show: true, explode: 5},
                             grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
@@ -328,10 +328,10 @@
                             var map = L.map('map');
                             map.fitWorld();
                             map.setZoom(1);
-                            var url = 'http://{s}.tile.cloudmade.com/f9ed30886bf3454691669c63a45490f4/997/256/{z}/{x}/{y}.png'
-                            L.tileLayer(url, 
+                            var url = 'http://tile.openstreetmap.org/{z}/{x}/{y}.png'
+                            L.tileLayer(url,
                                 {
-                                attribution: 'Map data Cloudmade.com &copy;',
+                                attribution: 'OpenStreetMap &copy;',
                                 maxZoom: 18,
                                 minZoom:1
                                 }).addTo(map);
@@ -390,10 +390,10 @@
                         var container = document.getElementById('userAuthStats');
                         var graph = Flotr.draw(container, [
                             {data:[[0, appStats.userAuthStats['top5'][0]['tasks'] ]],  label:appStats.userAuthStats['top5'][0]['fullname']},
-                            {data:[[0, appStats.userAuthStats['top5'][1]['tasks'] ]],  label:appStats.userAuthStats['top5'][1]['fullname']}, 
-                            {data:[[0, appStats.userAuthStats['top5'][2]['tasks'] ]],  label:appStats.userAuthStats['top5'][2]['fullname']}, 
-                            {data:[[0, appStats.userAuthStats['top5'][3]['tasks'] ]],  label:appStats.userAuthStats['top5'][3]['fullname']}, 
-                            {data:[[0, appStats.userAuthStats['top5'][4]['tasks'] ]],  label:appStats.userAuthStats['top5'][4]['fullname']}], 
+                            {data:[[0, appStats.userAuthStats['top5'][1]['tasks'] ]],  label:appStats.userAuthStats['top5'][1]['fullname']},
+                            {data:[[0, appStats.userAuthStats['top5'][2]['tasks'] ]],  label:appStats.userAuthStats['top5'][2]['fullname']},
+                            {data:[[0, appStats.userAuthStats['top5'][3]['tasks'] ]],  label:appStats.userAuthStats['top5'][3]['fullname']},
+                            {data:[[0, appStats.userAuthStats['top5'][4]['tasks'] ]],  label:appStats.userAuthStats['top5'][4]['fullname']}],
                             {
                             pie     : {show: true, explode: 5},
                             grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},

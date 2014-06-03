@@ -67,7 +67,7 @@ h3 > small {
                             var container = document.getElementById('users');
                             var graph = Flotr.draw(container, [
                                 {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}], 
+                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
                                 {
                                 pie     : {show: true, explode: 2},
                                 grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
@@ -112,7 +112,7 @@ h3 > small {
                             var container = document.getElementById('apps');
                             var graph = Flotr.draw(container, [
                                 {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}], 
+                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
                                 {
                                 pie     : {show: true, explode: 2},
                                 grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
@@ -122,7 +122,7 @@ h3 > small {
                                 legend  : {position: 'se'}
                             });
                         })();
-                        
+
                         </script>
                     </div>
                 </div>
@@ -145,7 +145,7 @@ h3 > small {
                             var container = document.getElementById('tasks');
                             var graph = Flotr.draw(container, [
                                 {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}], 
+                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
                                 {
                                 bars : {show: true},
                                 grid    : {verticalLines: true, horizontalLines: true},
@@ -154,7 +154,7 @@ h3 > small {
                                 legend  : {position: 'ne'}
                             });
                         })();
-                        
+
                         </script>
                     </div>
                 </div>
@@ -174,10 +174,10 @@ h3 > small {
                     var map = L.map('map');
                     map.fitWorld();
                     map.setZoom(1);
-                    var url = 'http://{s}.tile.cloudmade.com/f9ed30886bf3454691669c63a45490f4/997/256/{z}/{x}/{y}.png'
-                    L.tileLayer(url, 
+                    var url = 'http://tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    L.tileLayer(url,
                         {
-                        attribution: 'Map data Cloudmade.com &copy;',
+                        attribution: 'OpenStreetMap',
                         maxZoom: 18,
                         minZoom:1
                         }).addTo(map);
@@ -199,7 +199,7 @@ h3 > small {
             </div>
             {% endif %}
             <!-- END Anonymous Users Map CARD -->
-        {% endif %} 
+        {% endif %}
     </div>
 </div>
 {% endblock %}
