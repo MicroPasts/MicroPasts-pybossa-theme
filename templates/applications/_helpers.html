@@ -224,13 +224,13 @@ function imgError(image) {
                 <div class="col-md-3 center">
                     <a href={{ url_for('app.details', short_name=app.short_name)}}>
                       {% if app.info.thumbnail %}
-                      <img src="{{app.info.thumbnail}}" class="img-circle" >
+                      <img src="{{app.info.thumbnail}}" class="img-circle" width="200px" height="200px">
                       {% else %}
                       <img src="{{url_for('static', filename="img/placeholder.dark.png")}}" class="img-circle">
                       {% endif %}
                     </a>
                 <h2>{{app.name}}</h2>
-                <p>{{app.info}}</p>
+                <p>{{app.description}}</p>
                 </div>
                 {% endfor %}
             </div>
