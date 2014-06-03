@@ -231,7 +231,8 @@ function imgError(image) {
                     </a>
                 <h2>{{app.name}}</h2>
                 <p>{{app.description}}</p>
-                
+                <p><i class="glyphicon glyphicon-tasks"></i> {{ _('They have contributed') }} <strong>{{app.c}}</strong> {{ _('tasks') }}</p>
+                {{ helper.render_twitter_btn(app) }}
                 </div>
                 {% endfor %}
             </div>
