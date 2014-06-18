@@ -7,12 +7,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="{{ url_for('home.home') }}"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}" width="130" height="24"></a>
+          <a class="brand" href="http://micropasts.org"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}" width="130" height="24"></a>
          </div>
          
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="http://micropasts.org" title="Micropasts homepage">MicroPasts home</a></li>
+              <li><a href="http://crowdsourced.micropasts.org" title="Crowd-sourcing Home">Crowd-sourcing</a></li><!-- href="{{ url_for('home.home') }} -->
               <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
               <li {% if active_page == 'applications' %} class="active" {% endif %}><a href="{{ url_for('app.index') }}">{{ _('Applications') }}</a></li>
               {% if current_user.is_authenticated() %}
