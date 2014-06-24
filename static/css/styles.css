@@ -331,3 +331,6 @@ ul.users li a {
 .brand img {
   margin-top: 8px;
 }
+.dropdown-menu a {
+  text-align: left;
+}
