@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
               <li><a href="http://micropasts.org" title="Micropasts homepage">Home</a></li>
               <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
-              <li {% if active_page == 'applications' %} class="active" {% endif %}><a href="{{ url_for('app.index') }}">{{ _('Apps') }}</a></li>
+              <li {% if active_page == 'applications' %} class="active" {% endif %}><a href="{{ url_for('app.index') }}">{{ _('Applications') }}</a></li>
               {% if current_user.is_authenticated() %}
               <li {% if active_page == 'create' %} class="active" {% endif %}><a href="{{ url_for('app.new') }}">{{ _('Create') }}</a></li>
               {% endif %}
@@ -23,7 +23,7 @@
               <li><a href="http://micropasts.org/data-centre">Data</a></li>
               <li><a href="http://micropasts.org/learning">Learning</a></li>
               <li><a href="http://research.micropasts.org">Blog</a></li>
-              <li><a href="http://crowdfunded.micropasts.org">Crowd-funding</a></li>
+              <!-- li><a href="http://crowdfunded.micropasts.org">Crowd-funding</a></li -->
 
               <!-- li class="dropdown">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Research <b class="caret"></b></a>
