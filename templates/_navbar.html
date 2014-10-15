@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
               <li><a href="http://micropasts.org" title="Micropasts homepage">Home</a></li>
               <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
-              <li {% if active_page == 'applications' %} class="active" {% endif %}><a href="{{ url_for('app.index') }}">{{ _('Applications') }}</a></li>
+              <li {% if active_page == 'applications' %} class="active" {% endif %}><a href="{{ url_for('app.index') }}">{{ _('Apps') }}</a></li>
               {% if current_user.is_authenticated() %}
               <li {% if active_page == 'create' %} class="active" {% endif %}><a href="{{ url_for('app.new') }}">{{ _('Create') }}</a></li>
               {% endif %}
