@@ -20,20 +20,15 @@
               {% endif %}
               <li {% if active_page == 'about' %} class="active" {% endif %}><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li>
               <li><a href="http://community.micropasts.org" title="Our community forum">Forum</a></li>
-              <li><a href="http://micropasts.org/data-centre">Data</a></li>
-              <li><a href="http://micropasts.org/learning">Learning</a></li>
-              <li><a href="http://research.micropasts.org">Blog</a></li>
-              <!-- li><a href="http://crowdfunded.micropasts.org">Crowd-funding</a></li -->
-
-              <!-- li class="dropdown">
+              <li><a href="http://crowdfunded.micropasts.org">Crowd-funding</a></li>
+              <li class="dropdown">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Research <b class="caret"></b></a>
                  <ul class="dropdown-menu">
                     <li><a href="http://micropasts.org/data-centre">Data</a></li>
                     <li><a href="http://micropasts.org/learning">Learning</a></li>
                     <li><a href="http://research.micropasts.org">Blog</a></li>
                  </ul>
-              </li -->
-
+              </li>
             </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
