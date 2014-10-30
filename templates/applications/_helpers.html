@@ -129,9 +129,9 @@
     <div class="row">
         <div class="col-md-3">
             {% if data.app.info.thumbnail %}
-            <img class="thumbnail" src="{{ data.app.info.thumbnail }}" style="max-width:100px; max-height:100px" onerror="imgError(this);">
+            <img class="img-circle" src="{{ data.app.info.thumbnail }}" style="max-width:100px; max-height:100px" onerror="imgError(this);">
             {% else %}
-            <img class="thumbnail" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" style="max-width:100px;">
+            <img class="img-circle" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" style="max-width:100px;">
             {% endif %}
         </div> <!-- End of span3 -->
         <div id="data" class="col-md-9">
@@ -221,7 +221,7 @@ function imgError(image) {
             <h1>{{title}}</h1>
             <div class="col-md-12">
                 {% for app in apps %}
-                <div class="col-md-3 center">
+                <div class="col-md-3 center applications">
                     <a href={{ url_for('app.details', short_name=app.short_name)}}>
                       {% if app.info.thumbnail %}
                       <img src="{{app.info.thumbnail}}" class="img-circle" width="140" height="140">
