@@ -11,3 +11,4 @@ _gcs_form.html
 .project
 .buildpath
 Thumbs.db
+.idea*

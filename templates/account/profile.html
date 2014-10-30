@@ -17,7 +17,7 @@
         <h2>{{ _('Your Contributions') }}</h2>
         {% for app in apps_contrib %}
         <div class="row well well-small">
-            <div class="col-md-3">
+            <div class="col-md-3 applications">
               {% if app.info.thumbnail %}
               <img class="img-circle" src="{{app.info.thumbnail}}" width="100" height="100">
               {% else %}
