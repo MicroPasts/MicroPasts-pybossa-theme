@@ -11,7 +11,8 @@
     </div>
     <div class="col-md-9">
         <h1><strong>{{current_user.fullname}}</strong>: {{ _('Update your profile') }}</h1>
-        <form role="form" method="post"  action="{{ url_for('account.update_profile') }}">
+        <form role="form" method="post"  action="{{
+            url_for('account.update_profile', name=current_user.name) }}">
             <fieldset>
             {{ form.id }}
             {{ form.hidden_tag() }}
@@ -23,14 +24,15 @@
             <h2>External Services</h2>
             {{ render_field(form.ckan_api, class_="form-control") }}
             <div>
-                <img class="img-circle" height="50" width="50" src="{{ current_user.email_addr | gravatar(size=50,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
+                {{ helper.render_user_thumbnail(current_user, upload_method, class="img-circle", style="width:50px; height:50px;")}}
                 <a class="btn btn-sm btn-default" href="http://www.gravatar.com">{{ _('Change your avatar at Gravatar.com.') }}</a> <p>{{ _('We are using the current email address of: ') }} {{current_user.email_addr}}</p>
                 <hr>
                 <span class="label label-warning"><i class="glyphicon glyphicon-white glyphicon-star"></i> {{ _('Note') }}</span> {{ _('If you change your') }} <strong>{{ _('user name') }}</strong> {{ _('you will be asked to sign in again.') }}
             </div>
             <div class="btn-group">
               <input type="submit" value="{{ _('Save the changes') }}" class="btn btn-primary btn-sm" />
-              <a href="{{ url_for('account.settings') }}" class="btn btn-sm btn-primary">{{ _('Cancel') }}</a>
+              <a href="{{ url_for('account.update_profile',
+                  name=current_user.name) }}" class="btn btn-sm btn-primary">{{ _('Cancel') }}</a>
             </div>
             </fieldset>
         </form>
