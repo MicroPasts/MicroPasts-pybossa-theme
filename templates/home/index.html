@@ -1,4 +1,6 @@
 {% extends "basePlate.html" %}
+{% import "applications/_helpers.html" as helper %}
+{% import "account/_helpers.html" as account_helper %}
 
 {% block content %}
 <div class="background">
@@ -95,4 +97,5 @@ $("a[rel=popover]").popover({
         placement: 'top'
                 });
 </script>
+{{ helper.broken_image() }}
 {% endblock %}
