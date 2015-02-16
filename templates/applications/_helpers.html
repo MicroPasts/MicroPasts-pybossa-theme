@@ -178,7 +178,7 @@ function imgError(image) {
 </script>
 {% endmacro %}
 
-{% macro render_app_title(app, subtitle=None) %}
+{% macro render_app_title(app, upload_method, subtitle=None) %}
 <h1>
     {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:60px") }}
     {% if subtitle %}
