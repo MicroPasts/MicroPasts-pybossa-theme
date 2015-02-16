@@ -70,7 +70,7 @@
         {% endif %}
 
         <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
-            <hr>
+        <hr>
             <h2>External Services</h2>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             {{ render_field(external_form.ckan_api) }}
