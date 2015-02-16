@@ -2,6 +2,7 @@
 {% set active_page = "profile" %}
 {% set active_link = "profile" %}
 {% import "account/_helpers.html" as helper %}
+{% import "applications/_helpers.html" as app_helper %}
 
 {% block content %}
 
@@ -18,11 +19,8 @@
         {% for app in apps_contrib %}
         <div class="row well well-small">
             <div class="col-md-3 applications">
-              {% if app.info.thumbnail %}
-              <img class="img-circle" src="{{app.info.thumbnail}}" width="100" height="100">
-              {% else %}
-              <img class="img-circle" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" width="100" height="100">
-              {% endif %}
+                {{ app_helper.render_app_thumbnail(app, upload_method,
+                class='img-circle', style='width:100px; height:100px;')}}
             </div>
             <div class="col-md-9">
                 <h2><a href="{{url_for('app.details', short_name=app.short_name)}}">{{app.name}}</a></h2>
@@ -38,4 +36,5 @@
         {% endfor %}
     </div><!-- end span9 -->
 </div>
+{{ broken_image }}
 {% endblock %}
