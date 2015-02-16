@@ -11,20 +11,15 @@
     </div>
     <div class="col-md-9">
         <h1><strong>{{ _('Application') }}</strong>: {{ _('Create a new application') }}</h1>
-    <form  role="form" method="post" action="{{ url_for('app.new') }}">
+    <form  role="form" class="form-horizontal" method="post" action="{{ url_for('app.new') }}">
         {{ form.hidden_tag() }}
         <div class="form-group">
             {{ render_field(form.name, class_="form-control", placeholder= _('The name of the application')) }}
             {{ render_field(form.short_name, class_="form-control", placeholder=_('Short name or slug for the application')) }}
-            {{ render_field(form.description, class_="form-control", placeholder=_('Give some details about the application'))}}
-            {{ render_field(form.thumbnail, class_="form-control", placeholder=_('Paste the direct link to your app icon'))}}
-            {{ render_field(form.allow_anonymous_contributors, class_="form-control")}}
-            {{ render_field(form.category_id, class_="form-control")}}
             {{ render_field(form.long_description, class_="form-control", placeholder=_('Explain the application (you can use HTML code!)'))}}
-            {{ render_field(form.hidden, tooltip=_('Do you want to hide your app?'))}}
             <div>
                 <input type="submit" value={{_('Create the application')}} class="btn btn-primary" />
-                <a href="{{url_for('account.profile')}}" class="btn btn-primary">{{_('Cancel')}}</a>
+                <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-primary">{{_('Cancel')}}</a>
             </div>
         </div>
     </form>
