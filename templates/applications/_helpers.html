@@ -50,10 +50,10 @@
 </ul>
 {% endmacro %}
 
-{% macro render_app_summary(app, n_tasks, overall_progress, last_activity, current_user) -%}
+{% macro render_app_summary(app, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
 <div class="row">
     <div class="col-md-12">
-      {{ render_app_thumbnail(app, upload_method, class='img-circle') }}
+      {{ render_app_thumbnail(app, upload_method, class='img-circle', style="max-width:100px") }}
       <ul style="list-style-type: none; font-size: 16px;">
         {% if current_user.id == app.owner_id %}
         <li><strong><i class="glyphicon glyphicon-cog"></i> {{ _('ID') }}</strong>: {{ app.id }}</li>
@@ -79,7 +79,7 @@
 {% macro render_app_short_summary(app, current_user) -%}
 <div class="row well well-small">
     <div class="col-md-3">
-        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
+        {{ render_app_thumbnail(app, upload_method, class="img-circle", style="max-width:100px") }}
     </div>
     <div class="col-md-9">
         <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
@@ -92,7 +92,7 @@
 {% macro render_app_admin_featured(app, current_user) -%}
 <div class="row well well-small">
     <div class="col-md-3">
-        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
+        {{ render_app_thumbnail(app, upload_method, class="img-circle", style="max-width:100px") }}
     </div>
     <div class="col-md-9">
         <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
@@ -123,7 +123,7 @@
     <h2><a href="{{ url_for('app.details', short_name = data.app.short_name) }}">{{ data.app.name }}</a></h2>
     <div class="row">
         <div class="col-md-3">
-            {{ render_app_thumbnail(app, upload_method, class='thumbnail', style='max-width:100px; max-height:100px;') }}
+            {{ render_app_thumbnail(app, upload_method, class='img-circle', style='max-width:100px; max-height:100px;') }}
         </div> <!-- End of span3 -->
         <div id="data" class="col-md-9">
             <p style="margin:0"><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ data.app.description }}</p>
