@@ -36,7 +36,7 @@
         </form>
         <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
             <fieldset>
-                <h2 {% if form.errors %}name="profile"{%endif%}>Your profile</h2>
+                <h2 {% if form.errors %}name="profile"{%endif%}>{{_('Your profile')}}</h2>
             {{ form.id }}
             {{ form.hidden_tag() }}
             {{ render_field(form.fullname, placeholder= _('my full name') , class_='form-control') }}
@@ -71,7 +71,7 @@
 
         <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
         <hr>
-            <h2>External Services</h2>
+        <h2>{{_('External Services')}}</h2>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             {{ render_field(external_form.ckan_api, class_='form-control') }}
             <div class="form-actions">
