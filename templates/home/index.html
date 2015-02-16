@@ -58,9 +58,10 @@
           </div>
           {% endfor %}
         </div> -->
-        {% for app in featured %}
+        {% for app in categories_apps['featured']%}
         <div class="col-md-3 center">
-          <img class="img-circle" src="{{app.info.thumbnail}}" width="140px" height="140">
+            {{ helper.render_app_thumbnail(app, upload_method, class="img-circle",
+            style="width:140px; height:140px;")}}
           <h2>{{app.name}}</h2>
           <!-- <p>{{app.description | truncate(32, true)}}</p> -->
           <p>{{app.description}}</p>
@@ -76,7 +77,7 @@
         <ul class="users">
             {% for user in top_users %}
           <li>
-          <a href="{{url_for('account.public_profile', name=user.name)}}" data-content="
+          <a href="{{url_for('account.profile', name=user.name)}}" data-content="
                 <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}}
                 <br/>
                 <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
