@@ -223,15 +223,14 @@ function imgError(image) {
                 {% for app in apps %}
                 <div class="col-md-3 center applications">
                     <a href={{ url_for('app.details', short_name=app.short_name)}}>
-                      {% if app.info.thumbnail %}
-                      <img src="{{app.info.thumbnail}}" class="img-circle" width="140" height="140">
-                      {% else %}
-                      <img src="{{url_for('static', filename="img/placeholder.dark.png")}}" class="img-circle">
-                      {% endif %}
+                        {{render_app_thumbnail(app, upload_method,
+                        class="img-circle", style="width:140px; heigh=140px;")}}
                     </a>
                 <h2>{{app.name}}</h2>
                 <p>{{app.description}}</p>
-                <p><i class="glyphicon glyphicon-stats"></i> {{ _('With contributions to ') }} <strong>{{app.n_answers}}</strong> {{ _('task(s)') }}</p>
+                <!-- <p><i class="glyphicon glyphicon-stats"></i> {{ _('With
+                     contributions to ') }} <strong>{{app.n_answers}}</strong>
+                     {{ _('task(s)') }}</p>-->
                 </div>
                 {% endfor %}
             </div>
@@ -247,4 +246,18 @@ function imgError(image) {
         </div>
     </div>
 </div>
+{% endmacro %}
+
+{% macro render_app_thumbnail(app, upload_method, id, class, style) %}
+{% if app.info.container %}
+{% if upload_method == 'rackspace'%}
+<img id="{{id}}" class="{{class}}" width="{{width}}" src="{{ url_for('rackspace', filename=app.info.thumbnail, container=app.info.container)}}" style="{{style}}" onerror="imgError(this);">
+{% else %}
+<img id="{{id}}" class="{{class}}" width="{{width}}" src="{{ url_for('uploads.uploaded_file', filename=(app.info.container + '/' + app.info.thumbnail))}}" style="{{style}}" onerror="imgError(this);">
+{% endif %}
+{% elif app.info.thumbnail %}
+<img id="{{id}}" class="{{class}}" width="{{width}}" src="{{app.info.thumbnail}}" style="{{style}}" onerror="imgError(this);">
+{% else %}
+<img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="{{style}}">
+{% endif %}
 {% endmacro %}

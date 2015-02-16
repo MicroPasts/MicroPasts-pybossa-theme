@@ -2,38 +2,98 @@
 {% set active_page = "profile" %}
 {% set active_link = "settings" %}
 {% import "account/_helpers.html" as helper %}
+{% from "applications/_helpers.html" import broken_image %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
+<script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
+
 <div class="row">
     <div class="col-md-3">
         {{ helper.render_account_local_nav(current_user, active_link) }}
     </div>
     <div class="col-md-9">
         <h1><strong>{{current_user.fullname}}</strong>: {{ _('Update your profile') }}</h1>
-        <form role="form" method="post"  action="{{ url_for('account.update_profile') }}">
+        <form role="form" method="post"
+            action="{{url_for('account.update_profile',
+            name=current_user.name)}}" enctype="multipart/form-data">
             <fieldset>
-            {{ form.id }}
-            {{ form.hidden_tag() }}
-            {{ render_field(form.fullname, placeholder= _('my full name'), class_="form-control" ) }}
-            {{ render_field(form.name, placeholder= _('myusername'), class_="form-control" ) }}
-            {{ render_field(form.email_addr, placeholder= _('hello@mywebsite.org'), class_="form-control" ) }}
-            {{ render_field(form.locale, class_="form-control" ) }}
-            <hr>
-            <h2>External Services</h2>
-            {{ render_field(form.ckan_api, class_="form-control") }}
-            <div>
-                <img class="img-circle" height="50" width="50" src="{{ current_user.email_addr | gravatar(size=50,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
-                <a class="btn btn-sm btn-default" href="http://www.gravatar.com">{{ _('Change your avatar at Gravatar.com.') }}</a> <p>{{ _('We are using the current email address of: ') }} {{current_user.email_addr}}</p>
-                <hr>
-                <span class="label label-warning"><i class="glyphicon glyphicon-white glyphicon-star"></i> {{ _('Note') }}</span> {{ _('If you change your') }} <strong>{{ _('user name') }}</strong> {{ _('you will be asked to sign in again.') }}
-            </div>
-            <div class="btn-group">
-              <input type="submit" value="{{ _('Save the changes') }}" class="btn btn-primary btn-sm" />
-              <a href="{{ url_for('account.settings') }}" class="btn btn-sm btn-primary">{{ _('Cancel') }}</a>
+                <div class="span2 img-polaroid">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                {{ helper.render_user_thumbnail(current_user, upload_method)}}
+                </div>
+            {{ render_field(upload_form.avatar, onchange="previewImage()") }}
+            {{ upload_form.x1 }}
+            {{ upload_form.y1 }}
+            {{ upload_form.x2 }}
+            {{ upload_form.y2 }}
+            <img id="uploadPreview">
+            <div class="form-actions">
+                <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-large" />{{ _('Upload') }}</button>
             </div>
             </fieldset>
         </form>
+        <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+            <fieldset>
+                <h2 {% if form.errors %}name="profile"{%endif%}>{{_('Your profile')}}</h2>
+            {{ form.id }}
+            {{ form.hidden_tag() }}
+            {{ render_field(form.fullname, placeholder= _('my full name') , class_='form-control') }}
+            {{ render_field(form.name, placeholder= _('myusername') , class_='form-control') }}
+            {{ render_field(form.email_addr, placeholder= _('hello@mywebsite.org') , class_='form-control') }}
+            {{ render_field(form.locale, class_='form-control') }}
+            {{ render_field(form.privacy_mode) }}
+            <div class="form-actions">
+                <button type="submit" name='btn' value="Profile" class="btn btn-primary btn-large" />{{ _('Save the changes') }}</button>
+              <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn">{{ _('Cancel') }}</a>
+            </div>
+            </fieldset>
+        </form>
+
+        {% if show_passwd_form %}
+        <h2 {% if password_form.errors %} name="password" {%endif%}>{{ _('Change your Password') }}</h2>
+        <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+            <fieldset>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                {{ password_form.id }}
+                {{ password_form.hidden_tag() }}
+                {{ render_field(password_form.current_password, class_="form-control") }}
+                {{ render_field(password_form.new_password, class_="form-control") }}
+                {{ render_field(password_form.confirm, class_="form-control") }}
+                <div class="form-actions">
+                    <button type="submit" name="btn" value="Password" class="btn btn-primary btn-large">{{ _('Save the Changes')}}</button>
+                    <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn">{{ _('Cancel') }}</a>
+                </div>
+            </fieldset>
+        </form>
+        {% endif %}
+
+        <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+        <hr>
+        <h2>{{_('External Services')}}</h2>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            {{ render_field(external_form.ckan_api, class_='form-control') }}
+            <div class="form-actions">
+                <button type="submit" name='btn' value="External" class="btn btn-primary btn-large" />{{ _('Save the changes') }}</button>
+              <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn">{{ _('Cancel') }}</a>
+            </div>
+            </fieldset>
+        </form>
+        <hr>
+        <form class="form-horizontal" method="post" action="{{ url_for('account.reset_api_key', name=current_user.name)}}">
+        <fieldset>
+        <h3><strong>{{ _('Do you want to reset your personal API Key?') }}</strong></h3>
+            <div class="form-actions">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+              <button type="submit" class="btn btn-small" value="Reset">Reset</button>
+              <a href="{{ url_for('account.profile', name=current_user.name) }}" class="btn btn-large btn-primary">{{ _('No, do not reset the API key!') }}</a>
+            </div>
+        </fieldset>
+        </form>
+        <hr>
     </div>
 </div>
+<script src="{{url_for('static', filename='js/image_crop.js')}}" type="text/javascript"></script>
+{{ broken_image() }}
 {% endblock %}

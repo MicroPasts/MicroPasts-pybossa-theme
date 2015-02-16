@@ -33,7 +33,7 @@
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
 <div class="row">
     <div class="col-md-3">
-        {{ render_user_thumbnail(user, upload_method, class="img-circle") }}
+        {{ render_user_thumbnail(user, upload_method, class='img-circle', style='height:90px; width:90px;') }}
     </div>
     <div class="col-md-9">
         <h2><i class="glyphicon glyphicon-user"></i> {{ _('Username')}}: {{ user.name }}</h2>
@@ -61,7 +61,7 @@
             {% if private %}</a>{% endif %}
         </h2>
         {% else %}
-        <h2><i class="glyphicon glyphicon-trophy"></i> {{ _('Rank') }}: {{ _('The user has not contributed a task yet') }}</h2>
+        <h2><i class="glyphicon glyphicon-list-alt"></i> {{ _('Rank') }}: {{ _('The user has not contributed a task yet') }}</h2>
         {% endif %}
         {% if not private %}
         <h2><i class="glyphicon glyphicon-time"></i> {{ _('Joined') }}: {{ user.created[0:10]}}</h2>
