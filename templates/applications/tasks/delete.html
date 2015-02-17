@@ -15,11 +15,14 @@
         </div>
         {{ helper.render_app_summary(app, n_tasks, overall_progress, last_activity, current_user) }}
         <form role="form"  method="post" action="{{ url_for('app.delete_tasks', short_name = app.short_name) }}">
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <h3><strong>Are you sure you want to delete ALL the application tasks and associated task runs?</strong></h3>
         <div>
           <input type="submit" class="btn btn-sm" value="Yes"/>
           <a href="{{ url_for('app.settings', short_name = app.short_name) }}" class="btn btn-lg btn-primary">No, do not delete anything!</a>
         </div>
+        </form>
     </div>
 </div>
 {{ helper.broken_image() }}
