@@ -1,11 +1,13 @@
-{% macro render_admin_user(user) %}
+{% import "account/_helpers.html" as helper %}
+
+{% macro render_admin_user(user, upload_method) %}
 <div class="row well well-small">
     <div class="col-md-2">
-        <img class="img-circle" height="100" width="100" src="{{user.email_addr | gravatar(size=100,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
+        {{ helper.render_user_thumbnail(user, upload_method, class="img-circle", style="height:100px; width:100px;")}}
     </div>
     <div class="col-md-10">
-        <h2>{{user.fullname}} (Username: {{user.name}})</h2>
-        <h3>Member since: {{user.created[0:10]}}</h3>
+        <h2>{{user.fullname}} ({{ _('Username') }}: {{user.name}})</h2>
+        <h3>{{ _('Member since') }}: {{user.created[0:10]}}</h3>
         {% if user.admin %}
         <a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-danger">
             <i class="glyphicon glyphicon-remove"></i>

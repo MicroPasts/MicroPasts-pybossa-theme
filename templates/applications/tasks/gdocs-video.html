@@ -1,5 +1,8 @@
 <div class="well">
-  <h2><i class="glyphicon glyphicon-film"></i> Video Pattern Recognition</h2> 
-  <h3>Re-use the Vimeo task template</h3>
-  <p><a href="{{url_for('app.import_task', short_name=app.short_name, template='gdocs', mode='video')}}" class="btn btn-default">Use the Video Task template</a></p>
+    <h2><i class="glyphicon glyphicon-film"></i> {{_('Video Pattern
+        Recognition')}}</h2> 
+    <h3>{{_('Re-use the Vimeo task template')}}</h3>
+  <p><a href="{{url_for(target, short_name=app.short_name,
+      type='gdocs', template='video')}}" class="btn btn-default">{{_('Use the
+      Video Task template')}}</a></p>
 </div>

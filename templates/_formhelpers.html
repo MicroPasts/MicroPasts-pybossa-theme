@@ -5,9 +5,9 @@
         <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
             &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="icon-question-sign"></i></div>
         {% else %}
-        {{ field.label(class="control-label") }}
+        {{ field.label(class="col-sm-2 control-label") }}
         {% endif %}
-        <div class="controls">
+        <div class="col-sm-8">
             {% if addon %}
             <div class="{% if prepend %}input-prepend{%else%}input-group{%endif%}">
                 {% if prepend %}
