@@ -26,13 +26,13 @@
     <div class="col-md-9">
         <!-- Task Presenter Editor -->
         <h1><strong>{{app.name}}</strong>: {{ _('Task Presenter Editor') }} <a class="btn btn-lg pull-right" href="http://docs.pybossa.com/en/latest/overview.html#task-presenter"><i class="icon-book"></i> {{ _('Help') }}</a></h1>
-        <form role="form" class="form-inline" method="post" action="{{ url_for('app.task_presenter_editor', short_name=app.short_name) }}">
+        <form role="form" class="form-horizontal" method="post" action="{{ url_for('app.task_presenter_editor', short_name=app.short_name) }}">
             {{ form.hidden_tag() }}
             <fieldset>
-                {{ render_field(form.editor)}}
+                {{ form.editor() }}
                 <div>
                     <input type="submit" value={{ _('Update the application task presenter') }} class="btn btn-primary" />
-                    <a href="#" class="btn btn-info" value="preview">{{ _('Preview the task presenter') }}</a>
+                    <a href="#" class="btn btn-info btn-preview" value="preview">{{ _('Preview the task presenter') }}</a>
                     <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn btn-info">{{ _('Cancel') }}</a>
                 </div>
             </fieldset>
@@ -40,18 +40,23 @@
     </div>
 </div>
 
-<div id="modal-preview" class="modal hide big-modal">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">{{ _('&times;') }}</button>
-        <h2><strong>{{app.name}}</strong>: {{ _('Task Presenter Preview') }}</h2>
-    </div>
-    <div class="modal-body">
-        <iframe id="preview" frameBorder="0"></iframe>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">{{ _('Close') }}</button>
-    </div>
-</div>
+
+<div id="modal-preview" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+          <iframe id="preview" frameborder="0"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
     var delay;
     var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
@@ -67,7 +72,7 @@
         preview.write(editor.getValue());
         preview.close();
     }
-    $(".btn-preview").off('click').on('click', function(){
+     $(".btn-preview").off('click').on('click', function(){
         updatePreview();
         $("#modal-preview").modal('show');
     });
