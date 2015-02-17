@@ -180,7 +180,7 @@ function imgError(image) {
 
 {% macro render_app_title(app, upload_method, subtitle=None) %}
 <h1>
-    {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:60px") }}
+    {{ render_app_thumbnail(app, upload_method, class="img-circle", style="max-width:60px") }}
     {% if subtitle %}
     <strong>{{ app.name }}</strong>: {{subtitle}}</h1>
     {% else %}
