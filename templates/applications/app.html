@@ -11,12 +11,12 @@
     </div>
     <!-- Application -->
     <div class="col-md-9" style="min-height:400px">
-        {{ helper.render_app_title(app)}}
+        {{ helper.render_app_title(app, upload_method) }}
         <hr>
         {{ helper.render_overall_progress(app, n_tasks, overall_progress) }}
         {% if app.long_description %}
         <hr>
-            {{ app.long_description|safe}}
+            {{ app.long_description | e | markdown }}
         {% endif %}
         <hr>
         <div id="ckan" style="display:none">
@@ -28,9 +28,9 @@
     </div>
     {% else %}
     <div class="page-header">
-        <h1>{{ _('Sorry! This app does not exists.') }}</h1>
+        <h1>{{ _('Sorry! This app does not exist.') }}</h1>
     </div>
-{% endif %}
+    {% endif %}
 </div>
 <script>
     var url = "{{ckan_url}}/api/3/action/package_show";
