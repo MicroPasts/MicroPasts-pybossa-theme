@@ -26,14 +26,13 @@
     <div class="col-md-9">
         <!-- Task Presenter Editor -->
         <h1><strong>{{app.name}}</strong>: {{ _('Task Presenter Editor') }} <a class="btn btn-lg pull-right" href="http://docs.pybossa.com/en/latest/overview.html#task-presenter"><i class="icon-book"></i> {{ _('Help') }}</a></h1>
-        <form role="form" class="form-inline" method="post" action="{{ url_for('app.task_presenter_editor', short_name=app.short_name) }}">
+        <form role="form" class="form-horizontal" method="post" action="{{ url_for('app.task_presenter_editor', short_name=app.short_name) }}">
             {{ form.hidden_tag() }}
             <fieldset>
-                {{ render_field(form.editor)}}
+                {{ form.editor() }}
                 <div>
                     <input type="submit" value={{ _('Update the application task presenter') }} class="btn btn-primary" />
-                    <a href="#" class="btn btn-info" value="preview"
-                        data-toggle="modal" data-target="#modal-preview">{{ _('Preview the task presenter') }}</a>
+                    <a href="#" class="btn btn-info btn-preview" value="preview">{{ _('Preview the task presenter') }}</a>
                     <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn btn-info">{{ _('Cancel') }}</a>
                 </div>
             </fieldset>
@@ -73,5 +72,9 @@
         preview.write(editor.getValue());
         preview.close();
     }
+     $(".btn-preview").off('click').on('click', function(){
+        updatePreview();
+        $("#modal-preview").modal('toggle');
+    });
 </script>
 {% endblock %}
