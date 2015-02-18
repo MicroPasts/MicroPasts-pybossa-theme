@@ -46,13 +46,12 @@
       <!-- Answer buttons -->
       <div id="answer" class="col-md-8" style="text-align:center;">
           <div class="btn-group" style="padding-bottom:5px;">
-          <button class="btn btn-zoom" value=0><i class="icon icon-white icon-undo"></i></button>
+          <button id="prev" class="btn btn-navigate disabled" value="prev"><i class="icon-arrow-left"></i></button>
+          <button class="btn btn-zoom" value=0>1:1</button>
           <button class="btn btn-zoom" value=1><i class="icon icon-white icon-zoom-in"></i></button>
           <button class="btn btn-zoom" value=-1><i class="icon icon-white icon-zoom-out"></i></button>
-          </div>
-          <!--<div id="viewport" style="width:620px;height:755px;overflow:auto;">
-              <canvas id="the-canvas"></canvas>
-          </div>-->
+          <button id="next" class="btn btn-navigate" value="next"><i class="icon-arrow-right"></i></button>
+        </div>
      </div>
   <div id="question" class="col-md-4">
       <p>You are working now on task: <span id="task-id" class="label label-warning">#</span></p>
