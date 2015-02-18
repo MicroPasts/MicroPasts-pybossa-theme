@@ -12,7 +12,7 @@
         {{ privacy.render_lock_page() }}
       {% else %}
       <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small></h1>
-      <p>We only show you people who have contributed to our projects. Their avatars are powered by Gravatar.</p>
+      <p>We only show you people who have contributed to our projects.</p>
       <div class="btn-group">
       <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
       </div>
