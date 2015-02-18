@@ -30,11 +30,7 @@
                             {% else %}
                             {{_('Task')}} <span class="label label-info">#{{ t.id }}</span>
                             {% endif %}
-                            {% if t.get('info') %}
-                            {{ t.task_runs | count }} {{_('of')}} {{ t.info['n_answers'] }}
-                            {% else %}
-                            {{ t.task_runs | count }} {{_('of')}} {{ t.n_answers }}
-                            {% endif %}
+                            {{ t.n_task_runs }} {{_('of')}} {{ t.n_answers }}
                         </div>
                         {% if task_pct >= 100 %}
                         <div class="progress col-md-5"> 
