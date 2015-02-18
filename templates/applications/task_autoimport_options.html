@@ -11,14 +11,14 @@
     </div>
     <div class="col-md-9">
         {{ helper.render_app_title(app, subtitle=_('Setup task autoimporter'))}}
-        <div class="row-fluid">
+        <div class="row">
             <div class="col-md-12">
                 <p class="lead">{{_('Use one of the following available')}}
                 <strong>{{_('importers')}}</strong> {{_('to setup as the autoimporter')}}</p>
             </div>
         </div>
         {% for row in available_importers|batch(2) %}
-        <div class="row-fluid">
+        <div class="row">
             {% for importer in row %}
             <div class="col-md-6">
                 {% include importer %}
