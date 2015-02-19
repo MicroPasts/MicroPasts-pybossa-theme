@@ -30,7 +30,7 @@
   <div class="col-md-9">
       <legend><strong>{{app.name}}</strong>: {{_('Update the application')}}</legend>
       <!-- Update form for application thumbnail -->
-      <form method="post" class="form-horizontal" action="{{ url_for('app.update', short_name=app.short_name) }}" enctype="multipart/form-data">
+      <form method="post" class="form" action="{{ url_for('app.update', short_name=app.short_name) }}" enctype="multipart/form-data">
           <fieldset>
               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
               <div>
@@ -46,9 +46,9 @@
           </div>
           </fieldset>
       </form>
-
+      <br />
       <!-- Update form for application data-->
-    <form class="form-horizontal" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}">
+    <form class="form" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}">
       <fieldset>
         {{ form.hidden_tag() }}
         {{ render_field(form.name, class_="form-control", placeholder=_('The name of the application')) }}
