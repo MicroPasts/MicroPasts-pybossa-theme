@@ -40,11 +40,13 @@
         {% if private %}
         <h2><i class="glyphicon glyphicon-envelope"></i> {{_('E-mail')}}: {{user.email_addr }}
             {% if (user.valid_email == False) %}
+            {% if ACCOUNT_CONFIRMATION_DISABLED == False %}
               {% if (user.confirmation_email_sent == False) %}
               <a href="{{ url_for('account.confirm_email')}}" class="btn btn-small">Validate email</a>
               {% else %}
               <a href="#" class="btn btn-small disabled">Email sent for validation</a>
               {% endif %}
+            {% endif %}
             {% endif %}
         </h2>
         {% endif %}
