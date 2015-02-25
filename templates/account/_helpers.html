@@ -1,11 +1,11 @@
 {% macro render_account_local_nav(current_user, active_link) -%}
 <ul  class="nav nav-pills nav-stacked">
-    <li {% if active_link=="profile"%}class="active"{% endif %}><a href="{{url_for('account.profile')}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Profile') }}</a></li>
-    <li {% if active_link=="applications"%}class="active"{% endif %}><a href="{{url_for('account.applications')}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Applications') }}</a></li>
+    <li {% if active_link=="profile"%}class="active"{% endif %}><a href="{{url_for('account.profile', name=current_user.name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Profile') }}</a></li>
+    <li {% if active_link=="applications"%}class="active"{% endif %}><a href="{{url_for('account.applications', name=current_user.name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Applications') }}</a></li>
     {% if current_user.admin %}
     <li {% if active_link=="admin"%}class="active"{% endif %}><a href="{{url_for('admin.index')}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('Admin Site') }}</a></li>
     {% endif %}
-    <li {% if active_link=="settings"%}class="active"{% endif %}><a href="{{url_for('account.settings')}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Settings') }}</a></li>
+    <li {% if active_link=="settings"%}class="active"{% endif %}><a href="{{url_for('account.update_profile', name=current_user.name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Settings') }}</a></li>
 </ul>
 {% endmacro %}
 
@@ -30,31 +30,40 @@
 {% endmacro %}
 
 
-{% macro render_user_profile(user, settings, private=True) %}
+{% macro render_user_profile(user, upload_method, settings, private=True) %}
 <div class="row">
     <div class="col-md-3">
-        <img class="img-circle" height="90" width="90" src="{{ user.email_addr | gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
+        {{ render_user_thumbnail(user, upload_method, class='img-circle', style='height:90px; width:90px;') }}
     </div>
     <div class="col-md-9">
         <h2><i class="glyphicon glyphicon-user"></i> {{ _('Username')}}: {{ user.name }}</h2>
         {% if private %}
-        <h2><i class="glyphicon glyphicon-envelope"></i> {{_('E-mail')}}: {{ user.email_addr }}</h2>
+        <h2><i class="glyphicon glyphicon-envelope"></i> {{_('E-mail')}}: {{user.email_addr }}
+            {% if (user.valid_email == False) %}
+            {% if ACCOUNT_CONFIRMATION_DISABLED == False %}
+              {% if (user.confirmation_email_sent == False) %}
+              <a href="{{ url_for('account.confirm_email')}}" class="btn btn-small">Validate email</a>
+              {% else %}
+              <a href="#" class="btn btn-small disabled">Email sent for validation</a>
+              {% endif %}
+            {% endif %}
+            {% endif %}
+        </h2>
         {% endif %}
         {% if user.rank %}
         <h2><i class="glyphicon glyphicon-list-alt"></i> {{ _('Rank')}}:
-                {% if private %}
-                <a href="{{url_for('leaderboard.index')}}">
-                {% endif %}
-                {% if not settings %}
-                {{ user.rank }} {{_('of')}} {{user.total}} {{ _('with a Score of')}} {{user.score}} {{ _('contributed tasks')}}
-                {% else %}
-                {{ user.rank }}
-                {% endif %}
-                {% if private %}</a>{% endif %}
-
+            {% if private %}
+            <a href="{{url_for('leaderboard.index')}}">
+            {% endif %}
+            {% if not settings %}
+            {{ user.rank }} {{_('of')}} {{user.total}} {{ _('with a Score of')}} {{user.score}} {{ _('contributed tasks')}}
+            {% else %}
+            {{ user.rank }}
+            {% endif %}
+            {% if private %}</a>{% endif %}
         </h2>
         {% else %}
-        <h2><i class="glyphicon glyphicon-trophy"></i> {{ _('Rank') }}: {{ _('The user has not contributed a task yet') }}</h2>
+        <h2><i class="glyphicon glyphicon-list-alt"></i> {{ _('Rank') }}: {{ _('The user has not contributed a task yet') }}</h2>
         {% endif %}
         {% if not private %}
         <h2><i class="glyphicon glyphicon-time"></i> {{ _('Joined') }}: {{ user.created[0:10]}}</h2>
@@ -64,10 +73,22 @@
         {% endif %}
         {% if private and not settings%}
         <a href="{{ url_for('account.public_profile', name=user.name) }}" class="btn btn-default"><i class="icon glyphicon glyphicon-globe"></i> {{ _('See your public profile') }}</a>
-        <a href="{{ url_for('account.settings') }}" class="btn btn-primary"><i class="icon glyphicon glyphicon-user"></i> {{ _('Edit your profile') }}</a>
+        <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-primary"><i class="icon glyphicon glyphicon-user"></i> {{ _('Edit your profile') }}</a>
         {% endif %}
     </div>
 </div>
+{% endmacro %}
+
+{% macro render_user_thumbnail(user, upload_method, id, class, style) %}
+    {% if user.info.avatar %}
+        {% if upload_method == 'rackspace'%}
+        <img id="{{id}}" class="{{class}}" style="{{style}}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 'user');">
+        {% else %}
+        <img id="{{id}}" class="{{class}}" style="{{style}}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar))}}" onerror="imgError(this, 'user');">
+        {% endif %}
+    {% else %}
+        <img id="{{id}}" class="{{class}}" style="{{style}}" src="{{ url_for('static', filename='img/placeholder-head-grey.png')}}">
+    {% endif %}
 {% endmacro %}
 
 {% macro render_pagination(pagination) %}

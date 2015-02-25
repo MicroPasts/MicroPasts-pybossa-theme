@@ -2,6 +2,7 @@
 {% set active_page = "account" %}
 {% import "account/_helpers.html" as helper %}
 {% from "applications/_helpers.html" import render_grid_apps %}
+{% from "applications/_helpers.html" import broken_image%}
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
@@ -28,4 +29,5 @@
     </div>
 </div>
 
+{{ broken_image()}}
 {% endblock %}
