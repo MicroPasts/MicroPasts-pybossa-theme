@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
               <li><a href="http://micropasts.org" title="Micropasts homepage">Home</a></li>
               <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
-              <li {% if active_page == 'applications' %} class="active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Applications') }}</a></li>
+              <li {% if active_page == 'projects' %} class="active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
               {% if current_user.is_authenticated() %}
               <li {% if active_page == 'create' %} class="active" {% endif %}><a href="{{ url_for('project.new') }}">{{ _('Create') }}</a></li>
               {% endif %}
@@ -42,8 +42,8 @@
                 <ul class="dropdown-menu">
                     <li><a href="{{ url_for('account.profile',
                         name=current_user.name) }}"><i class="glyphicon glyphicon-user"></i> {{ _('My Profile') }}</a></li>
-                    <li><a href="{{ url_for('account.applications',
-                        name=current_user.name) }}"><i class="glyphicon glyphicon-th-large"></i> {{ _('My Applications') }}</a></li>
+                    <li><a href="{{ url_for('account.projects',
+                        name=current_user.name) }}"><i class="glyphicon glyphicon-th-large"></i> {{ _('My Projects') }}</a></li>
                     <li><a href="{{ url_for('account.update_profile',
                         name=current_user.name) }}"><i class="glyphicon glyphicon-cog"></i> {{ _('My Settings') }}</a></li>
                     {% if current_user.admin == 1 %}
