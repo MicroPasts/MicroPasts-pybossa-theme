@@ -2,7 +2,7 @@
 {% set active_page = "profile" %}
 {% set active_link = "profile" %}
 {% import "account/_helpers.html" as helper %}
-{% import "applications/_helpers.html" as app_helper %}
+{% import "projects/_helpers.html" as project_helper %}
 
 {% block content %}
 
@@ -16,18 +16,18 @@
         {{ helper.render_user_profile(current_user, settings=True) }}
         <hr>
         <h2>{{ _('Your Contributions') }}</h2>
-        {% for app in apps_contrib %}
+        {% for project in projects_contrib %}
         <div class="row well well-small">
             <div class="col-md-3">
-                {{ app_helper.render_app_thumbnail(app, upload_method,
+                {{ project_helper.render_project_thumbnail(project, upload_method,
                 class='img-circle', style='width:100px; height:100px;')}}
             </div>
             <div class="col-md-9">
-                <h2><a href="{{url_for('app.details', short_name=app.short_name)}}">{{app.name}}</a></h2>
-                  <a class="btn btn-primary" href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}</a>
+                <h2><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></h2>
+                  <a class="btn btn-primary" href="{{url_for('project.presenter', short_name=project.short_name)}}"><i class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}</a>
                    <a href="https://twitter.com/share" style="padding-top:5px;"
                        class="twitter-hashtag-button"
-    data-text="{{ _('I\'ve contributed to the @MicroPasts app ') }} {{app.name}}. {{ _('Do you want to help?') }} {{url_for('app.details',short_name=app.short_name,_external=True)}}"
+    data-text="{{ _('I\'ve contributed to the @MicroPasts project ') }} {{project.name}}. {{ _('Do you want to help?') }} {{url_for('project.details',short_name=project.short_name,_external=True)}}"
     data-count="none">{{ _('Tweet') }}</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
@@ -36,5 +36,5 @@
         {% endfor %}
     </div><!-- end span9 -->
 </div>
-{{ app_helper.broken_image() }}
+{{ project_helper.broken_image() }}
 {% endblock %}
