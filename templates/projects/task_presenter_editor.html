@@ -1,6 +1,6 @@
 {% extends "/base.html" %}
-{% set active_page = "applications" %}
-{% import "applications/_helpers.html" as helper %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
@@ -21,19 +21,19 @@
 </style>
 <div class="row">
     <div class="col-md-3">
-        {{ helper.render_app_local_nav(app, 'tasks', current_user) }}
+        {{ helper.render_project_local_nav(project, 'tasks', current_user) }}
     </div>
     <div class="col-md-9">
         <!-- Task Presenter Editor -->
-        <h1><strong>{{app.name}}</strong>: {{ _('Task Presenter Editor') }} <a class="btn btn-lg pull-right" href="http://docs.pybossa.com/en/latest/overview.html#task-presenter"><i class="icon-book"></i> {{ _('Help') }}</a></h1>
-        <form role="form" class="form-horizontal" method="post" action="{{ url_for('app.task_presenter_editor', short_name=app.short_name) }}">
+        <h1><strong>{{project.name}}</strong>: {{ _('Task Presenter Editor') }} <a class="btn btn-lg pull-right" href="http://docs.pybossa.com/en/latest/overview.html#task-presenter"><i class="icon-book"></i> {{ _('Help') }}</a></h1>
+        <form role="form" class="form-horizontal" method="post" action="{{ url_for('project.task_presenter_editor', short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             <fieldset>
                 {{ form.editor() }}
                 <div>
-                    <input type="submit" value={{ _('Update the application task presenter') }} class="btn btn-primary" />
+                    <input type="submit" value={{ _('Update the project task presenter') }} class="btn btn-primary" />
                     <a href="#" class="btn btn-info btn-preview" value="preview">{{ _('Preview the task presenter') }}</a>
-                    <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn btn-info">{{ _('Cancel') }}</a>
+                    <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn btn-info">{{ _('Cancel') }}</a>
                 </div>
             </fieldset>
         </form>

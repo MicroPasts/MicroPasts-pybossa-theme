@@ -1,7 +1,7 @@
 {% extends "/base.html" %}
-{% set active_page = "applications" %}
-{% set active_app  = "all" %}
-{% import "applications/_helpers.html" as helper %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% import "projects/_helpers.html" as helper %}
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
@@ -23,13 +23,13 @@
 </script>
 <div class="row">
     <div class="col-md-3">
-        {{helper.render_app_local_nav(app, 'stats', current_user)}}
+        {{helper.render_project_local_nav(project, 'stats', current_user)}}
     </div>
     <div class="col-md-9">
         {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
         {% else %}
-        {{ helper.render_app_title(app, upload_method, subtitle=_('Statistics'))}}
+        {{ helper.render_project_title(project, upload_method, subtitle=_('Statistics'))}}
         <br/>
 
             {% if private %}

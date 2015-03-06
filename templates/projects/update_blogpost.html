@@ -1,19 +1,19 @@
 {% extends "/base.html" %}
-{% set active_page = "applications" %}
-{% set active_app  = "all" %}
-{% import "applications/_helpers.html" as helper %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% import "projects/_helpers.html" as helper %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 <div id="app-form" class="row"> 
     <div class="col-md-3">
-        {{ helper.render_app_local_nav(app, 'blog', current_user) }}
+        {{ helper.render_project_local_nav(project, 'blog', current_user) }}
     </div>
     <div class="col-md-9">
-        {{ helper.render_app_title(app) }}
+        {{ helper.render_project_title(project) }}
         <h2>{{ _('Edit the blog post') }}</h2>
-        <form class="form-horizontal" method="post" action="{{ url_for('app.update_blogpost',
-                                                        short_name=app.short_name,
+        <form class="form-horizontal" method="post" action="{{ url_for('project.update_blogpost',
+                                                        short_name=project.short_name,
                                                         id=blogpost.id) }}">
             {{ form.hidden_tag() }}
             <fieldset>
@@ -21,7 +21,7 @@
                 {{ render_field(form.body, class_="col-md-9", placeholder= _('Write your post here. You can use Markdown!')) }}
                 <div class="form-actions">
                     <input type="submit" value={{_('Update')}} class="btn btn-primary" />
-                    <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
+                    <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn">{{_('Cancel')}}</a>
                 </div>
             </fieldset>
         </form>

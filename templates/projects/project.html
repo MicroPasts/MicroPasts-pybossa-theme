@@ -1,34 +1,34 @@
 {% extends "/base.html" %}
-{% set active_page = "applications" %}
-{% set active_app  = "all" %}
-{% import "applications/_helpers.html" as helper %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% import "projects/_helpers.html" as helper %}
 
 {% block content %}
 <div class="row">
-    {% if app %}
+    {% if project %}
     <div class="col-md-3">
-        {{ helper.render_app_local_nav(app, 'info', current_user) }}
+        {{ helper.render_project_local_nav(project, 'info', current_user) }}
     </div>
-    <!-- Application -->
+    <!-- Project -->
     <div class="col-md-9" style="min-height:400px">
-        {{ helper.render_app_title(app, upload_method) }}
+        {{ helper.render_project_title(project, upload_method) }}
         <hr>
-        {{ helper.render_overall_progress(app, n_tasks, overall_progress) }}
-        {% if app.long_description %}
+        {{ helper.render_overall_progress(project, n_tasks, overall_progress) }}
+        {% if project.long_description %}
         <hr>
-            {{ app.long_description | e | markdown }}
+            {{ project.long_description | e | markdown }}
         {% endif %}
         <hr>
         <div id="ckan" style="display:none">
         <h2>Data repository: {{ckan_name | default('CKAN server')}}</h2>
-        <p><i class="icon-bar-chart" style="font-size:16px;"></i> <a href="{{ckan_url}}/dataset/{{app.short_name}}">Preview the data</a>
+        <p><i class="icon-bar-chart" style="font-size:16px;"></i> <a href="{{ckan_url}}/dataset/{{project.short_name}}">Preview the data</a>
         </p>
         <p id="ckan_license" style="display:none"><strong>Data License</strong>: <span id="ckan_license_value"></span></p>
         </div>
     </div>
     {% else %}
     <div class="page-header">
-        <h1>{{ _('Sorry! This app does not exist.') }}</h1>
+        <h1>{{ _('Sorry! This project does not exist.') }}</h1>
     </div>
     {% endif %}
 </div>
