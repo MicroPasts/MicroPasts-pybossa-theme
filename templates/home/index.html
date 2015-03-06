@@ -1,5 +1,5 @@
 {% extends "basePlate.html" %}
-{% import "applications/_helpers.html" as helper %}
+{% import "projects/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
 
 {% block content %}
@@ -27,7 +27,7 @@
 </div>
 
       <div class="row well">
-        <!-- <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
+        <!-- <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Projects') }}</h2>
         <div class="row">
           {% for app in top_apps %}
           <div class="col-md-3">
@@ -47,7 +47,7 @@
           <div class="col-md-3">
             <div class="app box">
                 <a href="#" class="image" style="background-image:url({{url_for('static',filename='img/placeholder-head-grey.png')}})"></a>
-                <h3>{{ _('Application coming soon') }}</h3>
+                <h3>{{ _('Project coming soon') }}</h3>
                 <p>{{ _('Start participating!') }}</p>
                 {% if current_user.is_authenticated() %}
                 {% if current_user.admin == 1 %}
