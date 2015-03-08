@@ -1,4 +1,6 @@
 {% extends "basePlate.html" %}
+{% import "applications/_helpers.html" as helper %}
+{% import "account/_helpers.html" as account_helper %}
 
 {% block content %}
 <div class="background">
@@ -56,9 +58,10 @@
           </div>
           {% endfor %}
         </div> -->
-        {% for app in featured %}
+        {% for app in categories_apps['featured']%}
         <div class="col-md-3 center">
-          <img class="img-circle" src="{{app.info.thumbnail}}" width="140px" height="140">
+            {{ helper.render_app_thumbnail(app, upload_method, class="img-circle",
+            style="width:140px; height:140px;")}}
           <h2>{{app.name}}</h2>
           <!-- <p>{{app.description | truncate(32, true)}}</p> -->
           <p>{{app.description}}</p>
@@ -74,12 +77,12 @@
         <ul class="users">
             {% for user in top_users %}
           <li>
-          <a href="{{url_for('account.public_profile', name=user.name)}}" data-content="
+          <a href="{{url_for('account.profile', name=user.name)}}" data-content="
                 <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}}
                 <br/>
                 <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
                 " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
-                <img class="img-circle" height="90" width="90" src="{{user.email_addr|gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}">
+                {{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;") }}
            </a>
            <span class="label label-info">{{user.task_runs}}</span> {{_('Tasks')}}
           </li>
@@ -95,4 +98,5 @@ $("a[rel=popover]").popover({
         placement: 'top'
                 });
 </script>
+{{ helper.broken_image() }}
 {% endblock %}

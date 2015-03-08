@@ -2,6 +2,7 @@
 {% set active_page = "community"  %}
 {% import "privacy/locked.html" as privacy %}
 {% import "account/_helpers.html" as helper %}
+{% import "applications/_helpers.html" as apphelper %}
 
 {% block content %}
 
@@ -11,7 +12,7 @@
         {{ privacy.render_lock_page() }}
       {% else %}
       <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small></h1>
-      <p>We only show you people who have contributed to our projects. Their avatars are powered by Gravatar.</p>
+      <p>We only show you people who have contributed to our projects.</p>
       <div class="btn-group">
       <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
       </div>
@@ -20,9 +21,9 @@
       {% for account in accounts %}
       <div class="col-sm-6 col-md-4">
       <div class="img-circle">
-                <img src="{{account['email_addr'] | gravatar(size=90,default='http://crowdsourced.micropasts.org/static/img/avatar/gravatar.png')}}" width="90" height="90" alt="Avatar for {{account['fullname']}}" class="img-circle"  />
+        {{ helper.render_user_thumbnail(account, upload_method, class="img-circle", style="width:90px; height:90px;")}}
         <div class="caption">
-         <h5><a href="{{url_for('account.public_profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></h5>
+         <h5><a href="{{url_for('account.profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></h5>
               <ul style='list-style-type:none; margin-left:0px;'>
                 <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
                 <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
@@ -55,4 +56,5 @@
     {% endif %}
   </div>
 </div>
+{{ apphelper.broken_image()}}
 {% endblock %}

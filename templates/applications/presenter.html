@@ -13,6 +13,21 @@
 <div class="row">
         <h1><a href="{{url_for('app.details', short_name=app.short_name)}}">{{app.name}}</a>: {{ _('Contribute') }}</h1>
 </div>
-{{ app.info.task_presenter|safe}}
+{% if invite_new_volunteers %}
+<div class="row">
+        <p>
+        {{ _("Sorry, you've contributed to all the tasks for this project, but this project still needs more volunteers, so please spread the word!") }}
+        </p>
+</div>
+{% endif %}
+{{ app.info.task_presenter|safe }}
 
+
+<div id='PYBOSSA_USER_LOCALE' hidden>
+{% if current_user.is_anonymous() %}
+en
+{% else %}
+{{ current_user.locale }}
+{% endif %}
+</div>
 {% endblock %}

@@ -12,18 +12,20 @@
 </p>
 
   <legend>{{ _('Create an account') }}</legend>
-  <form role="form" method="post"  action="{{ url_for('account.register') }}">
+  <form role="form" method="post" class="form" action="{{ url_for('account.register') }}">
       {{ form.hidden_tag() }}
       <fieldset>
       {{ render_field(form.fullname, placeholder= _('Your full name'), class_="form-control") }}
-      {{ render_field(form.username, placeholder= _('Your username'), class_="form-control") }}
+      {{ render_field(form.name, placeholder= _('Your username'), class_="form-control") }}
       {{ render_field(form.email_addr, placeholder= _('Your email address'), class_="form-control") }}
       {{ render_field(form.password, placeholder= _('Enter a password'), class_="form-control") }}
       {{ render_field(form.confirm, placeholder= _('Re-enter the same password'), class_="form-control") }}
       <div>
-        <input type="submit" value="{{ _('Create an account') }}" class="btn btn-primary btn-lg" />
-        <input type="reset" value="{{ _('Cancel') }}" class="btn btn-lg btn-default" />
+        <input type="submit" value="{{ _('Create an account') }}" class="btn btn-primary" />
+        <input type="reset" value="{{ _('Cancel') }}" class="btn btn-default" />
       </div>
       </fieldset>
   </form>
+<script src="{{url_for('static', filename='vendor/jquery.textchange.min.js')}}" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/forms.js')}}" type="text/javascript"></script>
 {% endblock %}
