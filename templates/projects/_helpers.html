@@ -99,18 +99,18 @@
         <p>{{ project['description'] }}</p>
         <a class="btn btn-default" href="{{url_for('project.settings', short_name=project.short_name)}}"><i class="glyphicon glyphicon-wrench"></i> {{ _('Settings') }}</a>
         {% if project.featured %}
-        <button id="appBtnDel{{project.id}}" class="btn btn-danger" onclick="del({{project.id}})">
-                <i id="app{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
+        <button id="projectBtnDel{{project.id}}" class="btn btn-danger" onclick="del({{project.id}})">
+                <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
         </button>
-        <button id="appBtnAdd{{project.id}}" class="btn btn-primary" onclick="add({{project.id}})" style="display:none;">
-                <i id="app{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
+        <button id="projectBtnAdd{{project.id}}" class="btn btn-primary" onclick="add({{project.id}})" style="display:none;">
+                <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
         </button>
         {% else %}
-        <button id="appBtnAdd{{project.id}}" class="btn btn-primary" onclick="add({{project.id}})">
-                <i id="app{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
+        <button id="projectBtnAdd{{project.id}}" class="btn btn-primary" onclick="add({{project.id}})">
+                <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
         </button>
-        <button id="appBtnDel{{project.id}}" class="btn btn-danger" onclick="del({{project.id}})" style="display:none;">
-                <i id="app{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
+        <button id="projectBtnDel{{project.id}}" class="btn btn-danger" onclick="del({{project.id}})" style="display:none;">
+                <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
         </button>
         {% endif %}
     </div>
