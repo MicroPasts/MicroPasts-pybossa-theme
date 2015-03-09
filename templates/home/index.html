@@ -11,16 +11,16 @@
               <h1>{{ brand }}: Crowd-sourcing</h1>
 
           </div>
-		</div>
+    </div>
 
         <div class="row well" >
-        	<div class="col-md-4">
-        		<img src="{{url_for('static', filename="img/MP_SQUARE_notype.png")}}" />
-        	</div>
-        	<div class="col-md-8">
-        	<h2>{{ title }}</h2>
-			{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
-        	</div>
+          <div class="col-md-4">
+            <img src="{{url_for('static', filename="img/MP_SQUARE_notype.png")}}" />
+          </div>
+          <div class="col-md-8">
+          <h2>{{ title }}</h2>
+      {% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
+          </div>
         </div>
 
 
