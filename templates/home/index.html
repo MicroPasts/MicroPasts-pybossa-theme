@@ -27,37 +27,6 @@
 </div>
 
       <div class="row well">
-        <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
-        <div class="row">
-          {% for app in top_apps %}
-          <div class="col-md-3 center featured">
-            <div class="app box">
-                {% if app.info.thumbnail %}
-                <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{app.info.thumbnail}})"></a>
-                {% else %}
-                <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{url_for('static',filename='placeholder-head-grey.png')}})"></a>
-                {% endif %}
-                <h3>{{app.name}}</h3>
-                <p>{{app.description | truncate(32, true)}}</p>
-                <p><a href="{{url_for('app.details',short_name=app.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-xs btn-primary">{{ _('Start') }}</a></p>
-            </div>
-          </div>
-          {% endfor %}
-          {% for i in range(4-top_apps|count)%}
-          <div class="col-md-3">
-            <div class="app box">
-                <a href="#" class="image" style="background-image:url({{url_for('static',filename='img/placeholder-head-grey.png')}})"></a>
-                <h3>{{ _('Application coming soon') }}</h3>
-                <p>{{ _('Start participating!') }}</p>
-                {% if current_user.is_authenticated() %}
-                {% if current_user.admin == 1 %}
-                <p><a href="{{url_for('app.new')}}" class="btn btn-xs btn-primary">{{ _('Create an app') }}</a></p>
-                {% endif %}
-                {% endif %}
-            </div>
-          </div>
-          {% endfor %}
-        </div>
         {% for app in categories_apps['featured']%}
         <div class="col-md-3 center featured">
             {{ helper.render_app_thumbnail(app, upload_method, class="img-circle",
