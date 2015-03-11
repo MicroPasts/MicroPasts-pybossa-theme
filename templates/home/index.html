@@ -27,10 +27,10 @@
 </div>
 
       <div class="row well">
-        <!-- <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
+        <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Applications') }}</h2>
         <div class="row">
           {% for app in top_apps %}
-          <div class="col-md-3">
+          <div class="col-md-3 center featured">
             <div class="app box">
                 {% if app.info.thumbnail %}
                 <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{app.info.thumbnail}})"></a>
@@ -57,9 +57,9 @@
             </div>
           </div>
           {% endfor %}
-        </div> -->
+        </div>
         {% for app in categories_apps['featured']%}
-        <div class="col-md-3 center">
+        <div class="col-md-3 center featured">
             {{ helper.render_app_thumbnail(app, upload_method, class="img-circle",
             style="width:140px; height:140px;")}}
           <h2>{{app.name}}</h2>
