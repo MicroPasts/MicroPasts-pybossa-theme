@@ -210,7 +210,7 @@ function imgError(image) {
         <h1>{{title}}</h1>
         <div class="col-md-12">
             {% for app in apps %}
-            <div class="col-md-3 center applications">
+            <div class="col-md-3 center applications featured">
                 <a href={{ url_for('app.details', short_name=app.short_name)}}>
                     {{render_app_thumbnail(app, upload_method,
                     class="img-circle", style="width:140px; heigh=140px;")}}
