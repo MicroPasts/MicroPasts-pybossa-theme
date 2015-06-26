@@ -27,39 +27,8 @@
 </div>
 
       <div class="row well">
-        <!-- <h2><i class="glyphicon glyphicon-th"></i> {{ _('Most Active Projects') }}</h2>
-        <div class="row">
-          {% for project in top_projects %}
-          <div class="col-md-3">
-            <div class="app box">
-                {% if project.info.thumbnail %}
-                <a href="{{url_for('project.details', short_name=project.short_name)}}" class="image" style="background-image:url({{project.info.thumbnail}})"></a>
-                {% else %}
-                <a href="{{url_for('project.details', short_name=project.short_name)}}" class="image" style="background-image:url({{url_for('static',filename='placeholder-head-grey.png')}})"></a>
-                {% endif %}
-                <h3>{{project.name}}</h3>
-                <p>{{project.description | truncate(32, true)}}</p>
-                <p><a href="{{url_for('project.details',short_name=project.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('project.presenter',short_name=project.short_name)}}" class="btn btn-xs btn-primary">{{ _('Start') }}</a></p>
-            </div>
-          </div>
-          {% endfor %}
-          {% for i in range(4-top_projects|count)%}
-          <div class="col-md-3">
-            <div class="app box">
-                <a href="#" class="image" style="background-image:url({{url_for('static',filename='img/placeholder-head-grey.png')}})"></a>
-                <h3>{{ _('Project coming soon') }}</h3>
-                <p>{{ _('Start participating!') }}</p>
-                {% if current_user.is_authenticated() %}
-                {% if current_user.admin == 1 %}
-                <p><a href="{{url_for('project.new')}}" class="btn btn-xs btn-primary">{{ _('Create a project') }}</a></p>
-                {% endif %}
-                {% endif %}
-            </div>
-          </div>
-          {% endfor %}
-        </div> -->
         {% for project in categories_projects['featured']%}
-        <div class="col-md-3 center">
+        <div class="col-md-3 center featured">
             {{ helper.render_project_thumbnail(project, upload_method, class="img-circle",
             style="width:140px; height:140px;")}}
           <h2>{{project.name}}</h2>
