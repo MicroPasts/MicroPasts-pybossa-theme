@@ -1,0 +1,53 @@
+{% extends "/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+
+{% import "projects/_helpers.html" as helper %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Projects</h1>
+    </div>
+    <br/>
+    <div class="col-md-12" style="font-size:16px">
+        <p>Here you can find a list of all registered projects in {{brand}}.</p>
+        <p>The projects can be sorted in three categories:</p>
+        <ul style="list-style:none">
+            <li><strong><i class="glyphicon glyphicon-star"></i> Featured:</strong> a special selection of the most interesting projects.</li>
+            <li><strong><i class="glyphicon glyphicon-th"></i> Published:</strong> all available projects.</li>
+            <li><strong><i class="glyphicon glyphicon-wrench"></i> Draft:</strong> the only projects where you <i>cannot contribute for the moment</i> (the owners have not published them yet).</li>
+        </ul>
+        <p>Therefore, pick up a published or featured project and help!</p>
+    </div>
+</div>
+
+{% if projects %}
+<div class="row app-draft">
+    <div class="col-md-12">
+        <h2><i class="glyphicon glyphicon-wrench"></i> Draft: {{pagination.total_count}} projects in this category</h2>
+    </div>
+</div>
+{% endif %}
+
+{% for project in projects %}
+{{ helper.show_project(project, "app-draft", current_user) }}
+{% endfor %}
+
+<div class="row">
+    <div class="col-md-9 col-md-offset-2 centreText">
+        <a class="btn btn-small" href="{{url_for('project.index')}}"><i class="glyphicon glyphicon-th"></i> Check also the published projects</a>
+    </div>
+    <div class="col-md-9 col-md-offset-2">
+        {{ helper.render_pagination(pagination) }}
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 well centreText">
+        <a href="{{ url_for('project.new')}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-white glyphicon-plus"></i> Create a project!</a>
+    </div>
+</div>
+{% endblock %}

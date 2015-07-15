@@ -32,12 +32,12 @@
         {% for c in categories %}
         <div class="row">
             <div class="col-md-5">
-                <h2>{{c.name}} ({{ n_apps_per_category[c.short_name]}} apps)</h2>
+                <h2>{{c.name}} ({{ n_projects_per_category[c.short_name]}} projects)</h2>
             </div>
             <div class="col-md-6">
                 <div class="btn-group">
                     <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> {{_('Edit Category Name')}}</a>
-                    {% if n_apps_per_category[c.short_name] == 0 and (categories | count > 1) %}
+                    {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
                     <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn btn-primary"><i class="glyphicon glyphicon-trash"></i> {{_('Delete Category')}}</a>
                     {% else %}
                     <a href="#" class="btn btn-info disabled"><i class="glyphicon glyphicon-trash"></i> {{_('Delete Category')}}</a>

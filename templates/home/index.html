@@ -1,5 +1,5 @@
 {% extends "basePlate.html" %}
-{% import "applications/_helpers.html" as helper %}
+{% import "projects/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
 
 {% block content %}
@@ -11,30 +11,30 @@
               <h1>{{ brand }}: Crowd-sourcing</h1>
 
           </div>
-		</div>
+    </div>
 
         <div class="row well" >
-        	<div class="col-md-4">
-        		<img src="{{url_for('static', filename="img/MP_SQUARE_notype.png")}}" />
-        	</div>
-        	<div class="col-md-8">
-        	<h2>{{ title }}</h2>
-			{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
-        	</div>
+          <div class="col-md-4">
+            <img src="{{url_for('static', filename="img/MP_SQUARE_notype.png")}}" />
+          </div>
+          <div class="col-md-8">
+          <h2>{{ title }}</h2>
+      {% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
+          </div>
         </div>
 
 
 </div>
 
       <div class="row well">
-        {% for app in categories_apps['featured']%}
+        {% for project in categories_projects['featured']%}
         <div class="col-md-3 center featured">
-            {{ helper.render_app_thumbnail(app, upload_method, class="img-circle",
+            {{ helper.render_project_thumbnail(project, upload_method, class="img-circle",
             style="width:140px; height:140px;")}}
-          <h2>{{app.name}}</h2>
-          <!-- <p>{{app.description | truncate(32, true)}}</p> -->
-          <p>{{app.description}}</p>
-          <p><a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-primary">{{ _('Start') }}</a></p>
+          <h2>{{project.name}}</h2>
+          <!-- <p>{{project.description | truncate(32, true)}}</p> -->
+          <p>{{project.description}}</p>
+          <p><a href="{{url_for('project.presenter',short_name=project.short_name)}}" class="btn btn-primary">{{ _('Start') }}</a></p>
         </div>
         {% endfor %}
 
