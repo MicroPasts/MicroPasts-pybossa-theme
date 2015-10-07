@@ -13,16 +13,16 @@
         {% else %}
         <div class="row" id="user-data">
             <h1><strong>{{user.fullname}}</strong></h1>
-            {{ helper.render_user_profile(user, settings=False, private=False) }}
+            {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
         </div>
         {% if projects_created %}
         <div class="row" id="created-apps" >
-            {{render_grid_projects(apps_created, "Created Projects")}}
+            {{render_grid_projects(projects_created, "Created Projects", upload_method)}}
         </div>
         {% endif %}
         {% if projects %}
         <div class="row" id="contributed-apps" >
-            {{render_grid_projects(projects, "Contributions")}}
+            {{render_grid_projects(projects, "Contributions", upload_method)}}
         </div>
         {% endif %}
         {% endif %}
