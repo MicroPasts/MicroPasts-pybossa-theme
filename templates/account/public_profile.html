@@ -17,12 +17,12 @@
         </div>
         {% if projects_created %}
         <div class="row" id="created-apps" >
-            {{render_grid_apps(apps_created, "Created Projects")}}
+            {{render_grid_projects(apps_created, "Created Projects")}}
         </div>
         {% endif %}
         {% if projects %}
         <div class="row" id="contributed-apps" >
-            {{render_grid_apps(projects, "Contributions")}}
+            {{render_grid_projects(projects, "Contributions")}}
         </div>
         {% endif %}
         {% endif %}
