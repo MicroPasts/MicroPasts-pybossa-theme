@@ -15,14 +15,14 @@
             <h1><strong>{{user.fullname}}</strong></h1>
             {{ helper.render_user_profile(user, settings=False, private=False) }}
         </div>
-        {% if apps_created %}
+        {% if projects_created %}
         <div class="row" id="created-apps" >
             {{render_grid_apps(apps_created, "Created Projects")}}
         </div>
         {% endif %}
-        {% if apps %}
+        {% if projects %}
         <div class="row" id="contributed-apps" >
-            {{render_grid_apps(apps, "Contributions")}}
+            {{render_grid_apps(projects, "Contributions")}}
         </div>
         {% endif %}
         {% endif %}
