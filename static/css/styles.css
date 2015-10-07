@@ -394,3 +394,8 @@ ul.users li a {
 .featured {
     min-height: 350px;
 }
+.alert-message {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+}
