@@ -44,3 +44,5 @@ cooperation with the community in the case of network server software.
 
 Documentation and media is under a Creative Commons Attribution License version
 3.
+
+[![DOI](https://zenodo.org/badge/19055/MicroPasts/MicroPasts-pybossa-theme.svg)](https://zenodo.org/badge/latestdoi/19055/MicroPasts/MicroPasts-pybossa-theme)
