@@ -216,7 +216,7 @@ function imgError(image) {
             <div class="col-md-3 featured center">
                 <a href={{ url_for('project.details', short_name=project.short_name)}}>
                 {{ render_project_thumbnail(project, upload_method, class='img-circle', style="min-height:140px;
-                min-width:140px;")}}
+                min-width:140px; max-height:140px; max-width:140px;")}}
                 <h3>{{project.name}}</h3>
                 <span class="label label-info">{{ _('Info') }}</span>
                 </a>
