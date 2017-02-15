@@ -12,7 +12,7 @@
          
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="http://micropasts.org" title="Micropasts homepage">Home</a></li>
+              <li><a href="{{ url_for('home.home') }}" title="Micropasts homepage">Home</a></li>
               <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
               <li {% if active_page == 'projects' %} class="active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
               <!-- li {% if active_page == 'about' %} class="active" {% endif %}><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li -->
