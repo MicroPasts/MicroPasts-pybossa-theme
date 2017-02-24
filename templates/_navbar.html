@@ -9,14 +9,14 @@
           </button>
           <a class="brand" href="{{ url_for('home.home') }}"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}" width="130" height="24"></a>
          </div>
-         
+
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><a href="{{ url_for('home.home') }}" title="Micropasts homepage">Home</a></li>
               <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
               <li {% if active_page == 'projects' %} class="active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
               <!-- li {% if active_page == 'about' %} class="active" {% endif %}><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li -->
-              <li><a href="http://community.micropasts.org" title="Our community forum">Forum</a></li>
+              <li>{% if 'pybossa_discourse' in plugins %}<a href="{{ url_for('discourse.index') }}">Community</a>{% endif %}</li>
               <li><a href="http://micropasts.org/data-centre">Data</a></li>
               <li><a href="http://micropasts.org/learning">Learning</a></li>
               <li><a href="http://research.micropasts.org">Blog</a></li>
