@@ -59,6 +59,8 @@
         {{ render_field(form.allow_anonymous_contributors, class_="form-control") }}
         {{ render_field(form.password, class_="form-control") }}
         {{ render_field(form.webhook, class_="form-control") }}
+        {{ render_checkbox_field(form.protect, id='protect') }}
+
         <div class="form-actions">
           <button type="submit" name='btn' value="Save the changes" class="btn btn-primary">{{_('Save the changes')}}</button>
           <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn btn-primary">Cancel</a>
