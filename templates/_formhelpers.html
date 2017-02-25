@@ -22,8 +22,15 @@
             {% endif %}
         </div>
     </div>
-{% endmacro %}
+{%- endmacro %}
 
+{% macro render_checkbox_field(field) -%}
+    <div class="checkbox">
+        <label>
+            {{ field(type='checkbox', **kwargs) }} {{ field.label }}
+        </label>
+    </div>
+{%- endmacro %}
 
 {% macro render_label(field, tooltip, text) %}
     {% if tooltip and text %}
@@ -39,4 +46,4 @@
     {% else %}
     {{ field.label(class="control-label") }}
     {% endif %}
-{% endmacro %}
+{%- endmacro %}
