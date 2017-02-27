@@ -239,10 +239,12 @@
                    <div class="panel-body">
                        <img src="{{render_url_thumbnail(f, upload_method)}}" width="100" class="pull-left"/>
                        <p>
-                           Description: {{f.description}}<br/>
-                           Last activity: {{f.last_activity}}<br/>
-                           Number of volunteers: {{f.n_volunteers}}<br/>
-                           Number of tasks: {{f.n_tasks}}
+                           Description: {{f.description}}<br />
+                           Last activity: {{f.last_activity}}<br />
+                           Number of volunteers: {{f.n_volunteers}}<br />
+                           Number of tasks: {{f.n_tasks}}<br />
+                           Overall progress: {{f.overall_progress}} <br />
+                           Project owner: {{f.owner}}
                         </p>
                        <pre>{{f}}</pre>
                            {% if featured %}
