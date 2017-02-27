@@ -34,7 +34,11 @@
 
 
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
-<p><strong><i class="fa fa-user"></i> Username:</strong> {{ user.name }}</p>
+<p>
+    <strong><i class="fa fa-user"></i> Username:</strong> {{ user.name }}<br/>
+    <strong>Fullname:</strong> {{ user.fullname }}<br/>
+    <strong>Registered:</strong> {{ user.registered_ago}}
+</p>
 <pre>{{user}}</pre>
 {% if private %}
 <p><strong><i class="fa fa-envelope"></i> {{_('E-mail')}}:</strong> {{user.email_addr }}
