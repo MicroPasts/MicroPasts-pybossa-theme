@@ -25,6 +25,7 @@
         <div class="caption">
          <h5><a href="{{url_for('account.profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></h5>
               <ul style='list-style-type:none; margin-left:0px;'>
+                  <pre>{{account}}</pre>
                 <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
                 <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
                 {% if account.projects %}
@@ -40,7 +41,7 @@
           </div>
         </div>
 
-        
+
       </div>
       {% endfor %}
       </div>
