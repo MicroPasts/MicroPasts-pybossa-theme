@@ -152,7 +152,7 @@
 <script>
         function imgError(image) {
             image.onerror = "";
-            image.src = "{{url_for('static', filename='img/placeholder-head-grey.project.png')}}";
+            image.src = "{{url_for('static', filename='img/placeholder-head-grey.png')}}";
             if (arguments[1] === 'user') {
                 image.src = "{{url_for('static', filename='img/placeholder.user.png')}}";
             }
@@ -285,7 +285,7 @@
     <img id="{{id}}"  class="{{class}}" width="{{width}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder-head-grey.png')}}';" >
     {% endif %}
 {% elif project.info.thumbnail %}
-    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{project.info.thumbnail}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder-head-grey')}}';">
+    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{project.info.thumbnail}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder-head-grey.png')}}';">
 {% else %}
     <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholder-head-grey')}}" style="{{style}}">
 {% endif %}
