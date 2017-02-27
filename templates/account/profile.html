@@ -24,11 +24,11 @@
             </div>
             <div class="col-md-9">
                 <h2><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></h2>
-                <a class="btn btn-primary btn-sm" href="{{url_for('project.presenter', short_name=project.short_name)}}"><i
-                        class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}</a>
-            </div><!-- end row-fluid -->
-            {% endfor %}
-        </div><!-- end span9 -->
-    </div>
-    {{ project_helper.broken_image() }}
-    {% endblock %}
+                  <a class="btn btn-primary btn-sm" href="{{url_for('project.presenter', short_name=project.short_name)}}"><i class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}</a>
+            </div>
+        </div><!-- end row-fluid -->
+        {% endfor %}
+    </div><!-- end span9 -->
+</div>
+{{ project_helper.broken_image() }}
+{% endblock %}
