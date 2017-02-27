@@ -16,4 +16,3 @@ All the best,
 {{ BRAND }} team
 
 ***
-Powered by [PyBossa](http://pybossa.com)

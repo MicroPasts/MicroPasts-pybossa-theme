@@ -13,5 +13,4 @@ Regards,
 {{ config.BRAND }} Team
 
 ***
-Powered by [PyBossa](http://pybossa.com)
-Follow us: [Twitter](http://twitter.com/pybossa), [Google+](https://plus.google.com/115359083217638640334/posts)
+Follow us: [Twitter](http://twitter.com/micropasts)
