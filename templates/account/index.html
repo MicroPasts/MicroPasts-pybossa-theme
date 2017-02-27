@@ -11,7 +11,8 @@
       {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
       {% else %}
-      <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small></h1>
+      <h1>{{ _('Community') }}</h1>
+      <p>{{total}} registered users on the platform since October 2013</p>
       <p>We only show you people who have contributed to our projects.</p>
       <div class="btn-group">
       <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
