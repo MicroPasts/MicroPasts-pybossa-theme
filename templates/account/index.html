@@ -7,56 +7,62 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-md-9 col-md-offset-2">
-      {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+    <div class="col-md-9 col-md-offset-2">
+        {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not
+        current_user.admin)) %}
         {{ privacy.render_lock_page() }}
-      {% else %}
-      <h1>{{ _('Community') }}</h1>
-      <p>{{total}} registered users on the platform since October 2013</p>
-      <p>We only show you people who have contributed to our projects.</p>
-      <div class="btn-group">
-      <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
-      </div>
-      {% if accounts %}
-      <div class="row">
-      {% for account in accounts %}
-      <div class="col-sm-6 col-md-4">
-      <div class="img-circle">
-        {{ helper.render_user_thumbnail(account, upload_method, class="img-circle", style="width:90px; height:90px;")}}
-        <div class="caption">
-         <h5><a href="{{url_for('account.profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a></h5>
-              <p>
-                <strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}<br />
-                <strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}<br />
-                <strong><i class='icon-tasks'></i> Registered</strong> {{ account.registered_ago }}<br/>
-                <strong><i class='icon-tasks'></i> Rank</strong> {{ account.rank }}<br/>
-                {% if account.projects %}
-                <strong><i class='icon-certificate'></i> Owner of</strong><br />
-                  <ul style='list-style-type:none'>
-                      {% for project in account.projects %}
-                      <li><i class='icon-chevron-right'></i> {{ project.name | truncate(18, true)}}</li>
-                      {% endfor %}
-                  </ul>
-                {% endif %}
-              </p>
-          </div>
+        {% else %}
+        <h1>{{ _('Community') }}</h1>
+        <div class="btn-group pull-right">
+            <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy"
+                                                                                  style="color:white"></i> {{
+                _('Leaderboard') }}</a>
         </div>
+        <p>{{total}} registered users on the platform since October 2013</p>
+        <p>We only show you people who have contributed to our projects.</p>
+
+        {% if accounts %}
+        <div class="row">
+            {% for account in accounts %}
+            <div class="col-sm-6 col-md-4">
+                <div class="img-circle">
+                    {{ helper.render_user_thumbnail(account, upload_method, class="img-circle", style="width:90px;
+                    height:90px;")}}
+                    <div class="caption">
+                        <h5><a href="{{url_for('account.profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a>
+                        </h5>
+                        <p>
+                            <strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}<br/>
+                            <strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}<br/>
+                            <strong><i class='icon-tasks'></i> Registered</strong> {{ account.registered_ago }}<br/>
+                            <strong><i class='icon-tasks'></i> Rank</strong> {{ account.rank }}<br/>
+                            {% if account.projects %}
+                            <strong><i class='icon-certificate'></i> Owner of</strong><br/>
+                        <ul style='list-style-type:none'>
+                            {% for project in account.projects %}
+                            <li><i class='icon-chevron-right'></i> {{ project.name | truncate(18, true)}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        </p>
+                    </div>
+                </div>
 
 
-      </div>
-      {% endfor %}
-      </div>
-    {% endif %}
-      {% if pagination.has_next %}
-      {{ pagination.info }}
-    <div class="span9">
-        {% if pagination.pages > 2 %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if pagination.has_next %}
+        {{ pagination.info }}
+        <div class="span9">
+            {% if pagination.pages > 2 %}
             {{ helper.render_pagination(pagination) }}
+            {% endif %}
+        </div>
+        {% endif %}
         {% endif %}
     </div>
-      {% endif %}
-    {% endif %}
-  </div>
 </div>
 {{ projecthelper.broken_image()}}
 {% endblock %}
