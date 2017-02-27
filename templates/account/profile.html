@@ -24,17 +24,11 @@
             </div>
             <div class="col-md-9">
                 <h2><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></h2>
-                  <a class="btn btn-primary" href="{{url_for('project.presenter', short_name=project.short_name)}}"><i class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}</a>
-                   <a href="https://twitter.com/share" style="padding-top:5px;"
-                       class="twitter-hashtag-button"
-    data-text="{{ _('I\'ve contributed to the @MicroPasts project ') }} {{project.name}}. {{ _('Do you want to help?') }} {{url_for('project.details',short_name=project.short_name,_external=True)}}"
-    data-count="none">{{ _('Tweet') }}</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-            </div>
-        </div><!-- end row-fluid -->
-        {% endfor %}
-    </div><!-- end span9 -->
-</div>
-{{ project_helper.broken_image() }}
-{% endblock %}
+                <a class="btn btn-primary" href="{{url_for('project.presenter', short_name=project.short_name)}}"><i
+                        class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}</a>
+            </div><!-- end row-fluid -->
+            {% endfor %}
+        </div><!-- end span9 -->
+    </div>
+    {{ project_helper.broken_image() }}
+    {% endblock %}
