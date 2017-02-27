@@ -237,9 +237,11 @@
                        <h3 class="panel-title">{{f.name}}</h3>
                    </div>
                    <div class="panel-body">
-                       {{f}}
                        <img src="{{render_url_thumbnail(f, upload_method)}}" width="100" class="pull-left"/>
-                       <p>{{f.description}}</p>
+                       <p>Description: {{f.description}}</p>
+                       <p>Last activity: {{f.last_activity}}</p>
+                       <p>Number of volunteers: {{f.n_volunteers}}</p>
+                       <p>Number of tasks: {{f.n_tasks}}</p>
                            {% if featured %}
                             {% if f.featured %}
                             <p class="readmore">
