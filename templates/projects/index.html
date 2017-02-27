@@ -18,8 +18,7 @@
                     {% endif %}
                 </ul>
             </div>
-        </div>
-        {% if projects %}
+            {% if projects %}
             {% if active_cat.short_name=="featured"%}
                 {% set title = _('Featured Projects') %}
                 {% set subheading =_('A special selection of the most interesting projects') %}
@@ -43,6 +42,8 @@
         {% else %}
             <h3>{{_('Sorry, there are no published projects for this category yet')}}</h3>
         {% endif %}
+        </div>
+
     </div>
 </section>
 {% endblock %}
