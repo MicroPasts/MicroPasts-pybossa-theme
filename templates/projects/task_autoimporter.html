@@ -6,9 +6,9 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
-<div class="row">
+<div class="container">
     <div class="col-md-3">
-        {{ helper.render_project_local_nav(project, 'tasks', current_user)}}
+        {{ helper.render_project_local_nav(project, 'tasks', current_user, pro_features)}}
     </div>
     <div class="col-md-9">
         <h1><strong>{{project.name}}</strong>: {{_('Currently configured autoimport')}}</h1>
@@ -26,6 +26,11 @@
         {% elif importer['type']=='flickr'%}
         <p><strong>Type: </strong>Flickr album importer</p>
         <p><strong>Flickr album ID: </strong>{{ importer['album_id'] }}</p>
+        {% elif importer['type']=='twitter'%}
+        <p><strong>Type: </strong>Twitter importer</p>
+        <p><strong>From source: </strong>{{ importer['source'] }}</p>
+        <p><strong>Number of tweets to import at once: </strong>{{ importer['max_tweets'] }}</p>
+        <p><strong>Credentials: </strong>{{ "User" if importer['user_credentials'] else "Platform"}}</p>
         {% endif %}
 
       <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
@@ -33,7 +38,7 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <div class="form-actions">
             <input id="submit" type="submit" value="{{_('Delete')}}" class="btn btn-primary" />
-            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn">{{_('Back')}}</a>
+            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">{{_('Back')}}</a>
           </div>
         </fieldset>
       </form>
