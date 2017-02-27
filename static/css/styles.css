@@ -391,7 +391,9 @@ ul.users li a {
 .applications {
     min-height: 300px;
 }
-
+.featured {
+    min-height: 350px;
+}
 .alert-message {
     background-color: #dff0d8;
     border-color: #d6e9c6;
