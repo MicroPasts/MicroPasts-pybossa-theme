@@ -12,7 +12,6 @@
         {{ privacy.render_lock_page() }}
         {% else %}
         <div class="row" id="user-data">
-            {{ render_user_thumbnail(user, upload_method) }}
             <h1><strong>{{user.fullname}}</strong></h1>
             {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
         </div>
