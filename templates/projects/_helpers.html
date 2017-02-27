@@ -287,7 +287,7 @@
 {% elif project.info.thumbnail %}
     <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{project.info.thumbnail}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder-head-grey.png')}}';">
 {% else %}
-    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholder-head-grey')}}" style="{{style}}">
+    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholder-head-grey.png')}}" style="{{style}}">
 {% endif %}
 {% endmacro %}
 
