@@ -1,33 +1,51 @@
-{% extends "/base.html" %}
-{% set active_page = "projects"  %}
-{% set active_project = project.short_name %}
+{% Extends "/base.html"%}
+{% Set active_page = "projects"%}
+{% Set active_project = project.short_name%}
+{% Set jstop = True%}
 
-{% block content %}
-<script>
-    Modernizr.load({
-            test: window.JSON,
-            nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
-            });
-</script>
-<script src="{{url_for('static', filename="js/pybossa/pybossa.js")}}" type="text/javascript"></script>
-<div class="row">
-        <h1><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a>: {{ _('Contribute') }}</h1>
-</div>
-{% if invite_new_volunteers %}
-<div class="row">
-        <p>
-        {{ _("Sorry, you've contributed to all the tasks for this project, but this project still needs more volunteers, so please spread the word!") }}
-        </p>
-</div>
-{% endif %}
-{{ project.info.task_presenter|safe }}
+{% Block content%}
+{% Assets filters = "jsmin", output = "js / gen / full.min.js",
+          "Js / vendor / jquery-2.2.3.js", "js / vendor / bootstrap.js",
+          "Js / vendor / modernizr.min.js", "js / flashmessages.js",
+          "Js / vendor / cookieconsent.min.js",
+          "Js / pybossa / pybossa.js",
+          "Js / pybossa-player / dist / pybossa-player.min.js"
+          %}
+          <Script type = "text / javascript" src = "{{ASSET_URL}}"> </ script>
+{% Endassets%}
+<Script>
+    Modernizr.load ({
+        Test: window.JSON,
+        Nope: '{{url_for (' static ', filename =' js / vendor / json2.min.js ')}}'
+});
+</ Script>
 
+<Div class = "container">
+    <Div class = "row">
+        <Div class = "col-md-12">
+            <H1> <a href="{{url_for('project.details', short_name=project.short_name)}}"> {{project.name}} </a>: {{_ ('Contribute')}} </ H1>
+        </ Div>
+    </ Div>
+    {% If invite_new_volunteers%}
+    <Div class = "row">
+        <Div class = "col-md-12">
+            <P>
+            {{_ ((Sorry, you have to contribute to all the projects for this project, but this project will help you spread the word!)}}
+            </ P>
+        </ Div>
+    </ Div>
+    {% Endif%}
+    {{Project.info.task_presenter | safe}}
 
-<div id='PYBOSSA_USER_LOCALE' hidden>
-{% if current_user.is_anonymous() %}
-en
-{% else %}
-{{ current_user.locale }}
-{% endif %}
-</div>
-{% endblock %}
+    <Div id = 'PYBOSSA_USER_LOCALE' hidden>
+        {% If current_user.is_anonymous ()%}
+        in
+        {% Else%}
+        {{Current_user.locale}}
+        {% Endif%}
+    </ Div>
+</ Div>
+{% Endblock%}
+{% Block extrajs%}
+{% Include "_flash_messages.html"%}
+{% Endblock%}
