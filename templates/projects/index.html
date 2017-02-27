@@ -8,7 +8,7 @@
 <section class="project categories selector">
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1 hidden-xs hidden-sm">
+            <div class="col-md-2">
                 <ul class="nav nav-pills nav-stacked categories">
                     {% for c in categories %}
                     <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}><a href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow"><i class="icon-chevron-right"></i> {{ c.name }}</a></li>
@@ -29,11 +29,9 @@
                 {% set title = active_cat.name + ' ' + _('Projects') %}
                 {% set subheading = active_cat.description %}
             {% endif %}
-            <div class="row">
-                <div class="col-md-offset-1 col-md-10">
+                <div class="col-md-10">
                     {{ helper.render_grid_projects(projects, title, upload_method, title_class="col-md-12", container=False, active_cat = active_cat.short_name, subheading=subheading)}}
                 </div>
-            </div>
             {% if pagination.pages > 1 %}
             <div class="col-md-offset-2 col-md-8 text-center">
                 {{ helper_account.render_pagination(pagination) }}
