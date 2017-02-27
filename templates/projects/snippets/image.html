@@ -1,32 +1,3 @@
-<div class="row">
-    <!-- Success and Error Messages for the user --> 
-    <div class="col-md-6 col-md-offset-2" style="height:50px">
-        <div id="success" class="alert alert-success" style="display:none;">
-            <a class="close">×</a>
-            <strong id="i18n_welldone">Well done!</strong> <span id="i18n_welldone_text">Your answer has been saved</span>
-        </div>
-        <div id="loading" class="alert alert-info" style="display:none;">
-            <a class="close">×</a>
-            <span id="i18n_loading_next_task">Loading next task...</span>
-        </div>
-        <div id="taskcompleted" class="alert alert-info" style="display:none;">
-            <strong id="i18n_task_completed">The task has been completed!</strong> <span id="i18n_thanks">Thanks a lot!</span>
-        </div>
-        <div id="finish" class="alert alert-success" style="display:none;">
-            <strong id="i18n_congratulations">Congratulations!</strong> <span id="i18n_congratulations_text">You have participated in all available tasks!</span>
-            <br/>
-            <div class="alert-actions">
-                <a class="btn small" href="/">Go back</a>
-                <a class="btn small" href="/project">or, Check other projects</a>
-            </div>
-        </div>
-        <div id="error" class="alert alert-danger" style="display:none;">
-            <a class="close">×</a>
-            <strong>Error!</strong> Something went wrong, please contact the site administrators
-        </div>
-    </div> <!-- End Success and Error Messages for the user -->
-</div> <!-- End of Row -->
-
 <!--
     Task DOM for loading the Flickr Images
     It uses the class="skeleton" to identify the elements that belong to the
@@ -39,19 +10,19 @@
             <!-- If the user clicks this button, the saved answer will be value="yes"-->
             <button class="btn btn-success btn-answer" value='Yes'><i class="icon icon-white icon-thumbs-up"></i> <span id="i18n_yes">Yes</span></button>
             <!-- If the user clicks this button, the saved answer will be value="no"-->
-            <button class="btn btn-danger btn-answer" value='No'><i class="icon icon-white icon-thumbs-down"> </i> No</button>
+            <button class="btn btn-danger btn-answer" value='No'><i class="icon icon-white icon-thumbs-down"></i> No</button>
             <!-- If the user clicks this button, the saved answer will be value="NoPhoto"-->
-            <button class="btn btn-answer" value='NoPhoto'><i class="icon icon-white icon-exclamation"> </i><span id="i18n_no_photo">No photo</span></button>
+            <button class="btn btn-answer" value='NoPhoto'><i class="icon icon-exclamation"></i> <span id="i18n_no_photo">No photo</span></button>
             <!-- If the user clicks this button, the saved answer will be value="NotKnown"-->
-            <button class="btn btn-answer" value='NotKnown'><i class="icon icon-white icon-question-sign"> </i><span id="i18n_i_dont_know">I don't know</span></button>
+            <button class="btn btn-answer" value='NotKnown'><i class="icon icon-white icon-question-sign"></i> <span id="i18n_i_dont_know">I don't know</span></button>
         </div><!-- End of DIV for the submission buttons -->
         <!-- Feedback items for the user -->
         <p><span id="i18n_working_task">You are working now on task:</span> <span id="task-id" class="label label-warning">#</span></p>
         <p><span id="i18n_tasks_completed">You have completed:</span> <span id="done" class="label label-info"></span> <span id="i18n_tasks_from">tasks from</span>
-        <!-- Progress bar for the user -->
-        <span id="total" class="label label-info"></span></p>
+        <!-- Progress progress-bar for the user -->
+        <span id="total" class="label label-inverse"></span></p>
         <div class="progress progress-striped">
-            <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;" role="progressbar"></div>
+            <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"></div>
         </div>
         <!-- 
             This project uses Disqus to allow users to provide some feedback.
@@ -93,7 +64,8 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-<script>
+<script type="text/javascript">
+(function() {
 // Default language
 var userLocale = "en";
 // Translations
@@ -144,7 +116,9 @@ function i18n_translate() {
     var ids = Object.keys(messages[userLocale])
     for (i=0; i<ids.length; i++) {
         console.log("Translating: " + ids[i]);
-        document.getElementById(ids[i]).innerHTML = messages[userLocale][ids[i]];
+        if (document.getElementById(ids[i])) {
+            document.getElementById(ids[i]).innerHTML = messages[userLocale][ids[i]];
+        }
     }
 }
 
@@ -167,9 +141,10 @@ pybossa.taskLoaded(function(task, deferred) {
         img.load(function() {
             // continue as soon as the image is loaded
             deferred.resolve(task);
+            pybossaNotify("", false, "loading");
         });
         img.attr('src', task.info.url_b).css('height', 460);
-        img.addClass('img-thumbnail img-responsive');
+        img.addClass('img-thumbnail');
         task.info.image = img;
     }
     else {
@@ -185,30 +160,31 @@ pybossa.presentTask(function(task, deferred) {
         $("#photo-link").attr("href", task.info.link);
         $('#task-id').html(task.id);
         $('.btn-answer').off('click').on('click', function(evt) {
-            var $btn = $(this);
-            var answer = $btn.attr("value");
+            var btn = $(this);
+            var answer = btn.attr("value");
             if (typeof answer != 'undefined') {
                 pybossa.saveTask(task.id, answer).done(function() {
+                    pybossaNotify("Loading picture...", true, "loading");
                     deferred.resolve();
                 });
-                $("#loading").fadeIn(500);
                 if ($("#disqus_thread").is(":visible")) {
                     $('#disqus_thread').toggle();
                     $('.btn-disqus').toggle();
                 }
             }
             else {
-                $("#error").show();
+                pybossaNotify("Oops... Something went wrong.", true, "error");
             }
         });
-        $("#loading").hide();
+        pybossaNotify("Loading picture...", false, "loading");
     }
     else {
         $(".skeleton").hide();
-        $("#loading").hide();
-        $("#finish").fadeIn(500);
+        pybossaNotify("Loading picture...", false, "loading");
+        pybossaNotify("Thanks! You have participated in all available tasks. Enjoy some of your time!", true, "info");
     }
 });
 
 pybossa.run('{{project.short_name}}');
+})();
 </script>
