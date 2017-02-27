@@ -238,10 +238,13 @@
                    </div>
                    <div class="panel-body">
                        <img src="{{render_url_thumbnail(f, upload_method)}}" width="100" class="pull-left"/>
-                       <p>Description: {{f.description}}</p>
-                       <p>Last activity: {{f.last_activity}}</p>
-                       <p>Number of volunteers: {{f.n_volunteers}}</p>
-                       <p>Number of tasks: {{f.n_tasks}}</p>
+                       <p>
+                           Description: {{f.description}}<br/>
+                           Last activity: {{f.last_activity}}<br/>
+                           Number of volunteers: {{f.n_volunteers}}<br/>
+                           Number of tasks: {{f.n_tasks}}
+                        </p>
+                       <pre>{{f}}</pre>
                            {% if featured %}
                             {% if f.featured %}
                             <p class="readmore">
