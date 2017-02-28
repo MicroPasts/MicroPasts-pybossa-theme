@@ -31,34 +31,29 @@
     <meta name="twitter:creator" content="@micropasts" />
     <meta name="twitter:image:src" content="http://crowdsourced.micropasts.org/static/img/MP_SQUARE_notype.png">
 
-    <!-- Le styles -->
+    <!-- CSS begins -->
     <link href="{{url_for('static', filename='vendor/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link href="{{url_for('static', filename='css/fonts/stylesheet.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='vendor/jReject/css/jquery.reject.css')}}" rel="stylesheet">
+    <!-- CSS ends -->
 
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Le fav and touch icons -->
+    <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="/static/img/favicon.ico">
 
-	<!--  Apple flavoured icons - yuck -->
+	<!--  Apple flavoured icons -->
     <link rel="apple-touch-icon" href="/static/img/icons/touch-icon-iphone.png">
     <link rel="apple-touch-icon" sizes="76x76" href="/static/img/icons/touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="120x120" href="/static/img/icons/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/static/img/icons/touch-icon-ipad-retina.png">
-
-    <!-- Le javascript -->
-    <script type="text/javascript" src="{{url_for('static', filename='vendor/jquery.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='vendor/bootstrap/3.1.0/js/bootstrap.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='vendor/modernizr.min.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='vendor/jReject/js/jquery.reject.js')}}"></script>
 
     <!-- Google Analytics or similar solutions -->
     {% include '_ga.html' ignore missing %}
@@ -96,10 +91,10 @@
         	<div class="col-md-12">
         	<div class="center">
                 <ul class="footerLinks">
-                    <li><i class="glyphicon glyphicon-envelope glyphicon-inverse"></i> <a href="mailto:{{contact_email}}">{{ _('Email') }}</a></li>
-                    <li><i class="icon-twitter glyphicon-inverse"></i> <a href="http://twitter.com/{{contact_twitter}}">{{ _('Twitter') }}</a></li>
-                    <li><i class="icon-facebook glyphicon-inverse"></i> <a href="http://facebook.com/{{contact_twitter}}">{{ _('Facebook') }}</a></li>
-                    <li><i class="icon-flickr glyphicon-inverse"></i> <a href="http://flickr.com/{{contact_twitter}}">{{ _('Flickr') }}</a></li>
+                    <li><i class="glyphicon glyphicon-envelope glyphicon-inverse"></i> <a href="mailto:{{contact_email}}">Email</a></li>
+                    <li><i class="icon-twitter glyphicon-inverse"></i> <a href="http://twitter.com/{{contact_twitter}}">Twitter</a></li>
+                    <li><i class="icon-facebook glyphicon-inverse"></i> <a href="http://facebook.com/{{contact_twitter}}">Facebook</a></li>
+                    <li><i class="icon-flickr glyphicon-inverse"></i> <a href="http://flickr.com/{{contact_twitter}}">Flickr</a></li>
                     <li><i class="glyphicon glyphicon-link glyphicon-inverse"></i> <a href="{{url_for('help.api')}}">API</a></li>
                     <li><i class="icon-info-sign glyphicon-inverse"></i> <a href="{{url_for('home.about')}}">About</a></li>
                 </ul>
@@ -109,7 +104,7 @@
     </div>
     {% endif %}
     </footer>
-     <!-- Le javascript -->
+
     <script id="cookies_warning">
         window.cookieconsent_options = {"message":"Cookies help us to deliver our services. By using our services, you agree to our use of cookies.","dismiss":"Got it!","learnMore":"Learn More.","link":"{{url_for('help.cookies_policy')}}","theme":"dark-bottom"};
     </script>
@@ -118,13 +113,12 @@
     {% assets filters="jsmin", output="js/gen/default.min.js",
               "js/vendor/jquery-2.2.3.js", "js/vendor/bootstrap.js",
               "js/vendor/modernizr.min.js", "js/flashmessages.js",
-              "js/vendor/cookieconsent.min.js"
+              "js/vendor/cookieconsent.min.js", "vendor/jReject/js/jquery.reject.js"
               %}
               <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
     {% endif %}
     {% block extrajs %}
     {% endblock %}
-    {% include "_flash_messages.html" %}
   </body>
 </html>
