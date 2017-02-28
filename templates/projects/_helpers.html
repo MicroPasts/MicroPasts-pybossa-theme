@@ -295,6 +295,9 @@
                             Overall progress: {{f.overall_progress}}% <br/>
                             Project owner: {{f.owner}}
                         </p>
+                        <pre>{{ f }}</pre>
+                        <pre>{{ featured }}</pre>
+                            {% if featured %}
                             {% if f.featured %}
                             <p class="readmore">
                             <a id="projectBtnDel{{f.id}}" onclick="del({{f.id}})">{{ _('Remove from Featured') }}</a>
@@ -309,6 +312,7 @@
                            {% else %}
                            {% if active_cat != 'draft' %}
                            <p class="readmore"><a href="{{ url_for('project.details', short_name=f.short_name)}}">{{_('More info')}}</a></p>
+                           {% endif %}
                            {% endif %}
                     </div>
                 </div>
