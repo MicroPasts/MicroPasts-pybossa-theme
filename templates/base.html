@@ -55,10 +55,6 @@
     <link rel="apple-touch-icon" sizes="120x120" href="/static/img/icons/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/static/img/icons/touch-icon-ipad-retina.png">
 
-    <!-- Google Analytics or similar solutions -->
-    {% include '_ga.html' ignore missing %}
-    <!-- Google Custom Search -->
-    {% include '_gcs.html' ignore missing %}
   </head>
 
   <body>
@@ -77,7 +73,8 @@
 
     {% block content %}{% endblock %}
 
-    </div> <!-- /container -->
+    </div>
+
     {% if show_cookies_warning %}
     <div id="cookies_warning">
         <p>Cookies help us deliver our services. By using our services, you agree to our use of cookies. <button class="btn btn-sm btn-success" onclick="accept_cookies()"><i class="glyphicon glyphicon-thumbs-up"></i> OK</button> <a class="btn btn-sm btn-default" href="{{url_for('help.cookies_policy')}}"><i class="glyphicon glyphicon-info-sign"></i> More info</a></p>
@@ -105,6 +102,8 @@
     {% endif %}
     </footer>
 
+    <!-- All javascript -->
+    {% include '_ga.html' ignore missing %}
     <script id="cookies_warning">
         window.cookieconsent_options = {"message":"Cookies help us to deliver our services. By using our services, you agree to our use of cookies.","dismiss":"Got it!","learnMore":"Learn More.","link":"{{url_for('help.cookies_policy')}}","theme":"dark-bottom"};
     </script>
@@ -120,5 +119,6 @@
     {% endif %}
     {% block extrajs %}
     {% endblock %}
+    <!-- End of javascript -->
   </body>
 </html>
