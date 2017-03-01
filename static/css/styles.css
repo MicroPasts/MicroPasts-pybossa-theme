@@ -246,7 +246,6 @@ body > footer .container {
 
 ul.users {
     margin: 0px 0px 10px -3px;
-    height: 128px;
     overflow: hidden;
 }
 
@@ -257,7 +256,6 @@ ul.users li {
 
 ul.users li a {
     display: block;
-    border: solid 4px #FFF;
     margin-bottom: 5px;
 }
 
