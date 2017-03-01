@@ -45,7 +45,7 @@
 <div id="top_users" class="row well">
     <h2><i class="glyphicon glyphicon-user"></i> {{ _('Most Active Volunteers') }}</h2>
     <ul class="users">
-        {% for user in top_users[0:7] %}
+        {% for user in top_users[0:6] %}
         <li>
             <a href="{{url_for('account.profile', name=user.name)}}">{{ account_helper.render_user_thumbnail(user,
                 upload_method, class="img-circle", style="height:90px; width:90px;") }}</a>
