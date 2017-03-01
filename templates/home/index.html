@@ -6,66 +6,56 @@
 <div class="background">
 
 
-        <div class="row jumbotron">
-          <div class="col-md-12 ">
-              <h1>{{ brand }}: Crowd-sourcing</h1>
+    <div class="row jumbotron">
+        <div class="col-md-12 ">
+            <h1>{{ brand }}: Crowd-sourcing</h1>
 
-          </div>
+        </div>
     </div>
 
-        <div class="row well" >
-          <div class="col-md-4">
-            <img src="{{url_for('static', filename="img/MP_SQUARE_notype.png")}}" />
-          </div>
-          <div class="col-md-8">
-          <h2>{{ title }}</h2>
-      {% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
-          </div>
+    <div class="row well">
+        <div class="col-md-4">
+            <img src="{{url_for('static', filename=" img/MP_SQUARE_notype.png")}}" />
         </div>
+        <div class="col-md-8">
+            <h2>{{ title }}</h2>
+            {% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
+        </div>
+    </div>
 
 
 </div>
 
-      <div class="row well">
-        {% for project in categories_projects['featured']%}
-        <div class="col-md-3 center featured">
-            {{ helper.render_project_thumbnail(project, upload_method, class="img-circle",
-            style="width:140px; height:140px;")}}
-          <h2>{{project.name}}</h2>
-          <!-- <p>{{project.description | truncate(32, true)}}</p> -->
-          <p>{{project.description}}</p>
-          <p><a href="{{url_for('project.presenter',short_name=project.short_name)}}" class="btn btn-primary">{{ _('Start') }}</a></p>
-        </div>
+<div class="row well">
+    {% for project in categories_projects['featured']%}
+    <div class="col-md-3 center featured">
+        {{ helper.render_project_thumbnail(project, upload_method, class="img-circle",
+        style="width:140px; height:140px;")}}
+        <h2>{{project.name}}</h2>
+        <!-- <p>{{project.description | truncate(32, true)}}</p> -->
+        <p>{{project.description}}</p>
+        <p><a href="{{url_for('project.presenter',short_name=project.short_name)}}" class="btn btn-primary">{{
+            _('Start') }}</a></p>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% if top_users %}
+<div id="top_users" class="row well">
+    <h2><i class="glyphicon glyphicon-user"></i> {{ _('Most Active Volunteers') }}</h2>
+    <ul class="users">
+        {% for user in top_users %}
+        <li>
+            <a href="{{url_for('account.profile', name=user.name)}}">{{ account_helper.render_user_thumbnail(user,
+                upload_method, class="img-circle" style="height:90px; width:90px;") }}</a>
+            <strong>{{user.fullname}}</strong><br/>
+            <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}}<br/>
+            <strong>{{_('Submitted Tasks')}}:</strong> {{user.score}}
+        </li>
         {% endfor %}
-
-      </div>
-
-      {% if top_users %}
-      <div id="top_users" class="row well">
-        <h2><i class="glyphicon glyphicon-user"></i> {{ _('Most Active Volunteers') }}</h2>
-        <ul class="users">
-            {% for user in top_users %}
-          <li>
-          <a href="{{url_for('account.profile', name=user.name)}}" data-content="
-                <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}}
-                <br/>
-                <strong>{{_('Submitted Tasks')}}:</strong> {{user.score}}
-                " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
-                {{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;") }}
-           </a>
-           <span class="label label-info">{{user.score}}</span> {{_('Tasks')}}
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
-<script>
-$("a[rel=popover]").popover({
-        html: true,
-        animation: true,
-        trigger: 'hover',
-        placement: 'top'
-                });
-</script>
+    </ul>
+</div>
+{% endif %}
 {{ helper.broken_image() }}
 {% endblock %}
