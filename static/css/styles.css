@@ -245,13 +245,14 @@ body > footer .container {
 }
 
 ul.users {
+    display: flex;
     margin: 0px 0px 10px -3px;
-    overflow: hidden;
 }
 
 ul.users li {
+    flex: 1;
+    text-align: center;
     display: inline-block;
-    margin: 0px 0px 5px 3px;
 }
 
 ul.users li a {
