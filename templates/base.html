@@ -68,6 +68,7 @@
     {% include "_navbar.html" %}
 
     <div class="container" style="min-height:400px;">
+    {% include "_flash_messages.html" %}
 
     {% block content %}{% endblock %}
 
@@ -115,6 +116,5 @@
     {% endif %}
     {% block extrajs %}
     {% endblock %}
-    {% include "_flash_messages.html" %}
   </body>
 </html>
