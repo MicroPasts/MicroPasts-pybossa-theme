@@ -5,6 +5,7 @@
 <h1><strong>{{ _('Admin Site') }} :</strong> {{ _('Manage featured projects') }}</h1>
 <ul class="nav nav-pills nav-stacked">
     {% for c in categories %}
+    {{c}}
     <li {% if loop.first %}class="active"{% endif %}>
     <a href="#{{c.short_name}}" data-toggle="tab">{{c.name}}</a>
     </li>
