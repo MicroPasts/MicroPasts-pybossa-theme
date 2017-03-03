@@ -1,6 +1,8 @@
 {% extends "admin/base.html" %}
 {% from "projects/_helpers.html" import render_grid_projects %}
 {% block leftnavigation%}
+    {{ helper.render_account_local_nav(current_user, active_link) }}
+
 <ul class="nav nav-pills nav-stacked">
     {% for c in categories %}
     <li {% if loop.first %}class="active"{% endif %}>
