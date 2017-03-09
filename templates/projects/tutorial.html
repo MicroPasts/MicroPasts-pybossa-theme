@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{{ project.info.tutorial | safe}}
+
 
 <div class="row">
     <div class="col-md-12" style="text-align:center;padding-top:20px;">
@@ -23,4 +23,7 @@ en
 {% endif %}
 </div>
 
+{% endblock %}
+{% block extrajs %}
+{{ project.info.tutorial | safe}}
 {% endblock %}
