@@ -18,7 +18,7 @@
               <li>{% if 'pybossa_discourse' in plugins %}<a href="{{ url_for('discourse.index') }}">Community</a>{% endif %}</li>
               <li><a href="http://blog.micropasts.org/data-centre">Data</a></li>
               <li><a href="http://blog.micropasts.org/learning">Learning</a></li>
-              <li><a href="http://blog.micropasts.org">Blog</a></li>
+              <li><a href="http://blog.micropasts.org">Research Blog</a></li>
             </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
