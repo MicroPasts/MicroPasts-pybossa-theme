@@ -16,9 +16,9 @@
               <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
               <li {% if active_page == 'projects' %} class="active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
               <li>{% if 'pybossa_discourse' in plugins %}<a href="{{ url_for('discourse.index') }}">Community</a>{% endif %}</li>
-              <li><a href="http://blog.micropasts.org/data-centre">Data</a></li>
-              <li><a href="http://blog.micropasts.org/learning">Learning</a></li>
-              <li><a href="http://blog.micropasts.org">Research Blog</a></li>
+              <li><a href="https://blog.micropasts.org/data-centre">Data</a></li>
+              <li><a href="https://blog.micropasts.org/learning">Learning</a></li>
+              <li><a href="https://blog.micropasts.org">Research Blog</a></li>
             </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
