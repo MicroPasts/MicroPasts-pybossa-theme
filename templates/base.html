@@ -55,19 +55,19 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/static/img/icons/touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="120x120" href="/static/img/icons/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/static/img/icons/touch-icon-ipad-retina.png">
-
+    {% include "_ga.html" ignore missing %}
+    {% include "_gcs.html" ignore missing%}
   </head>
 
   <body>
 
     {% set active_page = active_page | default('index') -%}
     {% set active_project  = active_project | default('none') -%}
-    {% include "_navbar.html" %}
+    {% include "_navbar.html" ignore missing %}
     {% if not current_user.is_anonymous() %}
     <!-- checkpoint::logged-in::{{current_user.name}} -->
     {% endif %}
     <div class="container" style="min-height:400px;">
-    {% include "_flash_messages.html" %}
 
     {% block content %}{% endblock %}
 
@@ -76,7 +76,6 @@
 
     <footer>
     {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
-        {% if not enforce_privacy %}
     <div id="footer_links" class="container">
         <div class="row">
         	<div class="col-md-12">
@@ -93,7 +92,6 @@
                 </div>
         </div>
     </div>
-    {% endif %}
     </footer>
 
     <!-- Le javascript -->
@@ -111,6 +109,6 @@
     {% endif %}
     {% block extrajs %}
     {% endblock %}
-    {% include "_ga.html" %}
+    {% include "_flash_messages.html" ignore missing %}
   </body>
 </html>
