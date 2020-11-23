@@ -33,13 +33,11 @@
 
     <!-- CSS begins -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    {% assets filters="libsass", output="css/gen/micropasts.min.css", "sass/micropasts.scss"%}
 
-    <link href="{{url_for('static', filename='vendor/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url_for('static', filename='css/fonts/stylesheet.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='vendor/jReject/css/jquery.reject.css')}}" rel="stylesheet">
-    {% endassets %}
+    <link href="/static/vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/fonts/stylesheet.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+    <link href="/static/vendor/jReject/css/jquery.reject.css" rel="stylesheet">
     <!-- CSS ends -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
