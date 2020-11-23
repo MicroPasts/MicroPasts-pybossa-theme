@@ -40,6 +40,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="/static/vendor/jReject/css/jquery.reject.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -69,15 +71,17 @@
 
   <body>
 
-
-
     {% set active_page = active_page | default('index') -%}
+
     {% set active_project  = active_project | default('none') -%}
+
     {% include "_navbar.html"  %}
+
     {% if not current_user.is_anonymous %}
     <!-- checkpoint::logged-in::{{current_user.name}} -->
     {% endif %}
-    <div class="container" style="min-height:400px;">
+
+    <div class="container-fluid" style="min-height:400px;">
     {% block content %}{% endblock %}
 
     </div> <!-- /container -->
