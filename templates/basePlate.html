@@ -66,15 +66,15 @@
   </head>
 
   <body class="imageLead">
-    {% if not current_user.is_anonymous() %}
-    <!-- checkpoint::logged-in::{{current_user.name}} -->
-    {% endif %}
+
 
 
     {% set active_page = active_page | default('index') -%}
     {% set active_project  = active_project | default('none') -%}
     {% include "_navbar.html" %}
-
+    {% if not current_user.is_anonymous() %}
+    <!-- checkpoint::logged-in::{{current_user.name}} -->
+    {% endif %}
     <div class="container" style="min-height:400px;">
 
     {% include "_flash_messages.html" %}
@@ -114,10 +114,15 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="/static/vendor/jquery.js"></script>
-    <script type="text/javascript" src="/static/vendor/bootstrap/3.1.0/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/static/vendor/modernizr.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/jReject/js/jquery.reject.js"></script>
+    {% if not jstop %}
+    {% assets filters="jsmin", output="js/gen/default.min.js",
+              "js/vendor/jquery-2.2.4.min.js", "js/vendor/bootstrap.js",
+              "js/vendor/modernizr.min.js", "js/flashmessages.js",
+              "js/vendor/cookieconsent.min.js"
+              %}
+              <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% endif %}
     <script>
     {% include 'cookies.js' %}
     </script>

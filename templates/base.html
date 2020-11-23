@@ -19,7 +19,7 @@
     <meta property="og:site_name" content="MicroPasts: Crowd Sourcing platform" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_GB" />
-    <meta property="og:description" content="{{config.TWITTER_DESC}}" />
+    <meta property="og:description" content="{{ config.TWITTER_DEC }}" />
     <meta property="fb:admins" content="688811070" />
     <meta property="fb:app_id" content="1376278705957324" />
 
@@ -59,15 +59,13 @@
   </head>
 
   <body>
-    {% if not current_user.is_anonymous() %}
-    <!-- checkpoint::logged-in::{{current_user.name}} -->
-    {% endif %}
-
 
     {% set active_page = active_page | default('index') -%}
     {% set active_project  = active_project | default('none') -%}
     {% include "_navbar.html" %}
-
+    {% if not current_user.is_anonymous() %}
+    <!-- checkpoint::logged-in::{{current_user.name}} -->
+    {% endif %}
     <div class="container" style="min-height:400px;">
     {% include "_flash_messages.html" %}
 
