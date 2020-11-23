@@ -63,7 +63,7 @@
 
     {% set active_page = active_page | default('index') -%}
     {% set active_project  = active_project | default('none') -%}
-    {% include "_navbar.html" ignore missing %}
+    <!-- {% include "_navbar.html" ignore missing %} -->
     {% if not current_user.is_anonymous() %}
     <!-- checkpoint::logged-in::{{current_user.name}} -->
     {% endif %}
