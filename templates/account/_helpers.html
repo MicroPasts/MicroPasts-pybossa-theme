@@ -104,22 +104,23 @@
 {% endmacro %}
 
 {% macro render_pagination(pagination) %}
-<ul class="pagination pagination-sm">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
   {% if pagination.has_prev %}
-  <li><a href="{{ url_for_other_page(pagination.page - 1)}}" rel="nofollow">&laquo; {{_('Prev')}}</a></li>
+  <li class="page-item"><a href="{{ url_for_other_page(pagination.page - 1)}}" rel="nofollow">&laquo; {{_('Prev')}}</a></li>
   {% else %}
-  <li class="disabled"><a href="#">&laquo; {{_('Prev')}}</a></li>
+  <li class="page-item disabled"><a href="#" class="page-link">&laquo; {{_('Prev')}}</a></li>
   {% endif %}
 
   {%- for page in pagination.iter_pages() %}
     {% if page %}
       {% if page != pagination.page %}
       <li>
-        <a href="{{ url_for_other_page(page) }}" rel="nofollow">{{ page }}</a>
+        <a href="{{ url_for_other_page(page) }}" class="page-link" rel="nofollow">{{ page }}</a>
        </li>
       {% else %}
       <li class="active">
-          <a href="#">{{ page }}</a>
+          <a href="#" class="page-link" >{{ page }}</a>
       </li>
       {% endif %}
     {% endif %}
@@ -127,10 +128,11 @@
   {% if pagination.has_next %}
     <li>
     <a href="{{ url_for_other_page(pagination.page + 1)
-      }}" rel="nofollow">{{_('Next')}} &raquo;</a>
+      }}" rel="nofollow" class="page-link">{{_('Next')}} &raquo;</a>
     </li>
   {% endif %}
 </ul>
+</nav>
 {% endmacro %}
 
 
