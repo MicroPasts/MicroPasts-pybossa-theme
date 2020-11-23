@@ -1,48 +1,45 @@
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="{{ url_for('home.home') }}"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}" width="130" height="24"></a>
-         </div>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="{{ url_for('home.home') }}"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}" width="130" height="24"></a>
+    </div>
 
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="https://crowdsourced.micropasts.org" title="Micropasts homepage">Home</a></li>
-              <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
-              <li {% if active_page == 'projects' %} class="active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
-              <li>{% if 'pybossa_discourse' in plugins %}<a href="{{ url_for('discourse.index') }}">Community</a>{% endif %}</li>
-              <li><a href="https://blog.micropasts.org/data-centre">Data</a></li>
-              <li><a href="https://blog.micropasts.org/learning">Learning</a></li>
-              <li><a href="https://blog.micropasts.org">Research Blog</a></li>
-            </ul>
-            {% include '_gcs_form.html' ignore missing %}
-          {% if current_user.is_authenticated() %}
-            <ul class="nav navbar-nav navbar-right">
-              <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon icon-user"></i> {{ current_user.name | truncate(6,true) }} <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="{{ url_for('account.profile',
-                        name=current_user.name) }}"><i class="glyphicon glyphicon-user"></i> {{ _('My Profile') }}</a></li>
-                    <li><a href="{{ url_for('account.projects',
-                        name=current_user.name) }}"><i class="glyphicon glyphicon-th-large"></i> {{ _('My Projects') }}</a></li>
-                    <li><a href="{{ url_for('account.update_profile',
-                        name=current_user.name) }}"><i class="glyphicon glyphicon-cog"></i> {{ _('My Settings') }}</a></li>
-                    {% if current_user.admin == 1 %}
-                    <li class="divider"></li>
-                    <li><a href="{{ url_for('admin.index') }}"><i class="glyphicon glyphicon-cog"></i> {{ _('Admin Site') }}</a></li>
-                    {% endif %}
-                    <li class="divider"></li>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="https://crowdsourced.micropasts.org" title="Micropasts homepage">Home</a></li>
+        <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
+        <li {% if active_page == 'projects' %} class="active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
+        <li><a href="https://blog.micropasts.org/data-centre">Data</a></li>
+        <li><a href="https://blog.micropasts.org/learning">Learning</a></li>
+        <li><a href="https://blog.micropasts.org">Research Blog</a></li>
+      </ul>
+      {% include '_gcs_form.html' ignore missing %}
+      {% if current_user.is_authenticated() %}
+      <ul class="nav navbar-nav navbar-right">
+        <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon icon-user"></i> {{ current_user.name | truncate(6,true) }} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url_for('account.profile',
+              name=current_user.name) }}"><i class="glyphicon glyphicon-user"></i> {{ _('My Profile') }}</a></li>
+              <li><a href="{{ url_for('account.projects',
+                name=current_user.name) }}"><i class="glyphicon glyphicon-th-large"></i> {{ _('My Projects') }}</a></li>
+                <li><a href="{{ url_for('account.update_profile',
+                  name=current_user.name) }}"><i class="glyphicon glyphicon-cog"></i> {{ _('My Settings') }}</a></li>
+                  {% if current_user.admin == 1 %}
+                  <li class="divider"></li>
+                  <li><a href="{{ url_for('admin.index') }}"><i class="glyphicon glyphicon-cog"></i> {{ _('Admin Site') }}</a></li>
+                  {% endif %}
+                  <li class="divider"></li>
                   <li><a href="{{ url_for('account.signout') }}"><i class="glyphicon glyphicon-off"></i> {{ _('Sign Out') }}</a></li>
                 </ul>
               </li>
             </ul>
-          {% endif %}
-
-            {% if current_user.is_anonymous() %}
+            {% else %}
             <ul class="nav navbar-nav navbar-right">
               <li><a href="{{ url_for('account.signin') }}"><i class="glyphicon glyphicon-white glyphicon-signin"></i> {{ _('Sign in') }}</a></li>
             </ul>
