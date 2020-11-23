@@ -1,117 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    {% if brand == title %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title>{{ brand }} &middot; {{ title | safe}}</title>
-    {% endif %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{config.DESCRIPTION}}">
-    <meta name="author" content="The MicroPasts team">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<head>
+  <meta charset="utf-8">
+  {% if brand == title %}
+  <title>{{ title }}</title>
+  {% else %}
+  <title>{{ brand }} &middot; {{ title | safe}}</title>
+  {% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{config.DESCRIPTION}}">
+  <meta name="author" content="The MicroPasts team">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Open Graph tags -->
-    <meta property="og:title" content="{{ title | safe}}" />
-    <meta property="og:url" content="{{ request.base_url }}" />
-    <meta property="og:image" content="http://crowdsourced.micropasts.org/static/img/MP_SQUARE_notype.png" />
-    <meta property="og:site_name" content="MicroPasts: Crowd Sourcing platform" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_GB" />
-    <meta property="og:description" content="{{ config.TWITTER_DEC }}" />
-    <meta property="fb:admins" content="688811070" />
-    <meta property="fb:app_id" content="1376278705957324" />
+  <!-- Open Graph tags -->
+  <meta property="og:title" content="{{ title | safe}}" />
+  <meta property="og:url" content="{{ request.base_url }}" />
+  <meta property="og:image" content="http://crowdsourced.micropasts.org/static/img/MP_SQUARE_notype.png" />
+  <meta property="og:site_name" content="MicroPasts: Crowd Sourcing platform" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:description" content="{{ config.TWITTER_DEC }}" />
+  <meta property="fb:admins" content="688811070" />
+  <meta property="fb:app_id" content="1376278705957324" />
 
-    <!-- Twitter card tags -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@micropasts" />
-    <meta name="twitter:title" content="{{ title | safe }}" />
-    <meta name="twitter:description" content="{{config.TWITTER_DESC}}" />
-    <meta name="twitter:creator" content="@micropasts" />
-    <meta name="twitter:image:src" content="http://crowdsourced.micropasts.org/static/img/MP_SQUARE_notype.png">
+  <!-- Twitter card tags -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@micropasts" />
+  <meta name="twitter:title" content="{{ title | safe }}" />
+  <meta name="twitter:description" content="{{config.TWITTER_DESC}}" />
+  <meta name="twitter:creator" content="@micropasts" />
+  <meta name="twitter:image:src" content="http://crowdsourced.micropasts.org/static/img/MP_SQUARE_notype.png">
 
-    <!-- CSS begins -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Merriweather:ital@1&display=swap" rel="stylesheet">
+  <!-- CSS begins -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Merriweather:ital@1&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
   integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link href="/static/css/styles.css" rel="stylesheet">
-    <link href="/static/vendor/jReject/css/jquery.reject.css" rel="stylesheet">
-    <!-- CSS ends -->
+  <link href="/static/vendor/jReject/css/jquery.reject.css" rel="stylesheet">
+  <!-- CSS ends -->
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-    <!-- Favicon and touch icons -->
-    <link rel="shortcut icon" href="/static/img/favicon.ico">
+  <!-- Favicon and touch icons -->
+  <link rel="shortcut icon" href="/static/img/favicon.ico">
 
-	<!--  Apple flavoured icons -->
-    <link rel="apple-touch-icon" href="/static/img/icons/touch-icon-iphone.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/static/img/icons/touch-icon-ipad.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/static/img/icons/touch-icon-iphone-retina.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/static/img/icons/touch-icon-ipad-retina.png">
-    {% include "_ga.html" ignore missing %}
-    {% include "_gcs.html" ignore missing%}
-  </head>
+  <!--  Apple flavoured icons -->
+  <link rel="apple-touch-icon" href="/static/img/icons/touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/img/icons/touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/static/img/icons/touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/static/img/icons/touch-icon-ipad-retina.png">
+  {% include "_ga.html" ignore missing %}
+  {% include "_gcs.html" ignore missing%}
+</head>
 
-  <body>
+<body>
 
-    {% set active_page = active_page | default('index') -%}
-    {% set active_project  = active_project | default('none') -%}
-    {% include "_navbar.html"  %}
+  {% set active_page = active_page | default('index') -%}
+  {% set active_project  = active_project | default('none') -%}
+  {% include "_navbar.html"  %}
 
-    {% if not current_user.is_anonymous %}
-    <!-- checkpoint::logged-in::{{current_user.name}} -->
-    {% endif %}
-    <div class="container" style="min-height:400px;">
+  {% if not current_user.is_anonymous %}
+  <!-- checkpoint::logged-in::{{current_user.name}} -->
+  {% endif %}
+  <div class="container" style="min-height:400px;">
 
     {% block content %}{% endblock %}
 
-    </div>
+  </div>
 
 
-    <footer>
+  <footer>
     {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
     <div id="footer_links" class="container">
-        <div class="row">
-        	<div class="col-md-12">
-        	<div class="center">
-                <ul class="footerLinks">
-                    <li><i class="glyphicon glyphicon-envelope glyphicon-inverse"></i> <a href="mailto:{{contact_email}}">Email</a></li>
-                    <li><i class="icon-twitter glyphicon-inverse"></i> <a href="http://twitter.com/{{contact_twitter}}">Twitter</a></li>
-                    <li><i class="icon-facebook glyphicon-inverse"></i> <a href="http://facebook.com/{{contact_twitter}}">Facebook</a></li>
-                    <li><i class="icon-flickr glyphicon-inverse"></i> <a href="http://flickr.com/{{contact_twitter}}">Flickr</a></li>
-                    <li><i class="glyphicon glyphicon-link glyphicon-inverse"></i> <a href="{{url_for('help.api')}}">API</a></li>
-                    <li><i class="icon-info-sign glyphicon-inverse"></i> <a href="{{url_for('home.about')}}">About</a></li>
-                </ul>
-                </div>
-                </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="center">
+            <ul class="footerLinks">
+              <li><i class="glyphicon glyphicon-envelope glyphicon-inverse"></i> <a href="mailto:{{contact_email}}">Email</a></li>
+              <li><i class="icon-twitter glyphicon-inverse"></i> <a href="http://twitter.com/{{contact_twitter}}">Twitter</a></li>
+              <li><i class="icon-facebook glyphicon-inverse"></i> <a href="http://facebook.com/{{contact_twitter}}">Facebook</a></li>
+              <li><i class="icon-flickr glyphicon-inverse"></i> <a href="http://flickr.com/{{contact_twitter}}">Flickr</a></li>
+              <li><i class="glyphicon glyphicon-link glyphicon-inverse"></i> <a href="{{url_for('help.api')}}">API</a></li>
+              <li><i class="icon-info-sign glyphicon-inverse"></i> <a href="{{url_for('home.about')}}">About</a></li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-    </footer>
+  </footer>
 
-    <!-- Le javascript -->
-    <script id="cookies_warning">
-        window.cookieconsent_options = {"message":"Cookies help us to deliver our services. By using our services, you agree to our use of cookies.","dismiss":"Got it!","learnMore":"Learn More.","link":"{{url_for('help.cookies_policy')}}","theme":"dark-bottom"};
-    </script>
-    {% if not jstop %}
-    {% assets filters="jsmin", output="js/gen/default.min.js",
-              "js/vendor/jquery-2.2.4.min.js", "js/vendor/bootstrap.js",
-              "js/vendor/modernizr.min.js", "js/flashmessages.js",
-              "js/vendor/cookieconsent.min.js"
-              %}
-              <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-    {% endif %}
-    {% block extrajs %}
-    {% endblock %}
-    {% include "_flash_messages.html" ignore missing %}
-  </body>
+  <!-- Le javascript -->
+  <script id="cookies_warning">
+  window.cookieconsent_options = {"message":"Cookies help us to deliver our services. By using our services, you agree to our use of cookies.","dismiss":"Got it!","learnMore":"Learn More.","link":"{{url_for('help.cookies_policy')}}","theme":"dark-bottom"};
+  </script>
+  {% if not jstop %}
+  {% assets filters="jsmin", output="js/gen/default.min.js",
+  "js/vendor/modernizr.min.js", "js/flashmessages.js",
+  "js/vendor/cookieconsent.min.js"
+  %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+  {% endif %}
+  {% block extrajs %}
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  {% endblock %}
+  {% include "_flash_messages.html" ignore missing %}
+</body>
 </html>
