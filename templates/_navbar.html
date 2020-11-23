@@ -20,30 +20,25 @@
         <li><a href="https://blog.micropasts.org">Research Blog</a></li>
       </ul>
       {% include '_gcs_form.html' ignore missing %}
-      {% if current_user.is_authenticated() %}
       <ul class="nav navbar-nav navbar-right">
-        <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon icon-user"></i> {{ current_user.name | truncate(6,true) }} <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ url_for('account.profile',
-              name=current_user.name) }}"><i class="glyphicon glyphicon-user"></i> {{ _('My Profile') }}</a></li>
-              <li><a href="{{ url_for('account.projects',
-                name=current_user.name) }}"><i class="glyphicon glyphicon-th-large"></i> {{ _('My Projects') }}</a></li>
-                <li><a href="{{ url_for('account.update_profile',
-                  name=current_user.name) }}"><i class="glyphicon glyphicon-cog"></i> {{ _('My Settings') }}</a></li>
-                  {% if current_user.admin == 1 %}
-                  <li class="divider"></li>
-                  <li><a href="{{ url_for('admin.index') }}"><i class="glyphicon glyphicon-cog"></i> {{ _('Admin Site') }}</a></li>
+                  {% if current_user.is_authenticated %}
+                      <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle"> {{ current_user.name | truncate(15,true) }} <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="{{ url_for('account.profile', name=current_user.name) }}"> {{ _('My Profile') }}</a></li>
+                          <li><a href="{{ url_for('account.projects', name=current_user.name) }}"> {{ _('My Projects') }}</a></li>
+                          <li><a href="{{ url_for('account.update_profile', name=current_user.name) }}"> {{ _('My Settings') }}</a></li>
+                          {% if current_user.admin == 1 %}
+                          <li class="divider"></li>
+                          <li><a href="{{ url_for('admin.index') }}">{% if notify_admin %} <span class="label label-info ">{{ news |count }}</span>{% else %}{% endif %} {{ _('Admin Site') }}</a></li>
+                          {% endif %}
+                          <li class="divider"></li>
+                          <li><a href="{{ url_for('account.signout') }}"> {{ _('Sign Out') }}</a></li>
+                      </ul>
+                      </li>
+                  {% else %}
+                      <li><a href="{{ url_for('account.signin') }}"> {{ _('Sign in') }}</a></li>
+
                   {% endif %}
-                  <li class="divider"></li>
-                  <li><a href="{{ url_for('account.signout') }}"><i class="glyphicon glyphicon-off"></i> {{ _('Sign Out') }}</a></li>
-                </ul>
-              </li>
-            </ul>
-            {% else %}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="{{ url_for('account.signin') }}"><i class="glyphicon glyphicon-white glyphicon-signin"></i> {{ _('Sign in') }}</a></li>
-            </ul>
-            {% endif %}
           </div><!--/.nav-collapse -->
         </div>
       </div>
