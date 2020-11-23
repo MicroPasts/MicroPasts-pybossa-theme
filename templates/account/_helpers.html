@@ -105,9 +105,9 @@
 
 {% macro render_pagination(pagination) %}
 <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-end">
+  <ul class="pagination justify-content-center">
   {% if pagination.has_prev %}
-  <li class="page-item"><a href="{{ url_for_other_page(pagination.page - 1)}}" rel="nofollow">&laquo; {{_('Prev')}}</a></li>
+  <li class="page-item"><a class="page-link" href="{{ url_for_other_page(pagination.page - 1)}}" rel="nofollow">&laquo; {{_('Prev')}}</a></li>
   {% else %}
   <li class="page-item disabled"><a href="#" class="page-link">&laquo; {{_('Prev')}}</a></li>
   {% endif %}

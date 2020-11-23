@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div class="row">
+<div class="container-fluid">
     <div class="col-md-9 col-md-offset-2">
         {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not
         current_user.admin)) %}
@@ -14,9 +14,7 @@
         {% else %}
         <h1>{{ _('Community') }}</h1>
         <div class="btn-group pull-right">
-            <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy"
-                                                                                  style="color:white"></i> {{
-                _('Leaderboard') }}</a>
+            <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
         </div>
         <p>{{total}} registered users on the platform since October 2013</p>
         <p>We only show you people who have contributed to our projects.</p>
