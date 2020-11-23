@@ -67,7 +67,7 @@
     {% include '_browserReject.html' ignore missing %}
   </head>
 
-  <body class="imageLead">
+  <body>
 
 
 
@@ -86,28 +86,9 @@
         <p>Cookies help us deliver our services. By using our services, you agree to our use of cookies. <button class="btn btn-sm btn-success" onclick="accept_cookies()"><i class="glyphicon glyphicon-thumbs-up"></i> OK</button> <a class="btn btn-sm btn-default" href="{{url_for('help.cookies_policy')}}"><i class="glyphicon glyphicon-info-sign"></i> More info</a></p>
     </div>
     {% endif %}
-    <footer>
+
     {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
-    <div id="footer_links" class="container">
-        <div class="row">
-        	<div class="col-md-12">
-        	<div class="center">
-                <ul class="footerLinks">
-                    <li><i class="glyphicon glyphicon-envelope glyphicon-inverse"></i> <a href="mailto:{{contact_email}}">{{ _('Email') }}</a></li>
-                    <li><i class="icon-twitter glyphicon-inverse"></i> <a href="http://twitter.com/{{contact_twitter}}">{{ _('Twitter') }}</a></li>
-                    <li><i class="icon-facebook glyphicon-inverse"></i> <a href="http://facebook.com/{{contact_twitter}}">{{ _('Facebook') }}</a></li>
-                    <li><i class="icon-flickr glyphicon-inverse"></i> <a href="http://flickr.com/{{contact_twitter}}">{{ _('Flickr') }}</a></li>
-                    <li><i class="glyphicon glyphicon-link glyphicon-inverse"></i> <a href="{{url_for('help.api')}}">API</a></li>
-                    <li><i class="icon-info-sign glyphicon-inverse"></i> <a href="{{url_for('home.about')}}">About</a></li>
 
-                </ul>
-
-                <p>Powered by Pybossa</p>
-                </div>
-                </div>
-        </div>
-    </div>
-    </footer>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
