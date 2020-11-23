@@ -1,44 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="brand" href="{{ url_for('home.home') }}"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}" width="130" height="24"></a>
-    </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
 
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="https://crowdsourced.micropasts.org" title="Micropasts homepage">Home</a></li>
-        <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
-        <li {% if active_page == 'projects' %} class="active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
-        <li><a href="https://blog.micropasts.org/data-centre">Data</a></li>
-        <li><a href="https://blog.micropasts.org/learning">Learning</a></li>
-        <li><a href="https://blog.micropasts.org">Research Blog</a></li>
-      </ul>
-      {% include '_gcs_form.html' ignore missing %}
-      <ul class="nav navbar-nav navbar-right">
-        {% if current_user.is_authenticated %}
-        <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle"> {{ current_user.name | truncate(15,true) }} <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ url_for('account.profile', name=current_user.name) }}"> {{ _('My Profile') }}</a></li>
-            <li><a href="{{ url_for('account.projects', name=current_user.name) }}"> {{ _('My Projects') }}</a></li>
-            <li><a href="{{ url_for('account.update_profile', name=current_user.name) }}"> {{ _('My Settings') }}</a></li>
-            {% if current_user.admin == 1 %}
-            <li class="divider"></li>
-            <li><a href="{{ url_for('admin.index') }}">{% if notify_admin %} <span class="label label-info ">{{ news |count }}</span>{% else %}{% endif %} {{ _('Admin Site') }}</a></li>
-            {% endif %}
-            <li class="divider"></li>
-            <li><a href="{{ url_for('account.signout') }}"> {{ _('Sign Out') }}</a></li>
-          </ul>
-        </li>
-        {% else %}
-        <li><a href="{{ url_for('account.signin') }}"> {{ _('Sign in') }}</a></li>
+      <li><a href="https://crowdsourced.micropasts.org" title="Micropasts homepage">Home</a></li>
+      <li {% if active_page == 'community' %} class="navbar-active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Contributors') }}</a></li>
+      <li {% if active_page == 'projects' %} class="navbar-active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
+      <li><a href="https://blog.micropasts.org/data-centre">Data</a></li>
+      <li><a href="https://blog.micropasts.org/learning">Learning</a></li>
+      <li><a href="https://blog.micropasts.org">Research Blog</a></li>
+      {% if current_user.is_authenticated %}
+      <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle"> {{ current_user.name | truncate(15,true) }} <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ url_for('account.profile', name=current_user.name) }}"> {{ _('My Profile') }}</a></li>
+          <li><a href="{{ url_for('account.projects', name=current_user.name) }}"> {{ _('My Projects') }}</a></li>
+          <li><a href="{{ url_for('account.update_profile', name=current_user.name) }}"> {{ _('My Settings') }}</a></li>
+          {% if current_user.admin == 1 %}
+          <li class="divider"></li>
+          <li><a href="{{ url_for('admin.index') }}">{% if notify_admin %} <span class="label label-info ">{{ news |count }}</span>{% else %}{% endif %} {{ _('Admin Site') }}</a></li>
+          {% endif %}
+          <li class="divider"></li>
+          <li><a href="{{ url_for('account.signout') }}"> {{ _('Sign Out') }}</a></li>
+        </ul>
+      </li>
+      {% else %}
+      <li><a href="{{ url_for('account.signin') }}"> {{ _('Sign in') }}</a></li>
 
-        {% endif %}
-      </div><!--/.nav-collapse -->
-    </div>
-  </nav>
+      {% endif %}
+    </ul>
+    {% include '_gcs_form.html' ignore missing %}
+
+  </div>
+</nav>
