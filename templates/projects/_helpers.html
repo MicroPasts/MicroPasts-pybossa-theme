@@ -259,7 +259,7 @@
                      </p>
                      {% endif %}
                     {% else %}
-                    <p class="readmore"><a href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'Contribute to this')}}</a></p>
+                    <button class="btn btn-dark"><a href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'Contribute to this')}}</a></button>
                     {% endif %}
                    </div>
                  </div>
