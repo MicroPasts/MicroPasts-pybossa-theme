@@ -34,7 +34,7 @@
 
 <section class="project categories selector">
 
-    <div class="container">
+    <div class="">
             {% if projects %}
             {% if active_cat.short_name=="featured"%}
             {% set title = _('Featured Projects') %}
@@ -46,7 +46,7 @@
             {% set title = active_cat.name + ' ' + _('Projects') %}
             {% set subheading = active_cat.description %}
             {% endif %}
-            <div class="col-md-10">
+            <div class="col-md-12">
                 {{ helper.render_grid_projects(projects, title, upload_method, title_class="col-md-12", container=False,
                 active_cat = active_cat.short_name, subheading=subheading)}}
             </div>
@@ -56,7 +56,7 @@
             </div>
             {% endif %}
             {% else %}
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <h1>{{_('Sorry, there are no published projects for this category yet')}}</h1>
             </div>
             {% endif %}
