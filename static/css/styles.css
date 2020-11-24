@@ -361,6 +361,7 @@ ul.users li a {
  body {
     overflow-x: hidden;
     background-color: #efeeee;
+    font-size: 14px;
  }
 
 /* Toggle Styles */
