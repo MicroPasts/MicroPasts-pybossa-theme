@@ -10,57 +10,26 @@
 					<button type="button" id="sidebarCollapse" class="btn btn-primary">
 	        </button>
         </div>
-	  		<div class="img bg-wrap text-center py-4" style="background-image: url(images/bg_1.jpg);">
-	  			<div class="user-logo">
-	  				<div class="img" style="background-image: url(images/logo.jpg);"></div>
-	  				<h3>Catriona Henderson</h3>
-	  			</div>
-	  		</div>
+
         <ul class="list-unstyled components mb-5">
-          <li class="active">
-            <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
-          </li>
-          <li>
-              <a href="#"><span class="fa fa-download mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Download</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-gift mr-3"></span> Gift Code</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-trophy mr-3"></span> Top Review</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-cog mr-3"></span> Settings</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
-          </li>
+          {% for c in categories %}
+          <li {% if active_cat.short_name==c.short_name %}class="active"{% endif %}><a
+                  href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow"><i
+                  class="icon-chevron-right"></i> {{ c.name }}</a></li>
+          {% endfor %}
+
+          {% if current_user.is_authenticated and current_user.admin %}
+          <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a
+                  href="{{url_for('project.draft')}}" rel="nofollow"><i class="icon-chevron-right"></i> {{
+              _('Draft') }}</a></li>
+          {% endif %}
+
+
         </ul>
 
     	</nav>
 <section class="project categories selector">
     <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <ul class="nav nav-pills nav-stacked categories">
-
-                    {% for c in categories %}
-                    <li {% if active_cat.short_name==c.short_name %}class="active"{% endif %}><a
-                            href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow"><i
-                            class="icon-chevron-right"></i> {{ c.name }}</a></li>
-                    {% endfor %}
-
-                    {% if current_user.is_authenticated and current_user.admin %}
-                    <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a
-                            href="{{url_for('project.draft')}}" rel="nofollow"><i class="icon-chevron-right"></i> {{
-                        _('Draft') }}</a></li>
-                    {% endif %}
-
-                </ul>
-            </div>
             {% if projects %}
             {% if active_cat.short_name=="featured"%}
             {% set title = _('Featured Projects') %}
