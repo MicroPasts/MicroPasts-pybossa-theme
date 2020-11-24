@@ -71,8 +71,9 @@
   {% if not current_user.is_anonymous %}
   <!-- checkpoint::logged-in::{{current_user.name}} -->
   {% endif %}
-  <div class="container-fluid main-body">
-    {% block slidemenu %}{% endblock %}
+  {% block slidemenu %}{% endblock %}
+  <div class="container-fluid main-body" id="panel">
+
     {% block content %}{% endblock %}
 
   </div>
