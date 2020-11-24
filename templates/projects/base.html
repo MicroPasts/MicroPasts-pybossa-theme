@@ -5,7 +5,7 @@
 {% from "account/_helpers.html" import render_pagination %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     {% if project %}
     <div class="col-sm-3 col-md-3">
         {{ helper.render_project_local_nav(project, active_link, current_user, pro_features) }}
