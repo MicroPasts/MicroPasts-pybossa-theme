@@ -7,7 +7,7 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="col-md-9 col-md-offset-2">
+    <div class="col-md-12">
         {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not
         current_user.admin)) %}
         {{ privacy.render_lock_page() }}
@@ -32,15 +32,7 @@
                   <p class="card-text">
                       <strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}<br/>
                       <strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}<br/>
-                      <strong><i class='icon-tasks'></i> Registered</strong> {{ account.registered_ago }}<br/>
-                      {% if account.projects %}
-                      <strong><i class='icon-certificate'></i> Owner of</strong><br/>
-                  <ul style='list-style-type:none'>
-                      {% for project in account.projects %}
-                      <li><i class='icon-chevron-right'></i> {{ project.name | truncate(18, true)}}</li>
-                      {% endfor %}
-                  </ul>
-                  {% endif %}
+                      <strong><i class='icon-tasks'></i> Registered</strong> {{ account.registered_ago }}
                   </p>
                 </div>
               </div>
