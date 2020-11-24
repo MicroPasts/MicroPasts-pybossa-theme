@@ -22,32 +22,30 @@
         {% if accounts %}
         <div class="row">
             {% for account in accounts %}
-            <div class="col-sm-6 col-md-4">
-                <div class="img-circle">
-                    {{ helper.render_user_thumbnail(account, upload_method, class="img-circle", style="width:90px;
-                    height:90px;")}}
-                    <div class="caption">
-                        <h5><a href="{{url_for('account.profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a>
-                        </h5>
-                        <p>
-                            <strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}<br/>
-                            <strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}<br/>
-                            <strong><i class='icon-tasks'></i> Registered</strong> {{ account.registered_ago }}<br/>
-                            <strong><i class='icon-tasks'></i> Rank</strong> {{ account.rank }}<br/>
-                            {% if account.projects %}
-                            <strong><i class='icon-certificate'></i> Owner of</strong><br/>
-                        <ul style='list-style-type:none'>
-                            {% for project in account.projects %}
-                            <li><i class='icon-chevron-right'></i> {{ project.name | truncate(18, true)}}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                        </p>
-                    </div>
+            <div class="col-md-4 mb-3">
+              <div class="card" style="width: 18rem;">
+                {{ helper.render_user_thumbnail(account, upload_method, class="card-img-top")}}
+                <div class="card-body">
+                  <h5>
+                    <a href="{{url_for('account.profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a>
+                  </h5>
+                  <p class="card-text">
+                      <strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}<br/>
+                      <strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}<br/>
+                      <strong><i class='icon-tasks'></i> Registered</strong> {{ account.registered_ago }}<br/>
+                      {% if account.projects %}
+                      <strong><i class='icon-certificate'></i> Owner of</strong><br/>
+                  <ul style='list-style-type:none'>
+                      {% for project in account.projects %}
+                      <li><i class='icon-chevron-right'></i> {{ project.name | truncate(18, true)}}</li>
+                      {% endfor %}
+                  </ul>
+                  {% endif %}
+                  </p>
                 </div>
-
-
+              </div>
             </div>
+
             {% endfor %}
         </div>
         {% endif %}
