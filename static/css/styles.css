@@ -21,32 +21,7 @@ h6 {
   font-weight: normal;
 }
 
-h1 {
-  font-size: 24px;
-  line-height: 26px;
-}
 
-h2 {
-  font-size: 18px;
-  line-height: normal;
-}
-
-h3 {
-  font-size: 15px;
-  line-height: normal;
-}
-
-h1 [class^="icon-"],
-h2 [class^="icon-"],
-h3 [class^="icon-"],
-h4 [class^="icon-"],
-h5 [class^="icon-"],
-h6 [class^="icon-"] {
-  color: #8bbf36;
-  font-size: 1.5em;
-  vertical-align: middle;
-  margin-right: 5px;
-}
 
 a[rel="popover"] {
   cursor: pointer;
