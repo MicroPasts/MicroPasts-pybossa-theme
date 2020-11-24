@@ -9,7 +9,7 @@
 <nav id="menu">
 
 
-				<ul class="list-unstyled components mb-5">
+				<ul class="sidebar-nav">
 					{% for c in categories %}
 					<li {% if active_cat.short_name==c.short_name %}class="active"{% endif %}><a
 									href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow"><i
