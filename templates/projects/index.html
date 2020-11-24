@@ -12,7 +12,7 @@
                 <ul class="nav nav-pills nav-stacked categories">
 
                     {% for c in categories %}
-{% for p in projects %}
+{% for p in all_projects %}
   {{ p['overall_progress'] }}
 {% endfor %}
                     <li {% if active_cat.short_name==c.short_name %}class="active"{% endif %}><a
