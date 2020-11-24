@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-2">
                 <ul class="nav nav-pills nav-stacked categories">
-                    {% for c in categories %}
+                    {% for c in categories_used %}
                     {{ c }}
                     <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}><a
                             href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow"><i
