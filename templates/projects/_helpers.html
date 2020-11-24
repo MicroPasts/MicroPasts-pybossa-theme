@@ -228,7 +228,7 @@
     {% if container %}
     <div class="container-fluid">
     {% endif %}
-        <div class="row">
+
             <div class="{{title_class}}">
                 <div class="text-center">
                     <h{{title_size}}>{{title}}</h{{title_size}}>
@@ -236,10 +236,13 @@
                     <p>{{subheading}}</p>
                     {% endif %}
                 </div>
+            </div>
+
+              <div class="row">
                {% for f in projects %}
                <div class="col-md-4 mb-3">
                  <div class="card">
-                   <img id="" class="card-img-top" style="" src="{{render_url_thumbnail(f, upload_method)}}">
+                   <img id="" class="card-img-top" src="{{render_url_thumbnail(f, upload_method)}}">
                    <div class="card-body">
                     <h3>{{f.name}}</h3>
                     <p>{{f.description}}</p>
@@ -256,19 +259,18 @@
                      </p>
                      {% endif %}
                     {% else %}
-                    <p class="readmore"><a href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'More info')}}</a></p>
+                    <p class="readmore"><a href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'Contribute to this')}}</a></p>
                     {% endif %}
                    </div>
                  </div>
                </div>
 
-               
+
 
                {% endfor %}
            </div>
         </div>
     {% if container %}
-    </div>
     {% endif %}
 </section>
 {% endmacro %}
