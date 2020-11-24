@@ -33,11 +33,11 @@
 </div>
 {% endmacro %}
 
-{% macro render_project_local_nav(project, active_link, current_user, pro_features) -%}
-<ul class="list-group" style="margin-top: 21px;">
+{% macro render_project_image(project, active_link, current_user, pro_features) -%}
     {{ render_project_thumbnail(project, upload_method, class="img-fluid thumbnail card") }}
-</ul>
+{% endmacro %}
 
+{% macro render_project_local_nav(project, active_link, current_user, pro_features) -%}
 <div class="nav-scroller bg-white box-shadow mb-3">
 	<nav class="nav nav-underline">
     <a href="{{url_for('project.details', short_name=project.short_name)}}" class="nav-link {% if active_link=="info"%}active{% endif %}">{{_('Info')}}</a>
