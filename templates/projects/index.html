@@ -3,7 +3,6 @@
 
 {% import "projects/_helpers.html" as helper %}
 {% import "account/_helpers.html" as helper_account %}
-{% import pybossa.cache.projects as cached_projects %}
 
 {% block content %}
 <section class="project categories selector">
@@ -12,7 +11,7 @@
             <div class="col-md-2">
                 <ul class="nav nav-pills nav-stacked categories">
                     {% for c in categories %}
-                    {% if  cached_projects.n_count(c.short_name) > 0 %}
+                    {% if n_count(c.short_name) > 0 %}
                     <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}><a
                             href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow"><i
                             class="icon-chevron-right"></i> {{ c.name }}</a></li>
