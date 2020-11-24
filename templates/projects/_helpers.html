@@ -241,8 +241,8 @@
               <div class="row">
                {% for f in projects %}
                <div class="col-md-4 mb-3">
-                 <div class="card">
-                   <img id="" class="card-img-top" src="{{render_url_thumbnail(f, upload_method)}}">
+                 <div class="card h-100">
+                   <img class="card-img-top" src="{{render_url_thumbnail(f, upload_method)}}">
                    <div class="card-body">
                     <h3>{{f.name}}</h3>
                     <p>{{f.description}}</p>
