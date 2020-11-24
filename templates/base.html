@@ -67,13 +67,13 @@
   {% set active_page = active_page | default('index') -%}
   {% set active_project  = active_project | default('none') -%}
   {% include "_navbar.html"  %}
-
+  {% block offcanvas %}{% endblock %}
   {% if not current_user.is_anonymous %}
   <!-- checkpoint::logged-in::{{current_user.name}} -->
   {% endif %}
 
-  <div class="container-fluid main-body toggled" id="wrapper">
-    {% block slidemenu %}{% endblock %}
+  <div class="container-fluid main-body" id="wrapper">
+
     {% block content %}{% endblock %}
 
   </div>

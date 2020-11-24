@@ -4,32 +4,7 @@
 {% import "projects/_helpers.html" as helper %}
 {% import "account/_helpers.html" as helper_account %}
 
-{% block slidemenu %}
-<div id="sidebar-wrapper">
-<nav id="menu">
-
-
-				<ul class="sidebar-nav">
-					{% for c in categories %}
-					<li {% if active_cat.short_name==c.short_name %}class="active"{% endif %}><a
-									href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow"><i
-									class="icon-chevron-right"></i> {{ c.name }}</a></li>
-					{% endfor %}
-
-					{% if current_user.is_authenticated and current_user.admin %}
-					<li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a
-									href="{{url_for('project.draft')}}" rel="nofollow"><i class="icon-chevron-right"></i> {{
-							_('Draft') }}</a></li>
-					{% endif %}
-
-
-				</ul>
-
-			</nav>
-		</div>
-{% endblock %}
-
-{% block content %}
+{% block offcanvas %}
 <div class="nav-scroller bg-white box-shadow">
 	<nav class="nav nav-underline">
 		<a class="nav-link active" href="#">Dashboard</a>
@@ -37,18 +12,21 @@
 			Friends
 			<span class="badge badge-pill bg-light align-text-bottom">27</span>
 		</a>
-		<a class="nav-link" href="#">Explore</a>
-		<a class="nav-link" href="#">Suggestions</a>
-		<a class="nav-link" href="#">Link</a>
-		<a class="nav-link" href="#">Link</a>
-		<a class="nav-link" href="#">Link</a>
-		<a class="nav-link" href="#">Link</a>
-		<a class="nav-link" href="#">Link</a>
+		{% for c in categories %}
+		<a href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow" class="nav-link">{{ c.name }}</a>
+		{% endfor %}
+
+		{% if current_user.is_authenticated and current_user.admin %}
+		<a href="{{url_for('project.draft')}}" rel="nofollow" class="nav-link">{{	_('Draft') }}</a>
+		{% endif %}
+
 	</nav>
 </div>
+{% endblock %}
 
+{% block content %}
 
-<section class="project categories selector" id="page-content-wrapper">
+<section class="project categories selector">
 	 <a href="#menu-toggle" class="btn btn-dark" id="menu-toggle">Discover more projects</a>
     <div class="">
             {% if projects %}
