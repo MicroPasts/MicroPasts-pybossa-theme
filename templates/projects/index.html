@@ -10,12 +10,11 @@
         <div class="row">
             <div class="col-md-2">
                 <ul class="nav nav-pills nav-stacked categories">
+                    {{ categories }}
                     {% for c in categories %}
-                    {% if n_count(c.short_name) > 0 %}
                     <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}><a
                             href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow"><i
                             class="icon-chevron-right"></i> {{ c.name }}</a></li>
-                    {% endif %}
                     {% endfor %}
                     {% if current_user.is_authenticated and current_user.admin %}
                     <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a
