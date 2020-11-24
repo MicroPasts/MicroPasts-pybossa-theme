@@ -71,8 +71,8 @@
   {% if not current_user.is_anonymous %}
   <!-- checkpoint::logged-in::{{current_user.name}} -->
   {% endif %}
-  <div class="container" style="min-height:400px;">
-
+  <div class="container main-body">
+    {% block slider %}{% endblock %}
     {% block content %}{% endblock %}
 
   </div>
