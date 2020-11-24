@@ -153,7 +153,7 @@
 <script>
         function imgError(image) {
             image.onerror = "";
-            image.src = "{{url_for('static', filename='img/placeholder.project.png')}}";
+            image.src = "{{url_for('static', filename='img/micropasts.png')}}";
             if (arguments[1] === 'user') {
                 image.src = "{{url_for('static', filename='img/placeholder.user.png')}}";
             }
