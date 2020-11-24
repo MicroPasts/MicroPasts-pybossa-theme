@@ -556,5 +556,5 @@ a[data-toggle="collapse"] {
 }
 
 .container-fluid.main-body {
-    margin-left: -15px;
+    margin-left: -15px!important;
 }
