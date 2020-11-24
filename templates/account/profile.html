@@ -20,7 +20,7 @@
         <div class="row well well-small">
             <div class="col-md-3">
                 {{ project_helper.render_project_thumbnail(project, upload_method,
-                class='img-circle', style='width:100px; height:100px;')}}
+                class='rounded-circle', style='width:100px; height:100px;')}}
             </div>
             <div class="col-md-9">
                 <h2><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></h2>
