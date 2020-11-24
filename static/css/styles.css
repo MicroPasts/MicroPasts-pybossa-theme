@@ -552,4 +552,9 @@ a[data-toggle="collapse"] {
     color: rgba(255, 255, 255, 0.5); }
 
 .subscribe-form .form-control {
-  background: #4897fc; }
+  background: #4897fc;
+}
+
+.container-fluid.main-body {
+    margin-left: -15px;
+}
