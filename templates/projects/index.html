@@ -13,7 +13,7 @@
 
                     {% for c in categories %}
 {% for p in projects %}
-  {{ p }}
+  {{ p['overall_progress'] }}
 {% endfor %}
                     <li {% if active_cat.short_name==c.short_name %}class="active"{% endif %}><a
                             href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow"><i
