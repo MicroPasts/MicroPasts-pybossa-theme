@@ -290,57 +290,13 @@ ul.users li a {
   color: #fff;
 }
 
-.featured {
-  margin: -6px 0px 0px 0px;
-  height: 200px;
-  overflow: hidden;
-}
 
-.featured li {
-  display: block;
-  float: left;
-  width: 103px;
-  height: 150px;
-  background-color: #FFF;
-  background-repeat: no-repeat;
-  background-position: right bottom;
-  background-size: 97px 97px;
-}
-
-.featured li a {
-  display: block;
-  margin: 6px 0px 0px 6px;
-  text-decoration: none;
-}
-
-.featured li a h3 {
-  margin: 2px 6px 0px 6px;
-  color: #333333;
-  font-size: 12px;
-}
-
-.featured li a .label {
-  margin: 6px;
-  display: inline-block;
-}
-
-.featured li img {
-  max-width: 100px;
-  max-height: 100px;
-}
 
 .btn-pad {
   padding-top: 20px;
 }
 
-#banner {
-  background-color: #fff;
-  padding: 20px;
-}
 
-.imageLead {
-  background: url("https://farm5.staticflickr.com/4137/4771894054_1c5d80cdff_o.jpg");
-}
 
 .progress {
   padding-left: 0px;
@@ -577,18 +533,23 @@ a[data-toggle="collapse"] {
   border-radius: 4px;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  border: transparent; }
+  border: transparent;
+}
   .form-control:focus, .form-control:active {
-    border-color: #000; }
+    border-color: #000;
+  }
   .form-control::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
-    color: rgba(255, 255, 255, 0.5); }
+    color: rgba(255, 255, 255, 0.5);
+  }
   .form-control::-moz-placeholder {
     /* Firefox 19+ */
-    color: rgba(255, 255, 255, 0.5); }
+    color: rgba(255, 255, 255, 0.5);
+  }
   .form-control:-ms-input-placeholder {
     /* IE 10+ */
-    color: rgba(255, 255, 255, 0.5); }
+    color: rgba(255, 255, 255, 0.5);
+  }
   .form-control:-moz-placeholder {
     /* Firefox 18- */
     color: rgba(255, 255, 255, 0.5); }
