@@ -5,6 +5,7 @@
 {% import "account/_helpers.html" as helper_account %}
 
 {% block slidemenu %}
+<div id="sidebar-wrapper">
 <nav id="menu">
 				<div class="custom-menu">
 					<button type="button" id="sidebarCollapse" class="btn btn-primary">
@@ -28,12 +29,13 @@
 				</ul>
 
 			</nav>
+		</div>
 {% endblock %}
 
 {% block content %}
 
-<section class="project categories selector">
-
+<section class="project categories selector" id="page-content-wrapper">
+	 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
     <div class="">
             {% if projects %}
             {% if active_cat.short_name=="featured"%}
