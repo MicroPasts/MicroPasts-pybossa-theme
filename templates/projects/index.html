@@ -7,7 +7,7 @@
 {% block offcanvas %}
 <div class="nav-scroller bg-white box-shadow">
 	<nav class="nav nav-underline">
-		{% for c in categories %}
+		{% for c in categories|sort(attribute='short_name') %}
 		<a href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow" class="nav-link">{{ c.name }}</a>
 		{% endfor %}
 
