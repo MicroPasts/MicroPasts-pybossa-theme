@@ -12,3 +12,4 @@ _gcs_form.html
 .buildpath
 Thumbs.db
 .idea*
+.DS_Store
