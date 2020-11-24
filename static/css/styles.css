@@ -96,10 +96,7 @@ html {
 }
 
 body {
-  padding-top: 100px;
-  /* Allow for Header */
-
-  font-size: 13px;
+  padding-top: 58px;
 }
 
 section.grey {
