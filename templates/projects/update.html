@@ -56,7 +56,7 @@
     </div>
 </form>
 <h3>{{_('Webpush notifications')}}</h3>
-<p><span class="label label-info"><i class="fa fa-bullhorn"></i> {{_('Warning')}}</span> {{_('Once you enable the notifications, you cannot disable them.')}}</p>
+<p><span class="badge badge-info p-2"><i class="fa fa-bullhorn"></i> {{_('Warning')}}</span> {{_('Once you enable the notifications, you cannot disable them.')}}</p>
 {% if project.info.get('onesignal') == None %}
 <button id="webpush" class="btn btn-primary" value="webpush">{{_('Activate')}}</button>
 {% else %}
