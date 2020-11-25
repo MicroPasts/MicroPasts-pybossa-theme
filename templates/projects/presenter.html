@@ -23,7 +23,7 @@
 <div class="container">
         <div class="col-md-12 shadow-sm">
             <h2><a href="{{url_for('project.details', short_name=project.short_name)}}">{{ project.name }}</a></h2>
-        </div>
+
     {% if invite_new_volunteers %}
         <div class="col-md-12">
             <p>
@@ -39,6 +39,7 @@
         {% else %}
         {{ current_user.locale }}
         {% endif %}
+    </div>
     </div>
 </div>
 {% endblock %}
