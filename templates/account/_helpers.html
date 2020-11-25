@@ -34,6 +34,7 @@
 
 
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
+<div class="row">
 <p>
     <strong><i class="fa fa-user"></i> Username:</strong> {{ user.name }}<br/>
     <strong>Registered:</strong> {{ user.registered_ago}}
@@ -76,6 +77,7 @@
 {% if private and not settings%}
 <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-primary"><i class="icon fa fa-user"></i> {{ _('Edit your profile') }}</a>
 {% endif %}
+</div>
 {% endmacro %}
 
 {%- macro render_user_avatar_src(user, upload_method) %}
