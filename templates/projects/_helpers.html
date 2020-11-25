@@ -263,7 +263,7 @@
                {% for f in projects %}
                <div class="col-md-4 mb-3">
                  <div class="card h-100">
-                   <img class="card-img-top" src="{{render_url_thumbnail(f, upload_method)}}">
+                   <a href="{{ url_for('project.details', short_name=f.short_name)}}"><img class="card-img-top" src="{{render_url_thumbnail(f, upload_method)}}"></a>
                    <div class="card-body">
                     <h4>{{f.name}}</h4>
                     <p>{{f.description}}</p>
