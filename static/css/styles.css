@@ -11,6 +11,9 @@ body {
   font-weight: normal;
   background-color: #97816224;
 }
+.shadow-sm {
+    background-color: white;
+}
 
 h1,
 h2,
