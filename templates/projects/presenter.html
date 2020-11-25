@@ -1,6 +1,8 @@
 {% extends "/base.html" %}
-{% import "projects/_helpers.html" as helper %}
 {% set active_page = "projects"  %}
+{% import "projects/_helpers.html" as helper %}
+{% import "account/_helpers.html" as helper_account %}
+
 {% set active_project = project.short_name %}
 {% set jstop = True %}
 
@@ -21,7 +23,7 @@
 });
 </script>
 {% block offcanvas %}
-{{ helper.render_project_local_nav(project, active_link, current_user) }}
+{{ helper.render_project_local_nav(project, active_link, current_user, pro_features) }}
 {% endblock %}
 <div class="container mt-3">
         <div class="col-md-12 shadow-sm">
