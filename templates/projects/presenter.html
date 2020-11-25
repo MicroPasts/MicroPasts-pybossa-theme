@@ -1,13 +1,8 @@
 {% extends "/base.html" %}
 {% set active_page = "projects"  %}
-{% import "projects/_helpers.html" as helper %}
-{% import "account/_helpers.html" as helper_account %}
-
 {% set active_project = project.short_name %}
 {% set jstop = True %}
-{% block offcanvaslocal %}
-{{ helper.render_project_nav(project, active_link, current_user) }}
-{% endblock %}
+
 {% block content %}
 {% assets filters="jsmin", output="js/gen/full.min.js",
           "js/vendor/jquery-2.2.3.js", "js/vendor/bootstrap.js",
@@ -25,16 +20,20 @@
 });
 </script>
 
-<div class="container mt-3">
-        <div class="col-md-12 shadow-sm">
-            <h2>{{ project.name }}</h2>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1><a href="{{url_for('project.details', short_name=project.short_name)}}">{{ project.name }}</a>: {{ _('Contribute') }}</h1>
+        </div>
+    </div>
     {% if invite_new_volunteers %}
+    <div class="row">
         <div class="col-md-12">
             <p>
             {{ _("Sorry, you've contributed to all the tasks for this project, but this project still needs more volunteers, so please spread the word!") }}
             </p>
         </div>
+    </div>
     {% endif %}
     {{ project.info.task_presenter|safe }}
 
@@ -44,7 +43,6 @@
         {% else %}
         {{ current_user.locale }}
         {% endif %}
-    </div>
     </div>
 </div>
 {% endblock %}
