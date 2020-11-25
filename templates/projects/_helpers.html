@@ -356,9 +356,9 @@
       <h3 class="card-title">{{title}}</h3>
       <p class="card-text">{{explanation}}</p>
         {% if link_two %}
-        <a  class="card-link" {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a> <a class="card-link" {% if nofollow %}rel="nofollow"{% endif%} href="{{link_two}}" {% if download %}download{%endif%}>{{link_action_text_two}}</a>
+        <a  class="card-link btn-dark btn" {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a> <a class="card-link btn-dark btn" {% if nofollow %}rel="nofollow"{% endif%} href="{{link_two}}" {% if download %}download{%endif%}>{{link_action_text_two}}</a>
         {% else %}
-        <a class="card-link" {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a></p>
+        <a class="card-link btn-dark btn" {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a>
         {% endif %}
     </div>
 </div>
