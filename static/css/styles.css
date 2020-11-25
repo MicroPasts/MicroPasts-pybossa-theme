@@ -156,11 +156,6 @@ html {
 }
 
 
-body > footer .container {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 /* Home Page */
 /* ========= */
 .banner > .row .span4 {
@@ -294,13 +289,6 @@ ul.users li a {
   text-align: center;
 }
 
-.container {
-  margin-bottom: 10px;
-}
-
-.footerLinks a {
-  color: #ffffff;
-}
 
 #created-apps, #contributed-apps {
   margin-top: 10px;
