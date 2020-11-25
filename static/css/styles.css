@@ -420,3 +420,11 @@ ul.text-center.conversation-footer {
 .social_box li {
     display: inline;
 }
+.share li {
+    list-style: none;
+    margin-left: -40px;
+    font-size: 1rem;
+}
+.small-font {
+  font-size: 0.9rem!important;
+}
