@@ -6,7 +6,7 @@
 {% set active_project = project.short_name %}
 {% set jstop = True %}
 
-
+{% block content %}
 {% assets filters="jsmin", output="js/gen/full.min.js",
           "js/vendor/jquery-2.2.3.js", "js/vendor/bootstrap.js",
           "js/vendor/modernizr.min.js", "js/flashmessages.js",
@@ -25,7 +25,6 @@
 {% block offcanvaslocal %}
 {{ helper.render_project_nav(project, active_link, current_user) }}
 {% endblock %}
-{% block content %}
 <div class="container mt-3">
         <div class="col-md-12 shadow-sm">
             <h2>{{ project.name }}</h2>
