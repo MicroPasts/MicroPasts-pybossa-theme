@@ -5,25 +5,44 @@
 {% import "projects/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
 {% block content %}
-  <section class="home featured">
-      <div class="jumbotron">
-          <div class="container text-center firstfold">
-              {% if featured | count > 0 %}
-              {% set featured_project = featured | random %}
-              <h1>{{ featured_project.name }}</h1>
-              <p>{{ featured_project.description }}</p>
-              <a class="btn btn-primary" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute')}}</a>
-              {% else %}
-              <h1>{{_('Welcome to ')}} {{brand}}</h1>
-              <p>{{_("The ultimate crowdsourcing framework to analyze or enrich data that can't be processed by machines alone.")}}</p>
-              {% endif %}
-          </div>
-      </div>
-  </section>
-  {% if historical_contributions %}
-    {{ helper.render_grid_projects(historical_contributions, 'Historical Contributions', upload_method, current_user, projects_class='home projects', title_size='2') }}
-  {% endif %}
-  {% if featured %}
-    {{ helper.render_grid_projects(featured, 'Featured Projects', upload_method, current_user, projects_class='home projects', readmore_text='Contribute', title_size='2') }}
-  {% endif %}
+
+<div class="container">
+  <div class="col-md-12 shadow-sm mb-3">
+    <h2>Crowdfuelled and Crowdsourced archaeological data</h2>
+
+    <p>You can assist existing research projects with tasks that need human intelligence, such as the accurate location of artefact findspots or photographed scenes, the identification of subject matter in historic archives, the masking of photos meant for 3D modelling, or the transcription of letters and catalogues. Other tasks might require on-location contributions by members of the public, such as submitting your own photographs of particular archaeological sites or objects. By contributing to a MicroPasts project you will:</p>
+
+    <ul>
+      <li>Have a direct impact on research in archaeology, history and heritage</li>
+      <li>Help with tasks that computers cannot do</li>
+      <li>Develop skills that interest you</li>
+      <li>Produce results that will be open and freely usable</li>
+    </ul>
+    <p>
+      To start contributing, just choose one of our Featured Projects below or visit our full list of ongoing Projects.
+    </p>
+
+  </div>
+</div>
+<section class="home featured">
+  <div class="jumbotron">
+    <div class="container text-center firstfold">
+      {% if featured | count > 0 %}
+      {% set featured_project = featured | random %}
+      <h1>{{ featured_project.name }}</h1>
+      <p>{{ featured_project.description }}</p>
+      <a class="btn btn-primary" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute')}}</a>
+      {% else %}
+      <h1>{{_('Welcome to ')}} {{brand}}</h1>
+      <p>{{_("The ultimate crowdsourcing framework to analyze or enrich data that can't be processed by machines alone.")}}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% if historical_contributions %}
+{{ helper.render_grid_projects(historical_contributions, 'Historical Contributions', upload_method, current_user, projects_class='home projects', title_size='2') }}
+{% endif %}
+{% if featured %}
+{{ helper.render_grid_projects(featured, 'Featured Projects', upload_method, current_user, projects_class='home projects', readmore_text='Contribute', title_size='2') }}
+{% endif %}
 {% endblock %}
