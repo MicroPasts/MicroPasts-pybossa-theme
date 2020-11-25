@@ -19,10 +19,12 @@
         nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
 });
 </script>
-
-<div class="container">
+{% block offcanvas %}
+{{ helper.render_project_local_nav(project, active_link, current_user, pro_features) }}
+{% endblock %}
+<div class="container mt-3">
         <div class="col-md-12 shadow-sm">
-            <h2><a href="{{url_for('project.details', short_name=project.short_name)}}">{{ project.name }}</a></h2>
+            <h2>{{ project.name }}</h2>
 
     {% if invite_new_volunteers %}
         <div class="col-md-12">
