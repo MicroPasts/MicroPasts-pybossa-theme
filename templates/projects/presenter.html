@@ -22,9 +22,7 @@
         nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
 });
 </script>
-{% block offcanvaslocal %}
-{{ helper.render_project_nav(project, active_link, current_user) }}
-{% endblock %}
+
 <div class="container mt-3">
         <div class="col-md-12 shadow-sm">
             <h2>{{ project.name }}</h2>
