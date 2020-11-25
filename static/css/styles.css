@@ -1,16 +1,14 @@
-/*!
-* Sourcing for Good
-* by Sam Smith
-* To be used on top of Bootstrap
-*/
-/* Styling */
-/* ======= */
+
 body {
   color: #484848;
   font-family: 'Lato', Arial, Helvetica, sans-serif;
   font-weight: normal;
   background-color: #f5f3f0;
 }
+* {
+  border-radius: 0 !important;
+}
+
 .shadow-sm {
     background-color: white;
 }
