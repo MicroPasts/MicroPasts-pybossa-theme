@@ -7,7 +7,6 @@
 
 {% block content %}
 <div class="container mt-3">
-
   {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not current_user.admin)) %}
   {{ privacy.render_lock_page() }}
   {% else %}
