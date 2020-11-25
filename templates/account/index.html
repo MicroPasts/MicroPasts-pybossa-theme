@@ -22,7 +22,7 @@
         {% if accounts %}
         <div class="row">
             {% for account in accounts %}
-            <div class="col-md-4 mb-3">
+            <div class="col-md-3 mb-3">
               <div class="card">
                 {{ helper.render_user_thumbnail(account, upload_method, class="card-img-top")}}
                 <div class="card-body">
@@ -30,9 +30,7 @@
                     <a href="{{url_for('account.profile', name=account.name)}}" title="{{account['fullname']}}">{{account['fullname']}}</a>
                   </h5>
                   <p class="card-text">
-                      <strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}<br/>
-                      <strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}<br/>
-                      <strong><i class='icon-tasks'></i> Registered</strong> {{ account.registered_ago }}
+                      <strong>Registered</strong> {{ account.registered_ago }}
                   </p>
                 </div>
               </div>
