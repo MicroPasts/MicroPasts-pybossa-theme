@@ -9,9 +9,11 @@
 {{ helper.render_project_local_nav(project, active_link, current_user, pro_features) }}
 {% endblock %}
 {% endif %}
+{% block parallax %}
+{{ helper.render_project_image(project, active_link, current_user, pro_features) }}
+{% endblock %}
 
 {% block content %}
-{{ helper.render_project_image(project, active_link, current_user, pro_features) }}
 
 <div class="container-fluid">
     {% if project %}

@@ -68,6 +68,7 @@
   {% set active_project  = active_project | default('none') -%}
   {% include "_navbar.html"  %}
   {% block offcanvas %}{% endblock %}
+  {% block parallax %}{% endblock %}
   {% if not current_user.is_anonymous %}
   <!-- checkpoint::logged-in::{{current_user.name}} -->
   {% endif %}
