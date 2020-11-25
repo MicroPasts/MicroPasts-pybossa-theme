@@ -6,13 +6,15 @@
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
+<div class="container mt-3">
+
         {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
         {% else %}
+          <h1><strong>{{user.fullname}}</strong></h1>
+          <div class="col-md-12 shadow-sm">
         <div class="row" id="user-data">
-            <h1><strong>{{user.fullname}}</strong></h1>
+
             {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
         </div>
         {% if projects_created %}
