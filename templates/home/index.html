@@ -13,7 +13,7 @@
 <div class="container-fluid image-home mb-0">
   <div class="container p-3">
     <div class="row">
-      <div class="col-md-4 shadow-sm mb-3 mt-3 p-3 mr-2">
+      <div class="col-md-3 shadow-sm mb-3 mt-3 p-3 mr-2">
         <img src="/static/img/MP_SQUARE_notype.png" class="img-fluid float-left p-3"
         alt="The MicroPasts logo">
       </div>
@@ -37,10 +37,9 @@
 </div>
 {% endblock %}
 
-{% block content %}
+{% block featured %}
 <section class="home featured">
-  <div class="jumbotron">
-    <div class="container text-center firstfold">
+    <div class="container-fluid text-center bg-white">
       <div class="row">
       {% if featured | count > 0 %}
       {% set featured_project = featured | random %}
@@ -50,7 +49,7 @@
       <div class="col-md-8">
         <h2>{{ featured_project.name }}</h2>
         <p>{{ featured_project.description }}</p>
-        <a class="btn btn-dark" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute')}}</a>
+        <a class="btn btn-dark d-block" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute to this')}}</a>
       </div>
       {% else %}
       <div class="col-md-12">
@@ -60,8 +59,9 @@
       {% endif %}
       </div>
     </div>
-  </div>
 </section>
+{% endblock %}
+{% block content %}
 {% if historical_contributions %}
 {{ helper.render_grid_projects(historical_contributions, 'Historical Contributions', upload_method, current_user, projects_class='home projects', title_size='2') }}
 {% endif %}
