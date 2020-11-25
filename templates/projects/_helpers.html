@@ -34,7 +34,7 @@
 {% endmacro %}
 
 {% macro render_project_image(project, active_link, current_user, pro_features) -%}
-    {{ render_project_thumbnail(project, upload_method, class="img-fluid thumbnail card") }}
+    {{ render_project_parallax(project, upload_method, class="img-fluid thumbnail card") }}
 {% endmacro %}
 
 {% macro render_project_local_nav(project, active_link, current_user, pro_features) -%}
@@ -301,6 +301,19 @@
 {% else %}
     <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="{{style}}">
 {% endif %}
+{% endmacro %}
+
+{% macro render_project_thumbnail(project, upload_method, id, class, style) %}
+<style>
+  .head {
+  background-image: url({{project.info.thumbnail}});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+</style>
+<div class="container-fluid head parallax">
+</div>
 {% endmacro %}
 
 {%- macro render_url_thumbnail(project, upload_method) %}
