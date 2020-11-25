@@ -406,3 +406,9 @@ body {
 .lh-100 { line-height: 1; }
 .lh-125 { line-height: 1.25; }
 .lh-150 { line-height: 1.5; }
+.parallax {
+    min-height: 350px;
+    background-attachment: fixed;
+    background-size: cover;
+    margin-top: 6px!important;
+}
