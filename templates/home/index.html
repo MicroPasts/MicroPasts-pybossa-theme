@@ -4,8 +4,8 @@
 
 {% import "projects/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
-{% block content %}
 
+{% block leadtext %}
 <div class="container image-home">
   <div class="container p-3">
   <div class="col-md-12 shadow-sm mb-3 mt-3 p-3">
@@ -25,6 +25,9 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block content %}
 <section class="home featured">
   <div class="jumbotron">
     <div class="container text-center firstfold">

@@ -81,7 +81,9 @@
     <!-- checkpoint::logged-in::{{current_user.name}} -->
     {% endif %}
 
-    <div class="container-fluid" style="min-height:400px;">
+    {% block leadtext %}{% endblock %}
+    
+    <div class="container-fluid">
     {% block content %}{% endblock %}
 
     </div> <!-- /container -->
