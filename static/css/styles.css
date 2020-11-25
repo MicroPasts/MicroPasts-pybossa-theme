@@ -151,9 +151,6 @@ html {
   background-color: #000;
 }
 
-body > footer {
-  border-top: 20px solid #686868;
-}
 
 body > footer .container {
   padding-top: 20px;
