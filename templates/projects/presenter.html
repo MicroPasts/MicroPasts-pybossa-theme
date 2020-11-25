@@ -5,7 +5,9 @@
 
 {% set active_project = project.short_name %}
 {% set jstop = True %}
-
+{% block offcanvaslocal %}
+{{ helper.render_project_nav(project, active_link, current_user) }}
+{% endblock %}
 {% block content %}
 {% assets filters="jsmin", output="js/gen/full.min.js",
           "js/vendor/jquery-2.2.3.js", "js/vendor/bootstrap.js",
@@ -22,9 +24,7 @@
         nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
 });
 </script>
-{% block offcanvaslocal %}
-{{ helper.render_project_nav(project, active_link, current_user) }}
-{% endblock %}
+
 <div class="container mt-3">
         <div class="col-md-12 shadow-sm">
             <h2>{{ project.name }}</h2>
