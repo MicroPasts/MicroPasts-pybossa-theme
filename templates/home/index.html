@@ -41,15 +41,24 @@
 <section class="home featured">
   <div class="jumbotron">
     <div class="container text-center firstfold">
+      <div class="row">
       {% if featured | count > 0 %}
       {% set featured_project = featured | random %}
-      <h1>{{ featured_project.name }}</h1>
-      <p>{{ featured_project.description }}</p>
-      <a class="btn btn-primary" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute')}}</a>
+      <div class="col-md-3 mr-3">
+        <img class="card-img-top" src="{{render_url_thumbnail(project, upload_method)}}">
+      </div>
+      <div class="col-md-8">
+        <h2>{{ featured_project.name }}</h2>
+        <p>{{ featured_project.description }}</p>
+        <a class="btn btn-dark" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute')}}</a>
+      </div>
       {% else %}
-      <h1>{{_('Welcome to ')}} {{brand}}</h1>
-      <p>{{_("The ultimate crowdsourcing framework to analyze or enrich data that can't be processed by machines alone.")}}</p>
+      <div class="col-md-12">
+      <h2>{{_('Welcome to ')}} {{brand}}</h2>
+        <p>{{_("The ultimate crowdsourcing framework to analyze or enrich data that can't be processed by machines alone.")}}</p>
+      </div>
       {% endif %}
+      </div>
     </div>
   </div>
 </section>
