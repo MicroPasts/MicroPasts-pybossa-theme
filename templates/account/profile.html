@@ -5,6 +5,10 @@
 {% import "projects/_helpers.html" as project_helper %}
 {% import "account/user_pref_metadata.html" as user_pref_metadata %}
 
+{% block slidemenu %}
+  {{ helper.render_account_local_nav(current_user, active_link) }}
+{% endblock %}
+
 {% block content %}
 <section class="account profile">
     <div class="container">
