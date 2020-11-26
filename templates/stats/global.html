@@ -43,7 +43,6 @@
               </div>
               <div id="users" class="col-md-6"></div>
               <canvas id="canvasUsers"  height="450" width="800"></canvas>
-              {{ users }}
               <script>
                 var data = {{users|safe}};
                 new Chart(document.getElementById("canvasUsers"), {
@@ -109,7 +108,7 @@
                     {
                       label: "Number of Projects",
                       backgroundColor: ['#3e95cd', '#8e5ea2'],
-                      data: [data['values'][0]['value'], data['values'][1]['value']]
+                      data: [data['values'][0]['value'][1], data['values'][1]['value'][1]]
                     }
                   ],
                   options: {
@@ -164,7 +163,7 @@
                     {
                       label: "Number of tasks",
                       backgroundColor: ['#3e95cd', '#8e5ea2'],
-                      data: [data['values'][0]['value'], data['values'][1]['value']]
+                      data: [data['values'][0]['value'][1], data['values'][1]['value'][1]]
                     }
                   ],
                   options: {
