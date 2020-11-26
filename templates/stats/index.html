@@ -2,7 +2,7 @@
 {% set active_page = "leaderboard" %}
 {% set active_project  = "all" %}
 {% import "privacy/locked.html" as privacy %}
-
+{% from account/_helpers.html import ender_user_avatar_src %}
 
 {% block content %}
 <h2<i class="icon-trophy"></i> <strong>{{_('Community Leaderboard')}}</strong></h2>
@@ -27,7 +27,7 @@
                         {% for user in top_users %}
                         <tr>
                             <td>{{user.rank}}</td>
-                            <td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.fullname}}</a></strong></td>
+                            <td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.fullname}}</a></strong><img src="{{ ender_user_avatar_src(user)}}" class="rounded-circle" width="50"/></td>
                             <td>{{user.score}}</td>
                         </tr>
                         {% endfor %}
