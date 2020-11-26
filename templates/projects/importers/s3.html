@@ -81,8 +81,8 @@
                         });
                     });
                 }).fail(function(resp) {
-                    if (resp.status === 403) alert("{{ _('Oops... it seems that bucket is private.') }}")
-                    if (resp.status === 404) alert("{{ _('Oops... we could not find that bucket.') }}")
+                    if (resp.status === 403) alert("{{ _('It seems that bucket is private.') }}")
+                    if (resp.status === 404) alert("{{ _('We could not find that bucket.') }}")
                     });
             });
     });
