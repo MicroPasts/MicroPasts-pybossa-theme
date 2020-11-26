@@ -2,7 +2,9 @@
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
 {% set jstop = True %}
-
+{% block offcanvas %}
+render_project_local_nav(project, active_link, current_user, pro_features)
+{% endblock %}
 {% block content %}
 {% assets filters="jsmin", output="js/gen/full.min.js",
 "js/vendor/jquery-2.2.3.js", "js/vendor/bootstrap.js",
@@ -20,20 +22,7 @@
   });
 </script>
 
-{% block offcanvas %}
-<div class="nav-scroller bg-white box-shadow mb-3">
-	<nav class="nav nav-underline">
-		{% for c in categories|sort(attribute='short_name') %}
-		<a href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow" class="nav-link">{{ c.name }}</a>
-		{% endfor %}
 
-		{% if current_user.is_authenticated and current_user.admin %}
-		<a href="{{url_for('project.draft')}}" rel="nofollow" class="nav-link">{{	_('Draft') }}</a>
-		{% endif %}
-
-	</nav>
-</div>
-{% endblock %}
 <div class="container">
   <h1>{{ project.name }}</h1>
 
