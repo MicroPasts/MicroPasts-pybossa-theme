@@ -33,7 +33,11 @@
   {% if active_link == 'info' %}
   <p><em>{{ overall_progress | round | int }}% {{_('completed')}}</em></p>
   {% endif %}
-  {% block projectcontent %}{% endblock %}
+  <div class="col-md-12 p-3 shadow-sm mb-3">
+  {% block projectcontent %}
+
+  {% endblock %}
+  </div>
 
 </div>
 {% else %}
