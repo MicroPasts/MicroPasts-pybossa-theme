@@ -4,10 +4,13 @@
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
 {% set jstop = True %}
-{{ project }}
+<!-- {{ helper.render_project_local_nav(project, active_link, current_user) }} -->
+
 {% block offcanvaslocal %}
 {% endblock %}
 {% block content %}
+{{ project }}
+
 {% assets filters="jsmin", output="js/gen/full.min.js",
 "js/vendor/jquery-2.2.3.js", "js/vendor/bootstrap.js",
 "js/vendor/modernizr.min.js", "js/flashmessages.js",
