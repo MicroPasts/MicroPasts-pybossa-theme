@@ -2,6 +2,7 @@
 {% set active_page = "leaderboard" %}
 {% set active_project  = "all" %}
 {% import "privacy/locked.html" as privacy %}
+{% from "stats/_helpers.html" import format_price %}
 
 {% block content %}
 
@@ -159,8 +160,8 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>{{ '{:,.f}'.format(stats.n_tasks) }}</td>
-                      <td>{{ '{:,.f}'.format(stats.n_task_runs) }}</td>
+                      <td>{{ format_price(stats.n_tasks) }}</td>
+                      <td>{{ format_price(stats.n_task_runs) }}</td>
                     </tr>
                   </tbody>
                 </table>
