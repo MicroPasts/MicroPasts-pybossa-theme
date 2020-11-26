@@ -42,7 +42,7 @@
 
               </div>
               <div id="users" class="col-md-6"></div>
-              <canvas id="canvasUsers"  height="100"></canvas>
+              <canvas id="canvasUsers"  height="450" width="800"></canvas>
               <script>
                 var data = {{users|safe}};
                 new Chart(document.getElementById("canvasUsers"), {
@@ -57,7 +57,7 @@
                     }
                   ],
                   options: {
-                    legend: { display: false },
+                    // legend: { display: false },
                     title: {
                       display: true,
                       text: 'Number of users per category'
@@ -97,7 +97,7 @@
                 <p>{{stats.n_total_projects}}</p>
               </div>
 
-              <canvas id="canvasProjects"  height="100"></canvas>
+              <canvas id="canvasProjects"  height="450" width="800"></canvas>
               <script>
                 var data = {{projects|safe}};
                 new Chart(document.getElementById("canvasProjects"), {
@@ -112,7 +112,7 @@
                     }
                   ],
                   options: {
-                    legend: { display: false },
+                    // legend: { display: false },
                     title: {
                       display: true,
                       text: 'Number of projects on the system'
@@ -152,7 +152,7 @@
                 <h3>{{ _('Number of Task Runs') }}</h3>
                 <p>{{stats.n_task_runs}}</p>
               </div>
-              <canvas id="canvasTasks"  height="100"></canvas>
+              <canvas id="canvasTasks" height="450" width="800"></canvas>
               <script>
                 var data = {{tasks|safe}};
                 new Chart(document.getElementById("canvasTasks"), {
