@@ -9,7 +9,7 @@
     <div class="col-md-3">
         {{ helper.render_account_local_nav(current_user, active_link) }}
     </div>
-    <div class="col-md-9" style="min-height:400px">
+    <div class="col-md-12">
         {% if projects_published or projects_draft %}
         {% if projects_published %}
         {{ project_helper.render_grid_projects(projects_published, _('Published Projects'), upload_method,
