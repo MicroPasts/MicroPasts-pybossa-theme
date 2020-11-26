@@ -155,7 +155,7 @@
               <canvas id="canvasTasks"  height="100"></canvas>
               <script>
                 var data = {{tasks|safe}};
-                new Chart(document.getElementById("canvasProjects"), {
+                new Chart(document.getElementById("canvasTasks"), {
                   type: 'pie',
                   data : {
                     labels: [data['values'][0]['label'],data['values'][1]['label'] ],
