@@ -46,7 +46,7 @@
               <script>
                 var data = {{users|safe}};
                 new Chart(document.getElementById("canvasUsers"), {
-                  type: 'bar',
+                  type: 'pie',
                   data : {
                     labels: [data['values'][0]['label'],data['values'][1]['label'] ],
                     datasets: [
@@ -96,25 +96,34 @@
                 <h3>{{ _('Total') }}</h3>
                 <p>{{stats.n_total_projects}}</p>
               </div>
-              <div id="projects" class="col-md-6"></div>
-              <script>
-                (function(){
-                  var data = {{projects|safe}};
-                  var container = document.getElementById('projects');
-                  var graph = Flotr.draw(container, [
-                  {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                  {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
-                  {
-                    pie     : {show: true, explode: 2},
-                    grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-                    HtmlText: false,
-                    xaxis   : {showLabels: false},
-                    yaxis   : {showLabels: false},
-                    legend  : {position: 'se'}
-                  });
-                })();
 
+              <canvas id="canvasProjects"  height="100"></canvas>
+              <script>
+                var data = {{projects|safe}};
+                new Chart(document.getElementById("canvasProjects"), {
+                  type: 'pie',
+                  data : {
+                    labels: [data['values'][0]['label'],data['values'][1]['label'] ],
+                    datasets: [
+                    {
+                      label: "Number of Projects",
+                      backgroundColor: ['#3e95cd', '#8e5ea2'],
+                      data: [data['values'][0]['value'], data['values'][01]['value']]
+                    }
+                  ],
+                  options: {
+                    legend: { display: false },
+                    title: {
+                      display: true,
+                      text: 'Number of projects on the system'
+                    }
+                  }
+
+                  }
+
+                });
               </script>
+
             </div>
             {% if top5_projects_24_hours %}
             <div class="row">
@@ -143,23 +152,31 @@
                 <h3>{{ _('Number of Task Runs') }}</h3>
                 <p>{{stats.n_task_runs}}</p>
               </div>
-              <div id="tasks" class="col-md-6" style="height:400px;"></div>
+              <canvas id="canvasTasks"  height="100"></canvas>
               <script>
-                (function(){
-                  var data = {{tasks|safe}};
-                  var container = document.getElementById('tasks');
-                  var graph = Flotr.draw(container, [
-                  {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                  {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
-                  {
-                    bars : {show: true},
-                    grid    : {verticalLines: true, horizontalLines: true},
-                    xaxis   : {showLabels: false, autoscale: true, autoscaleMargin:1},
-                    yaxis   : {showLabels: true, min:0, autoscaleMargin:1},
-                    legend  : {position: 'ne'}
-                  });
-                })();
+                var data = {{tasks|safe}};
+                new Chart(document.getElementById("canvasProjects"), {
+                  type: 'pie',
+                  data : {
+                    labels: [data['values'][0]['label'],data['values'][1]['label'] ],
+                    datasets: [
+                    {
+                      label: "Number of tasks",
+                      backgroundColor: ['#3e95cd', '#8e5ea2'],
+                      data: [data['values'][0]['value'], data['values'][01]['value']]
+                    }
+                  ],
+                  options: {
+                    legend: { display: false },
+                    title: {
+                      display: true,
+                      text: 'Number of tasks by type on the system'
+                    }
+                  }
 
+                  }
+
+                });
               </script>
             </div>
           </div>
