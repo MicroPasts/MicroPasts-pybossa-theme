@@ -33,20 +33,18 @@
 
 
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
-<div ">
+<div>
 <p>
     <strong>Username:</strong> {{ user.name }}<br/>
     <strong>Registered:</strong> {{ user.registered_ago}}
 
 {% if private %}
-<p>
   <strong>{{_('E-mail')}}:</strong> {{user.email_addr }}
     {% if (user.valid_email == False) %}
       {% if (user.confirmation_email_sent == False) %}
       <a href="{{ url_for('account.confirm_email')}}" class="btn btn-warning btn-xs">Validate email</a>
       {% else %}
-      <a href="#" class="btn btn-sm disabled">Email sent for
-          validation</a>
+      <a href="#" class="btn btn-sm disabled">Email sent for validation</a>
       {% endif %}
     {% endif %}
 

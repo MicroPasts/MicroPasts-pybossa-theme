@@ -12,9 +12,9 @@
 {% block content %}
 <section class="account profile">
     <div class="container">
+            <h2>{{ _('Your Account') }}</h2>
+            <div class="col-md-12 shadow-sm mb-3 p-2">
 
-            <div class="col-md-12 shadow-sm">
-                <h2>{{ _('Your Account') }}</h2>
                 Full name: {{current_user.fullname}}<br />
                 {{ helper.render_user_profile(current_user, upload_method, "settings") }}
                 {% if config.upref_mdata %}
