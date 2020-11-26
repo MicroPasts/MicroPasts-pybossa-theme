@@ -20,6 +20,7 @@
                         <tr>
                             <th>{{ _('Rank') }}</th>
                             <th>{{ _('Name') }}</th>
+                            <th>{{ _('Avatar') }}</th>
                             <th>{{ _('Score') }}</th>
                         </tr>
                     </thead>
@@ -27,7 +28,8 @@
                         {% for user in top_users %}
                         <tr>
                             <td>{{user.rank}}</td>
-                            <td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.fullname}}</a></strong><img src="{{ render_user_avatar_src(user)}}" class="rounded-circle" width="50"/></td>
+                            <td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.fullname}}</a></strong></td>
+                            <td><img src="{{ render_user_avatar_src(user)}}" class="rounded-circle" width="50"/></td>
                             <td>{{user.score}}</td>
                         </tr>
                         {% endfor %}
