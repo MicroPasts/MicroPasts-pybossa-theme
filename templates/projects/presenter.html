@@ -4,8 +4,8 @@
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
 {% set jstop = True %}
-{% block offcanvas %}
-{{ helper.render_project_local_nav(project, active_link, current_user, pro_features) }}
+{{ project }}
+{% block offcanvaslocal %}
 {% endblock %}
 {% block content %}
 {% assets filters="jsmin", output="js/gen/full.min.js",
