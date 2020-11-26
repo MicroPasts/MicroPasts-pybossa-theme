@@ -159,10 +159,8 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>{{ '{:,.2f}'.format(stats.n_tasks) }}</td>
-                    </tr>
-                    <tr>
-                      <td>{{  '{:,.2f}'.format(stats.n_task_runs) }}</td>
+                      <td>{{ f'{stats.n_tasks:,d}' }}</td>
+                      <td>{{ f'{stats.n_task_runs:,d}' }}</td>
                     </tr>
                   </tbody>
                 </table>
