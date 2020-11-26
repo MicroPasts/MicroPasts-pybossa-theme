@@ -1,1 +1,18 @@
 {%- macro format_price(price, thousand_separator=',', decimal_separator='.', decimal_places=0) -%}
+{%- set price_as_string = price | string -%}
+{%- set price_split = price_as_string.split('.') -%}
+{%- set price_integer = price_split[0] -%}
+{%- if price_split | count > 1 -%}
+{%- set price_fraction = price_split[1] -%}
+{%- if price_fraction | length < decimal_places -%}
+{%- set price_fraction = price_fraction.ljust(decimal_places, '0') -%} {%- endif -%}
+{%- else -%}
+{%- set price_fraction = '' -%}
+{%- endif -%}
+{%- set formatted_price_integer = price_integer | reverse | batch(3) | map('join', '') | join(thousand_separator) | reverse -%}
+{%- if price_fraction != '' -%}
+{%- set formatted_price = formatted_price_integer ~ decimal_separator ~ price_fraction -%}
+{%- else -%}
+{%- set formatted_price = formatted_price_integer-%}
+{%- endif -%}
+{{- formatted_price -}} {%- endmacro -%}
