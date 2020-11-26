@@ -2,7 +2,7 @@
 {% set active_page = "leaderboard" %}
 {% set active_project  = "all" %}
 {% import "privacy/locked.html" as privacy %}
-{% from account/_helpers.html import render_user_avatar_src %}
+{% from "stats/_helpers.html" import render_user_avatar_src %}
 
 {% block content %}
 <h2<i class="icon-trophy"></i> <strong>{{_('Community Leaderboard')}}</strong></h2>
