@@ -22,247 +22,250 @@
   {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not current_user.admin)) %}
   {{ privacy.render_lock_page() }}
   {% else %}
-  <h1>{{ _('General Statistics') }}</h1>
+
+  <h2>{{ _('General Statistics') }}</h2>
+
   <div class="container shadow-sm p-3 mb-3">
     <div class="row">
-      <div class="col-md-12">
+      <div id="userStats" class="col-md-12">
+        <h2>{{_('Number of Users')}}</h2>
+        <div class="row">
+          <div class="col-md-6">
 
-        <!-- Users Stats CARD -->
-        <div id="card" class="row">
-          <div id="userStats" class="col-md-12">
-            <h2>{{_('Number of Users')}}</h2>
-            <div class="row">
-              <div class="col-md-6">
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th>Anonymous users</th>
+                  <th>Authenticated users</th>
+                  <th>Total users</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ format_price(stats.n_anon) }}</td>
+                  <td>{{ format_price(stats.n_auth) }}</td>
+                  <td>{{ format_price(stats.n_total_users) }}</td>
+                </tr>
+              </tbody>
+            </table>
 
-                <table class="table table-dark">
-                  <thead>
-                    <tr>
-                      <th>Anonymous users</th>
-                      <th>Authenticated users</th>
-                      <th>Total users</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{{ format_price(stats.n_anon) }}</td>
-                      <td>{{ format_price(stats.n_auth) }}</td>
-                      <td>{{ format_price(stats.n_total_users) }}</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <a class="btn btn-dark btn-sm" href="{{url_for('leaderboard.index')}}"><i class="fa fa-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
 
-                <a class="btn btn-dark btn-sm" href="{{url_for('leaderboard.index')}}"><i class="fa fa-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
-
-              </div>
-              <div id="users" class="col-md-6">
-                <canvas id="canvasUsers"  height="450" width="800"></canvas>
-              </div>
-
-              <script>
-                var data = {{users|safe}};
-                new Chart(document.getElementById("canvasUsers"), {
-                  type: 'pie',
-                  data : {
-                    labels: [data['values'][0]['label'],data['values'][1]['label'] ],
-                    datasets: [
-                    {
-                      label: "Number of Users",
-                      backgroundColor: ['#3e95cd', '#8e5ea2'],
-                      data: [data['values'][0]['value'][1], data['values'][1]['value'][1]]
-                    }
-                  ],
-                  options: {
-                    // legend: { display: false },
-                    title: {
-                      display: true,
-                      text: 'Number of users per category'
-                    }
-                  }
-
-                  }
-
-                });
-              </script>
-            </div>
-            {% if top5_users_24_hours %}
-            <div class="col-md-12">
-              <h4><i class="fa fa-group"></i> {{ _('Top 5 Users in the last 24 hours') }}</h4>
-              <ol>
-                {% for user in top5_users_24_hours %}
-                <li><a href="{{url_for('account.profile', name=user.name)}}" >{{user.fullname}}</a> {{ _('with') }} {{user.n_answers}} {{ _('contributed answers') }}</li>
-                {% endfor %}
-              </ol>
-            </div>
-            {% endif %}
           </div>
-        </div>
-        <!-- END Users Stats CARD -->
-
-        <!-- Project Stats CARD -->
-        <div id="card" class="row">
-          <div id="projectStats" class="col-md-12">
-            <h2>{{ _('Projects') }}</h2>
-            <div class="row">
-              <div class="col-md-6">
-                <h3>{{ _('Published Projects') }}</h3>
-                <table class="table table-dark">
-                  <thead>
-                    <tr>
-                      <th>Published projects</th>
-                      <th>Draft projects</th>
-                      <th>Total projects</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{{ format_price(stats.n_published_projects) }}</td>
-                      <td>{{ format_price(stats.n_draft_projects) }}</td>
-                      <td>{{ format_price(stats.n_total_projects) }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-md-6">
-                <canvas id="canvasProjects"  height="450" width="800"></canvas>
-              </div>
-              <script>
-                var data = {{projects|safe}};
-                new Chart(document.getElementById("canvasProjects"), {
-                  type: 'pie',
-                  data : {
-                    labels: [data['values'][0]['label'],data['values'][1]['label'] ],
-                    datasets: [
-                    {
-                      label: "Number of Projects",
-                      backgroundColor: ['#3e95cd', '#8e5ea2'],
-                      data: [data['values'][0]['value'][1], data['values'][1]['value'][1]]
-                    }
-                  ],
-                  options: {
-                    // legend: { display: false },
-                    title: {
-                      display: true,
-                      text: 'Number of projects on the system'
-                    }
-                  }
-
-                  }
-
-                });
-              </script>
-
-            </div>
-            {% if top5_projects_24_hours %}
-            <div class="row">
-              <div class="col-md-12">
-                <h4><i class="fa fa-th-large"></i> {{ _('Top 5 projects in the last 24 hours') }}</h4>
-                <ol>
-                  {% for project in top5_projects_24_hours %}
-                  <li><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></li>
-                  {% endfor %}
-                </ol>
-              </div>
-            </div>
-            {% endif %}
+          <div id="users" class="col-md-6">
+            <canvas id="canvasUsers"  height="450" width="800"></canvas>
           </div>
-        </div>
-        <!-- END Users Stats CARD -->
 
-        <!-- Projects Task and TaskRuns CARD -->
-        <div class="container shadow-sm p-3 mb-3">
-          <div id="taskStats" class="col-md-12">
-            <h2>{{ _('Tasks and Answers') }}</h2>
-            <div class="row">
-              <div class="col-md-6">
-                <table class="table table-dark">
-                  <thead>
-                    <tr>
-                      <th>{{ _('Number of Tasks') }}</th>
-                      <th>{{ _('Number of Task Runs') }}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{{ format_price(stats.n_tasks) }}</td>
-                      <td>{{ format_price(stats.n_task_runs) }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-md-6">
-                <canvas id="canvasTasks" height="450" width="800"></canvas>
-              </div>
-              <script>
-                var data = {{tasks|safe}};
-                new Chart(document.getElementById("canvasTasks"), {
-                  type: 'pie',
-                  data : {
-                    labels: [data['values'][0]['label'],data['values'][1]['label'] ],
-                    datasets: [
-                    {
-                      label: "Number of tasks",
-                      backgroundColor: ['#3e95cd', '#8e5ea2'],
-                      data: [data['values'][0]['value'][1], data['values'][1]['value'][1]]
-                    }
-                  ],
-                  options: {
-                    legend: { display: false },
-                    title: {
-                      display: true,
-                      text: 'Number of tasks by type on the system'
-                    }
-                  }
-
-                  }
-
-                });
-              </script>
-            </div>
-          </div>
-        </div>
-        <!-- END Users Stats CARD -->
-        <!-- START Anonymous Users Map CARD -->
-        {% if show_locs %}
-        <div id="card" class="row">
-          <div class="col-md-12">
-            <h2>{{ _('Anonymous Volunteers') }}</h2>
-            <div id="map" style="height:250px;"></div>
-            <p class="note">{{_('This page includes GeoLite data created by MaxMind, available from')}}
-              <a href="http://www.maxmind.com">http://www.maxmind.com</a></p>
-            </div>
-            <script>
-              (function(){
-                var map = L.map('map');
-                map.fitWorld();
-                map.setZoom(1);
-                var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                L.tileLayer(url,
+          <script>
+            var data = {{users|safe}};
+            new Chart(document.getElementById("canvasUsers"), {
+              type: 'pie',
+              data : {
+                labels: [data['values'][0]['label'],data['values'][1]['label'] ],
+                datasets: [
                 {
-                  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                  maxZoom: 18,
-                  minZoom:1
-                }).addTo(map);
-
-                var i = 0;
-                var locations = {{locs|safe}};
-                var l = locations.length;
-                var markers = new L.MarkerClusterGroup();
-                for (i;i<l;i++) {
-                  if (locations[i].loc != null) {
-                    var lat = parseFloat(locations[i].loc.latitude);
-                    var lng = parseFloat(locations[i].loc.longitude);
-                    markers.addLayer(L.marker([lat,lng]));
+                  label: "Number of Users",
+                  backgroundColor: ['#3e95cd', '#8e5ea2'],
+                  data: [data['values'][0]['value'][1], data['values'][1]['value'][1]]
+                }
+                ],
+                options: {
+                  // legend: { display: false },
+                  title: {
+                    display: true,
+                    text: 'Number of users per category'
                   }
                 }
-                map.addLayer(markers);
-              })();
-            </script>
+
+              }
+
+            });
+          </script>
+        </div>
+        {% if top5_users_24_hours %}
+        <div class="col-md-12">
+          <h4><i class="fa fa-group"></i> {{ _('Top 5 Users in the last 24 hours') }}</h4>
+          <ol>
+            {% for user in top5_users_24_hours %}
+            <li><a href="{{url_for('account.profile', name=user.name)}}" >{{user.fullname}}</a> {{ _('with') }} {{user.n_answers}} {{ _('contributed answers') }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <!-- END Users Stats CARD -->
+  <h2>{{ _('Projects') }}</h2>
+  <div class="container shadow-sm p-3 mb-3">
+    <div class="row">
+      <div id="projectStats" class="col-md-12">
+
+        <div class="row">
+          <div class="col-md-6">
+            <h3>{{ _('Published Projects') }}</h3>
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th>Published projects</th>
+                  <th>Draft projects</th>
+                  <th>Total projects</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ format_price(stats.n_published_projects) }}</td>
+                  <td>{{ format_price(stats.n_draft_projects) }}</td>
+                  <td>{{ format_price(stats.n_total_projects) }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          {% endif %}
-          <!-- END Anonymous Users Map CARD -->
-          {% endif %}
+          <div class="col-md-6">
+            <canvas id="canvasProjects"  height="450" width="800"></canvas>
+          </div>
+          <script>
+            var data = {{projects|safe}};
+            new Chart(document.getElementById("canvasProjects"), {
+              type: 'pie',
+              data : {
+                labels: [data['values'][0]['label'],data['values'][1]['label'] ],
+                datasets: [
+                {
+                  label: "Number of Projects",
+                  backgroundColor: ['#3e95cd', '#8e5ea2'],
+                  data: [data['values'][0]['value'][1], data['values'][1]['value'][1]]
+                }
+                ],
+                options: {
+                  // legend: { display: false },
+                  title: {
+                    display: true,
+                    text: 'Number of projects on the system'
+                  }
+                }
+
+              }
+
+            });
+          </script>
+
+        </div>
+        {% if top5_projects_24_hours %}
+        <div class="row">
+          <div class="col-md-12">
+            <h4><i class="fa fa-th-large"></i> {{ _('Top 5 projects in the last 24 hours') }}</h4>
+            <ol>
+              {% for project in top5_projects_24_hours %}
+              <li><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></li>
+              {% endfor %}
+            </ol>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <!-- END Users Stats CARD -->
+
+  <!-- Projects Task and TaskRuns CARD -->
+  <h2>{{ _('Tasks and Answers') }}</h2>
+  <div class="container shadow-sm p-3 mb-3">
+    <div class="row">
+      <div id="taskStats" class="col-md-12">
+        <h2>{{ _('Tasks and Answers') }}</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th>{{ _('Number of Tasks') }}</th>
+                  <th>{{ _('Number of Task Runs') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ format_price(stats.n_tasks) }}</td>
+                  <td>{{ format_price(stats.n_task_runs) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <canvas id="canvasTasks" height="450" width="800"></canvas>
+          </div>
+          <script>
+            var data = {{tasks|safe}};
+            new Chart(document.getElementById("canvasTasks"), {
+              type: 'pie',
+              data : {
+                labels: [data['values'][0]['label'],data['values'][1]['label'] ],
+                datasets: [
+                {
+                  label: "Number of tasks",
+                  backgroundColor: ['#3e95cd', '#8e5ea2'],
+                  data: [data['values'][0]['value'][1], data['values'][1]['value'][1]]
+                }
+                ],
+                options: {
+                  legend: { display: false },
+                  title: {
+                    display: true,
+                    text: 'Number of tasks by type on the system'
+                  }
+                }
+
+              }
+
+            });
+          </script>
         </div>
       </div>
     </div>
-  </section>
-  {% endblock %}
+  </div>
+  <!-- END Users Stats CARD -->
+  <!-- START Anonymous Users Map CARD -->
+  {% if show_locs %}
+  <div class="container shadow-sm p-3 mb-3">
+    <div class="row">
+    <div class="col-md-12">
+      <h2>{{ _('Anonymous Volunteers') }}</h2>
+      <div id="map" style="height:250px;"></div>
+      <p class="note">{{_('This page includes GeoLite data created by MaxMind, available from')}}
+        <a href="http://www.maxmind.com">http://www.maxmind.com</a></p>
+      </div>
+      <script>
+        (function(){
+          var map = L.map('map');
+          map.fitWorld();
+          map.setZoom(1);
+          var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+          L.tileLayer(url,
+          {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18,
+            minZoom:1
+          }).addTo(map);
+
+          var i = 0;
+          var locations = {{locs|safe}};
+          var l = locations.length;
+          var markers = new L.MarkerClusterGroup();
+          for (i;i<l;i++) {
+            if (locations[i].loc != null) {
+              var lat = parseFloat(locations[i].loc.latitude);
+              var lng = parseFloat(locations[i].loc.longitude);
+              markers.addLayer(L.marker([lat,lng]));
+            }
+          }
+          map.addLayer(markers);
+        })();
+      </script>
+    </div>
+    {% endif %}
+    <!-- END Anonymous Users Map CARD -->
+    {% endif %}
+  </div>
+  
+</section>
+{% endblock %}
