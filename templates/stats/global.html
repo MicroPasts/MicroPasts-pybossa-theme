@@ -5,24 +5,18 @@
 
 {% block content %}
 <!-- Leaflet maps -->
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
- <!--[if lte IE 8]>
-     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
- <![endif]-->
+<link rel="stylesheet" href="https://unpkg.com/browse/leaflet@1.7.1/dist/leaflet.css" />
 
- <!--<link href="{{url_for('static', filename='css/stats/stats.css')}}" rel="stylesheet" type="text/css">-->
 <script src="{{url_for('static', filename='js/stats/flotr2.min.js')}}" type="text/javascript"></script>
-<script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
+<script src="https://unpkg.com/browse/leaflet@1.7.1/dist/leaflet.js"></script>
 <link href="{{url_for('static', filename='css/stats/MarkerCluster.css')}}" rel="stylesheet" type="text/css">
 <link href="{{url_for('static', filename='css/stats/MarkerCluster.Default.css')}}" rel="stylesheet" type="text/css">
-<!--<link href="{{url_for('static', filename='css/stats/stats.css')}}" rel="stylesheet" type="text/css">-->
-<script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
 <script src="{{url_for('static', filename='js/stats/flotr2.min.js')}}" type="text/javascript"></script>
 <script src="{{url_for('static', filename='js/stats/leaflet.markercluster.js')}}" type="text/javascript"></script>
 <section class="stats global">
-    <div class="container">
+    <div class="container shadow-sm p-3 mb-3">
         <div class="row">
-            <div class="col-md-offset-2 col-md-8">
+            <div class="col-md-12">
                 {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not current_user.admin)) %}
                 {{ privacy.render_lock_page() }}
                 {% else %}
