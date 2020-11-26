@@ -1,9 +1,11 @@
 {% extends "/base.html" %}
+{% import "projects/_helpers.html" as helper %}
+
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
 {% set jstop = True %}
 {% block offcanvas %}
-render_project_local_nav(project, active_link, current_user, pro_features)
+{{ helper.render_project_local_nav(project, active_link, current_user, pro_features) }}
 {% endblock %}
 {% block content %}
 {% assets filters="jsmin", output="js/gen/full.min.js",
