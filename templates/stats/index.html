@@ -24,14 +24,11 @@
                     </thead>
                     <tbody>
                         {% for user in top_users %}
-                        {% if user.name == current_user.name %}
-                        <tr class="info">
-                            <td><strong>{{user.rank}}</strong></td>
+                        <tr>
+                            <td>{{user.rank}}</td>
                             <td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.fullname}}</a></strong></td>
-                            <td><strong>{{user.score}}</strong></td>
+                            <td>{{user.score}}</td>
                         </tr>
-                        
-                        {%endif%}
                         {% endfor %}
                     </tbody>
                 </table>
