@@ -13,10 +13,7 @@
 <section class="account profile">
     <div class="container">
 
-            <div class="col-sm-3 col-md-3">
-                {{ helper.render_account_local_nav(current_user, active_link) }}
-            </div>
-            <div class="col-sm-9 col-md-9">
+            <div class="col-md-12 shadow-sm">
                 <h2>{{ _('Your Account') }}: {{current_user.fullname}}</h2>
                 {{ helper.render_user_profile(current_user, upload_method, "settings") }}
                 {% if config.upref_mdata %}
