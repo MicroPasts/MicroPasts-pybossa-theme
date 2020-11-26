@@ -33,12 +33,24 @@
             <h2>{{_('Number of Users')}}</h2>
             <div class="row">
               <div class="col-md-6">
-                <h3>{{ _('Anonymous') }}</h3>
-                <p>{{stats.n_anon}}</p>
-                <h3>{{ _('Authenticated') }}</h3>
-                <p>{{stats.n_auth}}</p>
-                <h3>{{ _('Total') }}</h3>
-                <p>{{stats.n_total_users}}</p>
+
+                <table class="table table-dark">
+                  <thead>
+                    <tr>
+                      <th>Anonymous users</th>
+                      <th>Authenticated users</th>
+                      <th>Total users</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{ format_price(stats.n_anon) }}</td>
+                      <td>{{ format_price(stats.n_auth) }}</td>
+                      <td>{{ format_price(stats.n_total_users) }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
                 <a class="btn btn-dark btn-sm" href="{{url_for('leaderboard.index')}}"><i class="fa fa-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
 
               </div>
@@ -93,11 +105,22 @@
             <div class="row">
               <div class="col-md-6">
                 <h3>{{ _('Published Projects') }}</h3>
-                <p>{{stats.n_published_projects}}</p>
-                <h3>{{ _('Draft Projects') }}</h3>
-                <p>{{stats.n_draft_projects}}</p>
-                <h3>{{ _('Total') }}</h3>
-                <p>{{stats.n_total_projects}}</p>
+                <table class="table table-dark">
+                  <thead>
+                    <tr>
+                      <th>Published projects</th>
+                      <th>Draft projects</th>
+                      <th>Total projects</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{ format_price(stats.n_published_projects) }}</td>
+                      <td>{{ format_price(stats.n_draft_projects) }}</td>
+                      <td>{{ format_price(stats.n_total_projects) }}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               <div class="col-md-6">
                 <canvas id="canvasProjects"  height="450" width="800"></canvas>
