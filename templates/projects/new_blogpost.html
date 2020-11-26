@@ -6,8 +6,8 @@
 
 {% block projectcontent %}
 {% from "_formhelpers.html" import render_field %}
-<div id="project-form" class="row">
-    <div class="col-md-12">
+<div id="project-form">
+    <div class="col-md-12 p-3">
         <form method="post" action="{{ url_for('project.new_blogpost', short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             <fieldset>
