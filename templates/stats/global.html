@@ -158,8 +158,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>{{ format(stats.n_tasks, ',d') }}</tr>
-                    <tr>{{ format(stats.n_task_runs, ',d') }}</tr>
+                    <tr>{{ "{0:0.2f}".format(stats.n_tasks) }}</tr>
+                    <tr>{{ stats.n_task_runs }}</tr>
                   </tbody>
                 </table>
               </div>
