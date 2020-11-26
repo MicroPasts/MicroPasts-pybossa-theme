@@ -8,8 +8,8 @@
 {% block offcanvas %}
 {{ helper.render_project_local_nav(project, active_link, current_user, pro_features) }}
 {% endblock %}
-
 {% endif %}
+
 {% block parallax %}
 {{ helper.render_project_image(project, active_link, current_user, pro_features) }}
 {% endblock %}
@@ -26,22 +26,23 @@
     {% if section %}
     <h2>{{section}}</h2>
     {% endif %}
-
-    {{helper.render_contribute_button(project)}}
-
-    {% if active_link == 'info' %}
-    <p><em>{{ overall_progress | round | int }}% {{_('completed')}}</em></p>
-    {% endif %}
-    {% block projectcontent %}{% endblock %}
-
   </div>
-  {% else %}
-  <div class="page-header">
-    <h1>There has been an error</h1>
-    <p>
-      {{ _('Sorry! This project does not exist.') }}
-    </p>
-  </div>
+
+  {{helper.render_contribute_button(project)}}
+
+  {% if active_link == 'info' %}
+  <p><em>{{ overall_progress | round | int }}% {{_('completed')}}</em></p>
   {% endif %}
+  {% block projectcontent %}{% endblock %}
+
+</div>
+{% else %}
+<div class="page-header">
+  <h1>There has been an error</h1>
+  <p>
+    {{ _('Sorry! This project does not exist.') }}
+  </p>
+</div>
+{% endif %}
 </div>
 {% endblock %}
