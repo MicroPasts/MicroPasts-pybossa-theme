@@ -15,7 +15,7 @@
 
             <div class="col-md-12 shadow-sm">
                 <h2>{{ _('Your Account') }}</h2>
-                {{current_user.fullname}}
+                Full name: {{current_user.fullname}}<br />
                 {{ helper.render_user_profile(current_user, upload_method, "settings") }}
                 {% if config.upref_mdata %}
                 {{ user_pref_metadata.render_upref_mdata(user, form, can_update, input_form) }}
