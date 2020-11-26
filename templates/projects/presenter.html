@@ -4,9 +4,10 @@
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
 {% set jstop = True %}
-<!-- {{ helper.render_project_local_nav(project, active_link, current_user) }} -->
 
-{% block offcanvaslocal %}
+{% block offcanvas %}
+{{ helper.render_project_l_nav(project, active_link, current_user) }}
+
 {% endblock %}
 {% block content %}
 {{ project }}
