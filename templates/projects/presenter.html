@@ -5,41 +5,55 @@
 
 {% block content %}
 {% assets filters="jsmin", output="js/gen/full.min.js",
-          "js/vendor/jquery-2.2.3.js", "js/vendor/bootstrap.js",
-          "js/vendor/modernizr.min.js", "js/flashmessages.js",
-          "js/vendor/cookieconsent.min.js",
-          "js/pybossa/pybossa.js",
-          "js/pybossa-player/dist/pybossa-player.min.js"
-          %}
-          <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+"js/vendor/jquery-2.2.3.js", "js/vendor/bootstrap.js",
+"js/vendor/modernizr.min.js", "js/flashmessages.js",
+"js/vendor/cookieconsent.min.js",
+"js/pybossa/pybossa.js",
+"js/pybossa-player/dist/pybossa-player.min.js"
+%}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
 <script>
-    Modernizr.load({
-        test: window.JSON,
-        nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
-});
+  Modernizr.load({
+    test: window.JSON,
+    nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
+  });
 </script>
 
-<div class="container">
-            <h1>{{ project.name }}</h1>
+{% block offcanvas %}
+<div class="nav-scroller bg-white box-shadow mb-3">
+	<nav class="nav nav-underline">
+		{% for c in categories|sort(attribute='short_name') %}
+		<a href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow" class="nav-link">{{ c.name }}</a>
+		{% endfor %}
 
-    {% if invite_new_volunteers %}
-        <div class="col-md-12 shadow-sm mb-3 p-3">
-            <p>
-            {{ _("Sorry, you've contributed to all the tasks for this project, but this project still needs more volunteers, so please spread the word!") }}
-            </p>
-        </div>
-    {% endif %}
-    <div class="col-md-12 shadow-sm mb-3 p-3">
+		{% if current_user.is_authenticated and current_user.admin %}
+		<a href="{{url_for('project.draft')}}" rel="nofollow" class="nav-link">{{	_('Draft') }}</a>
+		{% endif %}
+
+	</nav>
+</div>
+{% endblock %}
+<div class="container">
+  <h1>{{ project.name }}</h1>
+
+  {% if invite_new_volunteers %}
+  <div class="col-md-12 shadow-sm mb-3 p-3">
+    <p>
+      {{ _("Sorry, you've contributed to all the tasks for this project, but this project still needs more volunteers, so please spread the word!") }}
+    </p>
+  </div>
+  {% endif %}
+  <div class="col-md-12 shadow-sm mb-3 p-3">
     {{ project.info.task_presenter|safe }}
-    </div>
-    <div id='PYBOSSA_USER_LOCALE' hidden>
-        {% if current_user.is_anonymous %}
-        en
-        {% else %}
-        {{ current_user.locale }}
-        {% endif %}
-    </div>
+  </div>
+  <div id='PYBOSSA_USER_LOCALE' hidden>
+    {% if current_user.is_anonymous %}
+    en
+    {% else %}
+    {{ current_user.locale }}
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
 {% block extrajs %}
