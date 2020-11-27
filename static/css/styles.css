@@ -1,9 +1,10 @@
 
 body {
   color: #484848;
-  font-family: 'Lato', Arial, Helvetica, sans-serif;
   font-weight: normal;
   background-color: #f5f3f0;
+  font-family: 'Roboto', sans-serif !important;
+
 }
 * {
   border-radius: 0 !important;
