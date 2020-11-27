@@ -9,76 +9,109 @@
 
 <div class="container mb-3 mt-3">
   <h3>Crowd produced 3D models</h3>
-  <div class="embed-responsive embed-responsive-4by3">
-      <iframe title="A 3D model playlist for micropasts" class="embed-responsive-item"
-      src="https://sketchfab.com/playlists/embed?collection=bb3cff6dfa4f40a588794dd02a29e12f"
-      frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-  </div>
-</div>
-{% endblock %}
-{% block leadtext %}
-<div class="container text-center mb-3 mt-3">
-<h1>Crowdfuelled and Crowdsourced archaeological data</h1>
-</div>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="card h-100">
+        <div class="embed-responsive embed-responsive-4by3">
+          <iframe title="A 3D model" class="embed-responsive-item"" src="https://sketchfab.com/models/957af1b75838473bbb7017cefc471093/embed?autostart=0&amp;ui_controls=1&amp;ui_infos=1&amp;ui_inspector=1&amp;ui_stop=1&amp;ui_watermark=1&amp;ui_watermark_link=1" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+        </div>
 
-<div class="container-fluid image-home mb-0">
-  <div class="container p-3">
-    <div class="row">
-      <div class="col-md-3 shadow-sm mb-3 mt-3 p-3 mr-2">
-        <img src="/static/img/MP_SQUARE_notype.png" class="img-fluid float-left p-3"
-        alt="The MicroPasts logo">
+          <div class="card-body">
+            <h4>A statue of the goddess Taweret</h4>
+          </div>
+        </div>
       </div>
-      <div class="col-md-8 shadow-sm mb-3 mt-3 p-3">
 
-        <p>You can assist existing research projects with tasks that need human intelligence</p>
-        <p>By contributing to a MicroPasts project you will:</p>
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          <div class="embed-responsive embed-responsive-4by3">
+            <iframe title="A 3D model" class="embed-responsive-item"" src="https://sketchfab.com/models/957af1b75838473bbb7017cefc471093/embed?autostart=0&amp;ui_controls=1&amp;ui_infos=1&amp;ui_inspector=1&amp;ui_stop=1&amp;ui_watermark=1&amp;ui_watermark_link=1" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          </div>
 
-        <ul>
-          <li>Have a direct impact on research in archaeology, history and heritage</li>
-          <li>Help with tasks that computers cannot do</li>
-          <li>Develop skills that interest you</li>
-          <li>Produce results that will be open and freely usable</li>
-        </ul>
-        <p>
-          To start contributing, just choose one of our Featured Projects below or visit our full list of ongoing Projects.
-        </p>
+            <div class="card-body">
+              <h4>A statue of the goddess Taweret</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <div class="card h-100">
+            <div class="embed-responsive embed-responsive-4by3">
+              <iframe title="A 3D model" class="embed-responsive-item"" src="https://sketchfab.com/models/957af1b75838473bbb7017cefc471093/embed?autostart=0&amp;ui_controls=1&amp;ui_infos=1&amp;ui_inspector=1&amp;ui_stop=1&amp;ui_watermark=1&amp;ui_watermark_link=1" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+
+              <div class="card-body">
+                <h4>A statue of the goddess Taweret</h4>
+              </div>
+            </div>
+          </div>
+          
+    </div>
+  </div>
+  {% endblock %}
+  {% block leadtext %}
+  <div class="container text-center mb-3 mt-3">
+    <h1>Crowdfuelled and Crowdsourced archaeological data</h1>
+  </div>
+
+  <div class="container-fluid image-home mb-0">
+    <div class="container p-3">
+      <div class="row">
+        <div class="col-md-3 shadow-sm mb-3 mt-3 p-3 mr-2">
+          <img src="/static/img/MP_SQUARE_notype.png" class="img-fluid float-left p-3"
+          alt="The MicroPasts logo">
+        </div>
+        <div class="col-md-8 shadow-sm mb-3 mt-3 p-3">
+
+          <p>You can assist existing research projects with tasks that need human intelligence</p>
+          <p>By contributing to a MicroPasts project you will:</p>
+
+          <ul>
+            <li>Have a direct impact on research in archaeology, history and heritage</li>
+            <li>Help with tasks that computers cannot do</li>
+            <li>Develop skills that interest you</li>
+            <li>Produce results that will be open and freely usable</li>
+          </ul>
+          <p>
+            To start contributing, just choose one of our Featured Projects below or visit our full list of ongoing Projects.
+          </p>
+        </div>
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
+  {% endblock %}
 
-{% block featured %}
-<section class="home featured mb-3">
+  {% block featured %}
+  <section class="home featured mb-3">
     <div class="container-fluid bg-white p-3">
       <div class="container">
-      <div class="row">
-      {% if featured | count > 0 %}
-      {% set featured_project = featured | random %}
-      <div class="col-md-3 mr-3">
-        <img class="img-fluid" src="{{helper.render_url_thumbnail(featured_project, upload_method)}}">
-      </div>
-      <div class="col-md-8">
-        <h2>{{ featured_project.name }}</h2>
-        <p>{{ featured_project.description }}</p>
-        <a class="btn btn-dark d-block" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute to this')}}</a>
-      </div>
-      {% else %}
-      <div class="col-md-12">
-      <h2>{{_('Welcome to ')}} {{brand}}</h2>
-        <p>{{_("The ultimate crowdsourcing framework to analyze or enrich data that can't be processed by machines alone.")}}</p>
-      </div>
-      {% endif %}
-      </div>
+        <div class="row">
+          {% if featured | count > 0 %}
+          {% set featured_project = featured | random %}
+          <div class="col-md-3 mr-3">
+            <img class="img-fluid" src="{{helper.render_url_thumbnail(featured_project, upload_method)}}">
+          </div>
+          <div class="col-md-8">
+            <h2>{{ featured_project.name }}</h2>
+            <p>{{ featured_project.description }}</p>
+            <a class="btn btn-dark d-block" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute to this')}}</a>
+          </div>
+          {% else %}
+          <div class="col-md-12">
+            <h2>{{_('Welcome to ')}} {{brand}}</h2>
+            <p>{{_("The ultimate crowdsourcing framework to analyze or enrich data that can't be processed by machines alone.")}}</p>
+          </div>
+          {% endif %}
+        </div>
       </div>
     </div>
-</section>
-{% endblock %}
-{% block content %}
-{% if featured %}
-{{ helper.render_grid_projects(featured, 'Featured Projects', upload_method, current_user, projects_class='home projects', readmore_text='Contribute', title_size='2') }}
-{% endif %}
-{% if historical_contributions %}
-{{ helper.render_grid_projects(historical_contributions, 'Historical Contributions', upload_method, current_user, projects_class='home projects', title_size='2') }}
-{% endif %}
-{% endblock %}
+  </section>
+  {% endblock %}
+  {% block content %}
+  {% if featured %}
+  {{ helper.render_grid_projects(featured, 'Featured Projects', upload_method, current_user, projects_class='home projects', readmore_text='Contribute', title_size='2') }}
+  {% endif %}
+  {% if historical_contributions %}
+  {{ helper.render_grid_projects(historical_contributions, 'Historical Contributions', upload_method, current_user, projects_class='home projects', title_size='2') }}
+  {% endif %}
+  {% endblock %}
