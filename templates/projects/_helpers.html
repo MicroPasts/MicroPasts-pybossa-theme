@@ -321,6 +321,7 @@
 {% endmacro %}
 
 {% macro render_project_parallax(project, upload_method, id, class, style) %}
+{%- if project.info.container %}
 <style>
   .head {
   background-image: url({{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))}});
@@ -333,6 +334,7 @@
 </style>
 <div class="container-fluid head parallax mb-3">
 </div>
+%endif
 {% endmacro %}
 
 {%- macro render_url_thumbnail(project, upload_method) %}
