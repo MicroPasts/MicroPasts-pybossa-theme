@@ -7,6 +7,7 @@
 {{ project.info.tutorial | safe}}
 
 <div class="row">
+  {{ project.short_name }}
     <div class="col-md-12 shadow-sm mb-3 p-3" style="text-align:center;padding-top:20px;">
         <a id="start" href={{url_for('project.presenter', short_name = project.short_name)}}
            class="btn btn-primary btn-lg">
