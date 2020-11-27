@@ -514,8 +514,9 @@ ul.text-center.conversation-footer {
   }
 }
 
-@media (min-width: 1200px){
-  #myModal {
-    width: 90%;
+@media (min-width: 992px){
+  .modal-dialog {
+    max-width: 90%;
+    max-height: 90%;
   }
 }
