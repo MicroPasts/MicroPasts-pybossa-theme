@@ -10,7 +10,6 @@ body {
   border-radius: 0 !important;
 }
 
-.tag
 .shadow-sm {
     background-color: white;
 }
@@ -534,7 +533,7 @@ ul.text-center.conversation-footer {
   font-size: 1rem;
 }
 h1.text-white.tag {
-  font-size: 4vw;
+  font-size: 7vw;
   font-family: 'Lora', serif;
   font-style: italic;
 }
