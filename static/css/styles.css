@@ -513,3 +513,9 @@ ul.text-center.conversation-footer {
     bottom: 30px;
   }
 }
+
+@media (min-width: 1200px){
+  #myModal {
+    width: 90%;
+  }
+}
