@@ -520,7 +520,7 @@ ul.text-center.conversation-footer {
   }
 }
 .modal-dialog, .modal-content {
-  height:90%;
+  height: 95%;
 }
 .modal-body {
   max-height: calc(100% - 120px);
