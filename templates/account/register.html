@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-12">
 
-        <div id="ageCheck" class="form-inline">
+        <div id="ageCheck" class="form col-md-6">
           <div class="form-group">
             <p>{{_('To create an account you must be 16+ years old. Please enter your date of birth')}}</p>
             <input class="form-control" id="day" placeholder="DD">
@@ -22,7 +22,7 @@
         {{ render_form(form, form_id="register", action_url=url_for('account.register'), btn_class="btn btn-primary btn-block" )}}
 
         <p class="text-center text-sm" style="margin-top:5px;">
-          <span class="label label-warning"><i class="fa fa-bullhorn"></i> {{ _('Note') }}</span>
+          <span class="badge badge-warning badge-large"><i class="fa fa-bullhorn"></i> {{ _('Note') }}</span>
           {{ _('By click the') }}
           <strong>{{ _('Create account button') }}
           </strong>{{ _('below you are agreeing to the') }}
