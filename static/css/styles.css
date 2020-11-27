@@ -14,8 +14,11 @@ body {
     background-color: white;
 }
 .image-home {
-    background: url('https://farm5.staticflickr.com/4137/4771894054_1c5d80cdff_o.jpg');
-    min-height: 300px;
+  background-image: url(https://farm5.staticflickr.com/4137/4771894054_1c5d80cdff_o.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 300px;
 }
 h1,
 h2,
