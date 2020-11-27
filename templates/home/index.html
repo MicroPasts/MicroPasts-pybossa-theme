@@ -85,32 +85,7 @@
 </div>
 {% endblock %}
 
-{% block featured %}
-<section class="home featured mb-3">
-  <div class="container-fluid bg-white p-3">
-    <div class="container">
-      <div class="row">
-        {% if featured | count > 0 %}
-        {% set featured_project = featured | random %}
-        <div class="col-md-3 mr-3">
-          <img class="img-fluid" src="{{helper.render_url_thumbnail(featured_project, upload_method)}}">
-        </div>
-        <div class="col-md-8">
-          <h2>{{ featured_project.name }}</h2>
-          <p>{{ featured_project.description }}</p>
-          <a class="btn btn-dark d-block" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute to this')}}</a>
-        </div>
-        {% else %}
-        <div class="col-md-12">
-          <h2>{{_('Welcome to ')}} {{brand}}</h2>
-          <p>{{_("The ultimate crowdsourcing framework to analyze or enrich data that can't be processed by machines alone.")}}</p>
-        </div>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-</section>
-{% endblock %}
+
 {% block content %}
 {% if featured %}
 {{ helper.render_grid_projects(featured, 'Featured Projects', upload_method, current_user, projects_class='home projects', readmore_text='Contribute', title_size='2') }}
