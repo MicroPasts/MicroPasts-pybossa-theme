@@ -517,6 +517,12 @@ ul.text-center.conversation-footer {
 @media (min-width: 992px){
   .modal-dialog {
     max-width: 90%;
-    max-height: 90%;
   }
+}
+.modal-dialog, .modal-content {
+  height:80%;
+}
+.modal-body {
+  max-height: calc(100% - 120px);
+  overflow-y: scroll;
 }
