@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content%}
-<h1><strong>{{ _('Admin Site') }} :</strong> {{ _('Manage featured projects') }}</h1>
-<div class="tab-content">
+<h2 class="mt-3">{{ _('Admin Site') }} : {{ _('Manage featured projects') }}</h2>
+<div class="container">
     {% for c in categories %}
     <div {% if loop.first %}class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="{{c.short_name}}">
         {{ render_grid_projects(projects[c.short_name], "", upload_method, featured=True,title_class="col-md-12", container=False)}}
