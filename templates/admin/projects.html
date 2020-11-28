@@ -1,17 +1,10 @@
 {% extends "admin/base.html" %}
 {% from "projects/_helpers.html" import render_grid_projects %}
-{% block leftnavigation%}
+{% block offcanvas%}
     {{ helper.render_account_local_nav(current_user, active_link) }}
+{% endblock}
 
-<ul class="nav nav-pills nav-stacked">
-    {% for c in categories %}
-    <li {% if loop.first %}class="active"{% endif %}>
-    <a href="#{{c.short_name}}" data-toggle="tab">{{c.name}}</a>
-    </li>
-    {% endfor %}
-</ul>
-{% endblock %}
-{% block rightbody%}
+{% block content%}
 <h1><strong>{{ _('Admin Site') }} :</strong> {{ _('Manage featured projects') }}</h1>
 <div class="tab-content">
     {% for c in categories %}
@@ -20,8 +13,13 @@
     </div>
     {% endfor %}
 </div>
-    </div>
-</div>
+<ul class="nav nav-pills nav-stacked">
+    {% for c in categories %}
+    <li {% if loop.first %}class="active"{% endif %}>
+    <a href="#{{c.short_name}}" data-toggle="tab">{{c.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
 {% block extrajs %}
 {% include "admin/js/featured_projects.js" %}
