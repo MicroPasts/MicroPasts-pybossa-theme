@@ -539,3 +539,6 @@ h1.text-white.tag {
   font-size: 7vw;
   font-family: 'Lora', serif;
 }
+.share a {
+  color: #000;
+}
