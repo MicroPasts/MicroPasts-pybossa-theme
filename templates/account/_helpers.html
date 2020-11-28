@@ -35,6 +35,7 @@
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
 <div>
 <p>
+	{{ user }}
     <strong>Username:</strong> {{ user.name }}<br/>
     <strong>Registered:</strong> {{ user.registered_ago}}
 
