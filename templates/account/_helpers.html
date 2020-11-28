@@ -38,7 +38,7 @@
 <p><strong><i class="fa fa-envelope"></i> {{_('E-mail')}}:</strong> {{user.email_addr }}
     {% if (user.valid_email == False) %}
       {% if (user.confirmation_email_sent == False) %}
-      <a href="{{ url_for('account.confirm_email')}}" class="btn btn-warning btn-xs">Validate email</a>
+      <a href="{{ url_for('account.confirm-email')}}" class="btn btn-warning btn-xs">Validate email</a>
       {% else %}
       <a href="#" class="btn btn-sm disabled">Email sent for
           validation</a>
