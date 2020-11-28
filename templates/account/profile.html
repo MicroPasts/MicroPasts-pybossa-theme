@@ -13,7 +13,7 @@
 <section class="account profile">
   <h2 class="mt-3">{{ _('Your Account') }}</h2>
 
-  <div class="container shadow-sm mb-3 p-2">
+  <div class="shadow-sm mb-3 p-2">
     <div class="col-md-12 ">
       Full name: {{current_user.fullname}}<br />
       {{ helper.render_user_profile(current_user, upload_method, "settings") }}
@@ -22,13 +22,11 @@
       {% endif %}
     </div>
   </div>
-  <div class="container">
     <div>
       {% if projects_contrib | count > 0 %}
       {{ project_helper.render_grid_projects(projects_contrib,  _('Your Contributions'), upload_method, title_class="col-md-12", container=False)}}
       {% endif %}
     </div>
-  </div>
 </section>
 {% endblock %}
 {% block extrajs %}
