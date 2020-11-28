@@ -33,52 +33,45 @@
 
 
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
-<div>
-<p>
-	{{ user }}
-    <strong>Username:</strong> {{ user.name }}<br/>
-    <strong>Registered:</strong> {{ user.registered_ago}}
-
+<p><strong><i class="fa fa-user"></i> {{ _('Username')}}:</strong> {{ user.name }}</p>
 {% if private %}
-  <strong>{{_('E-mail')}}:</strong> {{user.email_addr }}
+<p><strong><i class="fa fa-envelope"></i> {{_('E-mail')}}:</strong> {{user.email_addr }}
     {% if (user.valid_email == False) %}
       {% if (user.confirmation_email_sent == False) %}
       <a href="{{ url_for('account.confirm_email')}}" class="btn btn-warning btn-xs">Validate email</a>
       {% else %}
-      <a href="#" class="btn btn-sm disabled">Email sent for validation</a>
+      <a href="#" class="btn btn-sm disabled">Email sent for
+          validation</a>
       {% endif %}
     {% endif %}
-
+</p>
 {% endif %}
 {% if user.rank %}
-
-  <strong>{{ _('Rank')}}: </strong>
+<p><strong><i class="fa fa-trophy"></i> {{ _('Rank')}}: </strong>
     {% if private %}
         <a href="{{url_for('leaderboard.index')}}">
         {% endif %}
         {% if not settings %}
-        {{ user.rank }} {{_('of')}} {{user.total}} {{ _('with a Score of')}} {{user.score}} {{ _('contributed tasks')}}<br/>
+        {{ user.rank }} {{_('of')}} {{user.total}} {{ _('with a Score of')}} {{user.score}} {{ _('contributed tasks')}}
         {% else %}
         {{ user.rank }}
         {% endif %}
         {% if private %}</a>{% endif %}
     {% else %}
-    <strong>{{ _('Rank') }}: </strong>{{ _('The user has not contributed to any tasks yet') }}<br/>
+    <p><strong><i class="fa fa-trophy"></i> {{ _('Rank') }}: </strong>{{ _('The user has not contributed to any tasks yet') }}</p>
     {% endif %}
 
 {% if not private %}
-<strong>{{ _('Joined') }}: </strong>{{ user.created[0:10]}}<br/>
+<p><strong><i class="fa fa-time"></i> {{ _('Joined') }}: </strong>{{ user.created[0:10]}}</p
 {% endif %}
 
 {% if settings %}
-<strong><i class="fa fa-key"></i> {{ _('API key') }}: </strong>{{ user.api_key }}<br/>
+<p><strong><i class="fa fa-key"></i> {{ _('API key') }}: </strong>{{ user.api_key }}</p>
 {% endif %}
 
 {% if private and not settings%}
 <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-primary"><i class="icon fa fa-user"></i> {{ _('Edit your profile') }}</a>
 {% endif %}
-</p>
-</div>
 {% endmacro %}
 
 {%- macro render_user_avatar_src(user, upload_method) %}
