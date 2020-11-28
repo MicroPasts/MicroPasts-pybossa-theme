@@ -2,23 +2,27 @@
 {% set active_page = "profile" %}
 {% set active_link  = "settings" %}
 {% import "account/_helpers.html" as helper %}
+{% block offcanvas %}
+{{ helper.render_account_local_nav(current_user, active_link) }}
+{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-3">
-        {{ helper.render_account_local_nav(current_user, active_link) }}
+<h1 class="mt-3">{{current_user.fullname}}: {{ _(' Reset API Key') }}</h1>
+
+<div class="container shadow-sm mb-3 p-3">
+  <div class="col-md-12">
+    <div class="alert alert-warning">
+      <strong>{{ _('Note') }}</strong>{{ _(' If you reset the API key, you will need to use the new generated key for any API call.') }}
     </div>
-    <div class="col-md-9">
-        <h1><strong>{{current_user.fullname}}</strong>: {{ _(' Reset API Key') }}</h1>
-        <div class="alert alert-warning">
-            <strong>{{ _('Note') }}</strong>{{ _(' If you reset the API key, you will need to use the new generated key for any API call.') }}
-        </div>
-        <form role="form"  method="post" action="{{ url_for('account.reset_api_key')}}">
-        <h3><strong>{{ _('Do you want to reset your personal API Key?') }}</strong></h3>
-        <div>
-          <input type="submit" class="btn btn-sm btn-default" value="Yes"/>
-          <a href="{{ url_for('account.settings') }}" class="btn btn-lg btn-primary">{{ _('No, do not reset the API key!') }}</a>
-        </div>
-    </div>
+    <form role="form"  method="post" action="{{ url_for('account.reset_api_key')}}">
+      <h3>
+        {{ _('Do you want to reset your personal API Key?') }}
+      </h3>
+      <div>
+        <input type="submit" class="btn btn-sm btn-default" value="Yes"/>
+        <a href="{{ url_for('account.settings') }}" class="btn btn-lg btn-primary">{{ _('No, do not reset the API key!') }}</a>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}
