@@ -1,23 +1,48 @@
-    <div class="row">
-        <div class="col-md-11">
-            <h1>{{ _('About') }}</h1>
-            <p>
-            {{ _('MicroPasts is a free and open-source, crowd-sourcing platform which supports massive online data collection about the human past (e.g. for researchers in archaeology, history and heritage). It is inspired by existing multi-application, crowd-sourcing projects such as') }} <a href="http://www.zooniverse.org/">{{ _('Zooniverse') }}</a> {{ _(' or ') }} <a href="http://crowdcrafting.org/">{{ _('Crowdcrafting') }}</a> {{ _(' and, like the latter, is built using the excellent ') }} <a href="http://docs.pybossa.com/">{{ _('Pybossa') }}</a> {{ _(' platform. PyBossa handles storage of data, management of users, and overall workflow, while individual projects are written in Javascript and HTML5. For now, we are developing example projects for common research tasks that require either widespread user contributions (such as on-location photography) or human intelligence (such as geocoding, image classification, transcription and more). In the future, we also wish to help researchers in archaeology, history and heritage to create their own crowd-sourcing projects from scratch and host them here. All the software and data we create is placed immediately into the public domain.') }}
-            </p>
+<div class="row">
+  <h1 class="mt-3">{{ _('About') }}</h1>
 
-            <p>
-            {{ _('You can find out more about our ') }} <a href="{{url_for('help.tos')}}">{{ _('Terms of Use') }}</a> {{ _(', ') }} <a href="{{url_for('help.api')}}">{{ _('RESTful API') }}</a> {{ _(', ') }} <a href="{{url_for('help.cookies_policy')}}">{{ _('Cookies Policy') }}</a> {{ _(' or ') }} <a href="{{url_for('help.license')}}">{{ _('Open Licenses') }}</a>{{ _('.') }}
-            </p>
-            
-            
-            <h1 id="contact">{{ _('Contact information') }}</h1>
-            <ul>
-                <li>{{ _('For more info, send us an e-mail to: ') }} <a href="mailto:info@micropasts.org">info@micropasts.org</a> or <a class="btn btn-info btn-xs" href="http://twitter.com/micropasts"><i class="icon icon-twitter"></i> {{ _('Follow us on Twitter!') }}</a></li>        
-                <li><p>{{ _('Report any bug, issue or improvement:') }} 
-                    <a class="btn btn-info btn-xs" href="https://github.com/findsorguk/MicroPasts-pybossa-theme/issues">
-                        <i class="icon icon-github"></i> {{ _('Github Issues') }}
-                    </a>
-                    </li>            
-            </ul>
-        </div>
-    </div>
+  <div class="col-md-12 shadow-sm mb-3">
+    <p>
+      MicroPasts is a free and open-source, crowd-sourcing platform which
+      supports massive online data collection about the human past
+      (e.g. for researchers in archaeology, history and heritage).
+      It is inspired by existing multi-application, crowd-sourcing
+      projects such as <a href="http://www.zooniverse.org/">Zooniverse</a>,
+      Libcrowds or <a href="http://crowdcrafting.org/">Crowdcrafting</a>
+      and, like the latter two, is built using the excellent
+      <a href="http://docs.pybossa.com/">Pybossa</a> platform.
+    </p>
+    <p>
+      PyBossa handles storage of data, management of users, and overall
+      workflow, while individual projects are written in Javascript and
+      HTML5.
+    </p>
+    <p>
+      For now, we are developing example projects for common research tasks
+      that require either widespread user contributions (such as on-location
+      photography) or human intelligence (such as geocoding, image classification,
+      transcription and more). In the future, we also wish to help researchers
+      in archaeology, history and heritage to create their own crowd-sourcing
+      projects from scratch and host them here.
+    </p>
+    <p>
+      All the software and data we create is placed immediately into the public d
+      omain under an open licence.
+    </p>
+
+  </div>
+
+  <h1 id="contact mt-3">Contact information</h1>
+  <div class="col-md-12 shadow-sm mb-3">
+    <ul>
+      <li>
+        For more info, send us an e-mail to: <a href="mailto:info@micropasts.org">info@micropasts.org</a>
+        or <a class="btn btn-info btn-xs" href="http://twitter.com/micropasts"><i class="fab fa-twitter></i> Follow us on Twitter!</a>
+      </li>
+      <li>
+        Report any bug, issue or improvement: <a class="btn btn-info btn-xs"
+        href="https://github.com/findsorguk/MicroPasts-pybossa-theme/issues"><i class="fab fa-github"></i> Github Issues</a>
+      </li>
+    </ul>
+  </div>
+</div>
