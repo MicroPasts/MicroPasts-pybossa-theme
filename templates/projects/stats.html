@@ -53,9 +53,9 @@
         allFilter.push(values);
       });
       var res = allFilter.map((obj,index) => {
-          var moment = require("moment")
+
           var x = obj['x']
-          var time = moment(x.toString(),"LT")
+          var time = moment(x,'HH').format('HH:mm');
           return { x:time, y:obj['y'] }
         });
       var myChart = new Chart('userAnsHours', {
