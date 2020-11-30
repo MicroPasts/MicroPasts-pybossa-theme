@@ -3,7 +3,6 @@
 {% import "privacy/locked.html" as privacy %}
 
 {% block projectcontent %}
-<script src="{{url_for('static', filename='js/stats/flotr2.min.js')}}" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" type="text/javascript"></script>
 
 <script>
@@ -48,49 +47,7 @@
   </div>
 
   <script type="text/javascript">
-    new Chart(document.getElementById("userAnsHours"), {
-      type: 'line',
-      data : {
-        labels: [projectStats.hourStats[1]['label'],projectStats.hourStats[2]['label'] ],
-        datasets: [
-        {
-          label: "Number of Users",
-          backgroundColor: ['#3e95cd', '#8e5ea2'],
-          data: [ projectStats.hourStats[1]['values'][1],  projectStats.hourStats[2]['values'][1]]
-        }
-        ],
-        options: {
-          // legend: { display: false },
-          title: {
-            display: true,
-            text: 'Number of users per category'
-          }
-        }
 
-      }
-
-    });
-  </script>
-  <script>
-    (function(){
-      function answersPerHour(obj) {
-        return (parseInt(obj.y) + " answers were submitted at " + parseInt(obj.x) + " hours");
-      }
-
-      function hours(obj) {
-        return (parseInt(obj) + ":00");
-      }
-
-      var container = document.getElementById('hourStats');
-      var graph = Flotr.draw(container, [{data: projectStats.hourStats[1]['values'], label:projectStats.hourStats[1]['label']},{ data:projectStats.hourStats[2]['values'],label:projectStats.hourStats[2]['label'] }], {
-        bubbles : {show: true, baseRadius:5},
-        xaxis   : {min: 0, max:24, tickFormatter: hours},
-        yaxis   : {min: 0, max:_.max(projectStats.hourStats[0]), tickDecimals: 0 },
-        mouse   : {track: true, trackFormatter: answersPerHour},
-        HtmlText: false,
-        legend  : {postion: 'nw'}
-      });
-    })();
   </script>
 </div>
 <!-- END Hour Stats CARD -->
@@ -139,67 +96,7 @@
 <div class="col-md-12 shadow-sm mb-3 p-3">
   <div id="dayStats" style="margin:0;height:500px;"></div>
   <script>
-    (function(){
-      function date(obj) {
-        var d = new Date(parseInt( obj ));
-        var year = d.getFullYear();
-        var month = d.getMonth() + 1;
-        var day = d.getDate();
-        return(year + "-" + month + '-' + day)
-      }
-      function answersPerDay(obj) {
-        return (parseInt(obj.y) + " {{_('answers were submitted this day')}} " + date(obj.x));
-      }
 
-
-      var options = {
-        xaxis   : {mode:'time'},
-        yaxis   : {min: 0, tickDecimals: 0},
-        mouse   : {track: true, trackFormatter: answersPerDay},
-        HtmlText: false,
-        legend  : {postion: 'nw'},
-        selection: {
-          mode: 'x',
-          fps: 30
-        }
-      };
-
-      var dayStatsContainer = document.getElementById('dayStats');
-
-      function drawGraph(opts) {
-        // Clone the options, so the 'options' variable always keeps intact.
-        var o = Flotr._.extend(Flotr._.clone(options), opts || {});
-
-        // Return a new graph.
-        return Flotr.draw(
-        dayStatsContainer, [{data: projectStats.dayStats[1]['values'], label:projectStats.dayStats[1]['label']},{ data:projectStats.dayStats[2]['values'],label:projectStats.dayStats[2]['label'] }, { data:projectStats.dayStats[0]['values'],label:projectStats.dayStats[0]['label']} ], o);
-      }
-
-      // Actually draw the graph.
-      graph = drawGraph();
-
-      // Hook into the 'flotr:select' event.
-      Flotr.EventAdapter.observe(dayStatsContainer, 'flotr:select', function(area) {
-
-        // Draw graph with new area
-        graph = drawGraph({
-          xaxis: {
-            mode: 'time',
-            min: area.x1,
-            max: area.x2
-          },
-          yaxis: {
-            min: area.y1,
-            max: area.y2
-          }
-        });
-      });
-
-      // When graph is clicked, draw the graph with default area.
-      Flotr.EventAdapter.observe(dayStatsContainer, 'flotr:click', function() {
-        drawGraph();
-      });
-    })();
   </script>
 </div>
 <!-- END Day Stats CARD -->
@@ -346,23 +243,7 @@
   <div id="userAuthStats" class="col-md-12">
   </div>
   <script>
-    (function(){
-      var container = document.getElementById('userAuthStats');
-      var graph = Flotr.draw(container, [
-      {data:[[0, projectStats.userAuthStats['top5'][0]['tasks'] ]],  label:projectStats.userAuthStats['top5'][0]['fullname']},
-      {data:[[0, projectStats.userAuthStats['top5'][1]['tasks'] ]],  label:projectStats.userAuthStats['top5'][1]['fullname']},
-      {data:[[0, projectStats.userAuthStats['top5'][2]['tasks'] ]],  label:projectStats.userAuthStats['top5'][2]['fullname']},
-      {data:[[0, projectStats.userAuthStats['top5'][3]['tasks'] ]],  label:projectStats.userAuthStats['top5'][3]['fullname']},
-      {data:[[0, projectStats.userAuthStats['top5'][4]['tasks'] ]],  label:projectStats.userAuthStats['top5'][4]['fullname']}],
-      {
-        pie     : {show: true, explode: 5},
-        grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-        HtmlText: false,
-        xaxis   : {showLabels: false},
-        yaxis   : {showLabels: false},
-        legend  : {postion: 'nw'}
-      });
-    })();
+  
   </script>
 </div>
 
