@@ -189,22 +189,29 @@
   </div>
   <script>
     console.log(projectStats.userAuthStats.top5);
-
+    let userAuthStats = projectStats.userAuthStats.top5;
+    let authenticated = projectStats.dayStats[2]['values'];
+    var userAuthStatsQuant = [];
+    var userAuthStatsLabels = [];
+    userAuthStats.forEach(function(item, index, array){
+      userAuthStatsLabels.push(item['tasks']);
+      userAuthStatsQuant.push(item['fullname']);
+    });
     new Chart(document.getElementById("userAnsStats"), {
       type: 'pie',
       data : {
-        labels: [projectStats.userAuthStats.top5['values'][0]['label'],projectStats.userStats['values'][1]['label'] ],
+        labels: [ userAuthStatsLabels ],
         datasets: [
         {
           label: "Number of Users",
-          backgroundColor: ['#3e95cd', '#8e5ea2'],
-          data: [projectStats.userStats['values'][0]['value'][1], projectStats.userStats['values'][1]['value'][1]]
+          backgroundColor: ['#3e95cd', '#8e5ea2', '#000', 'blue', 'red'],
+          data: [userAuthStatsQuant]
         }
         ],
         options: {
           title: {
             display: true,
-            text: 'Number of users per category'
+            text: 'Number of tasks by user'
           }
         }
 
