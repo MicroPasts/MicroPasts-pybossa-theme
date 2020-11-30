@@ -187,7 +187,8 @@
 </div>
 <script>
 
-
+  console.log(projectStats.userStats);
+  
   new Chart(document.getElementById("canvasDist"), {
     type: 'pie',
     data : {
@@ -196,7 +197,7 @@
       {
         label: "Number of Users",
         backgroundColor: ['#3e95cd', '#8e5ea2'],
-        data: userAuthStatsQuant
+        data: ''''
       }
       ],
       options: {
