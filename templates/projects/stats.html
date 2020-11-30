@@ -108,7 +108,7 @@
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
-      labels: [projectStats.dayStats[3]['label']],
+      labels: [projectStats.dayStats[3]['label'][0]],
       datasets: [{
           data: [projectStats.dayStats[3]['values'][1]],
           label: "Completed",
