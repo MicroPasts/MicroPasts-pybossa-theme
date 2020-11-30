@@ -3,7 +3,6 @@ import requests
 
 {% macro render_stats() -%}
 url = f'https://crowdsourced.fitz.ms/api/globalstats'
-req = requests.get(url)
-    data = json.loads(req.content)['response']
-{{ data }}
+
+{{ url }}
 {% endmacro %}
