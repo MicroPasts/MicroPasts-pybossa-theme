@@ -2,7 +2,7 @@
 {% set active_link = "stats" %}
 {% import "privacy/locked.html" as privacy %}
 
-{% block projectcontent %}
+{% block stats %}
 <script src="{{url_for('static', filename='js/stats/flotr2.min.js')}}" type="text/javascript"></script>
 <script>
   var projectStats = {{projectStats|safe}};
