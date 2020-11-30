@@ -8,7 +8,8 @@ $( document ).ready(function() {
             console.log(result);
             $("#projectCount").append(result.n_projects);
             $("#userCount").append(result.n_users);
-            $("#completedTasks").append(result.n_tasks - result.n_pending_tasks);
+            var completed = result.n_tasks - result.n_pending_tasks;
+            $("#completedTasks").append(completed);
         }
     });
 });
