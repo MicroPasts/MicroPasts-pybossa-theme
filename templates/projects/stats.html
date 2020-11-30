@@ -276,12 +276,12 @@
     new Chart(document.getElementById("userAnsStats"), {
       type: 'pie',
       data : {
-        labels:  userAuthStatsLabels ,
+        labels:  [userAuthStatsLabels] ,
         datasets: [
         {
           label: "Number of Users",
           backgroundColor: ['#3e95cd', '#8e5ea2'],
-          data: userAuthStatsQuant
+          data: [userAuthStatsQuant]
         }
         ],
         options: {
