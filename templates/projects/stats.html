@@ -108,9 +108,9 @@
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
-      labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+      labels: [projectStats.dayStats[3]['label']],
       datasets: [{
-          data: [projectStats.dayStats[3]['values'][0][1]],
+          data: [projectStats.dayStats[3]['values']]],
           label: "Completed",
           borderColor: "#3e95cd",
           fill: false
@@ -127,67 +127,7 @@
 
   </script>
 
-  <script>
-    (function(){
-      function date(obj) {
-        var d = new Date(parseInt( obj ));
-        var year = d.getFullYear();
-        var month = d.getMonth() + 1;
-        var day = d.getDate();
-        return(year + "-" + month + '-' + day)
-      }
-      function answersPerDay(obj) {
-        return ("Tasks: " + parseInt(obj.y));
-      }
-      var options = {
-        xaxis   : {mode:'time'},
-        yaxis   : {min:0, max: projectStats.dayStats[3]['values'][0][1] + 1, tickDecimals: 0},
-        mouse   : {track: true, trackFormatter: answersPerDay},
-        HtmlText: false,
-        legend  : {postion: 'nw'},
-        selection: {
-          mode: 'x',
-          fps: 30
-        }
-      };
 
-      var dayStatsTotalContainer = document.getElementById('dayStatsTotal');
-
-      function drawGraph(opts) {
-        // Clone the options, so the 'options' variable always keeps intact.
-        var o = Flotr._.extend(Flotr._.clone(options), opts || {});
-
-        // Return a new graph.
-        return Flotr.draw(
-        dayStatsTotalContainer, [{ data:projectStats.dayStats[3]['values'],label:projectStats.dayStats[3]['label']},  ], o);
-      }
-
-      // Actually draw the graph.
-      graph = drawGraph();
-
-      // Hook into the 'flotr:select' event.
-      Flotr.EventAdapter.observe(dayStatsTotalContainer, 'flotr:select', function(area) {
-
-        // Draw graph with new area
-        graph = drawGraph({
-          xaxis: {
-            mode: 'time',
-            min: area.x1,
-            max: area.x2
-          },
-          yaxis: {
-            min: area.y1,
-            max: area.y2
-          }
-        });
-      });
-
-      // When graph is clicked, draw the graph with default area.
-      Flotr.EventAdapter.observe(dayStatsTotalContainer, 'flotr:click', function() {
-        drawGraph();
-      });
-    })();
-  </script>
 </div>
 <!-- END Day Stats CARD -->
 
