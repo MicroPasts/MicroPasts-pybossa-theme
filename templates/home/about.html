@@ -2,5 +2,9 @@
 {% set active_page = "about" %}
 
 {% block content %}
-    {% include ['custom/_about.html', 'home/_about.html'] ignore missing %}
+    {% include ['home/_about.html'] ignore missing %}
+{% endblock %}
+
+{% block team %}
+    {% include ['home/_team.html'] ignore missing %}
 {% endblock %}

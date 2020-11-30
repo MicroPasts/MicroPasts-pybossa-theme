@@ -83,7 +83,7 @@
   <div class="container main-body" >
 
     {% block content %}{% endblock %}
-
+    {% block team %}{% endblock %}
   </div>
 
   {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
@@ -102,7 +102,6 @@
   {% endif %}
   {% block extrajs %}
   {% endblock %}
-  <script src="/static/js/slidemenu.js"></script>
 
   {% include "_flash_messages.html" ignore missing %}
 </body>
