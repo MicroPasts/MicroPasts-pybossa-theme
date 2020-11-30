@@ -203,44 +203,43 @@
 <h2 class="mt-3">{{_('Distribution of Answers')}}</h2>
 
 <div id="dist-answers" class="col-md-12 shadow-sm mb-3 p-3">
-    <div class="col-md-6">
-      <table class="table table-hover table-bordered table-striped">
-        <thead>
-          <tr>
-            <th>{{_('Type')}}</th>
-            <th>{{_('Users')}}</th>
-            <th>{{_('Percentage')}}</th>
-          </tr>
-        </thead>
-        {% for k in userStats.keys() if k != 'geo' %}
+  <div class="col-md-6">
+    <table class="table table-hover table-bordered table-striped">
+      <thead>
         <tr>
-          <th>{{k | capitalize}}</th>
-          <th>{{userStats[k].taskruns}}</th>
-          <th>{{userStats[k].pct_taskruns}} %</th>
+          <th>{{_('Type')}}</th>
+          <th>{{_('Users')}}</th>
+          <th>{{_('Percentage')}}</th>
         </tr>
-        {% endfor %}
-      </table>
+      </thead>
+      {% for k in userStats.keys() if k != 'geo' %}
+      <tr>
+        <th>{{k | capitalize}}</th>
+        <th>{{userStats[k].taskruns}}</th>
+        <th>{{userStats[k].pct_taskruns}} %</th>
+      </tr>
+      {% endfor %}
+    </table>
 
-    </div>
-    <div id="userAnsStats" class="col-md-4" style="height: 250px; width:250px;">
-    </div>
-    <script>
-      (function(){
-        var container = document.getElementById('userAnsStats');
-        var graph = Flotr.draw(container, [
-        {data:[projectStats.userStats['values'][0]['value']], label:projectStats.userStats['values'][0]['label']},
-        {data:[projectStats.userStats['values'][1]['value']],  label:projectStats.userStats['values'][1]['label']}],
-        {
-          pie     : {show: true, explode: 2},
-          grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-          HtmlText: false,
-          xaxis   : {showLabels: false},
-          yaxis   : {showLabels: false},
-          legend  : {postion: 'nw'}
-        });
-      })();
-    </script>
-</div>
+  </div>
+  <div id="userAnsStats" class="col-md-4" style="height: 250px; width:250px;">
+  </div>
+  <script>
+    (function(){
+      var container = document.getElementById('userAnsStats');
+      var graph = Flotr.draw(container, [
+      {data:[projectStats.userStats['values'][0]['value']], label:projectStats.userStats['values'][0]['label']},
+      {data:[projectStats.userStats['values'][1]['value']],  label:projectStats.userStats['values'][1]['label']}],
+      {
+        pie     : {show: true, explode: 2},
+        grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
+        HtmlText: false,
+        xaxis   : {showLabels: false},
+        yaxis   : {showLabels: false},
+        legend  : {postion: 'nw'}
+      });
+    })();
+  </script>
 </div>
 <!-- END Number of Answers Stats CARD -->
 
@@ -299,49 +298,49 @@
 <!-- Auth User Stats CARD -->
 <h2 class="mt-3">{{_('Details about Authenticated Users')}}</h2>
 <div id="dist-auth" class="col-md-12 shadow-sm p-3 mb-3">
-    <div class="col-md-12">
-      <p><i class="icon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
-      {% if userStats.authenticated.top5 %}
-      <h3>{{_('Top 5 users')}}</h3>
-      <table class="table table-hover table-bordered table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>{{_('User')}}</th>
-            <th>{{_('Tasks')}}</th>
-          </tr>
-        </thead>
-        {% for u in userStats.authenticated.top5 %}
+  <div class="col-md-12">
+    <p><i class="icon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
+    {% if userStats.authenticated.top5 %}
+    <h3>{{_('Top 5 users')}}</h3>
+    <table class="table table-hover table-bordered table-striped">
+      <thead>
         <tr>
-          <th>{{loop.index}}</th>
-          <th><a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a></th>
-          <th>{{u.tasks}}</th>
+          <th>#</th>
+          <th>{{_('User')}}</th>
+          <th>{{_('Tasks')}}</th>
         </tr>
-        {% endfor %}
-      </table>
-      {% endif %}
-    </div>
-    <div id="userAuthStats" class="col-md-12">
-    </div>
-    <script>
-      (function(){
-        var container = document.getElementById('userAuthStats');
-        var graph = Flotr.draw(container, [
-        {data:[[0, projectStats.userAuthStats['top5'][0]['tasks'] ]],  label:projectStats.userAuthStats['top5'][0]['fullname']},
-        {data:[[0, projectStats.userAuthStats['top5'][1]['tasks'] ]],  label:projectStats.userAuthStats['top5'][1]['fullname']},
-        {data:[[0, projectStats.userAuthStats['top5'][2]['tasks'] ]],  label:projectStats.userAuthStats['top5'][2]['fullname']},
-        {data:[[0, projectStats.userAuthStats['top5'][3]['tasks'] ]],  label:projectStats.userAuthStats['top5'][3]['fullname']},
-        {data:[[0, projectStats.userAuthStats['top5'][4]['tasks'] ]],  label:projectStats.userAuthStats['top5'][4]['fullname']}],
-        {
-          pie     : {show: true, explode: 5},
-          grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-          HtmlText: false,
-          xaxis   : {showLabels: false},
-          yaxis   : {showLabels: false},
-          legend  : {postion: 'nw'}
-        });
-      })();
-    </script>
+      </thead>
+      {% for u in userStats.authenticated.top5 %}
+      <tr>
+        <th>{{loop.index}}</th>
+        <th><a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a></th>
+        <th>{{u.tasks}}</th>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </div>
+  <div id="userAuthStats" class="col-md-12">
+  </div>
+  <script>
+    (function(){
+      var container = document.getElementById('userAuthStats');
+      var graph = Flotr.draw(container, [
+      {data:[[0, projectStats.userAuthStats['top5'][0]['tasks'] ]],  label:projectStats.userAuthStats['top5'][0]['fullname']},
+      {data:[[0, projectStats.userAuthStats['top5'][1]['tasks'] ]],  label:projectStats.userAuthStats['top5'][1]['fullname']},
+      {data:[[0, projectStats.userAuthStats['top5'][2]['tasks'] ]],  label:projectStats.userAuthStats['top5'][2]['fullname']},
+      {data:[[0, projectStats.userAuthStats['top5'][3]['tasks'] ]],  label:projectStats.userAuthStats['top5'][3]['fullname']},
+      {data:[[0, projectStats.userAuthStats['top5'][4]['tasks'] ]],  label:projectStats.userAuthStats['top5'][4]['fullname']}],
+      {
+        pie     : {show: true, explode: 5},
+        grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
+        HtmlText: false,
+        xaxis   : {showLabels: false},
+        yaxis   : {showLabels: false},
+        legend  : {postion: 'nw'}
+      });
+    })();
+  </script>
 </div>
 
 <!-- END Auth User Stats CARD -->
