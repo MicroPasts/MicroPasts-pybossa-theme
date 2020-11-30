@@ -182,6 +182,10 @@
       </table>
 
     </div>
+    <div class="col-md-6">
+      <canvas id="canvasDist"  height="450" width="800"></canvas>
+
+    </div>
   </div>
 
 </div>
@@ -192,12 +196,12 @@
   new Chart(document.getElementById("canvasDist"), {
     type: 'pie',
     data : {
-      labels:  '' ,
+      labels: [projectStats.userStats['values'][0]['label'],projectStats.userStats['values'][1]['label']] ,
       datasets: [
       {
         label: "Number of Users",
         backgroundColor: ['#3e95cd', '#8e5ea2'],
-        data: ''
+        data: [projectStats.userStats['values'][0]['value'][1],projectStats.userStats['values'][1]['value'][1],]
       }
       ],
       options: {
