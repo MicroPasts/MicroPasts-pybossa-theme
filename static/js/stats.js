@@ -8,5 +8,5 @@ $( document ).ready(function() {
             console.log(result);
         }
     });
-    $("#projectCount").append(result.n_projects);
+    $("#projectCount").append(results.n_projects);
 });
