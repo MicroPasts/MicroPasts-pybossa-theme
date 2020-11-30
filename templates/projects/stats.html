@@ -232,30 +232,32 @@
   Details about Authenticated Users
 </h2>
 <div id="dist-auth" class="col-md-12 shadow-sm p-3 mb-3">
-  <div class="col-md-6">
-    <p><i class="icon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
-    {% if userStats.authenticated.top5 %}
-    <h3>{{_('Top 5 users')}}</h3>
-    <table class="table table-hover table-bordered table-striped">
-      <thead>
-        <tr class="thead-dark">
-          <th>#</th>
-          <th>{{_('User')}}</th>
-          <th>{{_('Tasks')}}</th>
+  <div class="row">
+    <div class="col-md-6">
+      <p><i class="icon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
+      {% if userStats.authenticated.top5 %}
+      <h3>{{_('Top 5 users')}}</h3>
+      <table class="table table-hover table-bordered table-striped">
+        <thead>
+          <tr class="thead-dark">
+            <th>#</th>
+            <th>{{_('User')}}</th>
+            <th>{{_('Tasks')}}</th>
+          </tr>
+        </thead>
+        {% for u in userStats.authenticated.top5 %}
+        <tr>
+          <th>{{loop.index}}</th>
+          <th><a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a></th>
+          <th>{{u.tasks}}</th>
         </tr>
-      </thead>
-      {% for u in userStats.authenticated.top5 %}
-      <tr>
-        <th>{{loop.index}}</th>
-        <th><a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a></th>
-        <th>{{u.tasks}}</th>
-      </tr>
-      {% endfor %}
-    </table>
-    {% endif %}
-  </div>
-  <div id="users" class="col-md-6">
-    <canvas id="userAnsStats"  height="450" width="800"></canvas>
+        {% endfor %}
+      </table>
+      {% endif %}
+    </div>
+    <div id="users" class="col-md-6">
+      <canvas id="userAnsStats"  height="450" width="800"></canvas>
+    </div>
   </div>
 </div>
 
