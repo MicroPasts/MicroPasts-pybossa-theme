@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-  let endpoint = ''
+  let endpoint = 'https://crowdsourced.fitz.ms/api/globalstats';
     $.ajax({
         url: endpoint,
         contentType: "application/json",
