@@ -56,16 +56,10 @@
 <div class="col-md-12 shadow-sm mb-3 p-3">
   <canvas id="line-chart"></canvas>
   <script type="text/javascript">
-    console.log(projectStats.dayStats);
     let data = projectStats.dayStats[3]['values'];
-    console.log(data['values']);
-    console.log(data['values'][0]);
-    console.log(data['values'][1]);
     var quant = [];
     var dates = [];
     data.forEach(function(item, index, array){
-      console.log(item[0]);
-      console.log(item[1]);
       var d = new Date(item[0]);
       var year = d.getYear();
       var month = d.getMonth() + 1;
