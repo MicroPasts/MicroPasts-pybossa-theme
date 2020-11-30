@@ -45,25 +45,18 @@
     </div>
 
     <script type="text/javascript">
-      function removeElementsWithValue(arr, val) {
-    var i = arr.length;
-    while (i--) {
-        if (arr[i] === val) {
-            arr.splice(i, 1);
-        }
-    }
-    return arr;
-}
+
 
       let all = projectStats.hourStats[1]['values'];
       var allFilter = new Array();
       all.forEach(function(item, index, array){
-        var values = new Array();
-        values['x'] = item[0];
-        values['y'] = item[1];
-        allFilter.push(values);
+        if(item['1'] > 0){
+          var values = new Array();
+          values['x'] = item[0];
+          values['y'] = item[1];
+          allFilter.push(values);
+        }
       });
-      removeElementsWithValue(allFilter, 0);
       console.log(allFilter)
       var res = allFilter.map((obj,index) => {
           var x = obj['x']
