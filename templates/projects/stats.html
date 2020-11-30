@@ -64,7 +64,7 @@
         allFilter.push(values);
       });
       removeElementsWithValue(allFilter, 0);
-
+      log.console(allFilter)
       var res = allFilter.map((obj,index) => {
           var x = obj['x']
           var time = moment(x,'HH').format('HH:mm');
