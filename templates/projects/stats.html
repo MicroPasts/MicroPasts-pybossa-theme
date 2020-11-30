@@ -54,7 +54,7 @@
       });
       var res = allFilter.map((obj,index) => {
         console.log(obj['y'])
-          return {x:index,y:obj['y'])}
+          return {x:index,y:obj['y']}
         });
         console.log(res);
       var myChart = new Chart('userAnsHours', {
@@ -62,12 +62,7 @@
         data: {
           datasets: [{
             label: 'All users',
-            data: [{ x: "05:22", y: 12 },
-        { x: "12:13", y: 19 },
-        { x: "13:45", y: 3 },
-        { x: "18:31", y: 5 },
-        { x: "19:05", y: 2 },
-        { x: "22:55", y: 3 }],
+            data: res,
             backgroundColor: ['#000'],
             borderColor: ['#000'],
             pointRadius: 8,
