@@ -104,8 +104,8 @@
   <canvas id="line-chart" width="800" height="450"></canvas>
   <script type="text/javascript">
     var data = projectStats.dayStats[3];
-    console.log(data['values'][0]['label'][0]);
-    console.log(data['values'][0]['value'][1]);
+    console.log(data['values'][0]['label']);
+    console.log(data['values'][0]['value']);
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
