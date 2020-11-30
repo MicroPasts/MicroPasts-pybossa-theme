@@ -53,6 +53,7 @@
         allFilter.push(values);
       });
       var res = allFilter.map((obj,index) => {
+        console.log(obj)
           return {x:index,y:Number(obj[1])}
         });
         console.log(res);
