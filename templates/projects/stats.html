@@ -51,6 +51,8 @@
         values['y'] = item[1];
         allFilter.push(values);
       });
+      var myJsonString = JSON.stringify(allFilter);
+      $("#avgTime").append(myJsonString);
 
       var myChart = new Chart('userAnsHours', {
         type: 'scatter',
