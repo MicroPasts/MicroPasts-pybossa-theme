@@ -182,11 +182,34 @@
       </table>
 
     </div>
-
-
   </div>
 
 </div>
+<script>
+
+
+  new Chart(document.getElementById("canvasDist"), {
+    type: 'pie',
+    data : {
+      labels:  '' ,
+      datasets: [
+      {
+        label: "Number of Users",
+        backgroundColor: ['#3e95cd', '#8e5ea2'],
+        data: userAuthStatsQuant
+      }
+      ],
+      options: {
+        title: {
+          display: true,
+          text: 'Number of tasks by user'
+        }
+      }
+
+    }
+
+  });
+</script>
 <!-- END Number of Answers Stats CARD -->
 
 <!-- Anon User Stats CARD -->
@@ -280,7 +303,7 @@
         datasets: [
         {
           label: "Number of Users",
-          backgroundColor: ['#3e95cd', '#8e5ea2'],
+          backgroundColor: ['#3e95cd', '#8e5ea2', '#000', '#0AB', '#767c87'],
           data: userAuthStatsQuant
         }
         ],
