@@ -104,7 +104,7 @@
 <script>
   console.log(projectStats.dayStats);
 
-  let answers = projectStats.dayStats[1]['values'];
+  let anonymous = projectStats.dayStats[1]['values'];
   console.log(answers['values']);
   console.log(answers['values'][0]);
   console.log(answers['values'][1]);
@@ -121,14 +121,32 @@
     quantAns.push(item[1]);
   });
 
+  let authenticated = projectStats.dayStats[2]['values'];
+  var quantAuth = [];
+  var datesAuth = [];
+  authenticated.forEach(function(item, index, array){
+    var d = new Date(item[0]);
+    var year = d.getYear();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    datesAuth.push(day + '/' + month + '/' + year);
+    quantAuth.push(item[1]);
+  });
+
   new Chart(document.getElementById("answerPerDay"), {
     type: 'line',
     data: {
       labels: datesAns,
       datasets: [{
         data: quantAns,
-        label: "Answers per day",
+        label: "Anonymous users",
         borderColor: "#3e95cd",
+        fill: false
+      },
+      {
+        data: quantAuth,
+        label: "Authenicate users",
+        borderColor: "#000",
         fill: false
       }
       ]
