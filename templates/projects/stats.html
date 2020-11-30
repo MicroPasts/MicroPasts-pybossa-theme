@@ -188,11 +188,12 @@
     </div>
   </div>
   <script>
-    console.log(projectStats.userAuthStats);
+    console.log(projectStats.userAuthStats.top5);
+
     new Chart(document.getElementById("userAnsStats"), {
       type: 'pie',
       data : {
-        labels: [projectStats.userStats['values'][0]['label'],projectStats.userStats['values'][1]['label'] ],
+        labels: [projectStats.userAuthStats.top5['values'][0]['label'],projectStats.userStats['values'][1]['label'] ],
         datasets: [
         {
           label: "Number of Users",
@@ -201,7 +202,6 @@
         }
         ],
         options: {
-          // legend: { display: false },
           title: {
             display: true,
             text: 'Number of users per category'
