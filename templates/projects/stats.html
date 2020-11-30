@@ -52,9 +52,10 @@
         values['y'] = item[1];
         allFilter.push(values);
       });
-      var myJsonString = JSON.stringify(allFilter);
-      $("#test").append(allFilter);
-
+      var res = allFilter.map((obj,index) => {
+          return {x:index,y:Number(obj)}
+        });
+        console.log(res);
       var myChart = new Chart('userAnsHours', {
         type: 'scatter',
         data: {
