@@ -45,20 +45,9 @@
   <script type="text/javascript">
     console.log(projectStats.hourStats[1]['values']);
 
-      var ctx = document.getElementById("userAnsHours");
-      var data = {
-          datasets: [
-              {
-                  label : "Authenticated",
-                  data: [
 
-                  ],
-                  backgroundColor:"#444",
-                  hoverBackgroundColor: "#FF6384",
-              }
-          ]
-      };
-      var myBubbleChart = new Chart(ctx,{
+      new Chart(document.getElementById("userAnsHours"), {
+
         type: 'bubble',
   data: {
     labels: "Africa",
