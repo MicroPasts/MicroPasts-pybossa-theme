@@ -102,7 +102,6 @@
 </div>
 
 <script>
-  console.log(projectStats.dayStats);
 
   let anonymous = projectStats.dayStats[1]['values'];
   var quantAns = [];
@@ -169,9 +168,9 @@
       <table class="table table-hover table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
-            <th>{{_('Type')}}</th>
-            <th>{{_('Users')}}</th>
-            <th>{{_('Percentage')}}</th>
+            <th>Type</th>
+            <th>Users</th>
+            <th>Percentage</th>
           </tr>
         </thead>
         {% for k in userStats.keys() if k != 'geo' %}
@@ -185,10 +184,11 @@
 
     </div>
     <div id="users" class="col-md-6">
-      <canvas id="userAnsStats"  height="450" width="800"></canvas>
+      <canvas id="userAnsStats"></canvas>
     </div>
   </div>
   <script>
+    console.log(projectStats.userStats);
     new Chart(document.getElementById("userAnsStats"), {
       type: 'pie',
       data : {
