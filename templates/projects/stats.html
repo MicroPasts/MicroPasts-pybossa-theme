@@ -67,7 +67,6 @@
       dates.push(day + '/' + month + '/' + year);
       quant.push(item[1]);
     });
-    console.log(quant);
 
     new Chart(document.getElementById("line-chart"), {
       type: 'line',
@@ -120,7 +119,7 @@
     datesAns.push(day + '/' + month + '/' + year);
     quantAns.push(item[1]);
   });
-  console.log(quant);
+  console.log(quantAns);
 
   new Chart(document.getElementById("answerPerDay"), {
     type: 'line',
