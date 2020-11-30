@@ -53,14 +53,14 @@
         allFilter.push(values);
       });
       var res = allFilter.map((obj,index) => {
-          return { x:index, y:obj['y'] }
+          return { x:moment(obj['x'].toString(),"LT"), y:obj['y'] }
         });
       var myChart = new Chart('userAnsHours', {
         type: 'scatter',
         data: {
           datasets: [{
             label: 'All users',
-            data: [res],
+            data: res,
             backgroundColor: ['#000'],
             borderColor: ['#000'],
             pointRadius: 8,
