@@ -268,7 +268,7 @@
     userAuthStatsLabels = [];
     userAuthStats.forEach(function(item, index, array){
       userAuthStatsLabels.push(item['tasks']);
-      userAuthStatsQuant.push(item['fullname']);
+      userAuthStatsQuant.push(item['fullname'].toLocaleString());
     });
     console.log(userAuthStatsLabels);
     console.log(userAuthStatsQuant);
