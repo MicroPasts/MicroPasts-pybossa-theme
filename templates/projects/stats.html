@@ -103,15 +103,16 @@
 
 <script>
   console.log(projectStats.dayStats);
+
   let answers = projectStats.dayStats[1]['values'];
   console.log(answers['values']);
   console.log(answers['values'][0]);
   console.log(answers['values'][1]);
+
   var quantAns = [];
   var datesAns = [];
-  data.forEach(function(item, index, array){
-    console.log(item[0]);
-    console.log(item[1]);
+
+  answers.forEach(function(item, index, array){
     var d = new Date(item[0]);
     var year = d.getYear();
     var month = d.getMonth() + 1;
@@ -119,7 +120,6 @@
     datesAns.push(day + '/' + month + '/' + year);
     quantAns.push(item[1]);
   });
-  console.log(quantAns);
 
   new Chart(document.getElementById("answerPerDay"), {
     type: 'line',
