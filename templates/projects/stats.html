@@ -53,7 +53,7 @@
         allFilter.push(values);
       });
       var myJsonString = JSON.stringify(allFilter);
-      $("#test").append(allFilter[0]['x']);
+      $("#test").append(allFilter);
 
       var myChart = new Chart('userAnsHours', {
         type: 'scatter',
