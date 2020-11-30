@@ -95,13 +95,9 @@
 
     </div> <!-- /container -->
 
+    {% block stats %}{%endblock%}
     {% block sketchfab %}{% endblock %}
 
-    {% if show_cookies_warning %}
-    <div id="cookies_warning">
-        <p>Cookies help us deliver our services. By using our services, you agree to our use of cookies. <button class="btn btn-sm btn-success" onclick="accept_cookies()"><i class="glyphicon glyphicon-thumbs-up"></i> OK</button> <a class="btn btn-sm btn-default" href="{{url_for('help.cookies_policy')}}"><i class="glyphicon glyphicon-info-sign"></i> More info</a></p>
-    </div>
-    {% endif %}
 
     {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
 
