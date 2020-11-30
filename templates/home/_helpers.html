@@ -1,25 +1,3 @@
 {% macro render_stats -%}
-import json
-import requests
-
-
-def api_request(request):
-    '''Returns the data from a request (eg /groups)'''
-    url = f'https://crowdsourced.fitz.ms/api/globalstats'
-    req = requests.get(url)
-
-    if not req.content:
-        return None
-
-    # We only want the data associated with the "response" key
-    return json.loads(req.content)['response']
-
-def get_stats(group_id):
-    response = api_request()
-
-    # Just return the messages (and none of the metadata)
-    return response
-
-data = get_stats
-{{ data }}
+{{ stats }}
 {% endmacro %}
