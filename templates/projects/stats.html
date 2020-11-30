@@ -43,7 +43,7 @@
     </div>
 
   <script type="text/javascript">
-    console.log(projectStats.hourStats);
+    console.log(projectStats.hourStats[1]['values']);
 
       var ctx = document.getElementById("userAnsHours");
       var data = {
@@ -51,7 +51,7 @@
               {
                   label : "Authenticated",
                   data: [
-                      projectStats.hourStats[1]['values']
+
                   ],
                   backgroundColor:"#444",
                   hoverBackgroundColor: "#FF6384",
