@@ -37,6 +37,36 @@
 <div class="col-md-12 shadow-sm mb-3 mt-3">
   <div id="hourStats" style="margin:0;height:500px;">
   </div>
+  <div class="row">
+    <div class="col-md-6">
+      <canvas id="distByHours" width="300" height="300"></canvas>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  new Chart(document.getElementById("userAnsStats"), {
+    type: 'line',
+    data : {
+      labels: [projectStats.userStats['values'][0]['label'],projectStats.userStats['values'][1]['label'] ],
+      datasets: [
+      {
+        label: "Number of Users",
+        backgroundColor: ['#3e95cd', '#8e5ea2'],
+        data: [projectStats.userStats['values'][0]['value'][1], projectStats.userStats['values'][1]['value'][1]]
+      }
+      ],
+      options: {
+        // legend: { display: false },
+        title: {
+          display: true,
+          text: 'Number of users per category'
+        }
+      }
+
+    }
+
+  });
+</script>
   <script>
     (function(){
       function answersPerHour(obj) {
@@ -46,6 +76,8 @@
       function hours(obj) {
         return (parseInt(obj) + ":00");
       }
+      console.log(projectStats.hourStats[1]['values']);
+      console.log(projectStats.hourStats[2]['values']);
       var container = document.getElementById('hourStats');
       var graph = Flotr.draw(container, [{data: projectStats.hourStats[1]['values'], label:projectStats.hourStats[1]['label']},{ data:projectStats.hourStats[2]['values'],label:projectStats.hourStats[2]['label'] }], {
         bubbles : {show: true, baseRadius:5},
@@ -134,7 +166,6 @@
 <!-- Day Stats CARD -->
 <h2 class="mt-3">{{_('Answers per day')}}</h2>
 <div class="col-md-12 shadow-sm mb-3 p-3">
-  <p>{{_('select an area to zoom, click to reset the chart')}}</p>
   <div id="dayStats" style="margin:0;height:500px;"></div>
   <script>
     (function(){
@@ -148,6 +179,8 @@
       function answersPerDay(obj) {
         return (parseInt(obj.y) + " {{_('answers were submitted this day')}} " + date(obj.x));
       }
+
+
       var options = {
         xaxis   : {mode:'time'},
         yaxis   : {min: 0, tickDecimals: 0},
