@@ -270,6 +270,9 @@
       userAuthStatsLabels.push(item['tasks']);
       userAuthStatsQuant.push(item['fullname']);
     });
+    console.log(userAuthStatsLabels);
+    console.log(userAuthStatsQuant);
+
     new Chart(document.getElementById("userAnsStats"), {
       type: 'pie',
       data : {
