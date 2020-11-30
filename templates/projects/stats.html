@@ -45,6 +45,16 @@
     </div>
 
     <script type="text/javascript">
+      function removeElementsWithValue(arr, val) {
+    var i = arr.length;
+    while (i--) {
+        if (arr[i] === val) {
+            arr.splice(i, 1);
+        }
+    }
+    return arr;
+}
+
       let all = projectStats.hourStats[1]['values'];
       var allFilter = new Array();
       all.forEach(function(item, index, array){
@@ -54,11 +64,11 @@
         allFilter.push(values);
       });
       var res = allFilter.map((obj,index) => {
-
           var x = obj['x']
           var time = moment(x,'HH').format('HH:mm');
           return { x:time, y:obj['y'] }
         });
+        removeElementsWithValue(res, 0);
       var myChart = new Chart('userAnsHours', {
         type: 'scatter',
         data: {
