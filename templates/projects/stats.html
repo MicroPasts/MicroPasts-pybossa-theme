@@ -229,13 +229,10 @@
   <div id="users" class="col-md-6">
     <canvas id="userAnsStats"  height="450" width="800"></canvas>
   </div>
-  <div id="userAnsStats" class="col-md-4" style="height: 250px; width:250px;">
-  </div>
-
 
   <script>
     var data = {{users|safe}};
-    new Chart(document.getElementById("canvasUsers"), {
+    new Chart(document.getElementById("userAnsStats"), {
       type: 'pie',
       data : {
         labels: [label:projectStats.userStats['values'][0]['label'],label:projectStats.userStats['values'][1]['label'] ],
