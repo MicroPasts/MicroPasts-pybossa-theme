@@ -231,11 +231,10 @@
   </div>
 
   <script>
-    var data = {{users|safe}};
     new Chart(document.getElementById("userAnsStats"), {
       type: 'pie',
       data : {
-        labels: [label:projectStats.userStats['values'][0]['label'],label:projectStats.userStats['values'][1]['label'] ],
+        labels: [projectStats.userStats['values'][0]['label'],projectStats.userStats['values'][1]['label'] ],
         datasets: [
         {
           label: "Number of Users",
