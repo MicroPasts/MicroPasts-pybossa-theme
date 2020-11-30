@@ -77,9 +77,9 @@
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
-      labels: [projectStats.dayStats[3]['label']],
+      labels: dates,
       datasets: [{
-          data: [projectStats.dayStats[3]['values']],
+          data: quant,
           label: "Completed",
           borderColor: "#3e95cd",
           fill: false
