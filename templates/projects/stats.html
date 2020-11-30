@@ -37,6 +37,7 @@
 <h2 class="mt-3 text-center">
   Distribution of Answers per Hour
 </h2>
+<div id="test"><div>
 <div class="col-md-12 shadow-sm mb-3 mt-3">
     <div class="col-md-12">
       <canvas id="userAnsHours" width="300" height="300"></canvas>
@@ -52,7 +53,7 @@
         allFilter.push(values);
       });
       var myJsonString = JSON.stringify(allFilter);
-      $("#avgTime").append(myJsonString);
+      $("#test").append(myJsonString);
 
       var myChart = new Chart('userAnsHours', {
         type: 'scatter',
