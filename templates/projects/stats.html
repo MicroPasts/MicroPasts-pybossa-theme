@@ -70,7 +70,11 @@
     data.forEach(function(item, index, array){
       console.log(item[0]);
       console.log(item[1]);
-      dates.push(new Date(item[0]));
+      var d = new Date(item[0]);
+      var year = d.getFullYear();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      dates.push(year + '-' + month + '-' + day);
       quant.push(item[1]);
     });
     console.log(quant);
