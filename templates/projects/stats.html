@@ -63,6 +63,7 @@
     console.log(projectStats.dayStats);
     var data = projectStats.dayStats[3];
     console.log(data['values']);
+    console.log(data['values'][0].[0]);
     console.log(data['label']);
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
@@ -243,7 +244,7 @@
   <div id="userAuthStats" class="col-md-12">
   </div>
   <script>
-  
+
   </script>
 </div>
 
