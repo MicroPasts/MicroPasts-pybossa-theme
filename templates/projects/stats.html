@@ -256,7 +256,7 @@
       {% endif %}
     </div>
     <div class="col-md-6">
-      <canvas id="userAnsStats"  height="450" width="800"></canvas>
+      <canvas id="canvasUserStats"    height="450" width="800"></canvas>
     </div>
   </div>
 </div>
@@ -273,15 +273,15 @@
     console.log(userAuthStatsLabels);
     console.log(userAuthStatsQuant);
 
-    new Chart(document.getElementById("userAnsStats"), {
+    new Chart(document.getElementById("canvasUserStats"), {
       type: 'pie',
       data : {
-        labels:  [userAuthStatsLabels] ,
+        labels:  userAuthStatsLabels ,
         datasets: [
         {
           label: "Number of Users",
           backgroundColor: ['#3e95cd', '#8e5ea2'],
-          data: [userAuthStatsQuant]
+          data: userAuthStatsQuant
         }
         ],
         options: {
