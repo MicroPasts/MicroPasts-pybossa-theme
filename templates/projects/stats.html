@@ -98,11 +98,35 @@
 <!-- END Hour Stats CARD -->
 
 <!-- Day Stats Total CARD -->
-<h2 class="text-center mt-3">{{_('Completed Tasks in the last 15 days')}} </h2>
+<h2 class="text-center mt-3">
+  Completed Tasks in the last 15 days
+</h2>
 
 <div class="col-md-12 shadow-sm mb-3 p-3">
-  <p>{{_('select an area to zoom, click to reset the chart')}}</p>
-  <div id="dayStatsTotal" style="margin:0;height:500px;"></div>
+  <canvas id="line-chart" width="800" height="450"></canvas>
+  <script type="text/javascript">
+    new Chart(document.getElementById("line-chart"), {
+    type: 'line',
+    data: {
+      labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+      datasets: [{
+          data: [projectStats.dayStats[3]['values'][0][1]],
+          label: "Completed",
+          borderColor: "#3e95cd",
+          fill: false
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Completed Tasks in the last 15 days'
+      }
+    }
+  });
+
+  </script>
+
   <script>
     (function(){
       function date(obj) {
