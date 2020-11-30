@@ -52,7 +52,8 @@
         allFilter.push(values);
       });
 
-      console.log(JSON.stringify(allFilter));
+    var json = JSON.stringify(allFilter);
+    console.log(json);
       var myChart = new Chart('userAnsHours', {
         type: 'scatter',
         data: {
