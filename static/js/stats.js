@@ -6,7 +6,7 @@ $( document ).ready(function() {
         dataType: 'json',
         success: function(result){
             console.log(result);
+            $("#projectCount").append(result.n_projects);
         }
     });
-    $("#projectCount").append(results.n_projects);
 });
