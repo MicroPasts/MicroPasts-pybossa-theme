@@ -45,9 +45,11 @@
     <script type="text/javascript">
       console.log(projectStats.hourStats[1]['values']);
       let all = projectStats.hourStats[1]['values'];
-      var allFilter = [];
+      var allFilter = new Array();
       all.forEach(function(item, index, array){
         console.log(item[0]);
+        allFilter.x.push(item[0]);
+        console.log(item[1]);
       });
       console.log(allFilter)
       var myChart = new Chart('userAnsHours', {
