@@ -46,7 +46,7 @@
       console.log(projectStats.hourStats[1]['values']);
       let all = projectStats.hourStats[1]['values'];
       var allFilter = [];
-      allFilter.forEach(function(item, index, array){
+      all.forEach(function(item, index, array){
         allFilter['x'].push(item[0]);
         allFilter['y'].push(item[1]);
       });
