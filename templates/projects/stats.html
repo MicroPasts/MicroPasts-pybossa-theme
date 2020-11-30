@@ -11,7 +11,6 @@
 {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not current_user.admin)) %}
 {{ privacy.render_lock_page() }}
 {% else %}
-<br/>
 
 {% if private %}
 <div class="row">
@@ -39,12 +38,9 @@
   Distribution of Answers per Hour
 </h2>
 <div class="col-md-12 shadow-sm mb-3 mt-3">
-
-  <div class="row">
     <div class="col-md-12">
       <canvas id="userAnsHours" width="300" height="300"></canvas>
     </div>
-  </div>
 
   <script type="text/javascript">
 
@@ -78,6 +74,7 @@
       quant.push(item[1]);
     });
     console.log(quant);
+
     new Chart(document.getElementById("line-chart"), {
       type: 'line',
       data: {
@@ -112,9 +109,44 @@
 </div>
 
 <script>
+  let data = projectStats.dayStats[1]['values'];
+  console.log(data['values']);
+  console.log(data['values'][0]);
+  console.log(data['values'][1]);
+  var quant = [];
+  var dates = [];
+  data.forEach(function(item, index, array){
+    console.log(item[0]);
+    console.log(item[1]);
+    var d = new Date(item[0]);
+    var year = d.getYear();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    dates.push(day + '/' + month + '/' + year);
+    quant.push(item[1]);
+  });
+  console.log(quant);
 
+  new Chart(document.getElementById("answerPerDay"), {
+    type: 'line',
+    data: {
+      labels: dates,
+      datasets: [{
+        data: quant,
+        label: "Answers per day",
+        borderColor: "#3e95cd",
+        fill: false
+      }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Completed Tasks in the last 15 days'
+      }
+    }
+  });
 </script>
-</div>
 <!-- END Day Stats CARD -->
 
 
