@@ -103,8 +103,8 @@
 <div class="col-md-12 shadow-sm mb-3 p-3">
   <canvas id="line-chart" width="800" height="450"></canvas>
   <script type="text/javascript">
-    console.log(projectStats.dayStats[3]);
-    console.log(projectStats.dayStats[3]['label'][1]);
+    console.log(projectStats.dayStats[3]['values'][0]);
+    console.log(projectStats.dayStats[3]['values'][1]);
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
