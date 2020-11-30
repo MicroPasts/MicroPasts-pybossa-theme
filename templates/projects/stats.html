@@ -113,8 +113,8 @@
   console.log(answers['values']);
   console.log(answers['values'][0]);
   console.log(answers['values'][1]);
-  var quant = [];
-  var dates = [];
+  var quantAns = [];
+  var datesAns = [];
   data.forEach(function(item, index, array){
     console.log(item[0]);
     console.log(item[1]);
@@ -122,17 +122,17 @@
     var year = d.getYear();
     var month = d.getMonth() + 1;
     var day = d.getDate();
-    dates.push(day + '/' + month + '/' + year);
-    quant.push(item[1]);
+    datesAns.push(day + '/' + month + '/' + year);
+    quantAns.push(item[1]);
   });
   console.log(quant);
 
   new Chart(document.getElementById("answerPerDay"), {
     type: 'line',
     data: {
-      labels: dates,
+      labels: datesAns,
       datasets: [{
-        data: quant,
+        data: quantAns,
         label: "Answers per day",
         borderColor: "#3e95cd",
         fill: false
