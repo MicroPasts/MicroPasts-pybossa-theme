@@ -43,7 +43,6 @@
     </div>
 
     <script type="text/javascript">
-      console.log(projectStats.hourStats[1]['values']);
       let all = projectStats.hourStats[1]['values'];
       var allFilter = new Array();
       all.forEach(function(item, index, array){
@@ -52,51 +51,58 @@
         values['y'] = item[1];
         allFilter.push(values);
       });
+      d = array[{ x: "05:22", y: 12 },
+        { x: "12:13", y: 19 },
+        { x: "13:45", y: 3 },
+        { x: "18:31", y: 5 },
+        { x: "19:05", y: 2 },
+        { x: "22:55", y: 3 }];
+      console.log(d);
       console.log(allFilter)
       var myChart = new Chart('userAnsHours', {
-  type: 'scatter',
-  data: {
-    datasets: [{
-      label: 'All users',
-      data: allFilter,
-      backgroundColor: ['#000'],
-      borderColor: ['#000'],
-      pointRadius: 8,
-      pointHoverRadius: 8
-    }]
-  },
-  options: {
-    responsive: true,
-    legend: {
-        display: false
-    },
-    scales: {
-      xAxes: [{
-        type: 'time',
-        time: {
-          parser: 'HH:mm',
-          unit: 'hour',
-          stepSize: 1,
-          displayFormats: {
-            hour: 'HH:mm'
-          },
-          tooltipFormat: 'HH:mm'
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'All users',
+            data: allFilter,
+            backgroundColor: ['#000'],
+            borderColor: ['#000'],
+            pointRadius: 8,
+            pointHoverRadius: 8
+          }]
         },
-        ticks: {
-          min: '00:00',
-          max: '24:00',
-          callback: (value, index) => index == 24 ? '24:00' : value
+        options: {
+          responsive: true,
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              type: 'time',
+              time: {
+                parser: 'HH:mm',
+                unit: 'hour',
+                stepSize: 1,
+                displayFormats: {
+                  hour: 'HH:mm'
+                },
+                tooltipFormat: 'HH:mm'
+              },
+              ticks: {
+                min: '00:00',
+                max: '24:00',
+                callback: (value, index) => index == 24 ? '24:00' : value
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                stepSize: 5
+              }
+            }]
+          }
         }
-      }],
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          stepSize: 5
-        }
-      }]
-    }
-  }
-});
+      });
     </script>
 
 </div>
