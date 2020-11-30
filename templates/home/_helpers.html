@@ -1,3 +1,4 @@
+{% macro render_stats -%}
 import json
 import requests
 
@@ -19,11 +20,6 @@ def get_stats(group_id):
     # Just return the messages (and none of the metadata)
     return response
 
-if __name__ == '__main__':
-    messages = get_messages_for_group(YOUR_GROUP_ID)
-    print(messages[0])
-
-{% macro render_stats -%}
-  data = get_stats
-  {{ data }}
+data = get_stats
+{{ data }}
 {% endmacro %}
