@@ -267,8 +267,8 @@
     userAuthStatsQuant = [];
     userAuthStatsLabels = [];
     userAuthStats.forEach(function(item, index, array){
-      userAuthStatsLabels.push(item['tasks']);
-      userAuthStatsQuant.push(item['fullname'].toLocaleString());
+      userAuthStatsLabels.push(item['fullname']);
+      userAuthStatsQuant.push(item['tasks']);
     });
     console.log(userAuthStatsLabels);
     console.log(userAuthStatsQuant);
@@ -276,12 +276,12 @@
     new Chart(document.getElementById("canvasUserStats"), {
       type: 'pie',
       data : {
-        labels:  ['test','fail'] ,
+        labels:  userAuthStatsLabels ,
         datasets: [
         {
           label: "Number of Users",
           backgroundColor: ['#3e95cd', '#8e5ea2'],
-          data: [1,2]
+          data: userAuthStatsQuant
         }
         ],
         options: {
