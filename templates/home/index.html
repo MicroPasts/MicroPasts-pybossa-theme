@@ -4,7 +4,7 @@
 
 {% import "projects/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
-
+{% import "home/_helpers" as stats_helper %}
 {% block sketchfab %}
 
 <div class="container mb-3 mt-3">
@@ -83,7 +83,7 @@
 
 
 {% block content %}
-{{ stats }}
+{{ stats_helper.render }}
 {% if featured %}
 {{ helper.render_grid_projects(featured, 'Featured Projects', upload_method, current_user, projects_class='home projects', readmore_text='Contribute', title_size='2') }}
 {% endif %}
