@@ -54,7 +54,7 @@
       });
       var res = allFilter.map((obj,index) => {
         console.log(obj['y'])
-          return {x:index,y:Number(obj[1])}
+          return {x:index,y:obj['y'])}
         });
         console.log(res);
       var myChart = new Chart('userAnsHours', {
