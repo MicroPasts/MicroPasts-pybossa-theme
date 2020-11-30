@@ -207,29 +207,30 @@
 </h2>
 
 <div id="dist-answers" class="col-md-12 shadow-sm mb-3 p-3">
-  <div class="col-md-6">
-    <table class="table table-hover table-bordered table-striped">
-      <thead class="thead-dark">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-hover table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>{{_('Type')}}</th>
+            <th>{{_('Users')}}</th>
+            <th>{{_('Percentage')}}</th>
+          </tr>
+        </thead>
+        {% for k in userStats.keys() if k != 'geo' %}
         <tr>
-          <th>{{_('Type')}}</th>
-          <th>{{_('Users')}}</th>
-          <th>{{_('Percentage')}}</th>
+          <th>{{k | capitalize}}</th>
+          <th>{{userStats[k].taskruns}}</th>
+          <th>{{userStats[k].pct_taskruns}} %</th>
         </tr>
-      </thead>
-      {% for k in userStats.keys() if k != 'geo' %}
-      <tr>
-        <th>{{k | capitalize}}</th>
-        <th>{{userStats[k].taskruns}}</th>
-        <th>{{userStats[k].pct_taskruns}} %</th>
-      </tr>
-      {% endfor %}
-    </table>
+        {% endfor %}
+      </table>
 
+    </div>
+    <div id="users" class="col-md-6">
+      <canvas id="userAnsStats"  height="450" width="800"></canvas>
+    </div>
   </div>
-  <div id="users" class="col-md-6">
-    <canvas id="userAnsStats"  height="450" width="800"></canvas>
-  </div>
-
   <script>
     new Chart(document.getElementById("userAnsStats"), {
       type: 'pie',
