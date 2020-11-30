@@ -51,14 +51,8 @@
         values['y'] = item[1];
         allFilter.push(values);
       });
-      d = array[{ x: "05:22", y: 12 },
-        { x: "12:13", y: 19 },
-        { x: "13:45", y: 3 },
-        { x: "18:31", y: 5 },
-        { x: "19:05", y: 2 },
-        { x: "22:55", y: 3 }];
-      console.log(d);
-      console.log(allFilter)
+
+      console.log(JSON.stringify(allFilter));
       var myChart = new Chart('userAnsHours', {
         type: 'scatter',
         data: {
