@@ -65,6 +65,10 @@
     console.log(data['values']);
     console.log(data['values'][0]);
     console.log(data['values'][1]);
+    data.forEach(function(item, index, array){
+      console.log(item,index)
+    });
+
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
