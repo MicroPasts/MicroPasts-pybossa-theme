@@ -105,13 +105,13 @@
 <div class="col-md-12 shadow-sm mb-3 p-3">
   <canvas id="line-chart" width="800" height="450"></canvas>
   <script type="text/javascript">
-    console.log(projectStats.dayStats[3]['values']);
+    console.log(projectStats.dayStats[3]['label']);
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
-      labels: [projectStats.dayStats[3]['values'][0]],
+      labels: [projectStats.dayStats[3]['label']],
       datasets: [{
-          data: [projectStats.dayStats[3]['values'][1]],
+          data: [projectStats.dayStats[3]['values'],
           label: "Completed",
           borderColor: "#3e95cd",
           fill: false
