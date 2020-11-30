@@ -33,7 +33,7 @@
   {% if active_link == 'info' %}
   <p><em>{{ overall_progress | round | int }}% {{_('completed')}}</em></p>
   {% endif %}
-  <div class="col-md-12 p-3 shadow-sm mb-3">
+  <div class="container">
   {% block projectcontent %}
 
   {% endblock %}
@@ -53,5 +53,4 @@
 
 {% block stats %}
 {{helper.render_contribute_button(project)}}
-
 {% endblock %}
