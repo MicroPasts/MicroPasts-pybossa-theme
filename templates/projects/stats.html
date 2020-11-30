@@ -47,11 +47,11 @@
     <script type="text/javascript">
 
 
-      let all = projectStats.hourStats[1]['values'];
-      let auth = projectStats.hourStats[0]['values'];
-      let anon = projectStats.hourStats[2]['values'];
-      console.log(projectStats.hourStats)
-      console.log(anon)
+      let all = projectStats.hourStats[0]['values'];
+      // let auth = projectStats.hourStats[0]['values'];
+      // let anon = projectStats.hourStats[2]['values'];
+      // console.log(projectStats.hourStats)
+      // console.log(anon)
       var allFilter = new Array();
       all.forEach(function(item, index, array){
         if(item['1'] > 0){
