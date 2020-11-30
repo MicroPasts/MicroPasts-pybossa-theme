@@ -161,7 +161,6 @@
 <h2 class="mt-3">
   Distribution of Answers
 </h2>
-
 <div id="dist-answers" class="col-md-12 shadow-sm mb-3 p-3">
   <div class="row">
     <div class="col-md-6">
@@ -183,40 +182,10 @@
       </table>
 
     </div>
-    <div id="users" class="col-md-6">
-      <canvas id="userAnsStats"></canvas>
-    </div>
+
+
   </div>
-  <script>
-    let userAuthStats = projectStats.userAuthStats.top5;
-    var userAuthStatsQuant = [];
-    var userAuthStatsLabels = [];
-    userAuthStats.forEach(function(item, index, array){
-      userAuthStatsLabels.push(item['tasks']);
-      userAuthStatsQuant.push(item['fullname']);
-    });
-    new Chart(document.getElementById("userAnsStats"), {
-      type: 'pie',
-      data : {
-        labels: [ userAuthStatsLabels ],
-        datasets: [
-        {
-          label: "Number of Users",
-          backgroundColor: ['#3e95cd', '#8e5ea2', '#000', 'blue', 'red'],
-          data: [userAuthStatsQuant]
-        }
-        ],
-        options: {
-          title: {
-            display: true,
-            text: 'Number of tasks by user'
-          }
-        }
 
-      }
-
-    });
-  </script>
 </div>
 <!-- END Number of Answers Stats CARD -->
 
@@ -263,13 +232,13 @@
   Details about Authenticated Users
 </h2>
 <div id="dist-auth" class="col-md-12 shadow-sm p-3 mb-3">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <p><i class="icon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
     {% if userStats.authenticated.top5 %}
     <h3>{{_('Top 5 users')}}</h3>
     <table class="table table-hover table-bordered table-striped">
       <thead>
-        <tr>
+        <tr class="thead-dark">
           <th>#</th>
           <th>{{_('User')}}</th>
           <th>{{_('Tasks')}}</th>
@@ -285,10 +254,39 @@
     </table>
     {% endif %}
   </div>
-  <div id="userAuthStats" class="col-md-12">
+  <div id="users" class="col-md-6">
+    <canvas id="userAnsStats"></canvas>
   </div>
-  <script>
 
+  <script>
+    let userAuthStats = projectStats.userAuthStats.top5;
+    var userAuthStatsQuant = [];
+    var userAuthStatsLabels = [];
+    userAuthStats.forEach(function(item, index, array){
+      userAuthStatsLabels.push(item['tasks']);
+      userAuthStatsQuant.push(item['fullname']);
+    });
+    new Chart(document.getElementById("userAnsStats"), {
+      type: 'pie',
+      data : {
+        labels: [ userAuthStatsLabels ],
+        datasets: [
+        {
+          label: "Number of Users",
+          backgroundColor: ['#3e95cd', '#8e5ea2', '#000', 'blue', 'red'],
+          data: [userAuthStatsQuant]
+        }
+        ],
+        options: {
+          title: {
+            display: true,
+            text: 'Number of tasks by user'
+          }
+        }
+
+      }
+
+    });
   </script>
 </div>
 
