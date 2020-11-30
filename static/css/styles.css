@@ -542,3 +542,7 @@ h1.text-white.tag {
 .share a {
   color: #000;
 }
+.col-md-12.text-center.counts {
+    font-family: 'Lora', serif;
+    font-size: 4vw;
+}
