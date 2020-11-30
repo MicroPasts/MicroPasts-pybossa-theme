@@ -206,23 +206,7 @@
   <div id="userAnonStats" class="col-md-12">
   </div>
   <script>
-    (function(){
-      var container = document.getElementById('userAnonStats');
-      var graph = Flotr.draw(container, [
-      {data:[[0, projectStats.userAnonStats['top5'][0]['tasks'] ]],  label:'{{_('User')}} 1'},
-      {data:[[0, projectStats.userAnonStats['top5'][1]['tasks'] ]],  label:'{{_('User')}} 2'},
-      {data:[[0, projectStats.userAnonStats['top5'][2]['tasks'] ]],  label:'{{_('User')}} 3'},
-      {data:[[0, projectStats.userAnonStats['top5'][3]['tasks'] ]],  label:'{{_('User')}} 4'},
-      {data:[[0, projectStats.userAnonStats['top5'][4]['tasks'] ]],  label:'{{_('User')}} 5'}],
-      {
-        pie     : {show: true, explode: 5},
-        grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-        HtmlText: false,
-        xaxis   : {showLabels: false},
-        yaxis   : {showLabels: false},
-        legend  : {postion: 'se'}
-      });
-    })();
+    
   </script>
 </div>
 <!-- END Anon User Stats CARD -->
