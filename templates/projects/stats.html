@@ -255,7 +255,7 @@
       </table>
       {% endif %}
     </div>
-    <div id="users" class="col-md-6">
+    <div class="col-md-6">
       <canvas id="userAnsStats"  height="450" width="800"></canvas>
     </div>
   </div>
@@ -264,8 +264,8 @@
 
   <script>
     let userAuthStats = projectStats.userAuthStats.top5;
-    var userAuthStatsQuant = [];
-    var userAuthStatsLabels = [];
+    userAuthStatsQuant = [];
+    userAuthStatsLabels = [];
     userAuthStats.forEach(function(item, index, array){
       userAuthStatsLabels.push(item['tasks']);
       userAuthStatsQuant.push(item['fullname']);
