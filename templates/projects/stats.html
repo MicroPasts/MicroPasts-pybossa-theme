@@ -80,9 +80,7 @@
       function hours(obj) {
         return (parseInt(obj) + ":00");
       }
-      console.log(projectStats);
-      console.log(projectStats.hourStats[1]['values']);
-      console.log(projectStats.hourStats[2]['values']);
+  
       var container = document.getElementById('hourStats');
       var graph = Flotr.draw(container, [{data: projectStats.hourStats[1]['values'], label:projectStats.hourStats[1]['label']},{ data:projectStats.hourStats[2]['values'],label:projectStats.hourStats[2]['label'] }], {
         bubbles : {show: true, baseRadius:5},
@@ -105,7 +103,7 @@
 <div class="col-md-12 shadow-sm mb-3 p-3">
   <canvas id="line-chart" width="800" height="450"></canvas>
   <script type="text/javascript">
-    console.log(projectStats.dayStats[3]['label']);
+    console.log(projectStats.dayStats[3]['label'][0]);
     new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
