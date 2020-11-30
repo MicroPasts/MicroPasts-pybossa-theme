@@ -79,39 +79,41 @@
     });
     console.log(quant);
     new Chart(document.getElementById("line-chart"), {
-    type: 'line',
-    data: {
-      labels: dates,
-      datasets: [{
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{
           data: quant,
           label: "Completed",
           borderColor: "#3e95cd",
           fill: false
         }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Completed Tasks in the last 15 days'
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Completed Tasks in the last 15 days'
+        }
       }
-    }
-  });
+    });
 
   </script>
-
-
 </div>
-<!-- END Day Stats CARD -->
+<!-- END Day Stats  -->
 
 
-<!-- Day Stats CARD -->
-<h2 class="mt-3">{{_('Answers per day')}}</h2>
+<!-- Day Stats  -->
+<h2 class="mt-3">
+  Answers per day
+</h2>
 <div class="col-md-12 shadow-sm mb-3 p-3">
-  <div id="dayStats" style="margin:0;height:500px;"></div>
-  <script>
+  <canvas id="answerPerDay"></canvas>
+</div>
 
-  </script>
+<script>
+
+</script>
 </div>
 <!-- END Day Stats CARD -->
 
