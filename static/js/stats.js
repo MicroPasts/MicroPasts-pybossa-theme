@@ -7,9 +7,9 @@ $( document ).ready(function() {
         success: function(result){
             console.log(result);
             $("#projectCount").append(result.n_projects);
-            $("#userCount").append(result.n_users);
+            $("#userCount").append(result.n_users.toLocaleString());
             var completed = result.n_tasks - result.n_pending_tasks;
-            $("#completedTasks").append(completed);
+            $("#completedTasks").append(completed.toLocaleString());
         }
     });
 });
