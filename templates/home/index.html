@@ -83,7 +83,6 @@
 
 
 {% block content %}
-{{ stats_helper.render_stats() }}
 {% if featured %}
 {{ helper.render_grid_projects(featured, 'Featured Projects', upload_method, current_user, projects_class='home projects', readmore_text='Contribute', title_size='2') }}
 {% endif %}
@@ -91,3 +90,4 @@
 {{ helper.render_grid_projects(historical_contributions, 'Historical Contributions', upload_method, current_user, projects_class='home projects', title_size='2') }}
 {% endif %}
 {% endblock %}
+<script src="/static/js/stats.js" ></script>
