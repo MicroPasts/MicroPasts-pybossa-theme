@@ -43,9 +43,10 @@
 <h2 class="mt-3 text-center">
   Distribution of Answers per Hour
 </h2>
-  <div class="col-md-12 shadow-sm mb-3 mt-3">
-    <div class="col-md-12 p-3">
-      <canvas id="userAnsHours" width="300" height="300"></canvas>
+  <div class="col-md-12 shadow-sm mb-3 mt-3 p-3">
+      <div class="chart-container">
+        <canvas id="userAnsHours" width="300" height="300"></canvas>
+      </div>
     </div>
 
     <script type="text/javascript">
@@ -122,7 +123,9 @@
   </h2>
 
   <div class="col-md-12 shadow-sm mb-3 p-3">
-    <canvas id="line-chart"></canvas>
+    <div class="chart-container">
+      <canvas id="line-chart"></canvas>
+    </div>
   </div>
     <script type="text/javascript">
       let data = projectStats.dayStats[3]['values'];
@@ -168,7 +171,9 @@
     Answers per day
   </h2>
   <div class="col-md-12 shadow-sm mb-3 p-3">
-    <canvas id="answerPerDay"></canvas>
+    <div class="chart-container">
+      <canvas id="answerPerDay"></canvas>
+    </div>
   </div>
 
   <script>

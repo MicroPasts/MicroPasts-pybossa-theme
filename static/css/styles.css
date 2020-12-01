@@ -11,7 +11,7 @@ body {
 }
 
 .shadow-sm {
-    background-color: white;
+  background-color: white;
 }
 .image-home {
   background-image: url(https://farm5.staticflickr.com/4137/4771894054_1c5d80cdff_o.jpg);
@@ -402,23 +402,23 @@ body {
 .lh-125 { line-height: 1.25; }
 .lh-150 { line-height: 1.5; }
 .parallax {
-    min-height: 200px;
-    background-attachment: fixed;
-    background-size: cover;
+  min-height: 200px;
+  background-attachment: fixed;
+  background-size: cover;
 }
 ul.text-center.conversation-footer {
-    padding-inline-start: 0px!important;
+  padding-inline-start: 0px!important;
 }
 .social_box ul {
-    list-style: none;
+  list-style: none;
 }
 .social_box li {
-    display: inline;
+  display: inline;
 }
 .share li {
-    list-style: none;
-    margin-left: -40px;
-    font-size: 1rem;
+  list-style: none;
+  margin-left: -40px;
+  font-size: 1rem;
 }
 .small-font {
   font-size: 0.9rem!important;
@@ -543,6 +543,12 @@ h1.text-white.tag {
   color: #000;
 }
 .col-md-12.text-center.counts {
-    font-family: 'Lora', serif;
-    font-size: 4vw;
+  font-family: 'Lora', serif;
+  font-size: 4vw;
+}
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 80vw;
 }
