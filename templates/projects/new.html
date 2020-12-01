@@ -2,11 +2,9 @@
 {% set active_page = "create" %}
 {% set active_link  = "projects" %}
 {% import "account/_helpers.html" as helper %}
-
 {% block offcanvas %}
-    {{ helper.render_project_local_nav(current_user, active_link) }}
+    {{ helper.render_account_local_nav(current_user, active_link) }}
 {% endblock %}
-
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 
