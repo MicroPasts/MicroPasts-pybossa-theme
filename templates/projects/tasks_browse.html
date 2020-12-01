@@ -38,7 +38,7 @@
       {% if task_pct >= 100 %}
       <a id="fulldownload" rel="nofollow" class="btn btn-success btn-sm" href="{{ url_for('project.export',
       short_name=project.short_name,
-      task_id=t.id) }}"><i class="fa fa-cloud-download"></i> {{_('Download Task Results')}}</a>
+      task_id=t.id) }}"><i class="fas fa-cloud-download-alt"></i> {{_('Download Task Results')}}</a>
       {% elif task_pct > 0 and task_pct < 100 %}
       <a id="partialdownload" rel="nofollow" class="btn btn-info btn-sm" href="{{ url_for('project.export',
       short_name=project.short_name,
