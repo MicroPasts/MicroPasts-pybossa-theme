@@ -19,14 +19,14 @@
       <h1>Question</h1>
       <h3 id="city">City</h3>
       <button id="point" class="btn btn-sm btn-primary">
-          <i class="icon icon-white icon-map-marker"></i> Add an Urban Park Marker 
+          <i class="icon icon-white icon-map-marker"></i> Add an Urban Park Marker
       </button>
       <button id="noPark" class="btn btn-sm btn-submit">I do not see an urban park</button>
       <button id="noCity" class="btn btn-sm btn-submit" style="display:none;">City not found!</button>
 
-      <p>Task: <span id="task-id" class="label label-warning">#</span></p>
+      <p>Task: <span id="task-id" class="badge badge-warning">#</span></p>
       <div id="map"></div>
-      <i class="icon-map-marker"></i> Urban park position: <strong> Longitude:</strong> <span id="lon"></span>, 
+      <i class="icon-map-marker"></i> Urban park position: <strong> Longitude:</strong> <span id="lon"></span>,
       <strong>Latitude:</strong> <span id="lat"></span>
     </div>
     <div id="answer">
@@ -143,7 +143,7 @@ pybossa.taskLoaded(function(task, deferred){
             externalGraphic: 'https://i.imgur.com/IYuHNue.png'
         });
 
-        // Icon for the Urban Park Marker 
+        // Icon for the Urban Park Marker
         var styleMapUrbanPark = new OpenLayers.StyleMap({
             pointRadius: 15,
             externalGraphic: 'https://i.imgur.com/FlxUAyh.png'
@@ -168,7 +168,7 @@ pybossa.taskLoaded(function(task, deferred){
         // Function to allow only the addition of one urban park per city
         // The function gets the feature (point) and gets its location, transforms it to the right projection
         // loads the lon and at into the HTML skeleton and disables the toolbar, so no more points can be added
-        disablePoint = function(feature) { 
+        disablePoint = function(feature) {
             if ($("#answerbtn").hasClass("disabled")) {
                 $("#answerbtn").removeClass('disabled');
             }
@@ -179,8 +179,8 @@ pybossa.taskLoaded(function(task, deferred){
                     task.map.getProjectionObject(), // from Spherical Mercator Projection
                     new OpenLayers.Projection("EPSG:4326") // to transform from WGS 1984
             );
-            $("#lon").text(tmp.x);       
-            $("#lat").text(tmp.y);       
+            $("#lon").text(tmp.x);
+            $("#lat").text(tmp.y);
             task.lon = tmp.x;
             task.lat = tmp.y;
             task.drawControls['point'].deactivate();
@@ -203,12 +203,12 @@ pybossa.taskLoaded(function(task, deferred){
                         new OpenLayers.Projection("EPSG:4326") // to transform from WGS 1984
                 );
                 // When the marker has been dropped, update the lon & lat of the urban park
-                $("#lon").text(tmp.x);       
-                $("#lat").text(tmp.y);       
+                $("#lon").text(tmp.x);
+                $("#lat").text(tmp.y);
                 task.lon = tmp.x;
                 task.lat = tmp.y;
             }
-        
+
         });
         // Add the drag & drop control into the map
         map.addControl(drag);
@@ -216,7 +216,7 @@ pybossa.taskLoaded(function(task, deferred){
         drag.activate();
 
         var drawControls = {
-            point:      new OpenLayers.Control.DrawFeature(urbanParkLayer, OpenLayers.Handler.Point, 
+            point:      new OpenLayers.Control.DrawFeature(urbanParkLayer, OpenLayers.Handler.Point,
                         { 'featureAdded': disablePoint})
         }
 
@@ -309,4 +309,3 @@ pybossa.presentTask(function(task, deferred){
 pybossa.run('{{project.short_name}}');
 })();
 </script>
-
