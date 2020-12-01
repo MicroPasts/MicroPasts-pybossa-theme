@@ -10,7 +10,7 @@
 providing a list of task IDs separated by commas. The lowest
 priority is')}} <span class="badge badge-warning">0.0</span>
 {{_('and the highest priority is')}} <span class="badge badge-info">1.0</span>.</p>
-<p><span class="label label-info">
+<p><span class="badge badge-info">
     {{_('Important')}}</span> {{_('The priority value is only
 respected by the')}} <strong>{{_('default scheduler')}}</strong>.</p>
 <form id="task_priority" method="post" action="{{ url_for('project.task_priority', short_name=project.short_name) }}">
