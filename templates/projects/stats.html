@@ -43,382 +43,382 @@
 <h2 class="mt-3 text-center">
   Distribution of Answers per Hour
 </h2>
-  <div class="col-md-12 shadow-sm mb-3 mt-3 p-3">
-      <div class="chart-container">
-        <canvas id="userAnsHours" width="300" height="300"></canvas>
-      </div>
-    </div>
-
-    <script type="text/javascript">
-      let all = projectStats.hourStats[0]['values'];
-
-      var allFilter = new Array();
-      all.forEach(function(item, index, array){
-        if(item['1'] > 0){
-          var values = new Array();
-          values['x'] = item[0];
-          values['y'] = item[1];
-          allFilter.push(values);
-        }
-      });
-      var res = allFilter.map((obj,index) => {
-        var x = obj['x']
-        var time = moment(x,'HH').format('HH:mm');
-        return { x:time, y:obj['y'] }
-      });
-      var myChart = new Chart('userAnsHours', {
-        type: 'scatter',
-        data: {
-          datasets: [{
-            label: 'All users',
-            data: res,
-            backgroundColor: ['#000'],
-            borderColor: ['#000'],
-            pointRadius: 8,
-            pointHoverRadius: 8
-          }]
-        },
-        options: {
-          maintainAspectRatio: false,
-          responsive: true,
-          legend: {
-            display: false
-          },
-          scales: {
-            xAxes: [{
-              type: 'time',
-              time: {
-                parser: 'HH:mm',
-                unit: 'hour',
-                stepSize: 1,
-                displayFormats: {
-                  hour: 'HH:mm'
-                },
-                tooltipFormat: 'HH:mm'
-              },
-              ticks: {
-                min: '00:00',
-                max: '24:00',
-                callback: (value, index) => index == 24 ? '24:00' : value
-              }
-            }],
-            yAxes: [{
-              ticks: {
-                beginAtZero: true,
-                stepSize: 5
-              }
-            }]
-          }
-        }
-      });
-    </script>
-
+<div class="col-md-12 shadow-sm mb-3 mt-3 p-3">
+  <div class="chart-container">
+    <canvas id="userAnsHours" width="300" height="300"></canvas>
   </div>
+</div>
 
-  <!-- END Hour Stats CARD -->
+<script type="text/javascript">
+  let all = projectStats.hourStats[0]['values'];
 
-  <!-- Day Stats Total CARD -->
-  <h2 class="text-center mt-3">
-    Completed Tasks in the last 15 days
-  </h2>
-
-  <div class="col-md-12 shadow-sm mb-3 p-3">
-    <div class="chart-container">
-      <canvas id="line-chart"></canvas>
-    </div>
-  </div>
-    <script type="text/javascript">
-      let data = projectStats.dayStats[3]['values'];
-      var quant = [];
-      var dates = [];
-      data.forEach(function(item, index, array){
-        var d = new Date(item[0]);
-        var year = d.getYear();
-        var month = d.getMonth() + 1;
-        var day = d.getDate();
-        dates.push(day + '/' + month + '/' + year);
-        quant.push(item[1]);
-      });
-
-      new Chart(document.getElementById("line-chart"), {
-        type: 'line',
-        data: {
-          labels: dates,
-          datasets: [{
-            data: quant,
-            label: "Completed",
-            borderColor: "#3e95cd",
-            fill: false
-          }
-          ]
-        },
-        options: {
-          title: {
-            maintainAspectRatio: false,
-            responsive: true,
-            display: true,
-            text: 'Completed tasks within last 15 days'
-          }
-        }
-      });
-
-    </script>
-  <!-- END Day Stats  -->
-
-
-  <!-- Day Stats  -->
-  <h2 class="mt-3">
-    Answers per day
-  </h2>
-  <div class="col-md-12 shadow-sm mb-3 p-3">
-    <div class="chart-container">
-      <canvas id="answerPerDay"></canvas>
-    </div>
-  </div>
-
-  <script>
-
-    let anonymous = projectStats.dayStats[1]['values'];
-    var quantAns = [];
-    var datesAns = [];
-
-    anonymous.forEach(function(item, index, array){
-      var d = new Date(item[0]);
-      var year = d.getYear();
-      var month = d.getMonth() + 1;
-      var day = d.getDate();
-      datesAns.push(day + '/' + month + '/' + year);
-      quantAns.push(item[1]);
-    });
-
-    let authenticated = projectStats.dayStats[2]['values'];
-    var quantAuth = [];
-    var datesAuth = [];
-    authenticated.forEach(function(item, index, array){
-      var d = new Date(item[0]);
-      var year = d.getYear();
-      var month = d.getMonth() + 1;
-      var day = d.getDate();
-      datesAuth.push(day + '/' + month + '/' + year);
-      quantAuth.push(item[1]);
-    });
-
-    new Chart(document.getElementById("answerPerDay"), {
-      type: 'line',
-      data: {
-        labels: datesAns,
-        datasets: [{
-          data: quantAns,
-          label: "Anonymous users",
-          borderColor: "#3e95cd",
-          fill: false
-        },
-        {
-          data: quantAuth,
-          label: "Authenticated users",
-          borderColor: "#000",
-          fill: false
-        }
-        ]
+  var allFilter = new Array();
+  all.forEach(function(item, index, array){
+    if(item['1'] > 0){
+      var values = new Array();
+      values['x'] = item[0];
+      values['y'] = item[1];
+      allFilter.push(values);
+    }
+  });
+  var res = allFilter.map((obj,index) => {
+    var x = obj['x']
+    var time = moment(x,'HH').format('HH:mm');
+    return { x:time, y:obj['y'] }
+  });
+  var myChart = new Chart('userAnsHours', {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'All users',
+        data: res,
+        backgroundColor: ['#000'],
+        borderColor: ['#000'],
+        pointRadius: 8,
+        pointHoverRadius: 8
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      legend: {
+        display: false
       },
+      scales: {
+        xAxes: [{
+          type: 'time',
+          time: {
+            parser: 'HH:mm',
+            unit: 'hour',
+            stepSize: 1,
+            displayFormats: {
+              hour: 'HH:mm'
+            },
+            tooltipFormat: 'HH:mm'
+          },
+          ticks: {
+            min: '00:00',
+            max: '24:00',
+            callback: (value, index) => index == 24 ? '24:00' : value
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            stepSize: 5
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+</div>
+
+<!-- END Hour Stats CARD -->
+
+<!-- Day Stats Total CARD -->
+<h2 class="text-center mt-3">
+  Completed Tasks in the last 15 days
+</h2>
+
+<div class="col-md-12 shadow-sm mb-3 p-3">
+  <div class="chart-container">
+    <canvas id="line-chart"></canvas>
+  </div>
+</div>
+<script type="text/javascript">
+  let data = projectStats.dayStats[3]['values'];
+  var quant = [];
+  var dates = [];
+  data.forEach(function(item, index, array){
+    var d = new Date(item[0]);
+    var year = d.getYear();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    dates.push(day + '/' + month + '/' + year);
+    quant.push(item[1]);
+  });
+
+  new Chart(document.getElementById("line-chart"), {
+    type: 'line',
+    data: {
+      labels: dates,
+      datasets: [{
+        data: quant,
+        label: "Completed",
+        borderColor: "#3e95cd",
+        fill: false
+      }
+      ]
+    },
+    options: {
+      title: {
+        maintainAspectRatio: false,
+        responsive: true,
+        display: true,
+        text: 'Completed tasks within last 15 days'
+      }
+    }
+  });
+
+</script>
+<!-- END Day Stats  -->
+
+
+<!-- Day Stats  -->
+<h2 class="mt-3">
+  Answers per day
+</h2>
+<div class="col-md-12 shadow-sm mb-3 p-3">
+  <div class="chart-container">
+    <canvas id="answerPerDay"></canvas>
+  </div>
+</div>
+
+<script>
+
+  let anonymous = projectStats.dayStats[1]['values'];
+  var quantAns = [];
+  var datesAns = [];
+
+  anonymous.forEach(function(item, index, array){
+    var d = new Date(item[0]);
+    var year = d.getYear();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    datesAns.push(day + '/' + month + '/' + year);
+    quantAns.push(item[1]);
+  });
+
+  let authenticated = projectStats.dayStats[2]['values'];
+  var quantAuth = [];
+  var datesAuth = [];
+  authenticated.forEach(function(item, index, array){
+    var d = new Date(item[0]);
+    var year = d.getYear();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    datesAuth.push(day + '/' + month + '/' + year);
+    quantAuth.push(item[1]);
+  });
+
+  new Chart(document.getElementById("answerPerDay"), {
+    type: 'line',
+    data: {
+      labels: datesAns,
+      datasets: [{
+        data: quantAns,
+        label: "Anonymous users",
+        borderColor: "#3e95cd",
+        fill: false
+      },
+      {
+        data: quantAuth,
+        label: "Authenticated users",
+        borderColor: "#000",
+        fill: false
+      }
+      ]
+    },
+    options: {
+      title: {
+        maintainAspectRatio: false,
+        responsive: true,
+        display: true,
+        text: 'Answers submitted in last 15 days'
+      }
+    }
+  });
+</script>
+<!-- END Day Stats CARD -->
+
+
+<!-- Number of answers CARD -->
+<h2 class="mt-3">
+  Distribution of Answers
+</h2>
+<div id="dist-answers" class="col-md-12 shadow-sm mb-3 p-3">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-hover table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Type</th>
+            <th>Users</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+        {% for k in userStats.keys() if k != 'geo' %}
+        <tr>
+          <th>{{k | capitalize}}</th>
+          <th>{{userStats[k].taskruns}}</th>
+          <th>{{userStats[k].pct_taskruns}} %</th>
+        </tr>
+        {% endfor %}
+      </table>
+
+    </div>
+    <div class="col-md-6">
+      <canvas id="canvasDist"  height="450" width="800"></canvas>
+    </div>
+  </div>
+
+</div>
+<script>
+  new Chart(document.getElementById("canvasDist"), {
+    type: 'pie',
+    data : {
+      labels: [projectStats.userStats['values'][0]['label'],projectStats.userStats['values'][1]['label']] ,
+      datasets: [
+      {
+        label: "Number of Users",
+        backgroundColor: ['#3e95cd', '#8e5ea2'],
+        data: [projectStats.userStats['values'][0]['value'][1],projectStats.userStats['values'][1]['value'][1],]
+      }
+      ],
       options: {
         title: {
-          maintainAspectRatio: false,
-          responsive: true,
           display: true,
-          text: 'Answers submitted in last 15 days'
+          text: 'Number of tasks by user'
         }
       }
-    });
-  </script>
-  <!-- END Day Stats CARD -->
 
+    }
 
-  <!-- Number of answers CARD -->
-  <h2 class="mt-3">
-    Distribution of Answers
-  </h2>
-  <div id="dist-answers" class="col-md-12 shadow-sm mb-3 p-3">
-    <div class="row">
-      <div class="col-md-6">
-        <table class="table table-hover table-bordered table-striped">
-          <thead class="thead-dark">
-            <tr>
-              <th>Type</th>
-              <th>Users</th>
-              <th>Percentage</th>
-            </tr>
-          </thead>
-          {% for k in userStats.keys() if k != 'geo' %}
-          <tr>
-            <th>{{k | capitalize}}</th>
-            <th>{{userStats[k].taskruns}}</th>
-            <th>{{userStats[k].pct_taskruns}} %</th>
-          </tr>
-          {% endfor %}
-        </table>
+  });
+</script>
+<!-- END Number of Answers Stats CARD -->
 
-      </div>
-      <div class="col-md-6">
-        <canvas id="canvasDist"  height="450" width="800"></canvas>
-      </div>
-    </div>
+<!-- Anon User Stats CARD -->
+<h2 class="mt-3">
+  Details about Anonymous Users
+</h2>
+
+<div id="dist-anon" class="col-md-12 shadow-sm mb-3 p-3">
+  <div class="col-md-12">
+    <p><i class="icon-group"></i> <strong>{{userStats.anonymous.users}} </strong> {{_('anonymous users have')}} <strong>{{_('participated')}}</strong></p>
+    {% if userStats.anonymous.top5 and userStats.geo %}
+    <h3>Top 5 users</h3>
+    <table class="table table-hover table-bordered table-striped">
+      <thead>
+        <tr class="thead-dark">
+          <th>#</th>
+          <th>{{_('Country')}}</th>
+          <th>{{_('City')}}</th>
+          <th>{{_('Tasks')}}</th>
+        </tr>
+      </thead>
+      {% for u in userStats.anonymous.top5 %}
+
+      <tr>
+        <th>{{loop.index}}</th>
+        <th>{{u.loc.country_name}}</th>
+        <th>{{u.loc.city}}</th>
+        <th>{{u.tasks}}</th>
+      </tr>
+
+      {% endfor %}
+
+    </table>
+
+    {% endif %}
 
   </div>
-  <script>
-    new Chart(document.getElementById("canvasDist"), {
-      type: 'pie',
-      data : {
-        labels: [projectStats.userStats['values'][0]['label'],projectStats.userStats['values'][1]['label']] ,
-        datasets: [
-        {
-          label: "Number of Users",
-          backgroundColor: ['#3e95cd', '#8e5ea2'],
-          data: [projectStats.userStats['values'][0]['value'][1],projectStats.userStats['values'][1]['value'][1],]
-        }
-        ],
-        options: {
-          title: {
-            display: true,
-            text: 'Number of tasks by user'
-          }
-        }
 
-      }
+  <div id="userAnonStats" class="col-md-12">
 
-    });
-  </script>
-  <!-- END Number of Answers Stats CARD -->
+  </div>
 
-  <!-- Anon User Stats CARD -->
-  <h2 class="mt-3">
-    Details about Anonymous Users
-  </h2>
 
-  <div id="dist-anon" class="col-md-12 shadow-sm mb-3 p-3">
-    <div class="col-md-12">
-      <p><i class="icon-group"></i> <strong>{{userStats.anonymous.users}} </strong> {{_('anonymous users have')}} <strong>{{_('participated')}}</strong></p>
-      {% if userStats.anonymous.top5 and userStats.geo %}
-      <h3>Top 5 users</h3>
+</div>
+<!-- END Anon User Stats CARD -->
+
+<!-- Auth User Stats CARD -->
+<h2 class="mt-3">
+  Details about Authenticated Users
+</h2>
+<div id="dist-auth" class="col-md-12 shadow-sm p-3 mb-3">
+  <div class="row">
+    <div class="col-md-6">
+      <p><i class="icon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
+      {% if userStats.authenticated.top5 %}
+      <h3>{{_('Top 5 users')}}</h3>
       <table class="table table-hover table-bordered table-striped">
         <thead>
           <tr class="thead-dark">
             <th>#</th>
-            <th>{{_('Country')}}</th>
-            <th>{{_('City')}}</th>
+            <th>{{_('User')}}</th>
             <th>{{_('Tasks')}}</th>
           </tr>
         </thead>
-        {% for u in userStats.anonymous.top5 %}
-
+        {% for u in userStats.authenticated.top5 %}
         <tr>
           <th>{{loop.index}}</th>
-          <th>{{u.loc.country_name}}</th>
-          <th>{{u.loc.city}}</th>
+          <th><a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a></th>
           <th>{{u.tasks}}</th>
         </tr>
-
         {% endfor %}
-
       </table>
-
       {% endif %}
-
     </div>
-
-    <div id="userAnonStats" class="col-md-12">
-
-    </div>
-
-
-  </div>
-  <!-- END Anon User Stats CARD -->
-
-  <!-- Auth User Stats CARD -->
-  <h2 class="mt-3">
-    Details about Authenticated Users
-  </h2>
-  <div id="dist-auth" class="col-md-12 shadow-sm p-3 mb-3">
-    <div class="row">
-      <div class="col-md-6">
-        <p><i class="icon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
-        {% if userStats.authenticated.top5 %}
-        <h3>{{_('Top 5 users')}}</h3>
-        <table class="table table-hover table-bordered table-striped">
-          <thead>
-            <tr class="thead-dark">
-              <th>#</th>
-              <th>{{_('User')}}</th>
-              <th>{{_('Tasks')}}</th>
-            </tr>
-          </thead>
-          {% for u in userStats.authenticated.top5 %}
-          <tr>
-            <th>{{loop.index}}</th>
-            <th><a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a></th>
-            <th>{{u.tasks}}</th>
-          </tr>
-          {% endfor %}
-        </table>
-        {% endif %}
-      </div>
-      <div class="col-md-6">
-        <canvas id="canvasUserStats"    height="450" width="800"></canvas>
-      </div>
+    <div class="col-md-6">
+      <canvas id="canvasUserStats"    height="450" width="800"></canvas>
     </div>
   </div>
+</div>
 
 
-  <script>
-    let userAuthStats = projectStats.userAuthStats.top5;
-    userAuthStatsQuant = [];
-    userAuthStatsLabels = [];
-    userAuthStats.forEach(function(item, index, array){
-      userAuthStatsLabels.push(item['fullname']);
-      userAuthStatsQuant.push(item['tasks']);
-    });
+<script>
+  let userAuthStats = projectStats.userAuthStats.top5;
+  userAuthStatsQuant = [];
+  userAuthStatsLabels = [];
+  userAuthStats.forEach(function(item, index, array){
+    userAuthStatsLabels.push(item['fullname']);
+    userAuthStatsQuant.push(item['tasks']);
+  });
 
-    new Chart(document.getElementById("canvasUserStats"), {
-      type: 'pie',
-      data : {
-        labels:  userAuthStatsLabels ,
-        datasets: [
-        {
-          label: "Number of Users",
-          backgroundColor: ['#3e95cd', '#8e5ea2', '#000', '#0AB', '#767c87'],
-          data: userAuthStatsQuant
+  new Chart(document.getElementById("canvasUserStats"), {
+    type: 'pie',
+    data : {
+      labels:  userAuthStatsLabels ,
+      datasets: [
+      {
+        label: "Number of Users",
+        backgroundColor: ['#3e95cd', '#8e5ea2', '#000', '#0AB', '#767c87'],
+        data: userAuthStatsQuant
+      }
+      ],
+      options: {
+        title: {
+          display: true,
+          text: 'Number of tasks by user'
         }
-        ],
-        options: {
-          title: {
-            display: true,
-            text: 'Number of tasks by user'
-          }
-        }
-
       }
 
-    });
-  </script>
+    }
+
+  });
+</script>
 
 
-  <!-- END Auth User Stats CARD -->
-  {%endif%}
+<!-- END Auth User Stats CARD -->
+{%endif%}
 
 
-  <script type="text/javascript">
-    (function() {
-      var time = document.getElementById('avgTime');
-      try {
-        var localTime = time.innerHTML;
-        var locale = navigator.languages ? navigator.languages[0] : navigator.language;
-        var localTime = parseFloat(time.innerHTML).toLocaleString(locale);
-        time.innerHTML = localTime;
-      }
-      catch (e) {
-        // console.log("Unable to convert to local string.");
-      }
-    })();
-  </script>
-  {{ helper.broken_image() }}
-  {% endblock %}
+<script type="text/javascript">
+  (function() {
+    var time = document.getElementById('avgTime');
+    try {
+      var localTime = time.innerHTML;
+      var locale = navigator.languages ? navigator.languages[0] : navigator.language;
+      var localTime = parseFloat(time.innerHTML).toLocaleString(locale);
+      time.innerHTML = localTime;
+    }
+    catch (e) {
+      // console.log("Unable to convert to local string.");
+    }
+  })();
+</script>
+{{ helper.broken_image() }}
+{% endblock %}
