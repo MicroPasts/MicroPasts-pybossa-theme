@@ -22,9 +22,9 @@
 <div class="row">
     <div class="col-md-3">
         {% if task_pct >= 100 %}
-        {{_('Task')}} <span class="label label-success">#{{ t.id }}</span>
+        {{_('Task')}} <span class="badge badge-success">#{{ t.id }}</span>
         {% else %}
-        {{_('Task')}} <span class="label label-info">#{{ t.id }}</span>
+        {{_('Task')}} <span class="badge badge-info">#{{ t.id }}</span>
         {% endif %}
         {{ t.n_task_runs }} {{_('of')}} {{ t.n_answers }}
     </div>
@@ -36,11 +36,11 @@
     </div>
     <div class="col-md-4">
         {% if task_pct >= 100 %}
-        <a id="fulldownload" rel="nofollow" class="btn btn-success btn-xs" href="{{ url_for('project.export',
+        <a id="fulldownload" rel="nofollow" class="btn btn-success btn-sm" href="{{ url_for('project.export',
             short_name=project.short_name,
             task_id=t.id) }}"><i class="fa fa-cloud-download"></i> {{_('Download Task Results')}}</a>
         {% elif task_pct > 0 and task_pct < 100 %}
-        <a id="partialdownload" rel="nofollow" class="btn btn-info btn-xs" href="{{ url_for('project.export',
+        <a id="partialdownload" rel="nofollow" class="btn btn-info btn-sm" href="{{ url_for('project.export',
             short_name=project.short_name,
             task_id=t.id) }}"><i class="fa fa-cloud-download"></i> {{_('Download Partial results')}}</a>
 
