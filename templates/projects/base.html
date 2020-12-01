@@ -31,12 +31,12 @@
     {{helper.render_contribute_button(project)}}
 
     {% if active_link == 'info' %}
-    <p><em>{{ overall_progress | round | int }}% {{_('completed')}}</em></p>
+    <p><strong>{{ overall_progress | round | int }}% {{_('completed')}}</strong></p>
     {% endif %}
-  </div>
+
   {% block projectcontent %}
   {% endblock %}
-
+  </div>
 </div>
 {% else %}
 <div class="page-header">
