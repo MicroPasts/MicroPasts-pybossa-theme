@@ -1,0 +1,879 @@
+<link rel="stylesheet" href="http://ol3js.org/en/master/css/ol.css" type="text/css">
+<link rel="stylesheet" href="/static/vendor/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script src="http://ol3js.org/en/master/build/ol.js" type="text/javascript"></script>
+<script src="/static/js/vendor/jquery.serializeJSON.min.js" type="text/javascript"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+<script src="http://maps.google.com/maps/api/js?v=3.6&amp;sensor=false"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript"></script>
+<script src="/static/vendor/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+<style type="text/css">
+  label {
+    font-size:16px;
+  }
+  #map_canvas label {
+    width: auto;
+    display: inline;
+  }
+  #map_canvas img {
+    max-width: none;
+  }
+  .affix {
+    width: inherit;
+    height: 0px;
+  }
+  .affix-bottom {
+    top: auto !important;
+    position: fixed;
+    bottom: 240px;
+  }
+  #imgContainer {
+    height: 390px;
+    width: 600px;
+  }
+</style>
+
+<div id="survey" class="modal fade" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Hey there! Do you want to help us?</h4>
+      </div>
+      <div class="modal-body">
+        Thanks for contributing one task for the project. We are interested in knowing how you found out about us. <strong>Could you please answer two questions in a short survey?</strong>
+
+        <!-- <iframe src="https://docs.google.com/forms/d/1Foe1CCfd4K_ZmtX2W8MDsoSjjDi5zd5DLgG7yRVn2HQ/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
+        <a class="btn btn-large btn-success" href="https://docs.google.com/forms/d/1Foe1CCfd4K_ZmtX2W8MDsoSjjDi5zd5DLgG7yRVn2HQ/viewform?embedded=true">Of course! Take me to the survey!</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="survey25" class="modal fade" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Congrats for completing 25 tasks!</h4>
+      </div>
+      <div class="modal-body">
+        Thanks for contributing 25 tasks for the project. Now that you have been using MicroPasts for a while, we would like to know how you found it. <strong>Could you please answer a few questions in a short survey?</strong>
+
+        <!-- <iframe src="https://docs.google.com/forms/d/1WTVapZ2Qdq0AIRazG-onDrVYDtb9xAnid7LwLrR3Uqw/viewform?embedded=true" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
+        <a class="btn btn-large btn-success" href="https://docs.google.com/forms/d/1WTVapZ2Qdq0AIRazG-onDrVYDtb9xAnid7LwLrR3Uqw/viewform?embedded=true">Of course! Take me to the survey!</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div style="display:none;margin-top:15px; height:500px;" id="oldbrowser" class="row">
+  <div  class="col-md-8 col-md-offset-1 alert alert-info">
+    <strong>Sorry, but your browser does not support the current application. If you want to contribute, please, upgrade to a modern web browser like the open source and free alternative <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> or <a href="https://www.google.com/intl/en/chrome/browser/">Chrome</a></strong>.
+  </div>
+</div> <!-- End of Row -->
+
+<!--
+Task DOM for loading the Flickr Images
+It uses the class="skeleton" to identify the elements that belong to the
+task.
+-->
+<div class="skeleton"> <!-- Start Skeleton Row-->
+
+  <h1 id="start">
+    Please transcribe this index card
+  </h1> <!-- The question will be loaded here -->
+  <p>
+    <span class="badge badge-info">Note</span> You can use your mouse wheel trackpad
+    to zoom in/out the picture, as well as drag & drop to navigate in the document.
+  </p>
+
+</div>
+
+<div class="row skeleton">
+
+  <div id="questions" class="col-md-4"><!-- Start of Question and Submission DIV (column) -->
+
+    <!-- If the user clicks this button, the saved answer will be value="yes"-->
+
+    <form id="transcription" role="form">
+
+      <div class="form-group">
+        <label class="control-label" for="objectType">Object Type</label>
+        <input class="form-control" type="text" name="objectType" placeholder="Top of card">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label inp" for="dateDiscoveryYear">Date of Discovery</label>
+        <div class="controls">
+          <div class="col-xs-4">
+            <select class="form-control" name="dateDiscoveryYear"></select>
+          </div>
+          <div class="col-xs-4">
+            <select class="form-control" name="dateDiscoveryMonth"></select>
+          </div>
+          <div class="col-xs-4">
+            <select class="form-control" name="dateDiscoveryDay"></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="rightCorner">Right Corner</label>
+        <textarea class="form-control"  rows="5" name="rightCorner" placeholder="Right Corner"></textarea>
+      </div>
+
+      <hr />
+
+      <div class="form-group">
+        <label class="control-label" for="site">Site</label>
+        <textarea name="site" type="text" class="form-control" placeholder="Left of the card"></textarea>
+        <div class="input-append">
+          <label class="control-label" for="site">Georeference the site</label>
+          <input type="text" class="form-control" id="toSearch" name="toSearch" placeholder="Geolocate the site in a map"></input>
+          <button id="searchBtn" class="btn btn-answer" value="search" type="button"><i class="icon-search"></i> Search</button>
+        </div>
+        <div style="display:none;margin-top:15px;" id="searching" class="alert alert-info"><img src="/static/img/loading.gif"> Searching...</div>
+        <div style="display:none;margin-top:15px;" id="searchingError" class="alert alert-warning"><strong>Location not found</strong>. If you know where it is approximately, please drag and drop the icon <img style="width:16px;" src="http://img225.imageshack.us/img225/5237/youarehere2.png"/> in the map.</div>
+        <div id="searchingTip" class="alert alert-info" style="display:none; margin-top:10px;">Drag & drop the <img style="width:16px;" src="http://img225.imageshack.us/img225/5237/youarehere2.png"/> to improve the location</div>
+        <div id="map" style="margin-top:15px;"></div>
+        <div style="font-size:12px;">Marker Icon by <a href="http://mapicons.nicolasmollet.com/">Nicolas Mollet</a></div>
+      </div>
+
+      <p>I believe the location I have given on the map is accurate to within:</p>
+      <div class="form-group">
+        <label class="radio">
+          <input type="radio" name="optionsAccuracy" id="optionsAccuracy100" value="100" checked>
+          100 metres
+        </label>
+        <label class="radio">
+          <input type="radio" name="optionsAccuracy" id="optionsAccuracy1000" value="1000">
+          1 kilometre
+        </label>
+        <label class="radio">
+          <input type="radio" name="optionsAccuracy" id="optionsAccuracy10000" value="10000">
+          10 kilometres
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="gridRef">Grid Reference</label>
+        <input type="text" name="gridRef" class="form-control" placeholder="Top left of card"></input>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="collection">Collection</label>
+        <textarea name="collection" rows="5" class="form-control" placeholder="Right of card"></textarea>
+      </div>
+
+      <hr />
+
+      <div class="form-group">
+        <label class="control-label" for="publications">Publications</label>
+        <textarea rows="5" class="form-control" name="publications" placeholder="Centre of card"></textarea>
+      </div>
+
+      <hr />
+
+      <div class="form-group">
+        <label class="control-label" for="length">Length</label>
+        <input class="form-control" type="number" min="0" name="length" placeholder="In millimetres">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="width">Width</label>
+        <input class="form-control"  type="number" min="0" name="width" placeholder="In millimetres">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="edge">Edge</label>
+        <input class="form-control"  type="number" min="0" name="edge" placeholder="In millimetres">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="thickness">Thickness</label>
+        <input class="form-control"  type="number" min="0" name="thickness" placeholder="In millimetres">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="weight">Weight</label>
+        <input class="form-control"  type="number" min="0" name="weight" placeholder="In grammes">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="composition">Composition</label>
+        <input class="form-control"  type="text" name="composition" placeholder="Below measurements">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="description">Description</label>
+        <textarea type="text" rows="5" name="description" placeholder="Below measurements" class="form-control"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="surface">Surface</label>
+        <input class="form-control"  type="text" name="surface" placeholder="Left of card">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="patina">Patina</label>
+        <input class="form-control"  type="text" name="patina" placeholder="Towards bottom left of card">
+      </div>
+
+      <hr />
+
+      <div class="form-group">
+        <label class="control-label" for="associations">Associations</label>
+        <input class="form-control"  type="text" name="associations" placeholder="Bottom centre of card">
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label class="control-label" for="remarks">Remarks</label>
+        <textarea class="form-control" rows="5"  name="remarks" placeholder="Bottom centre of card"></textarea>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label class="control-label" for="other">Transcriber's Comments</label>
+        <textarea class="form-control" rows="5"  name="other" placeholder="Add here your comments, if any."></textarea>
+      </div>
+
+    </form>
+
+    <button class="btn btn-info btn-answer" value='Yes'>Submit the transcription</button>
+
+
+    <!-- Feedback items for the user -->
+    <p>You are working now on task: <span id="task-id" class="badge badge-warning">#</span></p>
+    <p>
+      You have completed: <span id="done" class="badge badge-info"></span> tasks from
+      <span id="total" class="badge badge-inverse"></span>
+    </p>
+    <div class="progress progress-striped">
+      <div id="progress" rel="tooltip" title="#" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+    </div>
+    <!-- End of feedback row -->
+
+  </div><!-- End of Question and Submission DIV (column) -->
+  <div id="photo-link" class="col-md-7 col-md-offset-1"><!-- Start of Photo DIV (column) -->
+    <div class="mt-3">
+      <div id="success" class="alert alert-success" style="display:none;">
+        <strong>Well done!</strong> You have successfully submitted your transcription. Here is another to try if you wish!
+      </div>
+      <div id="loading" class="alert alert-info" style="display:none;">
+        <img src="/static/img/loading.gif">Loading next task...
+      </div>
+      <div id="taskcompleted" class="alert alert-info" style="display:none;">
+        <strong>The task has been completed!</strong> Thanks a lot!
+      </div>
+      <div id="finish" class="alert alert-success" style="display:none;">
+        <strong>Congratulations!</strong> You have participated in all available tasks!
+        <br/>
+        <div class="alert-actions">
+          <a class="btn-sm" href="/">Go back</a>
+          <a class="btn-sm" href="/app">or, Check other applications</a>
+        </div>
+      </div>
+      <div id="error" class="alert alert-error" style="display:none;">
+        <a class="close">×</a>
+        <strong>Error!</strong> Something went wrong, please contact the site administrators
+      </div>
+    </div> <!-- End Success and Error Messages for the user -->
+    <div id="imgHolder" data-spy="affix" data-offset-top="1" data-offset-bottom="550">
+      <div class="btn-group">
+        <a class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-eye-open"></i> Tutorial</a>
+        <a class="btn btn-info btn-sm" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window"  href="http://community.micropasts.org/category/crowdsourcing-support"><i class="glyphicon glyphicon-book"></i> Community Help</a>
+        <a id="raw" href="" class="btn btn-sm btn-info fancybox" ><i class="glyphicon glyphicon-picture"></i> Overlay</a>
+        <a id="newTask" href="../newtask" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-picture"></i> Different card?</a>
+        <a id="flickr" rel="tooltip" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="" class="btn btn-sm btn-info"><i class="icon icon-flickr"></i> View on flickr</a>
+        <a id="down" rel="tooltip" data-toggle="tooltip" data-placement="top" title="Only works for compliant browsers" download="" href="" class="btn btn-sm btn-info" ><i class="glyphicon glyphicon-download"></i> Download</a>
+      </div>
+      <div id="imgContainer"></div>
+      <div id="taskImg"></div>
+    </div>
+  </div><!-- End of Photo DIV (columnt) -->
+
+</div><!-- End of Skeleton Row -->
+<!-- Modal start -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal header -->
+      <div class="modal-header">
+        <h3 class="lead">BM Bronze Age Index Drawer A9 transcription tutorial</h3>
+      </div>
+      <!-- stepped modal body -->
+      <div id="0" class="modal-body" style="display:none">
+
+        <p>
+          This application is very simple, but does require you to use your own judgment in reading hand-written documents. When you participate,
+          the platform will load a scanned index card from the British Museum's Bronze Age catalog
+          (stored on the MicroPasts <a href="http://flickr.com">Flickr</a> stream).
+          Once the image has been loaded, you will be asked to transcribe the contents of each
+          card. Most scanned images combine the written details from the one side of the
+          index card and the line drawing of the object from the reverse side.
+          An example of the front side of a card is shown below.
+        </p>
+
+        <img src="https://farm4.staticflickr.com/3700/13305081014_dc91f9d867_n.jpg" class="img-polaroid"
+        alt="An example of one of the Bronze Age Index cards" width="229" height="320"/>
+
+        <p>
+          Each index card contains similar information and we are asking you to enter this information
+          into a set of pre-defined fields. In addition to the help provided by this tutorial, you will also
+          find further hints inside the data entry boxes about where on the card the relevant information might be found
+          (e.g. in the example card above, the necessary entry for the "Object Type" filed would be "Palstave" and the data entry box
+          will hint that this information can be found "Top of card").
+        </p>
+
+      </div>
+
+      <div id="1" class="modal-body" style="display:none">
+        <p>
+          During the transcription, you can always return to this tutorial via the "Help" button.
+          Here are some further issues to watch out for:
+        </p>
+
+        <ol>
+
+          <li>
+            The "top right corner" field is not present on all cards, but if it exists, it is normally a typological code
+            including a Latin numeral, following by an ordinary (Arabic) number, and finally a capital letter.
+            This is often but not always written in pencil. The example below would be rendered "II1A":<br />
+            <img src="http://farm6.staticflickr.com/5539/12233629423_e5f1f6ddcf_o.png" class="img-polaroid" alt="Top corner" width="227" height="65"/>
+          </li>
+
+          <li>
+            When entering information in the fields, please respect the case of words as seen on the card.
+          </li>
+
+          <li>
+            If there is a word or a portion of a word that you cannot read, please use the "[...]" notation. For example,
+            using the example index card shown before, if you could not read the reference top left to "Sea-shore near Cooden Bay",
+            you might render it as "Sea-shore near [...] Bay", although we suggest you do fill in the whole word in cases where
+            you are fairly confident but not certain.
+          </li>
+
+          <li>
+            If you see text that is stacked on more than one line or separated by a gap, but that otherwise should go
+            into just one of our pre-specified boxes, then separate it by "[;]". For example, on the
+            index card we showed you before, "Mr Vidler" and "Pevensey" are
+            both entries that should be entered in the the Collection box, so you could simply enter "Mr Vidler[;]Pevensey".
+          </li>
+
+          <li>
+            Measurements should be entered in millimetres or grammes, as the hints suggest, and only the number should be entered in the box
+            (e.g. a length of 174mm should  be entered as 174). If the units are not in mm or grammes, please convert them to whole number grammes and mm, and place
+            the converted values in the correct box. In such cases, please also make a note of the original in the Transcriber's Comments
+            (e.g. a length written as "4.2 in" should be note verbatim in the Transcriber's Comments, but recorded as 107 in the Length box).
+          </li>
+
+          <li>
+            If there is additional information on the card that you don't feel fits in one of our pre-specified
+            boxes, or if you have any further worries about how to transcribe the card, then please put these concerns in our
+            "Transcriber's Comments" box at the bottom of the transcription page.
+          </li>
+
+        </ol>
+
+
+      </div>
+
+      <div id="2" class="modal-body" style="display:none">
+        <p>
+          Sometimes you might notice that there is some variability in the style of the index cards and
+          occasionally you might get a card that looks quite different, such as the one below. In such cases, please try your best
+          to fill in the requisite fields and note in the Transcriber's Comments field that you found this difficult for that
+          particular card. As we continue drawer-by-drawer through the catalog, we will look to modify the
+          input fields in response to your suggestions.
+        </p>
+        <img src="https://farm4.staticflickr.com/3815/12674204253_2695e6293a_n.jpg" alt="variant card " width="230" height="320"/>
+      </div>
+
+      <div id="3" class="modal-body" style="display:none">
+        <p>
+          To find out how the project is progressing, suggest changes to this application or
+          propose new research ideas based what you have transcribed, please have a look at
+          our <a href="http://community.micropasts.org" title="Community forum">community forum</a>.
+        </p>
+      </div>
+
+      <!-- End of stepped modal body -->
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
+        <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+        <button id="startContrib" data-dismiss="modal" class="btn btn-primary" style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Let's start!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal end -->
+
+  <script>
+    var step = -1;
+    function showStep(action) {
+      $("#" + step).hide();
+      if (action == 'next') {
+        step = step + 1;
+      }
+      if (action == 'prev') {
+        step = step - 1;
+      }
+      if (step == 0) {
+        $("#prevBtn").hide();
+      }
+      else {
+        $("#prevBtn").show();
+      }
+
+      if (step == 3 ) {
+        $("#nextBtn").hide();
+        $("#startContrib").show();
+      }
+      $("#" + step).show();
+    }
+
+    showStep('next');
+    $("#modal").modal('show');
+  </script>
+
+
+  <script>
+    // Quick fix for IE8
+    Modernizr.load({
+      test: window.JSON,
+      nope: '/static/js/vendor/json2.min.js'
+    });
+
+    function loadUserProgress() {
+      pybossa.userProgress('{{project.short_name}}').done(function(data){
+        console.log("Total answers done for user: " + data.done);
+        if ((data.done == 1) && ($.cookie('{{project.short_name}}-1') === undefined)){
+          $("#survey").modal('show');
+          $.cookie('{{project.short_name}}-1', 'shown', { path: '/'});
+        }
+
+        if ((data.done >= 25) && ($.cookie('{{project.short_name}}-25') === undefined)){
+          $("#survey25").modal('show');
+          $.cookie('{{project.short_name}}-25', 'shown', { path: '/'});
+        }
+
+        var pct = Math.round((data.done*100)/data.total);
+        $("#progress").css("width", pct.toString() +"%");
+        $("#progress").attr("title", pct.toString() + "% completed!");
+        $("#progress").tooltip({'placement': 'left'});
+        $("#total").text(data.total);
+        $("#done").text(data.done);
+      });
+    }
+
+    function search(task, city, zoom) {
+      zoom = (typeof zoom === "undefined") ? 4 : zoom;
+      city = city.replace(/\n/g,' ');
+      console.log(city);
+      if (city) {
+        var place = city;
+        $("#searchingError").hide();
+      }
+      else {
+        $("#searching").show();
+        $("#searchingError").hide();
+        if ($('#toSearch').val()) {
+          var place = $("#toSearch").val();
+        }
+        else {
+          $("#searching").hide();
+          alert("Please, add a location in the Site section to search in the map");
+          return
+        }
+      }
+
+      // Geocode the place using Nominatim OSM service
+      $.getJSON('http://nominatim.openstreetmap.org/search/' + place + '?format=json', function(output) {
+        if (output.length >= 1) {
+          //console.log("Lon: "+ output[0].lon + " Lat: " + output[0].lat);
+          // Clean previous markers
+          $("#navigate").addClass("active");
+          $("#point").removeClass("disabled");
+          $("#point").removeClass("active");
+          task.objectLayer.removeAllFeatures();
+          task.cityLayer.removeAllFeatures();
+          //$("#answerbtn").addClass("disabled");
+          //$("#answerbtn").unbind('click',submitTask);
+          //console.log("Map cleaned!");
+          // Create a LonLat object to load the place marker
+          var lonLat = new OpenLayers.LonLat(output[0].lon, output[0].lat)
+          .transform(
+          new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+          task.map.getProjectionObject() // to Spherical Mercator Projection
+          );
+          // Set the marker position
+          point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
+          task.longitude = lonLat.lon;
+          task.latitude = lonLat.lat;
+          task.objectLayer.addFeatures([new OpenLayers.Feature.Vector(point)]);
+          // Center the map
+          task.map.setCenter(lonLat, zoom);
+          //lonLat.transform(
+          //        map.getProjectionObject(), // from Spherical Mercator Projection
+          //        new OpenLayers.Projection("EPSG:4326") // to transform from WGS 1984
+          //);
+          // Reset the lon & lat span objects
+          $("#lon").text("-");
+          $("#lat").text("-");
+
+          if (zoom !=4 ) {
+            $("#searchingTip").show();
+          }
+
+          // Only show the messages when looking for user input
+          if ($('#toSearch').val()) {
+            $("#searching").hide().fadeOut();
+            $("#searchingDone").show().fadeIn().delay(2000).fadeOut();
+          }
+        }
+        else {
+          // Location not found, sorry
+          // Warn the user and try with another place
+          $("#searching").hide().fadeOut();
+          $("#searchingError").show();
+        }
+      });
+    }
+
+
+
+    pybossa.taskLoaded(function(task, deferred) {
+      if ( !$.isEmptyObject(task) ) {
+        var img = $('<img />');
+        var div_map = $('<div/>');
+        div_map.css("height", "390px");
+        div_map.css("width", "600px");
+        div_map.css("background", "#000");
+
+        var copyright = "&copy; <a href='" + task.info.link + "'>British Museum</a>";
+
+        var extent = new OpenLayers.Bounds();
+        extent.extend(new OpenLayers.LonLat(1.758939,58.672231).transform(new OpenLayers.Projection("EPSG:4326"),
+        new OpenLayers.Projection('EPSG:900913')));
+        extent.extend(new OpenLayers.LonLat(-6.99745,49.96112).transform(new OpenLayers.Projection("EPSG:4326"),
+        new OpenLayers.Projection('EPSG:900913')));
+
+
+        $("#imgContainer").append(div_map);
+        div_map.attr("id", "img_" + task.id);
+
+        task.pixelProjection = new ol.proj.Projection({
+          code: 'pixel',
+          units: 'pixels',
+          extent: [0, 0, 1024, 720]
+        });
+
+        task.map_img = new ol.Map({
+          //interactions: ol.interaction.defaults().extend([task.select, task.modify]),
+          layers: [
+          new ol.layer.Image({
+            source: new ol.source.ImageStatic({
+              attributions: [
+              new ol.Attribution({
+                html: copyright
+              })
+              ],
+              url: task.info.url_b,
+              imageSize: [1024, 720],
+              projection: task.pixelProjection,
+              imageExtent: task.pixelProjection.getExtent()
+            })
+          })
+          ],
+          renderer: 'canvas',
+          target: 'img_' + task.id,
+          view: new ol.View({
+            projection: task.pixelProjection,
+            center: ol.extent.getCenter(task.pixelProjection.getExtent()),
+            zoom: 1.0
+          })
+        });
+        div_map.css("display", "none");
+
+
+        // load image from flickr
+        var img = $('<img />');
+        img.attr("id", "img_task_" + task.id);
+        img.load(function() {
+          // continue as soon as the image is loaded
+          deferred.resolve(task);
+        });
+        img.attr('src', task.info.url_b);
+        img.attr('width', '600px');
+        img.attr('height', '390px');
+        img.addClass('img-polaroid');
+        img.css("cursor", "zoom-in");
+        task.info.image = img;
+
+        // MAP
+        var div_map = $("<div/>", {'id': "map_" + task.id, 'class': 'map_canvas col-md-12'});
+        div_map.css("width", "360px");
+        div_map.css("height", "500px");
+        div_map.css("display", "none");
+
+        // We need to append the div element asap otherwise OpenLayers will fail
+        $("#map").append(div_map);
+
+        var map = new OpenLayers.Map('map_' + task.id, {
+          controls: [
+          new OpenLayers.Control.Navigation(),
+          new OpenLayers.Control.PanZoom(),
+          new OpenLayers.Control.LayerSwitcher(),
+          new OpenLayers.Control.MousePosition({displayProjection: new OpenLayers.Projection("EPSG:4326")}),
+          // new OpenLayers.Control.ScaleLine(),
+          new OpenLayers.Control.Attribution()
+          ]
+        });
+
+        // Layers
+        // Open Street Map (default layer)
+        map.addLayer(new OpenLayers.Layer.OSM("Open Street Map"));
+
+        // Google Maps Satellite layer
+        map.addLayer(new OpenLayers.Layer.Google(
+        "Google Satellite",
+        {type: google.maps.MapTypeId.SATELLITE}
+        ));
+
+        // Google Maps Physical layer
+        map.addLayer(new OpenLayers.Layer.Google(
+        "Google Physical",
+        {type: google.maps.MapTypeId.TERRAIN}
+        ));
+
+        // Icon for the City Marker
+        var styleMapCity = new OpenLayers.StyleMap({
+          pointRadius: 15,
+          externalGraphic: 'http://img225.imageshack.us/img225/5237/youarehere2.png'
+        });
+
+        // Icon for the Urban Park Marker
+        var styleMapObject = new OpenLayers.StyleMap({
+          pointRadius: 15,
+          externalGraphic: 'http://img225.imageshack.us/img225/5237/youarehere2.png'
+        });
+
+        // Layer for placing the city marker
+        var cityLayer = new OpenLayers.Layer.Vector("City marker", {
+          styleMap: styleMapCity,
+        });
+        map.addLayer(cityLayer);
+        task.cityLayer = cityLayer;
+
+        // Layer for placing the urban park marker
+        var objectLayer = new OpenLayers.Layer.Vector("Urban park marker", {
+          styleMap: styleMapObject,
+        });
+        map.addLayer(objectLayer);
+        task.objectLayer = objectLayer;
+
+        // Function to allow only the addition of one urban park per city
+        // The function gets the feature (point) and gets its location, transforms it to the right projection
+        // loads the lon and at into the HTML skeleton and disables the toolbar, so no more points can be added
+        disablePoint = function(feature) {
+          if ($("#answerbtn").hasClass("disabled")) {
+            $("#answerbtn").removeClass('disabled');
+          }
+
+          $("#lat").text(feature.geometry.y);
+          var tmp = feature.geometry.clone();
+          tmp.transform(
+          task.map.getProjectionObject(), // from Spherical Mercator Projection
+          new OpenLayers.Projection("EPSG:4326") // to transform from WGS 1984
+          );
+          $("#lon").text(tmp.x);
+          $("#lat").text(tmp.y);
+          task.lon = tmp.x;
+          task.lat = tmp.y;
+          task.drawControls['point'].deactivate();
+        }
+
+        // Default location to load the map
+        var lonLat = new OpenLayers.LonLat(-0.1279688 ,51.5077286 )
+        .transform(
+        new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+        new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
+        );
+
+        // Enable drag & drop in the urban park Layer
+        var drag = new OpenLayers.Control.DragFeature(objectLayer, {
+          onComplete: function() {
+            var urbanParkPoint = task.objectLayer.features[0].geometry
+            var tmp = urbanParkPoint.clone();
+            tmp.transform(
+            task.map.getProjectionObject(), // from Spherical Mercator Projection
+            new OpenLayers.Projection("EPSG:4326") // to transform from WGS 1984
+            );
+            // When the marker has been dropped, update the lon & lat of the urban park
+          }
+
+        });
+        // Add the drag & drop control into the map
+        map.addControl(drag);
+        // Activate drag & drop
+        drag.activate();
+
+        var drawControls = {
+          point:      new OpenLayers.Control.DrawFeature(objectLayer, OpenLayers.Handler.Point,
+          { 'featureAdded': disablePoint})
+        }
+
+        // Add them to the map
+        for (var key in drawControls) {
+          map.addControl(drawControls[key]);
+        }
+        task.drawControls = drawControls;
+
+        task.map = map;
+        task.map.setOptions({restrictedExtent: extent});
+        task.lon = 0;
+        task.lat = 0;
+
+        search(task, "united kingdom");
+      } // End if task empty
+      else {
+        deferred.resolve(task);
+      }
+
+    });
+
+    pybossa.presentTask(function(task, deferred) {
+      if ( !$.isEmptyObject(task) ) {
+        loadUserProgress();
+        $(':input','#transcription')
+        .not(':button, :submit, :reset, :hidden, :radio')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
+        //$('#imgContainer').html('').append(task.info.image);
+        //$("#photo-link").attr("href", task.info.link);
+        $("#searchingTip").hide();
+        $("#question").html(task.info.question);
+        $('#task-id').html(task.id);
+
+        $("a#raw").attr("href", task.info.url_b);
+        $("a#flickr").attr("href", task.info.link + '/sizes/k/');
+        $("a#down").attr("download", task.id);
+        $("a#down").attr("href", task.info.url_b );
+
+        $(".fancybox").fancybox();
+        $('#imgLink').tooltip();
+        $("[rel=tooltip]").tooltip();
+        //$('#img_task_' + task.id).wheelzoom();
+        //$('#img_task_' + task.id).trigger('wheelzoom.reset');
+        $("#map_" + task.id).show();
+        $("#img_" + task.id).show();
+
+        // Clean
+        $('select[name=dateDiscoveryYear]').html('').append($('<option/>').val('None').html('Year'));
+        for (i = 1700; i < 2000; i++)
+        {
+          $('select[name=dateDiscoveryYear]').append($('<option />').val(i).html(i));
+        }
+
+        $('select[name=dateDiscoveryMonth]').html('').append($('<option/>').val('None').html('Month'));
+        for (i = 1; i <= 12; i++)
+        {
+          $('select[name=dateDiscoveryMonth]').append($('<option />').val(i).html(i));
+        }
+
+        $('select[name=dateDiscoveryDay]').html('').append($('<option/>').val('None').html('Day'));
+        for (i = 1; i <= 31; i++)
+        {
+          $('select[name=dateDiscoveryDay]').append($('<option />').val(i).html(i));
+        }
+
+        $('.btn-answer').off('click').on('click', function(evt) {
+          evt.preventDefault();
+          var answer = $(evt.target).attr("value");
+          if (typeof answer != 'undefined') {
+            console.log(answer);
+            if (answer == 'search') {
+              $("#searching").show();
+              search(task, $("#toSearch").val(), 15);
+            }
+            else {
+              task.answer = $("#transcription").serializeJSON();
+              console.log(task.answer);
+              // Remove unwanted names
+              for (var key in task.answer) {
+                if ((key == 'City marker') || (key == 'Urban park marker') || (key.indexOf('OpenLayers_') == 0)) {
+                  delete task.answer[key];
+                }
+              }
+              task.answer.optionsAccuracy = $('input[name=optionsAccuracy]:checked', '#transcription').val();
+              console.log(task.answer.optionsAccuracy);
+              // Convert the feature location into the GeoJSON format
+              var geojson = new OpenLayers.Format.GeoJSON({
+                'internalProjection': task.map.baseLayer.projection,
+                'externalProjection': new OpenLayers.Projection("EPSG:4326")
+              });
+
+              task.answer.geojson = JSON.parse(geojson.write(task.objectLayer.features[0]));
+
+              task.answer.toSearch = task.answer.toSearch.replace(/\n/g,', ').toLowerCase();
+              task.answer.site = task.answer.site.replace(/\r\n/g,', ').toLowerCase();
+              console.log(task.answer);
+              pybossa.saveTask(task.id, task.answer).done(function() {
+                $("#map_" + task.id).hide();
+                $("#img_" + task.id).hide();
+                //$('#img_task_' + task.id).trigger('wheelzoom.reset');
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                $("#success").fadeIn(500).fadeOut(5500);
+                $("#loading").fadeIn(500).fadeOut(1000);
+                deferred.resolve();
+              });
+              $("#loading").fadeIn(500);
+
+            }
+          }
+          else {
+            console.log(answer);
+            console.log(typeof(answer));
+            $("#error").show();
+          }
+        });
+        $("#loading").hide();
+      }
+      else {
+        $(".skeleton").hide();
+        $("#loading").hide();
+        $("#finish").fadeIn(500);
+      }
+    });
+
+    if(Modernizr.borderradius) {
+      pybossa.run('{{project.short_name}}');
+    }
+    else {
+      $(".skeleton").hide();
+      $("#oldbrowser").show();
+    }
+    $(document).ready(function() {
+      var s = $("#imgContainer");
+
+      if ( $(window).width() < 768) {
+        s.removeClass("affix-bottom");
+        s.removeClass("affix");
+        s.removeClass("affix-top");
+      };
+    });
+
+  </script>
