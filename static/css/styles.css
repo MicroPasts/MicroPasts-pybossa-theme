@@ -549,5 +549,5 @@ h1.text-white.tag {
 .chart-container {
   position: relative;
   margin: auto;
-  width: 80vw;
+  /* width: 80vw; */
 }
