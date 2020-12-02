@@ -24,7 +24,7 @@
 {%- macro render_project_card_user(user, upload_method, title, explanation, link, link_action_text, background=False, download=False, nofollow=False, link_class=None, id=None, icon=None, link_two=None, link_action_text_two=None) %}
 <div {%if id%}id="{{id}}"{% endif %} class="card">
   <div class="card-body">
-    <img class="card-img-top" src="{{ render_user_avatar_src(user, upload_method) }}" alt="Card image cap">
+    <img class="card-img-top" src="{{ helper.render_user_avatar_src(user, upload_method) }}" alt="Card image cap">
     <div class="caption">
       {% if background %}
       <h3 class="card-title">{{user.fullname}}</h3>
