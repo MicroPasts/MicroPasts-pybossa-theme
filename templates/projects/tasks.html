@@ -1,7 +1,7 @@
 {% extends "/projects/base.html" %}
 {% from "projects/_helpers.html" import render_project_card_option %}
 {% set active_link  = "tasks" %}
-{% block content %}
+{% block projectcontent %}
 {% if project.owner_id == current_user.id or (current_user.is_authenticated and current_user.admin)%}
 <div class="row">
     <div id="import_tasks" class="col-md-6">
