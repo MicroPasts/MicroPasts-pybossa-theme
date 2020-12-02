@@ -3,7 +3,7 @@
 {% set subtitle = _('Project Settings')%}
 {% from "projects/_helpers.html" import render_project_card_option %}
 
-{% block projectcontent %}
+{% block content %}
 <div class="row">
     <div id="import_tasks" class="col-md-6">
         {{ render_project_card_option(project, upload_method, title=_('Project details'), explanation=_('Edit the name, description, etc.'), link=url_for('project.update', short_name=project.short_name), link_action_text=_('Edit'), icon='info-circle')}}
