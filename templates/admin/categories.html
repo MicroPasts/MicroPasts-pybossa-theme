@@ -33,7 +33,7 @@
   {% if categories %}
   {% for c in categories %}
   <div class="col-sm-4 col-md-4 mb-3">
-    <div class="card" >
+    <div class="card h-100" >
       <div class="card-body">
         <h2 class="card-title">{{c.name}} </h2>
         <p class="card-text">{{n_projects_per_category[c.short_name]}} projects</p>
@@ -41,7 +41,7 @@
         {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
         <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn btn-danger"><i class="icon-trash"></i> {{_('Delete')}}</a>
         {% else %}
-        <a href="#" class="btn btn-danger disabled"><i class="icon-trash"></i> {{_('Delete Category')}}</a>
+        <a href="#" class="btn btn-danger disabled"><i class="icon-trash"></i> {{_('Delete')}}</a>
         {% endif %}
       </div>
     </div>
