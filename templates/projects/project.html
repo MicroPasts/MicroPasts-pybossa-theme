@@ -1,7 +1,7 @@
 {% set active_link = "info" %}
 {% extends "/projects/base.html" %}
 
-{% block projectcontent %}
+{% block content %}
     {% if project.long_description != project.description  %}
     {{ project.long_description | e | markdown }}
     {% endif %}
