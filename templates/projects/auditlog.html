@@ -5,6 +5,7 @@
 
 {% block projectcontent %}
 {% if logs %}
+<div class="col-md-12 shadow-sm p-3 mb-3">
 <table id="webhooks-table" class="table table-bordered table-condensed table-hover table-responsive">
   <thead class="thead-dark">
     <tr>
@@ -30,9 +31,13 @@
 
 {% endfor %}
 </table>
+</div>
 {% else %}
+<div class="col-md-12 shadow-sm p-3 mb-3">
     <p>{{ _('Sorry! No logs so far.') }}</p>
+</div>
 {% endif %}
+
 <script>
 </script>
 {% endblock %}
