@@ -9,7 +9,17 @@ type="text/javascript"></script>
 <link rel="stylesheet" href="/static/vendor/fancybox/jquery.fancybox.css?v=2.1.5"
 type="text/css" media="screen"/>
 <style type="text/css">
-
+  .copyable:hover:after {
+    content: '';
+    background-color: rgba(0,0,0,0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 101;
+    cursor:copy;
+  }
 
   pre {
     white-space: pre-wrap;       /* Since CSS 2.1 */
@@ -27,253 +37,305 @@ type="text/css" media="screen"/>
       upgrade to a modern web browser like the open source and free alternative <a
       href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> or <a
       href="https://www.google.com/intl/en/chrome/browser/">Chrome</a></strong>.
-  </div>
-</div>
-<!-- End of Row -->
-<!-- end of browser -->
-
-<!-- Start of messages -->
-<div style="mt-3">
-<div id="success" class="alert alert-success" style="display:none;">
-  <strong>Well done!</strong> You have successfully submitted your contribution.
-  Here is another to try if you
-  wish!
-</div>
-<div id="loading" class="alert alert-info" style="display:none;">
-  <img src="/static/img/loading.gif">Loading next task...
-</div>
-<div id="taskcompleted" class="alert alert-info" style="display:none;">
-  <strong>The task has been completed!</strong> Thanks a lot!
-</div>
-<div id="finish" class="alert alert-success" style="display:none;">
-  <h2>Congratulations!</h2>
-  <p>
-    You have participated in all available tasks!
-  </p>
-  <div class="alert-actions">
-    <a class="btn-default btn" href="/">Go back to the home page</a>
-    <a class="btn-default btn" href="/projects">or, have a look at our
-      other applications</a>
     </div>
   </div>
-  <div id="error" class="alert alert-danger" style="display:none;">
-    <a class="close">×</a>
-    <strong>Error!</strong> Something went wrong, please contact the site administrators
-  </div>
-</div>
-<!-- End Success and Error Messages for the user -->
+  <!-- End of Row -->
+  <!-- end of browser -->
 
-
-<div class="skeleton">
-
-<div class="col-md-12">
-      <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
-        <i class="glyphicon glyphicon-eye-open"></i> Tutorial
-      </button>
-      <a class="btn btn-info btn-xs" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top"
-      title="Opens in a new window" href="http://community.micropasts.org/"><i
-      class="glyphicon glyphicon-book"></i> Community Help</a>
-</div>
-
-<div class="col-md-12">
-  <div class="row">
-    <h4>Please help us to transcribe this section of our audioguide</h4>
-  </div>
-</div>
-
-<div class="row">
-
-  <div id="sound" class="col-md-12 center-block">
-    <span id="soundCloud">
-      <div id="waveform">
-        <progress id="progress" class="progress progress-striped" value="0" max="100"></progress>
-      </div>
-<script>
-
-  var ctx = document.createElement('canvas').getContext('2d');
-  var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
-  linGrad.addColorStop(0.5, 'rgba(255, 255, 255, 1.000)');
-  linGrad.addColorStop(0.5, 'rgba(183, 183, 183, 1.000)');
-  var wavesurfer = WaveSurfer.create({
-    container: '#waveform',
-    waveColor: linGrad,
-    progressColor: 'hsla(200, 100%, 30%, 0.5)',
-    cursorColor: '#fff',
-    // This parameter makes the waveform look like SoundCloud's player
-    barWidth: 3
-  });
-  wavesurfer.on('loading', function (percents) {
-    document.getElementById('progress').value = percents;
-  });
-
-  wavesurfer.on('ready', function (percents) {
-    document.getElementById('progressWave').style.display = 'none';
-    var timeline = Object.create(WaveSurfer.Timeline);
-
-    timeline.init({
-      wavesurfer: wavesurfer,
-      container: '#waveform-timeline'
-    });
-  });
-</script>
-
-      <div id="waveform-timeline" class="col-md-10 center-block"></div>
-
-      <div class="controls col-md-12 center-block">
-        <button class="btn btn-primary mb-2" onclick="wavesurfer.skipBackward()">
-          <i class="fa fa-step-backward"></i>
-          Backward
-        </button>
-
-        <button class="btn btn-primary mb-2" onclick="wavesurfer.playPause()">
-          <i class="fa fa-play"></i>
-          Play
-          /
-          <i class="fa fa-pause"></i>
-          Pause
-        </button>
-
-        <button class="btn btn-primary mb-2" onclick="wavesurfer.skipForward()">
-          <i class="fa fa-step-forward"></i>
-          Forward
-        </button>
-
-        <button class="btn btn-primary mb-2" onclick="wavesurfer.toggleMute()">
-          <i class="fa fa-volume-off"></i>
-          Toggle Mute
-        </button>
-      </div>
-    </span>
-  </div>
-
-  <div class="col-md-12">
-    <h3>Current Transcription</h3>
-
-    <div>
-      <pre>
-        <span id="currentTranscription">
-          <p>#</p>
-        </span>
-      </pre>
+  <!-- Start of messages -->
+  <div style="mt-3">
+    <div id="success" class="alert alert-success" style="display:none;">
+      <strong>Well done!</strong> You have successfully submitted your contribution.
+      Here is another to try if you
+      wish!
     </div>
-  </div>
-  <div class="col-md-12">
-
-    <form id="magicData" role="form">
-      <h4>Is this transcription correct?</h4>
-        <label class="btn btn-primary mb-2">
-          <input type="radio" name="valid" value="yes" checked> Yes
-        </label>
-        <label class="btn btn-danger mb-2">
-          <input type="radio" name="valid" value="no"> No
-        </label>
-
-      <div class="form-group">
-        <label class="control-label" for="transcription">Transcription</label>
-        <textarea rows="3" class="form-control" name="transcription" id="transcription"></textarea>
+    <div id="loading" class="alert alert-info" style="display:none;">
+      <img src="/static/img/loading.gif">Loading next task...
+    </div>
+    <div id="taskcompleted" class="alert alert-info" style="display:none;">
+      <strong>The task has been completed!</strong> Thanks a lot!
+    </div>
+    <div id="finish" class="alert alert-success" style="display:none;">
+      <h2>Congratulations!</h2>
+      <p>
+        You have participated in all available tasks!
+      </p>
+      <div class="alert-actions">
+        <a class="btn-default btn" href="/">Go back to the home page</a>
+        <a class="btn-default btn" href="/projects">or, have a look at our
+          other applications</a>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label class="control-label" for="comments">Transcriber's Comments</label>
-        <textarea class="form-control" rows="2" id="comments" name="comments"
-        placeholder="Add any comments you might have"></textarea>
+      <div id="error" class="alert alert-danger" style="display:none;">
+        <a class="close">×</a>
+        <strong>Error!</strong> Something went wrong, please contact the site administrators
       </div>
+    </div>
+    <!-- End Success and Error Messages for the user -->
 
 
-      <button class="btn btn-success btn-answer" value='Yes'>
-        Submit your transcription
-      </button>
-    </form>
-  </div>
-</div>
-    <!-- The data entry section using html table -->
-<div>
+    <div class="skeleton">
 
-  <!-- Feedback items for the user -->
-  <p>
-    You are working now on task: <span id="task-id" class="badge badge-warning">#</span>
-  </p>
-  <p>
-    You have completed: <span id="done" class="badge badge-info"></span> tasks from
-    <!-- Progress bar for the user -->
-    <span id="total" class="badge badge-inverse"></span>
-  </p>
-  <div class="progress progress-striped">
-    <div id="progressWave" rel="tooltip" title="#" class="progress-bar" role="progressbar"
-    style="width: 0%;"></div>
-  </div>
-  <!-- End of feedback row -->
-</div>
-<!-- End of the section -->
-</div>
-<!-- End of DOM Skeleton row -->
-
-<!-- Modal start -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <!-- Modal header -->
-      <div class="modal-header">
-        <h3>How to transcribe our audio files</h3>
-      </div>
-
-      <!-- Step 1 of the tutorial -->
-      <div id="0" class="modal-body" style="display:none">
-        <p>
-          Transcription of our audio is pretty straightforward.
-        </p>
-        <p>
-          All we want you to do, is to listen to the audio snippet you
-          are presented with (10 seconds) and check this against the
-          automatically derived transcription.
-        </p>
-
-        <p>
-          If you spot an error, could you put your corrections in the transcription box.
-        </p>
-
-      </div>
-
-      <!-- Step 2 of the tutorial -->
-      <div id="1" class="modal-body" style="display:none">
-        <p>
-          The audio player has very simple controls.
-        </p>
-
-        <ul>
-          <li>Rewind</li>
-          <li>Play and pause</li>
-          <li>Fast forward</li>
-          <li>Mute</li>
-        </ul>
-
-        <p>
-          The audio will not play until you ask it to do so. Stop it
-          whenever you need to do so and rewind and fast forward as required.
-          Do not worry if you cannot transcribe everything. Each task
-          will be worked on by several people and then these transcriptions
-          will be merged via computing scripts for final curatorial approval.
-        </p>
-
-        <p>
-          Thank you for participating. Your help means a lot to us all.
-        </p>
-      </div>
-      <!-- End of stepped modal body -->
-
-      <!-- Modal footer -->
-        <div class="modal-footer">
-          <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
-          <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
-          <button id="closeBtn" data-dismiss="modal" onclick="showStep('finish')" class="btn btn-primary"
-          style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Back to task
+      <div class="col-md-12">
+        <button class="btn btn-info btn-sm mb-2" data-toggle="modal" data-target="#myModal">
+          <i class="glyphicon glyphicon-eye-open"></i> Tutorial
         </button>
+        <a class="btn btn-info btn-sm mb-2" target="_blank" data-toggle="tooltip" data-placement="top"
+        title="Opens in a new window" href="http://community.micropasts.org/"><i
+        class="glyphicon glyphicon-book"></i> Community Help</a>
+      </div>
+      <h4 class="mb-2 mt-2">Please help us to transcribe this section of our audioguide</h4>
+      <div class="col-md-12">
+        <div id="sound" class="col-md-12 center-block">
+          <span id="soundCloud">
+            <div id="waveform">
+              <progress id="progress" class="progress progress-striped" value="0" max="100"></progress>
+            </div>
+
+            <div id="waveform-timeline" class="col-md-10 center-block"></div>
+
+            <div class="controls col-md-12 center-block">
+              <button class="btn btn-primary mb-2" onclick="wavesurfer.skipBackward()">
+                <i class="fa fa-step-backward"></i>
+                Backward
+              </button>
+
+              <button class="btn btn-primary mb-2" onclick="wavesurfer.playPause()">
+                <i class="fa fa-play"></i>
+                Play
+                /
+                <i class="fa fa-pause"></i>
+                Pause
+              </button>
+
+              <button class="btn btn-primary mb-2" onclick="wavesurfer.skipForward()">
+                <i class="fa fa-step-forward"></i>
+                Forward
+              </button>
+
+              <button class="btn btn-primary mb-2" onclick="wavesurfer.toggleMute()">
+                <i class="fa fa-volume-off"></i>
+                Toggle Mute
+              </button>
+            </div>
+          </span>
+        </div>
+
+        <div class="col-md-12">
+          <h4 class="mt-2 mb-2">Current Transcription</h4>
+
+          <div class="mb-2 p-2 mt-2 copyable-code">
+            <code>
+              <samp><span id="currentTranscription">
+                #
+              </span></samp>
+            </code>
+            <button id="copyButton" type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom"  title="Copy to clipboard">
+              <!-- icon from google's material design library -->
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24"><path d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <form id="magicData" role="form">
+            <h4>Is this transcription correct?</h4>
+            <label class="btn btn-primary mb-2">
+              <input type="radio" name="valid" value="yes" checked> Yes
+            </label>
+            <label class="btn btn-danger mb-2">
+              <input type="radio" name="valid" value="no"> No
+            </label>
+
+            <div class="form-group">
+              <label class="control-label" for="transcription">Transcription</label>
+              <textarea rows="3" class="form-control" name="transcription" id="transcription"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label" for="comments">Transcriber's Comments</label>
+              <textarea class="form-control" rows="2" id="comments" name="comments"
+              placeholder="Add any comments you might have"></textarea>
+            </div>
+
+
+            <button class="btn btn-success btn-answer mb-2" value='Yes'>
+              Submit your transcription
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- The data entry section using html table -->
+      <div class="col-md-12">
+
+        <!-- Feedback items for the user -->
+        <p>
+          You are working now on task: <span id="task-id" class="badge badge-warning">#</span>
+        </p>
+        <p>
+          You have completed: <span id="done" class="badge badge-info"></span> tasks from
+          <!-- Progress bar for the user -->
+          <span id="total" class="badge badge-dark"></span>
+        </p>
+        <div class="progress progress-striped">
+          <div id="progressWave" rel="tooltip" title="#" class="progress-bar" role="progressbar"
+          style="width: 0%;"></div>
+        </div>
+        <!-- End of feedback row -->
+      </div>
+      <!-- End of the section -->
+    </div>
+    <!-- End of DOM Skeleton row -->
+
+    <!-- Modal start -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal header -->
+          <div class="modal-header">
+            <h3>How to transcribe our audio files</h3>
+          </div>
+
+          <!-- Step 1 of the tutorial -->
+          <div id="0" class="modal-body" style="display:none">
+            <p>
+              Transcription of our audio is pretty straightforward.
+            </p>
+            <p>
+              All we want you to do, is to listen to the audio snippet you
+              are presented with (10 seconds) and check this against the
+              automatically derived transcription.
+            </p>
+
+            <p>
+              If you spot an error, could you put your corrections in the transcription box.
+            </p>
+
+          </div>
+
+          <!-- Step 2 of the tutorial -->
+          <div id="1" class="modal-body" style="display:none">
+            <p>
+              The audio player has very simple controls.
+            </p>
+
+            <ul>
+              <li>Rewind</li>
+              <li>Play and pause</li>
+              <li>Fast forward</li>
+              <li>Mute</li>
+            </ul>
+
+            <p>
+              The audio will not play until you ask it to do so. Stop it
+              whenever you need to do so and rewind and fast forward as required.
+              Do not worry if you cannot transcribe everything. Each task
+              will be worked on by several people and then these transcriptions
+              will be merged via computing scripts for final curatorial approval.
+            </p>
+
+            <p>
+              Thank you for participating. Your help means a lot to us all.
+            </p>
+          </div>
+          <!-- End of stepped modal body -->
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
+            <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+            <button id="closeBtn" data-dismiss="modal" onclick="showStep('finish')" class="btn btn-primary"
+            style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Back to task
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <!-- Client side scripts -->
+
+  <script>
+    document.getElementById("copyButton").addEventListener("click", function() {
+  copyToClipboard(document.getElementById("currentTranscription"));
+});
+
+function copyToClipboard(elem) {
+  // create hidden text element, if it doesn't already exist
+  var targetId = "_hiddenCopyText_";
+  var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+  var origSelectionStart, origSelectionEnd;
+  if (isInput) {
+      // can just use the original source element for the selection and copy
+      target = elem;
+      origSelectionStart = elem.selectionStart;
+      origSelectionEnd = elem.selectionEnd;
+  } else {
+      // must use a temporary form element for the selection and copy
+      target = document.getElementById(targetId);
+      if (!target) {
+          var target = document.createElement("textarea");
+          target.style.position = "absolute";
+          target.style.left = "-9999px";
+          target.style.top = "0";
+          target.id = targetId;
+          document.body.appendChild(target);
+      }
+      target.textContent = elem.textContent;
+  }
+  // select the content
+  var currentFocus = document.activeElement;
+  target.focus();
+  target.setSelectionRange(0, target.value.length);
+
+  // copy the selection
+  var succeed;
+  try {
+      succeed = document.execCommand("copy");
+  } catch(e) {
+      succeed = false;
+  }
+  // restore original focus
+  if (currentFocus && typeof currentFocus.focus === "function") {
+      currentFocus.focus();
+  }
+
+  if (isInput) {
+      // restore prior selection
+      elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+  } else {
+      // clear temporary content
+      target.textContent = "";
+  }
+  return succeed;
+}
+    var ctx = document.createElement('canvas').getContext('2d');
+    var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
+    linGrad.addColorStop(0.5, 'rgba(255, 255, 255, 1.000)');
+    linGrad.addColorStop(0.5, 'rgba(183, 183, 183, 1.000)');
+    var wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: linGrad,
+      progressColor: 'hsla(200, 100%, 30%, 0.5)',
+      cursorColor: '#fff',
+      // This parameter makes the waveform look like SoundCloud's player
+      barWidth: 3
+    });
+    wavesurfer.on('loading', function (percents) {
+      document.getElementById('progress').value = percents;
+    });
+
+    wavesurfer.on('ready', function (percents) {
+      document.getElementById('progressWave').style.display = 'none';
+      var timeline = Object.create(WaveSurfer.Timeline);
+
+      timeline.init({
+        wavesurfer: wavesurfer,
+        container: '#waveform-timeline'
+      });
+    });
+  </script>
+
+
   <script>
     // Quick fix for IE8
     Modernizr.load({
@@ -318,7 +380,6 @@ type="text/css" media="screen"/>
     $("#modal").modal('show');
   </script>
 
-  <!-- Load user progress -->
   <script>
 
     // This part of the script loads the user's progress through the project
