@@ -3,13 +3,15 @@
 {% set active_project  = "all" %}
 {% import "projects/_helpers.html" as helper %}
 
+{% block offcanvas %}
+    {{helper.render_project_local_nav(project, 'stats', current_user, pro_features)}}
+{% endblock %}
+
 {% block content %}
-<div class="container" style="min-height:400px;">
-    <div class="col-md-3">
-        {{helper.render_project_local_nav(project, 'stats', current_user, pro_features)}}
-    </div>
-    <div class="col-md-9">
-        {{helper.render_project_title(project, upload_method, subtitle='Statistics') }}
+<div class="container">
+  {{helper.render_project_title(project, upload_method, subtitle='Statistics') }}
+
+    <div class="col-md-12 shadow-sm p-3 mb-3">
         <span class="alert alert-warning">Sorry, the project does not have tasks to process and show some statistics</span>
     </div>
 </div>
