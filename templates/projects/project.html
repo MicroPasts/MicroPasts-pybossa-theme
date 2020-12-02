@@ -1,7 +1,7 @@
 {% set active_link = "info" %}
 {% extends "/projects/base.html" %}
 
-{% block projeccontent %}
+{% block projectcontent %}
 <div class="col-md-12 shadow-sm p-3 mb-3">
     {% if project.long_description != project.description  %}
     {{ project.long_description | e | markdown }}
