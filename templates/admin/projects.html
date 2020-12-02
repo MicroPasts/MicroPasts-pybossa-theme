@@ -8,7 +8,7 @@
 <h2 class="mt-3">{{ _('Manage featured projects') }}</h2>
     {% for c in categories %}
     <div id="{{c.short_name}}">
-        {{ render_grid_projects(projects[c.short_name], c.name, upload_method, featured=True, title_class="", container=False)}}
+        {{ render_grid_projects(projects[c.short_name], c.name, upload_method, featured=True, title_class="", container=True)}}
     </div>
     {% endfor %}
 {% endblock %}
