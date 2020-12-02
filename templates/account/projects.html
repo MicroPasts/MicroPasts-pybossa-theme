@@ -19,9 +19,11 @@
         {% endif %}
       </div>
         {% if projects_draft %}
+      <div class="row">
       <div class="col-md-12">
         {{ project_helper.render_grid_projects(projects_draft, _('Draft Projects'), upload_method,
         title_class="col-md-12", container=False)}}
+      </div>
         {% endif %}
         {% else %}
         <h1>{{_('You have not created a project')}}</h1>
