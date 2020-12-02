@@ -233,10 +233,8 @@
     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right mb-3">{{ _('Draft project, complete it!') }}</a>
     {% endif %}
     {% if project['contrib_button'] == 'publish' %}
-    <div class="btn-group btn-contribute pull-right" role="group">
-        <a class="btn btn-primary" role="button" href="{{url_for('project.presenter', short_name=project.short_name)}}">{{ _('Test it!') }}</a>
-        <a href="{{url_for('project.publish', short_name=project.short_name)}}" class="btn btn-default">{{ _('Publish it') }}</a>
-    </div>
+        <a class="btn btn-primary mb-2" role="button" href="{{url_for('project.presenter', short_name=project.short_name)}}">{{ _('Test it!') }}</a>
+        <a href="{{url_for('project.publish', short_name=project.short_name)}}" class="btn btn-primary mb-2">{{ _('Publish it') }}</a>
         {% endif %}
 {% endmacro %}
 
