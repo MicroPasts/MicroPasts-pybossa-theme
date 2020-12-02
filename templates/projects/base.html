@@ -34,7 +34,11 @@
     <p><strong>{{ overall_progress | round | int }}% {{_('completed')}}</strong></p>
     {% endif %}
 
+
+  </div>
+  <div class="col-md-12">
   {% block projectcontent %}
+
   {% endblock %}
   </div>
 </div>
