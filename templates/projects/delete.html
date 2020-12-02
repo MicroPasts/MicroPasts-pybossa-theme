@@ -2,14 +2,15 @@
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
 
+{% block offcanvas %}
+    {{ helper.render_project_local_nav(project, 'settings', current_user, pro_features) }}
+{% endblock %}
 {% block content %}
 {% if project %}
   <div class="container">
-      <div class="col-md-3">
-          {{ helper.render_project_local_nav(project, 'settings', current_user, pro_features) }}
-      </div>
-    <div class="col-md-9">
-        <h1><strong>{{project.name}}</strong>: {{ _('Delete project') }}</h1>
+    <h1 class="mt-3"><strong>{{project.name}}</strong>: {{ _('Delete project') }}</h1>
+
+    <div class="col-md-12 shadow-sm mb-3 p-3">
         <div class="alert alert-danger">
             <strong>{{ _('Danger Zone!') }}</strong> {{ _('If you delete the project and its tasks, it will be gone forever!') }}
         </div>
@@ -26,7 +27,12 @@
   </div>
 {% else %}
   <div class="page-header">
-    <h1>{{ _('Sorry! This project does not exist.') }}</h1>
+    <h1 class="mt-3">
+      There has been an error
+    </h1>
+    <p>
+      {{ _('Sorry! This project does not exist.') }}
+    </p>
   </div>
 {% endif %}
 {{ helper.broken_image() }}
