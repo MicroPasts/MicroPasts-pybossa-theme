@@ -227,10 +227,10 @@
     <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-dark btn-contribute pull-right mb-3">{{ _('Start Contributing Now!') }}</a>
     {% endif %}
     {% if project['contrib_button'] == 'cannot_contribute' %}
-    <a href="{{url_for('project.details', short_name=project.short_name)}}" class="btn btn-dark btn-contribute pull-right">{{ _('Thanks for contributing') }}</a>
+    <a href="{{url_for('project.details', short_name=project.short_name)}}" class="btn btn-dark btn-contribute pull-right mb-3">{{ _('Thanks for contributing') }}</a>
     {% endif %}
     {% if project['contrib_button'] == 'draft' %}
-    <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Draft project, complete it!') }}</a>
+    <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right mb-3">{{ _('Draft project, complete it!') }}</a>
     {% endif %}
     {% if project['contrib_button'] == 'publish' %}
     <div class="btn-group btn-contribute pull-right" role="group">
