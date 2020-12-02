@@ -24,7 +24,7 @@
 <h2>{{ _('Found Users') }}</h2>
 <div class="row">
 {% for user in found %}
-    <div class="col-sm-4 col-md-4">
+    <div class="col-sm-4 col-md-4 mb-3 p-3">
     {{ render_project_card_user(user, upload_method, background=True)}}
     </div>
 {% endfor %}
