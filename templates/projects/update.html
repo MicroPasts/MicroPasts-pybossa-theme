@@ -97,7 +97,7 @@ $(function() {
         });
 
         //Show/hide secret key
-        $(window).load(function(){
+        $(window).on('load', function () {
             $(".fa-eye-slash").hide();
             $("#password-toggle").click(function(evt){
                 evt.preventDefault();
