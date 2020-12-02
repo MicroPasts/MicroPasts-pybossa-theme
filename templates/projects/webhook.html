@@ -9,15 +9,16 @@
         </div>
         <div class="table-responsive">
             <table class="table table-bordered table-condensed table-hover table-responsive">
-                <tr>
-                    <td><strong>{{_('Created')}}</strong></td>
-                    <td><strong>{{_('Updated')}}</strong></td>
-                    <td><strong>{{_('Payload')}}</strong></td>
-                    <td><strong>{{_('Response')}}</strong></td>
-                    <td><strong>{{_('Response Status Code')}}</strong></td>
-                    <td><strong>{{_('Repeat')}}</strong></td>
+              <thead>
+                <tr class="thead-dark">
+                    <th><strong>{{_('Created')}}</strong></th>
+                    <th><strong>{{_('Updated')}}</strong></th>
+                    <th><strong>{{_('Payload')}}</strong></th>
+                    <th><strong>{{_('Response')}}</strong></th>
+                    <th><strong>{{_('Response Status Code')}}</strong></th>
+                    <th><strong>{{_('Repeat')}}</strong></th>
                 </tr>
-
+                </thead>
                 {% for response in responses | sort(reverse=True, attribute='updated') %}
                 <tr id="webhook_tr_{{response.id}}">
                     <td>
