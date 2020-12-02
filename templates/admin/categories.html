@@ -45,11 +45,8 @@
         {% endif %}
       </div>
     </div>
-    {% if not loop.last %}
+    {% endfor %}
+  {% endif %}
   </div>
-  <hr>
-  {% endif %}
-  {% endfor %}
-  {% endif %}
 </div>
 {% endblock %}
