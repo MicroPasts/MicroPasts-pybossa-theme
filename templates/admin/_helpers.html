@@ -24,22 +24,7 @@
 {%- macro render_project_card_user(user, upload_method, title, explanation, link, link_action_text, background=False, download=False, nofollow=False, link_class=None, id=None, icon=None, link_two=None, link_action_text_two=None) %}
 <div {%if id%}id="{{id}}"{% endif %} class="card">
   <div class="card-body">
-    <div class="post-pic" style="background: rgb(0, 151, 167) {%- if background %}url({{helper.render_user_avatar_src(user, upload_method)}}){% endif -%} no-repeat center top; background-size: cover;">
-      {% if not background %}
-      {% if icon %}
-      <div class="row">
-        <div class="col-sm-8">
-          <h3 class="card-title">{{user.fullname}}</h3>
-        </div>
-        <div class="col-sm-3">
-          <i class="fa fa-{{icon}} fa-fw fa-4x"></i>
-        </div>
-      </div>
-      {% else %}
-      <h3 class="card-title">{{user.fullname}}</h3>
-      {% endif %}
-      {% endif %}
-    </div>
+    <img class="card-img-top" src="{{ render_user_avatar_src(user, upload_method) }}" alt="Card image cap">
     <div class="caption">
       {% if background %}
       <h3 class="card-title">{{user.fullname}}</h3>
