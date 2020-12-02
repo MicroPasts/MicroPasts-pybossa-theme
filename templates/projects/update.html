@@ -27,7 +27,7 @@
 </div>
 <!-- Update form for project data-->
 <h2 class="mb-3">{{_('Update project details')}}</h2>
-<div class="col-md-12 shadow-sm mb-3 p-3"
+<div class="col-md-12 shadow-sm mb-3 p-3">
   <form method="post" action="{{ url_for('project.update', short_name = project.short_name) }}">
       <fieldset>
           {{ form.hidden_tag() }}
