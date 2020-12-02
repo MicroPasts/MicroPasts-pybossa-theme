@@ -17,7 +17,9 @@
         {{ project_helper.render_grid_projects(projects_published, _('Published Projects'), upload_method,
         title_class="col-md-12", container=False)}}
         {% endif %}
+      </div>
         {% if projects_draft %}
+      <div class="col-md-12">
         {{ project_helper.render_grid_projects(projects_draft, _('Draft Projects'), upload_method,
         title_class="col-md-12", container=False)}}
         {% endif %}
