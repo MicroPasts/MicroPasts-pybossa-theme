@@ -7,7 +7,7 @@
 {% from "_formhelpers.html" import render_field, render_checkbox_field %}
 
 <h2 class="mb-3">{{_('Update the avatar')}}</h2>
-<div class="col-md-12 shadow-sm mt-3 p-3">
+<div class="col-md-12 shadow-sm mb-3 p-3">
   <form method="post" action="{{ url_for('project.update', short_name=project.short_name) }}" enctype="multipart/form-data">
       <fieldset>
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
