@@ -33,16 +33,18 @@
   <div class="row">
   {% if categories %}
     {% for c in categories %}
-    <div class="card" >
-      <div class="card-body">
-        <h2 class="card-title">{{c.name}} </h2>
-        <p class="card-text">{{n_projects_per_category[c.short_name]}} projects</p>
-        <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn btn-primary"><i class="icon-edit"></i> {{_('Edit Category Name')}}</a>
-        {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
-        <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn btn-danger"><i class="icon-trash"></i> {{_('Delete Category')}}</a>
-        {% else %}
-        <a href="#" class="btn btn-danger disabled"><i class="icon-trash"></i> {{_('Delete Category')}}</a>
-        {% endif %}
+    <div class="col-sm-4 col-md-4 mb-3">
+      <div class="card" >
+        <div class="card-body">
+          <h2 class="card-title">{{c.name}} </h2>
+          <p class="card-text">{{n_projects_per_category[c.short_name]}} projects</p>
+          <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn btn-primary"><i class="icon-edit"></i> {{_('Edit Category Name')}}</a>
+          {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
+          <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn btn-danger"><i class="icon-trash"></i> {{_('Delete Category')}}</a>
+          {% else %}
+          <a href="#" class="btn btn-danger disabled"><i class="icon-trash"></i> {{_('Delete Category')}}</a>
+          {% endif %}
+        </div>
       </div>
     </div>
     {% endfor %}
