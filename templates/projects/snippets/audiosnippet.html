@@ -9,13 +9,8 @@ type="text/javascript"></script>
 <link rel="stylesheet" href="/static/vendor/fancybox/jquery.fancybox.css?v=2.1.5"
 type="text/css" media="screen"/>
 <style type="text/css">
-  .btn-answer {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .btn-group {
-    margin-bottom: 0px
-  }
+
+
   pre {
     white-space: pre-wrap;       /* Since CSS 2.1 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -69,19 +64,15 @@ type="text/css" media="screen"/>
 <!-- End Success and Error Messages for the user -->
 
 
-<div class="row skeleton">
+<div class="skeleton">
 
 <div class="col-md-12">
-  <div class="row">
-    <div class="btn-group">
       <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
         <i class="glyphicon glyphicon-eye-open"></i> Tutorial
       </button>
       <a class="btn btn-info btn-xs" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top"
       title="Opens in a new window" href="http://community.micropasts.org/"><i
       class="glyphicon glyphicon-book"></i> Community Help</a>
-    </div>
-  </div>
 </div>
 
 <div class="col-md-12">
@@ -92,7 +83,7 @@ type="text/css" media="screen"/>
 
 <div class="row">
 
-  <div id="sound" class="col-md-10 center-block">
+  <div id="sound" class="col-md-12 center-block">
     <span id="soundCloud">
       <div id="waveform">
         <progress id="progress" class="progress progress-striped" value="0" max="100"></progress>
@@ -128,13 +119,13 @@ type="text/css" media="screen"/>
 
       <div id="waveform-timeline" class="col-md-10 center-block"></div>
 
-      <div class="controls col-md-6 center-block">
-        <button class="btn btn-primary" onclick="wavesurfer.skipBackward()">
+      <div class="controls col-md-12 center-block">
+        <button class="btn btn-primary mb-2" onclick="wavesurfer.skipBackward()">
           <i class="fa fa-step-backward"></i>
           Backward
         </button>
 
-        <button class="btn btn-primary" onclick="wavesurfer.playPause()">
+        <button class="btn btn-primary mb-2" onclick="wavesurfer.playPause()">
           <i class="fa fa-play"></i>
           Play
           /
@@ -142,12 +133,12 @@ type="text/css" media="screen"/>
           Pause
         </button>
 
-        <button class="btn btn-primary" onclick="wavesurfer.skipForward()">
+        <button class="btn btn-primary mb-2" onclick="wavesurfer.skipForward()">
           <i class="fa fa-step-forward"></i>
           Forward
         </button>
 
-        <button class="btn btn-primary" onclick="wavesurfer.toggleMute()">
+        <button class="btn btn-primary mb-2" onclick="wavesurfer.toggleMute()">
           <i class="fa fa-volume-off"></i>
           Toggle Mute
         </button>
@@ -170,14 +161,12 @@ type="text/css" media="screen"/>
 
     <form id="magicData" role="form">
       <h4>Is this transcription correct?</h4>
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary">
+        <label class="btn btn-primary mb-2">
           <input type="radio" name="valid" value="yes" checked> Yes
         </label>
-        <label class="btn btn-danger">
+        <label class="btn btn-danger mb-2">
           <input type="radio" name="valid" value="no"> No
         </label>
-      </div>
 
       <div class="form-group">
         <label class="control-label" for="transcription">Transcription</label>
@@ -198,16 +187,16 @@ type="text/css" media="screen"/>
   </div>
 </div>
     <!-- The data entry section using html table -->
-<div class="row">
+<div>
 
   <!-- Feedback items for the user -->
   <p>
-    You are working now on task: <span id="task-id" class="label label-warning">#</span>
+    You are working now on task: <span id="task-id" class="badge badge-warning">#</span>
   </p>
   <p>
-    You have completed: <span id="done" class="label label-info"></span> tasks from
+    You have completed: <span id="done" class="badge badge-info"></span> tasks from
     <!-- Progress bar for the user -->
-    <span id="total" class="label label-inverse"></span>
+    <span id="total" class="badge badge-inverse"></span>
   </p>
   <div class="progress progress-striped">
     <div id="progressWave" rel="tooltip" title="#" class="progress-bar" role="progressbar"
