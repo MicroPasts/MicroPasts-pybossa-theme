@@ -26,31 +26,32 @@
       </div>
     </div>
   </div>
-  </div>
-  <h1 class="mt-3">{{_('List of Available Categories')}}</h1>
+</div>
+<h1 class="mt-3">{{_('List of Available Categories')}}</h1>
 
-  <div class="container shadow-sm p-3 mb-3">
+<div class="container shadow-sm p-3 mb-3">
 
-    {% if categories %}
-    <hr>
+  {% if categories %}
+  <hr>
+  <div class="row">
     {% for c in categories %}
-    <div class="row">
-      <div class="col-md-5">
-        <h2>{{c.name}} <small>({{n_projects_per_category[c.short_name]}} projects)</small></h2>
-      </div>
-      <div class="col-md-6">
-          <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn btn-primary"><i class="icon-edit"></i> {{_('Edit Category Name')}}</a>
-          {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
-          <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn btn-danger"><i class="icon-trash"></i> {{_('Delete Category')}}</a>
-          {% else %}
-          <a href="#" class="btn btn-danger disabled"><i class="icon-trash"></i> {{_('Delete Category')}}</a>
-          {% endif %}
+    <div class="card" >
+      <div class="card-body">
+        <h2 class="card-title">{{c.name}} </h2>
+        <p class="card-text">{{n_projects_per_category[c.short_name]}} projects</p>
+        <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn btn-primary"><i class="icon-edit"></i> {{_('Edit Category Name')}}</a>
+        {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
+        <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn btn-danger"><i class="icon-trash"></i> {{_('Delete Category')}}</a>
+        {% else %}
+        <a href="#" class="btn btn-danger disabled"><i class="icon-trash"></i> {{_('Delete Category')}}</a>
+        {% endif %}
       </div>
     </div>
     {% if not loop.last %}
-    <hr>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
   </div>
-  {% endblock %}
+  <hr>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
