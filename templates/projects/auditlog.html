@@ -6,15 +6,17 @@
 {% block projectcontent %}
 {% if logs %}
 <table id="webhooks-table" class="table table-bordered table-condensed table-hover table-responsive">
+  <thead class="thead-dark">
     <tr>
-        <td>{{ _('When') }}</td>
-        <td>{{ _('Who') }}</td>
-        <td>{{ _('Source') }}</td>
-        <td>{{ _('Action') }}</td>
-        <td>{{ _('Attribute') }}</td>
-        <td>{{ _('Old Value') }}</td>
-        <td>{{ _('New Value') }}</td>
+        <th>{{ _('When') }}</th>
+        <th>{{ _('Who') }}</th>
+        <th>{{ _('Source') }}</th>
+        <th>{{ _('Action') }}</th>
+        <th>{{ _('Attribute') }}</th>
+        <th>{{ _('Old Value') }}</th>
+        <th>{{ _('New Value') }}</th>
     </tr>
+  </thead>
 {% for log in logs | sort(reverse=True, attribute='created') %}
     <tr>
         <td>{{log.created}}</td>
