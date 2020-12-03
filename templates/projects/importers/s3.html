@@ -23,15 +23,15 @@
     <ul id="objects"></ul>
 </div>
 {% if form %}
-<form class="form-group" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
-    <fieldset>
-        {{ form.hidden_tag() }}
-        {{ form.files(style="display: none;") }}
-        {{ render_field(form.bucket, placeholder=_("Name of the S3 bucket")) }}
-    </fieldset>
-    <a id="get-bucket" class="btn btn-default">{{ _('Search in bucket') }}</a>
-    <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-primary" />
-</form>
+  <form class="form-group" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+      <fieldset>
+          {{ form.hidden_tag() }}
+          {{ form.files(style="display: none;") }}
+          {{ render_field(form.bucket, placeholder=_("Name of the S3 bucket")) }}
+      </fieldset>
+      <a id="get-bucket" class="btn btn-primary mb-3">{{ _('Search in bucket') }}</a>
+      <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-primary mb-3" />
+  </form>
 </div>
 {% endif %}
 {% endblock %}
