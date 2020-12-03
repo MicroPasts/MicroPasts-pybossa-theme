@@ -23,8 +23,9 @@
   </div>
 </div>
 {% if wait == False %}
-<h2 class="mt-2">{{ _('Active users') }}: {{active_users_last_week['series'][0] | sum}}</h2>
-
+<h2 class="mt-2">
+  {{ _('Active users') }}: {{active_users_last_week['series'][0] | sum}}
+</h2>
 <div class="container col-md-12 shadow-sm mb-3">
     <div id="dashboard_week_users" class="ct-chart ct-perfect-fourth"></div>
     <script>
@@ -33,8 +34,10 @@
       new Chartist.Line('#dashboard_week_users', data, options);
     </script>
   </div>
-  <h2 class="mt-2">{{ _('Active anonymous users') }}: {{active_anon_last_week['series'][0] | sum}}</h2>
 
+  <h2 class="mt-2">
+    {{ _('Active anonymous users') }}: {{active_anon_last_week['series'][0] | sum}}
+  </h2>
   <div class="container col-md-12 shadow-sm mb-3">
       <div id="dashboard_week_anon"  class="ct-chart ct-perfect-fourth"></div>
     <script>
@@ -43,32 +46,44 @@
       new Chartist.Line('#dashboard_week_anon', data, options);
     </script>
   </div>
-  <div class="col-md-4">
-    <h2>{{ _('Draft projects') }}: {{draft_projects_last_week|count}}</h2>
+
+  <h2 class="mt-2">
+    {{ _('Draft projects') }}: {{draft_projects_last_week|count}}
+  </h2>
+  <div class="container col-md-12 shadow-sm mb-3">
     <ul>
       {% for project in draft_projects_last_week %}
       <li><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.p_name}}</a> by <a href="{{url_for('account.profile', name=project.u_name)}}">{{project.u_name}}</a> ({{project.email_addr}})</li>
       {% endfor %}
     </ul>
   </div>
-  <div class="col-md-4">
-    <h2>{{ _('Published projects') }}: {{published_projects_last_week|count}}</h2>
+
+  <h2 class="mt-2">
+    {{ _('Published projects') }}: {{published_projects_last_week|count}}
+  </h2>
+  <div class="container col-md-12 shadow-sm mb-3">
     <ul>
       {% for project in published_projects_last_week %}
       <li><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.p_name}}</a> by <a href="{{url_for('account.profile', name=project.u_name)}}">{{project.u_name}}</a> ({{project.email_addr}})</li>
       {% endfor %}
     </ul>
   </div>
-  <div class="col-md-4">
-    <h2>{{ _('Updated projects') }}: {{update_projects_last_week|count}}</h2>
+
+  <h2 class="mt-2">
+    {{ _('Updated projects') }}: {{update_projects_last_week|count}}
+  </h2>
+  <div class="container col-md-12 shadow-sm mb-3">
     <ul>
       {% for project in update_projects_last_week %}
       <li><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.p_name}}</a> by <a href="{{url_for('account.profile', name=project.u_name)}}">{{project.u_name}}</a> ({{project.email_addr}})</li>
       {% endfor %}
     </ul>
   </div>
-  <div class="col-md-6">
-    <h2>{{ _('New tasks') }}: {{new_tasks_week['series'][0] | sum}}</h2>
+
+  <h2 class="mt-2">
+    {{ _('New tasks') }}: {{new_tasks_week['series'][0] | sum}}
+  </h2>
+  <div class="container col-md-12 shadow-sm mb-3">
     <div id="dashboard_week_new_tasks" class="ct-chart ct-perfect-fourth"></div>
     <script>
       var data = {{ new_tasks_week | tojson | safe }};
@@ -76,8 +91,11 @@
       new Chartist.Line('#dashboard_week_new_tasks', data, options);
     </script>
   </div>
-  <div class="col-md-6">
-    <h2>{{ _('New Answers') }}: {{new_task_runs_week['series'][0] | sum}}</h2>
+
+  <h2 class="mt-2">
+    {{ _('New Answers') }}: {{new_task_runs_week['series'][0] | sum}}
+  </h2>
+  <div class="container col-md-12 shadow-sm mb-3">
     <div id="dashboard_week_new_task_runs" class="ct-chart ct-perfect-fourth"></div>
     <script>
       var data = {{ new_task_runs_week | tojson | safe }};
@@ -85,8 +103,11 @@
       new Chartist.Line('#dashboard_week_new_task_runs', data, options);
     </script>
   </div>
-  <div class="col-md-6">
-    <h2>{{ _('New Users') }}: {{new_users_week['series'][0] | sum}}</h2>
+
+  <h2 class="mt-2">
+    {{ _('New Users') }}: {{new_users_week['series'][0] | sum}}
+  </h2>
+  <div class="container col-md-12 shadow-sm mb-3">
     <div id="dashboard_week_new_users" class="ct-chart ct-perfect-fourth"></div>
     <script>
       var data = {{ new_users_week | tojson | safe }};
@@ -94,8 +115,11 @@
       new Chartist.Line('#dashboard_week_new_users', data, options);
     </script>
   </div>
-  <div class="col-md-6">
-    <h2>{{ _('Returning Users') }}: {{returning_users_week['series'][0] | sum}}</h2>
+
+  <h2 class="mt-2">
+    {{ _('Returning Users') }}: {{returning_users_week['series'][0] | sum}}
+  </h2>
+  <div class="container col-md-12 shadow-sm mb-3">
     <div id="dashboard_week_returning_users" class="ct-chart ct-perfect-fourth"></div>
     <script>
       var data = {{ returning_users_week | tojson | safe }};
@@ -104,6 +128,7 @@
     </script>
   </div>
 </div>
+
 <div class="container">
   <div class="row">
     <div class="col-md-12">
