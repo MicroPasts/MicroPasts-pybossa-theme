@@ -7,8 +7,12 @@
 {% from "_formhelpers.html" import render_form %}
 {% block projectcontent %}
 {{ helper.render_loading(loading_text) }}
-<h3>{{_('From a CSV file')}}</h3>
-{{ render_form(form, action_url=url_for(target, short_name=project.short_name), action_text=_('Import'), btn_class="btn btn-primary") }}
+<h3 class="mt-3">
+  {{_('From a CSV file')}}
+</h3>
+<div class="col-md-12 shadow-sm mb-3 p-3">
+  {{ render_form(form, action_url=url_for(target, short_name=project.short_name), action_text=_('Import'), btn_class="btn btn-primary mb-2") }}
+</div>
 {% endblock %}
 
 {% block extrajs %}
