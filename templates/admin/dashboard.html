@@ -103,7 +103,7 @@
   <div id="dashboard_week_new_task_runs" class="ct-chart ct-perfect-fourth"></div>
   <script>
     var data = {{ new_task_runs_week | tojson | safe }};
-    var options ={ axisY: {onlyInteger: false}};
+    var options ={ axisY: {onlyInteger: true}};
     new Chartist.Line('#dashboard_week_new_task_runs', data, options);
   </script>
 </div>
@@ -115,7 +115,7 @@
   <div id="dashboard_week_new_users" class="ct-chart ct-perfect-fourth"></div>
   <script>
     var data = {{ new_users_week | tojson | safe }};
-    var options ={ axisY: {onlyInteger: false}};
+    var options ={ axisY: {onlyInteger: true}};
     new Chartist.Line('#dashboard_week_new_users', data, options);
   </script>
 </div>
@@ -127,7 +127,7 @@
   <div id="dashboard_week_returning_users" class="ct-chart ct-perfect-fourth"></div>
   <script>
     var data = {{ returning_users_week | tojson | safe }};
-    var options ={ axisY: {onlyInteger: false}};
+    var options ={ axisY: {onlyInteger: true}};
     new Chartist.Bar('#dashboard_week_returning_users', data, options);
   </script>
 </div>
