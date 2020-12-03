@@ -8,7 +8,6 @@
 {% from "_formhelpers.html" import render_field %}
 
 {% block projectcontent %}
-<div class="row">
   <h3 class="mt-3">
     {{_('From a Flickr Album')}}
   </h3>
@@ -17,15 +16,16 @@
     <a id="revoke" href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right" style="display:none;">{{ _('Revoke access') }}</a>
     <br>
     <div id="grant">
-      <p> {{ _('Grant access to your Flickr albums to select one...') }}</p>
-      <a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-default">{{ _('Log in Flickr') }}</a>
+      <p>
+        {{ _('Grant access to your Flickr albums to select one...') }}
+      </p>
+      <a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-primary mb-3">{{ _('Log in Flickr') }}</a>
     </div>
     <div id="albums-container">
       <ul id="albums"></ul>
     </div>
   </div>
-</div>
-<div class="row">
+
   <div class="col-sm-12 shadow-sm mb-3 p-3">
     <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
       <fieldset>
@@ -38,7 +38,6 @@
       </fieldset>
     </form>
   </div>
-</div>
 {% endblock %}
 
 {% block extrajs %}
