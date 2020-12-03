@@ -12,7 +12,11 @@
         background-color: #D4D4D4;
     }
 </style>
-<h3>{{_('From an Amazon S3 bucket')}}</h3>
+
+<h3 class="mt-3">
+  {{_('From an Amazon S3 bucket')}}
+</h3>
+<div class="container shadow-sm p-3 mb-3">
 <span class="help-inline">{{_('For more information, please look at')}} <a href="http://docs.pybossa.com/en/latest/user/overview.html#importing-the-tasks-from-an-amazon-s3-bucket" target="_blank">{{_('the documentation')}}.</a></span>
 <br>
 <div id="objects-container" class="row">
@@ -28,6 +32,7 @@
     <a id="get-bucket" class="btn btn-default">{{ _('Search in bucket') }}</a>
     <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-primary" />
 </form>
+</div>
 {% endif %}
 {% endblock %}
 

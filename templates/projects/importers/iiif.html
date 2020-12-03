@@ -12,7 +12,7 @@
 </h3>
 <div class="container shadow-sm mb-3 p-3">
   <span class="help-inline">{{_('For more information, please look at')}} <a href="http://docs.pybossa.com/user/overview/#importing-the-tasks-from-a-iiif-manifest" target="_blank">{{_('the documentation')}}.</a></span>
-  {{ render_form(form, action_url=url_for(target, short_name=project.short_name), action_text=_('Import'), btn_class="btn btn-primary") }}
+  {{ render_form(form, action_url=url_for(target, short_name=project.short_name), action_text=_('Import'), btn_class="btn btn-primary mb-3") }}
 </div>
 {% endblock %}
 
