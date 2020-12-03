@@ -55,7 +55,7 @@
     {% endfor %}
   </ul>
 </div>
-
+{% if(published_projects_last_week|count > 0) %}
 <h2 class="mt-2">
   {{ _('Published projects') }}: {{published_projects_last_week|count}}
 </h2>
@@ -66,6 +66,7 @@
     {% endfor %}
   </ul>
 </div>
+{% endif %}
 
 <h2 class="mt-2">
   {{ _('Updated projects') }}: {{update_projects_last_week|count}}
