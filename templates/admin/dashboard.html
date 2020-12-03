@@ -33,6 +33,7 @@
   </script>
 </div>
 
+{% if(active_anon_last_week['series'][0] | sum > 0) %}
 <h2 class="mt-2">
   {{ _('Active anonymous users') }}: {{active_anon_last_week['series'][0] | sum}}
 </h2>
@@ -44,7 +45,9 @@
     new Chartist.Line('#dashboard_week_anon', data, options);
   </script>
 </div>
+{% endif %}
 
+{% if(draft_projects_last_week|count > 0) %}
 <h2 class="mt-2">
   {{ _('Draft projects') }}: {{draft_projects_last_week|count}}
 </h2>
@@ -55,6 +58,8 @@
     {% endfor %}
   </ul>
 </div>
+{% endif %}
+
 {% if(published_projects_last_week|count > 0) %}
 <h2 class="mt-2">
   {{ _('Published projects') }}: {{published_projects_last_week|count}}
