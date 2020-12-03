@@ -7,19 +7,23 @@
 {% from "_formhelpers.html" import render_field %}
 {% block projectcontent %}
 {% if form %}
-<h3>{{_('From an EpiCollect Plus project')}}</h3>
-<form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
-    <fieldset>
-        {{ form.hidden_tag() }}
-        <span class="help-inline">{{_('Please provide an EpiCollect Plus project name to import its data for')}} {{ active_project }}.<br/> {{_('For more information, please look at')}} <a href="http://docs.pybossa.com/en/latest/user/overview.html#importing-the-tasks-via-the-built-in-csv-task-creator" target="_blank">{{_('the documentation')}}.</a></span>
-        {{ render_field(form.epicollect_project, placeholder=_('The name of the public EpiCollect Plus project')) }}
-        {{ render_field(form.epicollect_form, placeholder=_('The name of the project\'s form')) }}
-        <div class="form-actions">
-            <input type="submit" value="{{_('Import')}}" class="btn btn-primary" />
-            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">{{_('Cancel')}}</a>
-        </div>
-    </fieldset>
-</form>
+<h3 class="mt-2">
+  {{_('From an EpiCollect Plus project')}}
+</h3>
+<div class="col-md-12 shadow-sm mb-3 p-3">
+  <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+      <fieldset>
+          {{ form.hidden_tag() }}
+          <span class="help-inline">{{_('Please provide an EpiCollect Plus project name to import its data for')}} {{ active_project }}.<br/> {{_('For more information, please look at')}} <a href="http://docs.pybossa.com/en/latest/user/overview.html#importing-the-tasks-via-the-built-in-csv-task-creator" target="_blank">{{_('the documentation')}}.</a></span>
+          {{ render_field(form.epicollect_project, placeholder=_('The name of the public EpiCollect Plus project')) }}
+          {{ render_field(form.epicollect_form, placeholder=_('The name of the project\'s form')) }}
+          <div class="form-actions">
+              <input type="submit" value="{{_('Import')}}" class="btn btn-primary" />
+              <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">{{_('Cancel')}}</a>
+          </div>
+      </fieldset>
+  </form>
+</div>
 {% endif %}
     </div>
 </div>
