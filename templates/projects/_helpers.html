@@ -301,14 +301,14 @@
 {% macro render_project_thumbnail(project, upload_method, id, class, style) %}
 {% if project.info.container %}
     {% if upload_method == 'rackspace'%}
-    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder.project.png')}}';">
+    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder.user.png')}}';">
     {% else %}
-    <img id="{{id}}"  class="{{class}}" width="{{width}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder.project.png')}}';" >
+    <img id="{{id}}"  class="{{class}}" width="{{width}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder.user.png')}}';" >
     {% endif %}
 {% elif project.info.thumbnail %}
-    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{project.info.thumbnail}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder.project.png')}}';">
+    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{project.info.thumbnail}}" style="{{style}}" onError="this.onerror=null;this.src='{{url_for('static', filename='img/placeholder.user.png')}}';">
 {% else %}
-    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="{{style}}">
+    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholder.user.png')}}" style="{{style}}">
 {% endif %}
 {% endmacro %}
 
@@ -339,7 +339,7 @@
 {%- elif project.info.thumbnail %}
     {{project.info.thumbnail}}"
 {% else -%}
-{{url_for('static', filename='img/placeholder.project.png')}}
+{{url_for('static', filename='img/placeholder.user.png')}}
 {% endif -%}
 {% endmacro -%}
 
