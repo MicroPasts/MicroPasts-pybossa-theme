@@ -13,3 +13,4 @@ _gcs_form.html
 Thumbs.db
 .idea*
 .DS_Store
+static/src/node_modules/*
