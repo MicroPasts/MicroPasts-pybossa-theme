@@ -23,9 +23,9 @@
   </div>
 </div>
 {% if wait == False %}
+<h2 class="mt-2">{{ _('Active users') }}: {{active_users_last_week['series'][0] | sum}}</h2>
+
 <div class="container col-md-12 shadow-sm mb-3">
-  <div class="col-md-6">
-    <h2>{{ _('Active users') }}: {{active_users_last_week['series'][0] | sum}}</h2>
     <div id="dashboard_week_users" class="ct-chart ct-perfect-fourth"></div>
     <script>
       var data = {{ active_users_last_week | tojson | safe }};
@@ -33,9 +33,10 @@
       new Chartist.Line('#dashboard_week_users', data, options);
     </script>
   </div>
-  <div class="col-md-6">
-    <h2>{{ _('Active anonymous users') }}: {{active_anon_last_week['series'][0] | sum}}</h2>
-    <div id="dashboard_week_anon"  class="ct-chart ct-perfect-fourth"></div>
+  <h2 class="mt-2">{{ _('Active anonymous users') }}: {{active_anon_last_week['series'][0] | sum}}</h2>
+
+  <div class="container col-md-12 shadow-sm mb-3">
+      <div id="dashboard_week_anon"  class="ct-chart ct-perfect-fourth"></div>
     <script>
       var data = {{ active_anon_last_week | tojson | safe }};
       var options ={ axisY: {onlyInteger: false}};
