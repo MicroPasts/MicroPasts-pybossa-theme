@@ -27,15 +27,13 @@
     <h2>{{section}}</h2>
     {% endif %}
   </div>
-  <div class="col-md-12 shadow-sm p-3 mb-3">
+
     {{helper.render_contribute_button(project)}}
 
     {% if active_link == 'info' %}
     <p><strong>{{ overall_progress | round | int }}% {{_('completed')}}</strong></p>
     {% endif %}
 
-
-  </div>
   {% block projectcontent %}
 
   {% endblock %}
