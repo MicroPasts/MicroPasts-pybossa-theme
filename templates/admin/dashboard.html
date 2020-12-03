@@ -15,12 +15,10 @@
   }
 </style>
 
-<div class="col-md-12">
-  <h1 class="mt-3"><strong>{{ _('Last 7 days statistics') }}</strong></h1>
-</div>
-<div class="col-md-2">
-  <a href="{{url_for('admin.dashboard', refresh='1')}}" class="btn btn-primary mb-2 mt-2">{{ _('Refresh') }}</a>
-</div>
+<h1 class="mt-3">
+  <strong>{{ _('Last 7 days statistics') }}</strong>
+</h1>
+<a href="{{url_for('admin.dashboard', refresh='1')}}" class="btn btn-primary mb-2 mt-2">{{ _('Refresh') }}</a>
 
 {% if wait == False %}
 <h2 class="mt-2">
@@ -127,65 +125,71 @@
     new Chartist.Bar('#dashboard_week_returning_users', data, options);
   </script>
 </div>
+
+<h2 class="mt-2">
+  {{ _('Recent activity') }}
+</h2>
+
+<div class="col-md-12 shadow-sm mb-3 p-3">
+  {% if update_feed %}
+  <ul class="recent-activity", style="list-style-type:none; padding-left:0px;">
+    {% for u in update_feed[0:30] %}
+    <li>
+      {% if u.action_updated == 'Project' %}
+      <img class="rounded-circle" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="max-width:30px;">
+        <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name }}</a> {{ _('new project created') }} {{u.updated | pretty_date }}
+      {% endif %}
+
+      {% if u.action_updated == 'Blog' %}
+      <img class="rounded-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
+      <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has published a blog post') }} {{u.updated | pretty_date }}
+      {% endif %}
+
+      {% if u.action_updated == 'Task' %}
+      <img class="rounded-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
+      <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has added new tasks') }} {{u.updated | pretty_date}}
+      {% endif %}
+
+      {% if u.action_updated == 'TaskCompleted' %}
+      <img class="rounded-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
+      <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has completed a task') }} {{u.updated | pretty_date}}</p>
+      {% endif %}
+
+      {% if u.action_updated == 'UserContribution' %}
+      {{ helper.render_avatar(u, upload_method, class='rounded-circle', width='30px')}}
+      <a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a> {{ _('has contributed to') }}
+      <a href="{{url_for('project.details', short_name=u.project_short_name)}}">
+      <span class="hidden-xs">{{u.project_name | truncate(28)}}</span>
+      <span class="visible-xs-fullnames">{{u.project_name | truncate(10)}}</span></a>
+      {{u.updated | pretty_date}}
+      {% endif %}
+      {% if u.action_updated == 'User' %}
+      <p>{{ helper.render_avatar(u, upload_method, class='rounded-circle', width='30px')}}
+      <a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a>
+      {{ _('has joined') }} {{u.updated | pretty_date}}
+      {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% elif accounts %}
+<ul class="recent-activity">
+  {% for account in accounts %}
+  <li>
+    <p>{{ helper.render_avatar(account, upload_method, class='rounded-circle', width='30px') }}
+      <a href="{{url_for('account.profile', name=account.name)}}">{{account['fullname']}}</a><br />
+      {{ _('has joined') }} {{account.registered_ago}} and has contributed {{ account.task_runs }} tasks
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h2>{{ _('Recent activity') }}</h2>
-      {% if update_feed %}
-      <ul class="recent-activity", style="list-style-type:none; padding-left:0px;">
-        {% for u in update_feed[0:30] %}
-        <li>
-          {% if u.action_updated == 'Project' %}
-          <p><img class="rounded-circle" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="max-width:30px;">
-            <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name }}</a> {{ _('new project created') }} {{u.updated | pretty_date }} </p>
-            {% endif %}
-            {% if u.action_updated == 'Blog' %}
-            <p><img class="rounded-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
-              <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has published a blog post') }} {{u.updated | pretty_date }} </p>
-              {% endif %}
-              {% if u.action_updated == 'Task' %}
-              <p><img class="rounded-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
-                <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has added new tasks') }} {{u.updated | pretty_date}}</p>
-                {% endif %}
-                {% if u.action_updated == 'TaskCompleted' %}
-                <p><img class="rounded-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
-                  <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has completed a task') }} {{u.updated | pretty_date}}</p>
-                  {% endif %}
-                  {% if u.action_updated == 'UserContribution' %}
-                  <p>{{ helper.render_avatar(u, upload_method, class='rounded-circle', width='30px')}}
-                    <a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a> {{ _('has contributed to') }}
-                    <a href="{{url_for('project.details', short_name=u.project_short_name)}}">
-                      <span class="hidden-xs">{{u.project_name | truncate(28)}}</span>
-                      <span class="visible-xs-fullnames">{{u.project_name | truncate(10)}}</span></a>
-                      {{u.updated | pretty_date}}</p>
-                      {% endif %}
-                      {% if u.action_updated == 'User' %}
-                      <p>{{ helper.render_avatar(u, upload_method, class='rounded-circle', width='30px')}}
-                        <a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a> {{ _('has joined') }} {{u.updated | pretty_date}}</p>
-                        {% endif %}
-                      </li>
-                      {% endfor %}
-                    </ul>
-                    {% elif accounts %}
-                    <ul class="recent-activity">
-                      {% for account in accounts %}
-                      <li>
-                        <p>{{ helper.render_avatar(account, upload_method, class='rounded-circle', width='30px') }}
-                          <a href="{{url_for('account.profile', name=account.name)}}">{{account['fullname']}}</a><br />{{ _('has joined') }} {{account.registered_ago}} and has contributed {{ account.task_runs }} tasks</p>
-                        </li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-                {% else %}
-                <div class="container">
-                  <div class="col-md-12">
-                    <h1>{{ _("No data available yet. You'll need to wait 24 hours.") }}</h1>
-                  </div>
-                </div>
-                {% endif %}
-                {% endblock %}
+{% else %}
+<h1 class="mt-2">
+  No data
+</h1>
+<div class="col-md-12 shadow-sm mb-3 p-3">
+  <p>{{ _("No data available yet. You'll need to wait 24 hours.") }}</p>
+</div>
+{% endif %}
+{% endblock %}
