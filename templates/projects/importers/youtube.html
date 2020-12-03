@@ -9,31 +9,36 @@
 
 {% block projectcontent %}
 <style type="text/css">
-.selected {
+  .selected {
     background-color: #D4D4D4;
-}
+  }
 </style>
-<h3>{{_('From Youtube')}}</h3>
+
+<h3 class="mt-3">
+  {{_('From Youtube')}}
+</h3>
 <br>
-<span class="help-inline"> {{ _('Please provide a URL to a Youtube playlist with videos for') }} {{ active_project }}.
-</span>
-<br>
-<div id="objects-container" class="row">
+<div class="container shadow-sm p-3 mb-3">
+  <span class="help-inline"> {{ _('Please provide a URL to a Youtube playlist with videos for') }} {{ active_project }}.
+  </span>
+  <br>
+  <div id="objects-container" class="row">
     <ul id="objects"></ul>
-</div>
-<form class="form-group" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+  </div>
+  <form class="form-group" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
     <fieldset>
-        {{ form.hidden_tag() }}
-        {{ render_field(form.playlist_url, placeholder=_("URL of a Youtube Playlist")) }}
+      {{ form.hidden_tag() }}
+      {{ render_field(form.playlist_url, placeholder=_("URL of a Youtube Playlist")) }}
     </fieldset>
     <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-primary" />
-</form>
+  </form>
+</div>
 {% endblock %}
 {% block extrajs %}
 <script>
-    $("#submit").off('click').on('click', function(){
-            var msg = "{{_('Importing data...')}}";
-            pybossaNotify(msg, true, "loading");
-            });
+  $("#submit").off('click').on('click', function(){
+    var msg = "{{_('Importing data...')}}";
+    pybossaNotify(msg, true, "loading");
+  });
 </script>
 {% endblock %}
