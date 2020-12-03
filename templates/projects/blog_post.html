@@ -13,10 +13,10 @@
     <em>{{ _('Written: ') }} {{ blogpost.created[0:10] }}</em>
   </p>
   <p>
-    <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}">{{_('Back')}}</a></p>
+    <a class="btn btn-primary" href="{{url_for('project.show_blogposts', short_name=project.short_name)}}">{{_('Back')}}</a></p>
   </header>
   <body>
-    <p>{{ blogpost.body | e | markdown }}</p>
+    <p>{{ blogpost.body | markdown }}</p>
   </body>
 </article>
 {% if current_user.is_authenticated and current_user.id == project.owner_id or current_user.admin %}
