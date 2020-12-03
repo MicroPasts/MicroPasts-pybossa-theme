@@ -35,7 +35,7 @@
           {{ render_field(form.short_name, class_="input-xlarge", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
           {{ render_field(form.description, class_="input-xlarge", placeholder=_('Give some details about the project')) }}
           {{ render_field(form.long_description, class_="input-xlarge", placeholder=_('Explain the project (use Markdown!)')) }}
-  
+
           {{ render_field(form.category_id) }}
           {{ render_checkbox_field(form.allow_anonymous_contributors, class_="", tooltip=_('Check if you want to allow anonymous users contribute to your project')) }}
           {{ render_checkbox_field(form.zip_download, class_="", tooltip=_("Check if you want to disable anonymous users to download project's data")) }}
@@ -122,6 +122,5 @@ $(function() {
             });
         });
 </script>
-<script src="/static/js/editor.min.js?8597e4affce13b5ec00c"></script>
 
 {% endblock %}
