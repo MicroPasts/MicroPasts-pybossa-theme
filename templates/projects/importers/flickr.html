@@ -58,7 +58,7 @@
         $('#grant').hide();
         $('#albums-container').prepend('<p>'+"{{ _('Select one of your albums:') }}"+'</p>');
         albums.forEach(function(album){
-          var albumElement = $('<div class="col-md-3" mb-3><div class="card"><img class="card-img-top" src="'+album.thumbnail_url+'"/><div class="card-body"><h2>'+album.title+'</h2><p class="card-text">'+album.photos+' {{ _('photos') }}</p><button id="'+album.id+'" class="btn btn-info btn-sm btn-album">{{ _('Select') }}</button></div></div></div>');
+          var albumElement = $('<div class="col-md-3 mb-3><div class="card h-100"><img class="card-img-top" src="'+album.thumbnail_url+'"/><div class="card-body"><h2>'+album.title+'</h2><p class="card-text">'+album.photos+' {{ _('photos') }}</p><button id="'+album.id+'" class="btn btn-info btn-sm btn-album">{{ _('Select') }}</button></div></div></div>');
           $('#albums').append(albumElement);
         });
       }
