@@ -13,7 +13,7 @@
   </h3>
 
   <div class="col-sm-12 shadow-sm mb-3 p-3">
-    <a id="revoke" href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right" style="display:none;">{{ _('Revoke access') }}</a>
+    <a id="revoke" href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right mb-3" style="display:none;">{{ _('Revoke access') }}</a>
     <br>
     <div id="grant">
       <p>
@@ -21,9 +21,12 @@
       </p>
       <a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-primary mb-3">{{ _('Log in Flickr') }}</a>
     </div>
-    <div id="albums-container">
-      <ul id="albums"></ul>
-    </div>
+  </div>
+
+  <div id="albums-container">
+      <div id="albums" class="row">
+
+      </div>
   </div>
 
   <div class="col-sm-12 shadow-sm mb-3 p-3">
@@ -55,7 +58,7 @@
         $('#grant').hide();
         $('#albums-container').prepend('<p>'+"{{ _('Select one of your albums:') }}"+'</p>');
         albums.forEach(function(album){
-          var albumElement = $('<li class="col-md-2 col-sm-6 col-xs-12"><p>'+album.title+'</p><img class="img-fluid" src="'+album.thumbnail_url+'"><p class="small">'+album.photos+' {{ _('photos') }}</p><button id="'+album.id+'" class="btn btn-info btn-xs btn-album">{{ _('Select') }}</button></li>');
+          var albumElement = $('<div class="col-md-4"><div class="card"><img class="card-img-top" src="'+album.thumbnail_url+'"/><div class="card-body"><h2>'+album.title+'</h2><p class="card-text">'+album.photos+' {{ _('photos') }}</p><button id="'+album.id+'" class="btn btn-info btn-sm btn-album">{{ _('Select') }}</button></div></div></div>');
           $('#albums').append(albumElement);
         });
       }
