@@ -7,7 +7,7 @@
         {% if blogposts %}
         <div class="row">
             {% for blogpost in blogposts %}
-            <div class="col-sm-6">
+            <div class="col-md-12">
                 {{ render_project_card_option(project, upload_method, title=blogpost.title, explanation=blogpost.body | markdown | truncate(200) | striptags, link=url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id), link_action_text=_('Read more'))}}
             </div>
             {% endfor %}
