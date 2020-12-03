@@ -12,7 +12,7 @@
           {{ render_field(form.n_answers, placeholder= _('The number of answers per tasks that you want for the project')) }}
           <div class="form-actions">
               <input type="submit" value={{_('Set redundancy')}} class="btn btn-primary" />
-              <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+              <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-primary">{{_('Cancel')}}</a>
           </div>
       </fieldset>
   </form>

@@ -19,7 +19,7 @@
           {{ render_field(form.epicollect_form, placeholder=_('The name of the project\'s form')) }}
           <div class="form-actions">
               <input type="submit" value="{{_('Import')}}" class="btn btn-primary" />
-              <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">{{_('Cancel')}}</a>
+              <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-primary">{{_('Cancel')}}</a>
           </div>
       </fieldset>
   </form>

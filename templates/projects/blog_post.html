@@ -23,7 +23,7 @@
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
   <div class="form-actions">
     <input type="submit" value={{_('Delete')}} class="btn btn-danger" />
-    <a href="{{url_for('project.update_blogpost', short_name=project.short_name, id=blogpost.id)}}" class="btn btn-default">{{_('Edit')}}</a>
+    <a href="{{url_for('project.update_blogpost', short_name=project.short_name, id=blogpost.id)}}" class="btn btn-primary">{{_('Edit')}}</a>
   </div>
 </form>
 {% endif %}
