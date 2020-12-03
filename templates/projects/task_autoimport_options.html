@@ -3,13 +3,15 @@
 {% set active_project  = project.short_name %}
 {% import "projects/_helpers.html" as helper %}
 
+{% block offcanvas %}
+    {{ helper.render_project_local_nav(project, 'tasks', current_user, pro_features)}}
+{% endblock %}
+
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 <div class="container">
-    <div class="col-md-3">
-        {{ helper.render_project_local_nav(project, 'tasks', current_user, pro_features)}}
-    </div>
-    <div class="col-md-9">
+
+    <div class="col-md-12">
         {{ helper.render_project_title(project, subtitle=_('Setup task autoimporter'))}}
         <div class="row">
             <div class="col-md-12">
