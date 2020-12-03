@@ -551,3 +551,6 @@ h1.text-white.tag {
   margin: auto;
   /* width: 80vw; */
 }
+.navbar-dark {
+    background-color: black!important;
+}
