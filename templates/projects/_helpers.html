@@ -354,6 +354,7 @@
         {% else %}
         <a class="card-link btn-dark btn" {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a>
         {% endif %}
+        {{ link }}
         {% if type == 'gdocs' %}
         <a class="card-link btn-dark btn" href="{{ config.TEMPLATE_TASKS[template] }}">View the template</a>
         {% endif %}
