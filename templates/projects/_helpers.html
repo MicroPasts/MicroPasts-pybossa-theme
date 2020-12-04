@@ -354,6 +354,7 @@
         {% else %}
         <a class="card-link btn-dark btn" {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a>
         {% endif %}
+        {{ template_tasks['audio'] }}
     </div>
 </div>
 {% endmacro -%}
