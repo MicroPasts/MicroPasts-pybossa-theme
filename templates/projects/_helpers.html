@@ -343,7 +343,7 @@
 {% endif -%}
 {% endmacro -%}
 
-{%- macro render_project_card_option(project, upload_method, title, explanation, link, link_action_text, background=False, download=False, nofollow=False, link_class=None, id=None, icon=None, link_two=None, link_action_text_two=None, background_url=None, published=False) %}
+{%- macro render_project_card_option(project, upload_method, title, explanation, link, link_action_text, background=False, download=False, nofollow=False, link_class=None, id=None, icon=None, link_two=None, link_action_text_two=None, background_url=None, published=False, type=None) %}
 
 <div {%if id%}id="{{id}}"{% endif %} class="card mb-3 mt-3">
     <div class="card-body">
@@ -354,7 +354,6 @@
         {% else %}
         <a class="card-link btn-dark btn" {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a>
         {% endif %}
-        {{ link }}
         {% if type == 'gdocs' %}
         <a class="card-link btn-dark btn" href="{{ config.TEMPLATE_TASKS[template] }}">View the template</a>
         {% endif %}
