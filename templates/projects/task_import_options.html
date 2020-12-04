@@ -18,12 +18,10 @@
     {% endfor %}
 </div>
 {% endfor %}
-<div class="row">
-    <div class="col-md-12 shadow-sm-12 mb-3 p-3">
+    <div class="col-md-12 shadow-sm  mb-3 p-3">
         <p>{{_('... or import a set of') }} <strong>{{_('template tasks')}}</strong> {{ ('for any of the template projects.')}}</p>
         <p>Alternatively, you can view the template file to work out how to structure your data for the type of project you have chosen.</p>
     </div>
-</div>
 {% for row in task_tmpls|batch(2) %}
 <div class="row">
     {% for task_tmpl in row %}
