@@ -5,8 +5,10 @@
 {% set section = _("Import Tasks") %}
 
 {% block projectcontent %}
+<div class="col-md-12 shadow-sm p-3 mb-3">
 <p>{{_('Use one of the following available')}}
 <strong>{{_('importers')}}</strong> {{_('to import tasks...')}}</p>
+</div>
 {% for row in available_importers|batch(2) %}
 <div class="row">
     {% for importer in row %}
