@@ -1,8 +1,8 @@
 <!-- Add scripts etc -->
 <script src="https://code.jquery.com/ui/1.8.1/jquery-ui.min.js" type="text/javascript"
-        xmlns="http://www.w3.org/1999/html"></script>
+xmlns="http://www.w3.org/1999/html"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.12.6/handsontable.full.min.js"
-        type="text/javascript"></script>
+type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.2.1/ol.min.js" type="text/javascript"></script>
 <script src="/static/js/vendor/jquery.serializeJSON.min.js" type="text/javascript"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript"></script>
@@ -11,372 +11,372 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.2.1/ol.css" type="text/css">
 <link rel="stylesheet" href="/static/vendor/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen"/>
 <link rel="stylesheet" media="screen"
-      href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.12.6/handsontable.full.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.12.6/handsontable.full.min.css">
 
 <!-- Browser not compatible message -->
 <div style="display:none;margin-top:15px; height:500px;" id="oldbrowser" class="row">
-    <!-- Success and Error Messages for the user -->
-    <div class="col-md-8 col-md-offset-1 alert alert-info">
-        <strong>Sorry, but your browser does not support the current application. If you want to contribute, please,
-            upgrade to a modern web browser like the open source and free alternative <a
-                    href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> or <a
-                    href="https://www.google.com/intl/en/chrome/browser/">Chrome</a></strong>.
+  <!-- Success and Error Messages for the user -->
+  <div class="col-md-8 col-md-offset-1 alert alert-info">
+    <strong>Sorry, but your browser does not support the current application. If you want to contribute, please,
+      upgrade to a modern web browser like the open source and free alternative <a
+      href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> or <a
+      href="https://www.google.com/intl/en/chrome/browser/">Chrome</a></strong>.
     </div>
-</div>
-<!-- End of Row -->
-<!-- end of browser -->
+  </div>
+  <!-- End of Row -->
+  <!-- end of browser -->
 
-<!-- Start of messages -->
-<div class="mt-3">
+  <!-- Start of messages -->
+  <div class="mt-3">
     <div id="success" class="alert alert-success" style="display:none;">
-        <strong>Well done!</strong> You have successfully submitted your contribution. Here is another to try if you
-        wish!
+      <strong>Well done!</strong> You have successfully submitted your contribution. Here is another to try if you
+      wish!
     </div>
     <div id="loading" class="alert alert-info" style="display:none;">
-        <img src="/static/img/loading.gif">Loading next task...
+      <img src="/static/img/loading.gif">Loading next task...
     </div>
     <div id="taskcompleted" class="alert alert-info" style="display:none;">
-        <strong>The task has been completed!</strong> Thanks a lot!
+      <strong>The task has been completed!</strong> Thanks a lot!
     </div>
     <div id="finish" class="alert alert-success" style="display:none;">
-        <h2>Congratulations!</h2>
-        <p>
-            You have participated in all available tasks!
-        </p>
-        <div class="alert-actions">
-            <a class="btn-default btn" href="/">Go back to the home page</a>
-            <a class="btn-default btn" href="/app">or, have a look at our
-                other applications</a>
+      <h2>Congratulations!</h2>
+      <p>
+        You have participated in all available tasks!
+      </p>
+      <div class="alert-actions">
+        <a class="btn-default btn" href="/">Go back to the home page</a>
+        <a class="btn-default btn" href="/app">or, have a look at our
+          other applications</a>
         </div>
-    </div>
-    <div id="error" class="alert alert-danger" style="display:none;">
+      </div>
+      <div id="error" class="alert alert-danger" style="display:none;">
         <a class="close">×</a>
         <strong>Error!</strong> Something went wrong, please contact the site administrators
+      </div>
     </div>
-</div>
-<!-- End Success and Error Messages for the user -->
+    <!-- End Success and Error Messages for the user -->
 
-<!--
-Task DOM for loading the S3 Images
-It uses the class="skeleton" to identify the elements that belong to the
-task.
--->
+    <!--
+    Task DOM for loading the S3 Images
+    It uses the class="skeleton" to identify the elements that belong to the
+    task.
+  -->
 
-<div class="skeleton">
+  <div class="skeleton">
     <!-- The pdf section -->
-        <h4>Please help transcribe the entries:</h4>
-<button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">
-                <i class="glyphicon glyphicon-eye-open"></i> Tutorial
-            </button>
-            <a class="btn btn-info btn-sm" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top"
-               title="Opens in a new window" href="http://community.micropasts.org/"><i
-                    class="glyphicon glyphicon-book"></i> Community Help</a>
+    <h4>Please help transcribe the entries:</h4>
+    <button class="btn btn-info btn-sm mb-3" data-toggle="modal" data-target="#myModal">
+      <i class="glyphicon glyphicon-eye-open"></i> Tutorial
+    </button>
+    <a class="btn btn-info btn-sm mb-3" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top"
+    title="Opens in a new window" href="http://community.micropasts.org/"><i
+    class="glyphicon glyphicon-book"></i> Community Help</a>
     <div class="col-md-12">
-        <div id="mypdf">
-            <iframe id="pdfImage" width="100%" height="200px" class="pdf" src=""></iframe>
-        </div>
+      <div id="mypdf">
+        <iframe id="pdfImage" width="100%" height="200px" class="pdf" src=""></iframe>
+      </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <div id="montpelierTable" class="handsontable col-md-12"></div>
-            <form id="magicData" role="form">
-                <div class="row" id="">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label" for="siteNumber">Site #</label>
-                            <input class="form-control" type="text" name="siteNumber">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="pageNumber">Page #</label>
-                            <input class="form-control" type="text" name="pageNumber">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="initials">Initials</label>
-                            <input class="form-control" type="text" name="initials">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" type="text" name="date">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="deCode">DE Code</label>
-                            <input class="form-control" type="text" name="deCode">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="comments">
-                            <div class="form-group">
-                                <label class="control-label" for="comments">Transcriber's Comments</label>
-                    <textarea class="form-control" rows="5" id="comments" name="comments"
-                              placeholder="Add any comments you have"></textarea>
-                            </div>
-                        </div>
-                        <button class="btn btn-success btn-answer" value='Yes'>
-                            Submit your transcription
-                        </button>
-                    </div>
+      <div class="col-md-12">
+        <div id="montpelierTable" class="handsontable col-md-12"></div>
+        <form id="magicData" role="form">
+          <div class="row" id="">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label" for="siteNumber">Site #</label>
+                <input class="form-control" type="text" name="siteNumber">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="pageNumber">Page #</label>
+                <input class="form-control" type="text" name="pageNumber">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="initials">Initials</label>
+                <input class="form-control" type="text" name="initials">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label" for="date">Date</label>
+                <input class="form-control" type="text" name="date">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="deCode">DE Code</label>
+                <input class="form-control" type="text" name="deCode">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="comments">
+                <div class="form-group">
+                  <label class="control-label" for="comments">Transcriber's Comments</label>
+                  <textarea class="form-control" rows="5" id="comments" name="comments"
+                  placeholder="Add any comments you have"></textarea>
                 </div>
-            </form>
-        </div>
+              </div>
+              <button class="btn btn-success btn-answer" value='Yes'>
+                Submit your transcription
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
     <!-- End of pdf section -->
     <!-- The data entry section using html table -->
     <div >
-        <!-- Feedback items for the user -->
-        <p>
-            You are working now on task: <span id="task-id" class="badge badge-danger">#</span>
-        </p>
-        <p>
-            You have completed: <span id="done" class="badge badge-info"></span> tasks from
-            <!-- Progress bar for the user -->
-            <span id="total" class="badge badge-dark"></span>
-        </p>
-        <div class="progress progress-striped">
-            <div id="progress" rel="tooltip" title="#" class="progress-bar" role="progressbar" style="width: 0%;"></div>
-        </div>
-        <!-- End of feedback row -->
+      <!-- Feedback items for the user -->
+      <p>
+        You are working now on task: <span id="task-id" class="badge badge-danger">#</span>
+      </p>
+      <p>
+        You have completed: <span id="done" class="badge badge-info"></span> tasks from
+        <!-- Progress bar for the user -->
+        <span id="total" class="badge badge-dark"></span>
+      </p>
+      <div class="progress progress-striped">
+        <div id="progress" rel="tooltip" title="#" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+      </div>
+      <!-- End of feedback row -->
     </div>
     <!-- End of the section -->
-</div>
-<!-- End of DOM Skeleton row -->
+  </div>
+  <!-- End of DOM Skeleton row -->
 
-<!-- Modal start -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <!-- Modal start -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal header -->
-            <div class="modal-header">
-                <h3>Gathering data from the Montpelier excavation logs</h3>
-            </div>
-
-            <!-- Step 1 of the tutorial -->
-            <div id="0" class="modal-body" style="display:none">
-                <h4>Information needed</h4>
-                <p>
-                    This project requires your help to capture the data held within the PDF scans. It is a very
-                    straightforward tabulation exercise. Montpelier would like your help to transcribe the following
-                    fields:
-                </p>
-                <ol>
-                    <li>Site #</li>
-                    <li>Page #</li>
-                    <li>Initials</li>
-                    <li>Date</li>
-                    <li>DE code</li>
-                    <li>Inv #</li>
-                    <li>Catalog Letter</li>
-                    <li>Ncatnum</li>
-                    <li>Material</li>
-                    <li>Species</li>
-                    <li>Bone Type</li>
-                  	<li>Condition</li>
-                    <li>Artifact Type</li>
-                    <li>Number</li>
-                 	<li>Grams</li>
-                  	<li>Artifact Size</li>
-                    <li>Notes</li>
-                </ol>
-            </div>
-
-            <!-- Step 2 of the tutorial -->
-            <div id="1" class="modal-body" style="display:none">
-                <p>
-                    On the catalogue forms, the " (or ditto mark) means that the information in this box is the same as
-                    the information from the box directly above the ".
-                </p>
-                <p>
-                    <strong>Please enter the number or descriptive information from above and not the ".</strong>
-                </p>
-            </div>
-
-            <!-- Step 2 of the tutorial -->
-            <div id="2" class="modal-body" style="display:none">
-                <p>
-                    The catalogue entry will have either a FS or S number, not both. FS numbers were assigned to
-                    artifacts found in each level of excavation in the field. S numbers were assigned to bulk soil
-                    samples that were later wet screened.</p>
-                <p>
-                    When artifacts were found during the wet screening a S number was assigned.
-                </p>
-            </div>
-
-            <!-- Step 2 of the tutorial -->
-            <div id="3" class="modal-body" style="display:none">
-                <p>
-                    <strong>NOTE:</strong> At the end of the field season all the artifacts with FS and S numbers were
-                    renumbered with a catalogue number. This new catalogue number does not appear on the field
-                    excavation
-                    forms. By digitally compiling the information on these site catalogue forms, we will be able to
-                    link the artifacts listed on the excavation forms with the appropriate catalogue numbers.
-                </p>
-                <p>
-                    Eventually, the excavation forms and field photographs from each level, as well as the photographs
-                    of the artifacts found in each level will be available online for people to perform research on the
-                    collection.
-                </p>
-            </div>
-            <!-- End of stepped modal body -->
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
-                <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
-                <button id="closeBtn" data-dismiss="modal" onclick="showStep('finish')" class="btn btn-primary"
-                        style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Back to task
-                </button>
-            </div>
+      <div class="modal-content">
+        <!-- Modal header -->
+        <div class="modal-header">
+          <h3>Gathering data from the Montpelier excavation logs</h3>
         </div>
+
+        <!-- Step 1 of the tutorial -->
+        <div id="0" class="modal-body" style="display:none">
+          <h4>Information needed</h4>
+          <p>
+            This project requires your help to capture the data held within the PDF scans. It is a very
+            straightforward tabulation exercise. Montpelier would like your help to transcribe the following
+            fields:
+          </p>
+          <ol>
+            <li>Site #</li>
+            <li>Page #</li>
+            <li>Initials</li>
+            <li>Date</li>
+            <li>DE code</li>
+            <li>Inv #</li>
+            <li>Catalog Letter</li>
+            <li>Ncatnum</li>
+            <li>Material</li>
+            <li>Species</li>
+            <li>Bone Type</li>
+            <li>Condition</li>
+            <li>Artifact Type</li>
+            <li>Number</li>
+            <li>Grams</li>
+            <li>Artifact Size</li>
+            <li>Notes</li>
+          </ol>
+        </div>
+
+        <!-- Step 2 of the tutorial -->
+        <div id="1" class="modal-body" style="display:none">
+          <p>
+            On the catalogue forms, the " (or ditto mark) means that the information in this box is the same as
+            the information from the box directly above the ".
+          </p>
+          <p>
+            <strong>Please enter the number or descriptive information from above and not the ".</strong>
+          </p>
+        </div>
+
+        <!-- Step 2 of the tutorial -->
+        <div id="2" class="modal-body" style="display:none">
+          <p>
+            The catalogue entry will have either a FS or S number, not both. FS numbers were assigned to
+            artifacts found in each level of excavation in the field. S numbers were assigned to bulk soil
+            samples that were later wet screened.</p>
+            <p>
+              When artifacts were found during the wet screening a S number was assigned.
+            </p>
+          </div>
+
+          <!-- Step 2 of the tutorial -->
+          <div id="3" class="modal-body" style="display:none">
+            <p>
+              <strong>NOTE:</strong> At the end of the field season all the artifacts with FS and S numbers were
+              renumbered with a catalogue number. This new catalogue number does not appear on the field
+              excavation
+              forms. By digitally compiling the information on these site catalogue forms, we will be able to
+              link the artifacts listed on the excavation forms with the appropriate catalogue numbers.
+            </p>
+            <p>
+              Eventually, the excavation forms and field photographs from each level, as well as the photographs
+              of the artifacts found in each level will be available online for people to perform research on the
+              collection.
+            </p>
+          </div>
+          <!-- End of stepped modal body -->
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
+            <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+            <button id="closeBtn" data-dismiss="modal" onclick="showStep('finish')" class="btn btn-primary"
+            style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Back to task
+          </button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Client side scripts -->
-<script>
-	// Quick fix for IE8
-	Modernizr.load({
-		test : window.JSON,
-		nope : '/static/js/vendor/json2.min.js'
-	});
-</script>
+  <!-- Client side scripts -->
+  <script>
+    // Quick fix for IE8
+    Modernizr.load({
+      test : window.JSON,
+      nope : '/static/js/vendor/json2.min.js'
+    });
+  </script>
 
-<!-- Step through modals -->
-<script type="text/javascript">
-	var step = -1;
-	function showStep(action) {
-		$("#" + step).hide();
-		if (action == 'next') {
-			step = step + 1;
-		}
-		if (action == 'prev') {
-			step = step - 1;
-		}
-		if (step == 0) {
-			$("#prevBtn").hide();
-		} else {
-			$("#prevBtn").show();
-		}
-		if (step == 2) {
-			$("#nextBtn").hide();
-			$("#closeBtn").show();
-		}
-		if (action == 'finish') {
-			step = 0;
-			$("#closeBtn").hide();
-			$("#prevBtn").hide();
-			$("#nextBtn").show();
-		}
-		$("#" + step).show();
-	}
-	showStep('next');
-	$("#modal").modal('show');
-</script>
+  <!-- Step through modals -->
+  <script type="text/javascript">
+    var step = -1;
+    function showStep(action) {
+      $("#" + step).hide();
+      if (action == 'next') {
+        step = step + 1;
+      }
+      if (action == 'prev') {
+        step = step - 1;
+      }
+      if (step == 0) {
+        $("#prevBtn").hide();
+      } else {
+        $("#prevBtn").show();
+      }
+      if (step == 2) {
+        $("#nextBtn").hide();
+        $("#closeBtn").show();
+      }
+      if (action == 'finish') {
+        step = 0;
+        $("#closeBtn").hide();
+        $("#prevBtn").hide();
+        $("#nextBtn").show();
+      }
+      $("#" + step).show();
+    }
+    showStep('next');
+    $("#modal").modal('show');
+  </script>
 
-<!-- Load user progress -->
-<script>
-	function loadUserProgress() {
-		pybossa.userProgress('montpelierFaunal').done(function(data) {
-			console.log("Total answers done for user: " + data.done);
-			var pct = Math.round((data.done * 100) / data.total);
-			$("#progress").css("width", pct.toString() + "%");
-			$("#progress").attr("title", pct.toString() + "% completed!");
-			$("#progress").tooltip({ 'placement' : 'left' });
-			$("#total").text(data.total);
-			$("#done").text(data.done);
-			$('a[rel]').tooltip({'placement' : 'left'});
-		});
-	}
+  <!-- Load user progress -->
+  <script>
+    function loadUserProgress() {
+      pybossa.userProgress('montpelierFaunal').done(function(data) {
+        console.log("Total answers done for user: " + data.done);
+        var pct = Math.round((data.done * 100) / data.total);
+        $("#progress").css("width", pct.toString() + "%");
+        $("#progress").attr("title", pct.toString() + "% completed!");
+        $("#progress").tooltip({ 'placement' : 'left' });
+        $("#total").text(data.total);
+        $("#done").text(data.done);
+        $('a[rel]').tooltip({'placement' : 'left'});
+      });
+    }
 
-	pybossa.taskLoaded(function(task, deferred) {
-		if (! $.isEmptyObject(task)) {
-			loadUserProgress();
-			deferred.resolve(task);
-		} else {
-			deferred.resolve(task);
-		}
-	});
-	$(window).resize(function() {
-		console.log('Window resized');
-	});
+    pybossa.taskLoaded(function(task, deferred) {
+      if (! $.isEmptyObject(task)) {
+        loadUserProgress();
+        deferred.resolve(task);
+      } else {
+        deferred.resolve(task);
+      }
+    });
+    $(window).resize(function() {
+      console.log('Window resized');
+    });
 
-	pybossa.presentTask(function(task, deferred) {
-		if (!$.isEmptyObject(task)) {
-			$("#question").html(task.info.question);
-			$('#task-id').html(task.id);
-			$("#pdfImage").attr('src', task.info.link_raw);
-			var data = [[]];
-			var config = {
-				data : data,
-				minRows : 30,
-				height: 200,
-				width: '100%',
-				minCols : 13,
-				minSpareRows : 0,
-				minSpareCols : 0,
-				maxRows : 40,
-				autoWrapRow : true,
-				autoWrapCol : true,
-				autoColumnSize : true,
-				colHeaders : ['Inv #', 'Catalog Letter', 'Ncatnum', 'Material', 'Species', 'Bone Type',
-				'Condition', 'Artifact Type', 'Number', 'Grams', 'Artifact Size', 'Notes', 'Problems'],
-				contextMenu : ['row_below', 'remove_row', 'undo', 'redo'],
-				stretchH : 'all'
-			};
-			$("#montpelierTable").handsontable(config);
-			$('.btn-answer').off('click').on('click', function(evt) {
-				evt.preventDefault();
-				var answer = $(evt.target).attr("value");
-				if ( typeof answer != 'undefined') {
-					task.answer = $("#magicData").serializeJSON();
-					console.log(task.answer);
-					var handsontable = $("#montpelierTable").data('handsontable');
-					var data = handsontable.getData();
-					console.log(data);
-					task.answer.table = data;
-					console.log(task.answer);
-					pybossa.saveTask(task.id, task.answer).done(function() {
-						$("html, body").animate( {scrollTop : 0 }, "slow");
-						$("#success").fadeIn(500).fadeOut(500);
-						$("#loading").fadeIn(500).fadeOut(500);
-						$('#magicData')[0].reset();
-						deferred.resolve();
-					});
-				} else {
-					$("#error").show();
-				}
-			});
-			$("#loading").hide();
-		} else {
-			$(".skeleton").hide();
-			$("#loading").hide();
-			$("#finish").fadeIn(500);
-		}
-	});
-	pybossa.run('montpelierFaunal');
-</script>
+    pybossa.presentTask(function(task, deferred) {
+      if (!$.isEmptyObject(task)) {
+        $("#question").html(task.info.question);
+        $('#task-id').html(task.id);
+        $("#pdfImage").attr('src', task.info.link_raw);
+        var data = [[]];
+        var config = {
+          data : data,
+          minRows : 30,
+          height: 200,
+          width: '100%',
+          minCols : 13,
+          minSpareRows : 0,
+          minSpareCols : 0,
+          maxRows : 40,
+          autoWrapRow : true,
+          autoWrapCol : true,
+          autoColumnSize : true,
+          colHeaders : ['Inv #', 'Catalog Letter', 'Ncatnum', 'Material', 'Species', 'Bone Type',
+          'Condition', 'Artifact Type', 'Number', 'Grams', 'Artifact Size', 'Notes', 'Problems'],
+          contextMenu : ['row_below', 'remove_row', 'undo', 'redo'],
+          stretchH : 'all'
+        };
+        $("#montpelierTable").handsontable(config);
+        $('.btn-answer').off('click').on('click', function(evt) {
+          evt.preventDefault();
+          var answer = $(evt.target).attr("value");
+          if ( typeof answer != 'undefined') {
+            task.answer = $("#magicData").serializeJSON();
+            console.log(task.answer);
+            var handsontable = $("#montpelierTable").data('handsontable');
+            var data = handsontable.getData();
+            console.log(data);
+            task.answer.table = data;
+            console.log(task.answer);
+            pybossa.saveTask(task.id, task.answer).done(function() {
+              $("html, body").animate( {scrollTop : 0 }, "slow");
+              $("#success").fadeIn(500).fadeOut(500);
+              $("#loading").fadeIn(500).fadeOut(500);
+              $('#magicData')[0].reset();
+              deferred.resolve();
+            });
+          } else {
+            $("#error").show();
+          }
+        });
+        $("#loading").hide();
+      } else {
+        $(".skeleton").hide();
+        $("#loading").hide();
+        $("#finish").fadeIn(500);
+      }
+    });
+    pybossa.run('montpelierFaunal');
+  </script>
 
-<style type="text/css">
+  <style type="text/css">
     #mypdf:-moz-full-screen {
-    height: 100%;
+      height: 100%;
     }
     #mypdf:-webkit-full-screen {
-    height: 50%;
+      height: 50%;
     }
     #mypdf:-ms-fullscreen {
-    height: 50%;
+      height: 50%;
     }
     #mypdf:full-screen {
-    height: 50%;
+      height: 50%;
     }
     #montpelierTable {
-    width: 100%;
-    overflow: hidden;
+      width: 100%;
+      overflow: hidden;
     }
     .btn-answer {
-    margin-top: 10px;
-    margin-bottom: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
     .btn-group {
-    margin-bottom: 0px
+      margin-bottom: 0px
     }
-</style>
+  </style>

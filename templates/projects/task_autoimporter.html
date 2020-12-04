@@ -2,9 +2,11 @@
 {% set active_page = "projects" %}
 {% set active_project  = project.short_name %}
 {% import "projects/_helpers.html" as helper %}
+
 {% block offcanvas %}
     {{ helper.render_project_local_nav(project, 'tasks', current_user, pro_features)}}
 {% endblock %}
+
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
@@ -40,7 +42,7 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <div class="form-actions">
             <input id="submit" type="submit" value="{{_('Delete')}}" class="btn btn-primary" />
-            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">{{_('Back')}}</a>
+            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-primary">{{_('Back')}}</a>
           </div>
         </fieldset>
       </form>
