@@ -352,9 +352,11 @@
         {% if link_two %}
         <a  class="card-link btn-dark btn" {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a> <a class="card-link btn-dark btn" {% if nofollow %}rel="nofollow"{% endif%} href="{{link_two}}" {% if download %}download{%endif%}>{{link_action_text_two}}</a>
         {% else %}
-        <a class="card-link btn-dark btn" {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a>
+         {% if nofollow %}rel="nofollow"{% endif%} href="{{link}}" {% if download %}download{%endif%}>{{link_action_text}}</a>
         {% endif %}
-        {{ config.TEMPLATE_TASKS['audio'] }}
+        {% if type = 'gdocs' %}
+        <a class="card-link btn-dark btn" href="{{ config.TEMPLATE_TASKS[template] }}">View the template</a>
+        {% endif %}
     </div>
 </div>
 {% endmacro -%}
