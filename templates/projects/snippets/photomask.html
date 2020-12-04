@@ -1,0 +1,657 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.14.2/ol.min.css" type="text/css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript"></script>
+<style>
+  #map {
+    background-color: grey;
+  }
+  .ol-zoom a,
+  .ol-zoom-extent a,
+  .ol-full-screen a{
+    display: block;
+    margin: 1px;
+    padding: 0;
+    color: white;
+    font-size: 1.14em;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    height: 1.375em;
+    width: 1.375em;
+    line-height: 1.4em;
+    background-color: #7b98bc;
+    background-color: rgba(0,60,136,0.5);
+    border: none;
+  }
+  .ol-zoom a::-moz-focus-inner,
+  .ol-zoom-extent a::-moz-focus-inner,
+  .ol-full-screen a::-moz-focus-inner {
+    border: none;
+    padding: 0;
+  }
+  .ol-zoom-extent a {
+    line-height: 1.4em;
+  }
+  .ol-touch .ol-zoom a,
+  .ol-touch .ol-full-screen a,
+  .ol-touch .ol-zoom-extent a{
+    font-size: 1.5em;
+  }
+  .ol-touch .ol-zoom-extent {
+    top: 5.5em;
+  }
+  .ol-zoom a:hover, .ol-zoom a:focus,
+  .ol-zoom-extent a:hover, .ol-zoom-extent a:focus,
+  .ol-full-screen a:hover, .ol-full-screen a:focus {
+    text-decoration: none;
+    background-color: #4c6079;
+    background-color: rgba(0,60,136,0.7);
+  }
+  .ol-zoom-extent a:after {
+      content: "E";
+  }
+
+  .ol-zoom-in {
+    border-radius: 2px 2px 0 0;
+  }
+
+  .ol-zoom-out {
+    border-radius: 0 0 2px 2px;
+  }
+
+  a.ol-full-screen-false:after {
+    content: "\2194";
+  }
+
+  a.ol-full-screen-true:after {
+    content: "\00d7";
+  }
+
+  .ol-zoom-extent a, .ol-attribution,
+  .ol-full-screen a, .ol-scale-line-inner,
+  .ol-zoom a, .ol-has-tooltip [role=tooltip] {
+    font-family: 'Lucida Grande',Verdana,Geneva,Lucida,Arial,Helvetica,sans-serif;
+  }
+  .map {
+    height: 500px;
+    width: 100%;
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.14.2/ol.min.js" type="text/javascript"></script>
+<script src="/static/js/vendor/ol3photomask.js" type="text/javascript"></script>
+
+<!--
+Task DOM for loading the S3 Images
+It uses the class="skeleton" to identify the elements that belong to the
+task.
+-->
+
+<div class="row skeleton">
+    <div class="col-md-12">
+
+      <button class="btn btn-info btn-sm mb-2" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-eye-open"></i> Tutorial</button>
+      <a class="btn btn-info btn-sm mb-2" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="http://community.micropasts.org/category/crowdsourcing-support"><i class="glyphicon glyphicon-book"></i> Community Help</a>
+
+    <h1 id="step1">Draw the outline of the main object shown in the picture</h1>
+      <button id="status" type="button" class="btn btn-default btn-type disabled" name="loading" value="loading">Loading photo</button>
+      <button id="outline" type="button" class="btn btn-default btn-type active" name="outline" value="outline">Outline</button>
+      <button id="holes" type="button" class="btn btn-default btn-type" name="holes" value="holes">Holes</button>
+      <button id="draw" type="button" class="btn btn-default btn-draw active" name="draw" value="draw">Draw</button>
+      <button id="edit" type="button" class="btn btn-default btn-draw" name="edit" value="edit">Edit</button>
+      <button id="delete" type="button" class="btn btn-default btn-draw" name="delete" value="delete">Remove all polygons</button>
+      <button id="btn-save" class="btn btn-success btn-answer" value='save'><i class="icon icon-white icon-save"></i> Save the drawings</button>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Success and Error Messages for the user -->
+  <div class="col-md-6 col-md-offset-2" style="height:50px">
+    <div id="success" class="alert alert-success" style="display:none;">
+      <a class="close">×</a>
+      <strong>Well done!</strong> Your answer has been saved
+    </div>
+    <div id="loading" class="alert alert-info" style="display:none;">
+      <a class="close">×</a>
+      Loading next task...
+    </div>
+    <div id="taskcompleted" class="alert alert-info" style="display:none;">
+      <strong>The task has been completed!</strong> Thanks a lot!
+    </div>
+    <div id="finish" class="alert alert-success" style="display:none;">
+      <strong>Congratulations!</strong> You have participated in all available tasks!
+      <br/>
+      <div class="alert-actions">
+        <a class="btn small" href="/">Go back</a>
+        <a class="btn small" href="/project/category/featured">or, check our other applications</a>
+      </div>
+    </div>
+    <div id="error" class="alert alert-error" style="display:none;">
+      <a class="close">×</a>
+      <strong>Error!</strong> Something went wrong, please contact the site administrators
+    </div>
+  </div> <!-- End Success and Error Messages for the user -->
+</div> <!-- End of Row -->
+
+<div class="row skeleton"> <!-- Start Skeleton Row-->
+  <div class="col-md-12"><!-- Start of Photo DIV (column) -->
+    <div id="map" class="img-polaroid"></div>
+  </div><!-- End of Photo DIV (columnt) -->
+  <div class="span4"><!-- Start of Question and Submission DIV (column) -->
+    <!-- Feedback items for the user -->
+    <p>You are working now on task: <span id="task-id" class="label label-warning">#</span></p>
+    <p>You have completed: <span id="done" class="label label-info"></span> tasks from
+      <!-- Progress bar for the user -->
+      <span id="total" class="label label-inverse"></span></p>
+      <div class="progress progress-striped">
+        <div id="progress" class="progress-bar" role="progressbar" rel="tooltip" title="#" class="bar" style="width: 0%;"></div>
+      </div>
+
+      <div id="answer"> <!-- Start DIV for the submission buttons -->
+      </div><!-- End of DIV for the submission buttons -->
+
+
+    </div><!-- End of Question and Submission DIV (column) -->
+
+  </div><!-- End of Skeleton Row -->
+
+  <!-- Survey code -->
+
+  <div id="survey" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Hey there! Do you want to help us?</h4>
+        </div>
+        <div class="modal-body">
+          Thanks for contributing one task for the project. We are interested in knowing how you found out about us. <strong>Could you please answer two questions in a short survey?</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
+          <a class="btn btn-large btn-success" href="https://docs.google.com/forms/d/1ENa3xBllMaO5wmHDbPSkbyBdfXtxXdi-Y0KxO4t_s-8/viewform?embedded=true">Of course! Take me to the survey!</a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div id="survey25" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Congrats for completing 25 tasks!</h4>
+        </div>
+        <div class="modal-body">
+          Thanks for contributing 25 tasks for the project. Now that you have been using MicroPasts for a while, we would like to know how you found it. <strong>Could you please answer a few questions in a short survey?</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
+          <a class="btn btn-large btn-success" href="https://docs.google.com/forms/d/1XQrw1TxuNvENNo-8c5jepJwG0-LTc1-Xf-Ilm7JkZQ0/viewform?embedded=true">Of course! Take me to the survey!</a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <!-- Survey code ends -->
+
+
+
+  <!-- tutorial code start -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal header -->
+        <div class="modal-header">
+          <h3>Photo-masking tutorial for 3D modelling </h3>
+        </div>
+        <div id="0" class="modal-body" style="display:none">
+          <p>
+            This application is very simple (but it does not yet work on mobile devices). When you participate, the platform will load a photograph of an archaeological artefact. Once the image has been loaded, you will be asked to click or tap around the edge of the artefact in order to define a polygon outline. Click once every time you wish to add a point along the edge of the polygon and your final point will snap back onto the one you started with. You can draw one polygon around the entire object or instead draw a series of overlapping polygons if you prefer. In general, we would like you to draw your polygon(s) very slightly inside the actual edge of the artefact. This is because we don't want background pixels near this edge to create a fuzzy border, and we don't need to worry so much about losing a bit of the artefact edge, as the missing few pixels are very likely to appear in one of the other photographs (at least 40 overlapping photographs are likely to exist for each object to support the construction of the 3D model). An example of a successful outline is shown below:
+          </p>
+          <img src="http://micropasts.org/wp-content/uploads/2015/03/PEF_Tutorial.png" width="100%" class="img-polaroid" alt="An example of an artefact photograph whose outline has been defined" />
+        </div>
+        <div id="1" class="modal-body" style="display:none">
+          <p>
+            How to use the application's photo-masking toolbar:
+          </p>
+          <img src="http://micropasts.org/wp-content/uploads/2014/11/Photomasking_Toolbar.png" width="100%" alt="Photo-masking Toolbar" />
+          <p>
+            <p><strong>Outline</strong>: This button is selected and enabled by default, indicating that your following actions, i.e. drawing and editing, will relate to the outline of the object.</p>
+            <p><strong>Holes</strong>: This button is usually not available, but will be a part of the photo-masking toolbar whenever you are presented with an object that has 'holes', such as bracelets. In these cases, the background should be masked out and excluded from the object's final mask. Click on 'Holes' before starting to draw or edit a hole in the object.</p>
+            <p><strong>Draw</strong>: This option is selected by default, at the beginning of a task. Click on 'Draw' whenever you want to start drawing an outline of the object. Once you complete an outline polygon, the delineating line will turn from blue to yellow.</p>
+            <p><strong>Edit</strong>: This option is enabled once there is at least one complete polygon drawn. After clicking on 'Edit', choose the polygon you wish to edit by clicking once anywhere inside the polygon. It's line will turn blue, and become available for editing by re-positioning the blue nodes.</p>
+            <p><strong>Remove all polygons</strong>: Use this option if you wish to start over. Clicking this button will remove all drawn polygons.</p>
+            <p> <strong>Save the drawings</strong>: Click on this button when you are done photo-masking the object - it will save and submit your mask.</p>
+          </p>
+
+          <p>
+            Tip: You could draw a relatively rough polygon around the object to begin with, and then zoom in and click on the 'Edit' button. Then you could edit your polygon much more carefully, moving along the object's outline and fixing your initial polygon to create an accurate mask.
+          </p>
+        </div>
+
+        <div id="2" class="modal-body" style="display:none">
+          <p>
+            During the task, you can always return to this tutorial via the "Tutorial" button.
+          </p>
+          <p>
+            An example of a finished <a href="http://micropasts.org/3D">3D model</a> has now been completed.
+          </p>
+          <p>
+            To find out how the project is progressing, to suggest changes to this application or to propose new research ideas based what you have photo-masked, please have a look at our <a href="http://community.micropasts.org" title="Community forum">community forum</a>.
+          </p>
+        </div>
+
+        <!-- End of stepped modal body -->
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
+          <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+          <button id="startContrib" data-dismiss="modal" class="btn btn-primary" style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Let's start!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Tutorial code end -->
+    <script type="text/javascript">
+      var step = -1;
+      function showStep(action) {
+        $("#" + step).hide();
+        if (action == 'next') {
+          step = step + 1;
+        }
+        if (action == 'prev') {
+          step = step - 1;
+        }
+        if (step == 0) {
+          $("#prevBtn").hide();
+        }
+        else {
+          $("#prevBtn").show();
+        }
+
+        if (step == 2) {
+          $("#nextBtn").hide();
+          $("#startContrib").show();
+        }
+        $("#" + step).show();
+      }
+
+      showStep('next');
+      $("#modal").modal('show');
+    </script>
+
+
+    <script>
+      function loadUserProgress() {
+        pybossa.userProgress('{{project.short_name}}').done(function(data){
+
+          console.log('Tasks done so far: ' + data.done);
+          var pct = Math.round((data.done*100)/data.total);
+          $("#progress").css("width", pct.toString() +"%");
+          $("#progress").attr("title", pct.toString() + "% completed!");
+          $("#progress").tooltip({'placement': 'left'});
+          $("#total").text(data.total);
+          $("#done").text(data.done);
+        });
+      }
+
+      pybossa.taskLoaded(function(task, deferred) {
+        if ( !$.isEmptyObject(task) ) {
+
+          var img = $('<img />');
+          var div_map = $('<div/>');
+          div_map.css("height", "500px");
+          div_map.css("width", "100%");
+          $("#draw").addClass("disabled");
+          $("#edit").addClass("disabled");
+          $("#delete").addClass("disabled");
+          $("#outline").addClass("disabled");
+          $("#holes").addClass("disabled");
+          $("#map").append(div_map);
+          div_map.attr("id", "map_" + task.id);
+          img.load(function() {
+            // continue as soon as the image is loaded
+            deferred.resolve(task);
+            $("#draw").removeClass("disabled");
+            $("#edit").removeClass("disabled");
+            $("#delete").removeClass("disabled");
+            $("#outline").removeClass("disabled");
+            $("#holes").removeClass("disabled");
+            $("#status").text("Photo loaded!");
+          });
+          img.attr('src', task.info.url_b).css('height', 460);
+
+          //Log the url of image being masked.
+          console.log(task.info.url_b);
+          console.log(task.info);
+          img.addClass('img-polaroid');
+          task.info.image = img;
+
+          // Maps always need a projection, but the static image is not geo-referenced,
+          // and are only measured in pixels.  So, we create a fake projection that the
+          // map can use to properly display the layer.
+          task.pixelProjection = new ol.proj.Projection({
+            code: 'pixel',
+            units: 'pixels',
+            extent: [0, 0, 6016, 4016]
+          });
+
+          task.styleArray = [new ol.style.Style({
+            fill: new ol.style.Fill({
+              color: 'rgba(255, 255, 255, 0.2)'
+            }),
+            stroke: new ol.style.Stroke({
+              color: '#ffcc33',
+              width: 2
+            }),
+            image: new ol.style.Circle({
+              radius: 7,
+              fill: new ol.style.Fill({
+                color: '#ffcc33'
+              })
+            })
+          })];
+
+          task.source = new ol.source.Vector();
+          task.source_holes = new ol.source.Vector();
+
+          task.vector = new ol.layer.Vector({
+            source: task.source,
+            //styleFunction: function(feature, resolution) {
+            //  return task.styleArray;
+            //}
+            style: new ol.style.Style({
+              fill: new ol.style.Fill({
+                color: 'rgba(255, 255, 255, 0.2)'
+              }),
+              stroke: new ol.style.Stroke({
+                color: '#ffcc33',
+                width: 2
+              }),
+              image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                  color: '#ffcc33'
+                })
+              })
+            })
+          });
+
+          task.holes = new ol.layer.Vector({
+            source: task.source_holes,
+            //styleFunction: function(feature, resolution) {
+            //  return task.styleArray;
+            //}
+            style: new ol.style.Style({
+              fill: new ol.style.Fill({
+                color: 'rgba(255, 255, 255, 0.2)'
+              }),
+              stroke: new ol.style.Stroke({
+                color: '#00CC99',
+                width: 2
+              }),
+              image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                  color: '#00CC99'
+                })
+              })
+            })
+          });
+
+          task.overlay = new ol.FeatureOverlay({
+            style: new ol.style.Style({
+              fill: new ol.style.Fill({
+                color: 'rgba(255, 255, 255, 0.2)'
+              }),
+              stroke: new ol.style.Stroke({
+                color: [0, 153, 255, 1],
+                width: 2
+              }),
+              image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                  color: [0, 153, 255, 1]
+                })
+              })
+            })
+          });
+
+          // Modifiers for vector outline
+          task.modify = new ol.interaction.Modify({
+            layer: task.vector,
+            featureOverlay: task.overlay });
+            task.select = new ol.interaction.Select({
+              layer: task.vector,
+              featureOverlay: task.overlay });
+
+              // Modifiers for vector holes
+              task.modify_holes = new ol.interaction.Modify({
+                layer: task.holes,
+                featureOverlay: task.overlay });
+                task.select_holes = new ol.interaction.Select({
+                  layer: task.holes,
+                  featureOverlay: task.overlay });
+
+                  task.map = new ol.Map({
+                    //interactions: ol.interaction.defaults().extend([task.select, task.modify, task.select_holes, task.modify_holes]),
+                    layers: [
+                    new ol.layer.Image({
+                      source: new ol.source.ImageStatic({
+                        attributions: [
+                        new ol.Attribution({
+                          html: '&copy; <a href="http://micropasts.org">Micropasts</a>'
+                        })
+                        ],
+                        url: task.info.url_b,
+                        imageSize: [6016, 4016],
+                        projection: task.pixelProjection,
+                        imageExtent: task.pixelProjection.getExtent()
+                      })
+                    })
+                    ,
+                    task.vector,
+                    task.holes,
+                    ],
+                    renderer: 'canvas',
+                    target: 'map_' + task.id,
+                    view: new ol.View2D({
+                      projection: task.pixelProjection,
+                      center: ol.extent.getCenter(task.pixelProjection.getExtent()),
+                      zoom: 2.25
+                    })
+                  });
+                  var zoomslider;
+                  zoomslider = new ol.control.ZoomSlider();
+                  task.map.addControl(zoomslider);
+                  div_map.css("display", "none");
+
+                  var typeSelect = document.getElementById('type');
+
+                  //task.draw; // global so we can remove it later
+                  task.draw = new ol.interaction.Draw({
+                    source: task.source,
+                    type: 'Polygon',
+                  });
+
+                  task.draw_holes = new ol.interaction.Draw({
+                    source: task.source_holes,
+                    type: 'Polygon',
+                  });
+
+                  // When the first polygon is completed, remove the drawInteraction
+                  task.draw.on('drawend', function(evt) {
+                    task.polygon = true;
+                    $("#btn-save").removeClass("disabled");
+                  });
+
+                  // When the first hole is completed, remove the drawInteraction
+                  task.draw_holes.on('drawend', function(evt) {
+                    task.holes = true;
+                    $("#btn-save").removeClass("disabled");
+                  });
+
+                  task.map.addInteraction(task.draw);
+
+                  task.answer = {
+                    'task_id': task.id,
+                    'outline': [],
+                    'holes': [],
+                    'img': task.info.url_b};
+                    task.polygon = false;
+                    task.holes = false;
+                  }
+                  else {
+                    deferred.resolve(task);
+                  }
+                });
+
+                pybossa.presentTask(function(task, deferred) {
+                  if ( !$.isEmptyObject(task) ) {
+                    loadUserProgress();
+                    $("#btn-save").addClass("disabled");
+                    $('#task-id').html(task.id);
+                    $("#map_" + task.id).show();
+
+                    // Code for drawing outlines or holes
+                    $('.btn-type').off('click').on('click', function(evt) {
+                      var answer = $(evt.target).attr("value");
+                      if (typeof answer != 'undefined'){
+                        if (answer == 'holes') {
+                          $("#outline").removeClass('active');
+                          $("#holes").addClass('active');
+                          task.map.removeInteraction(task.draw);
+                          task.map.addInteraction(task.draw_holes);
+                        }
+                        else {
+                          $("#holes").removeClass('active');
+                          $("#outline").addClass('active');
+                          task.map.addInteraction(task.draw);
+                          task.map.removeInteraction(task.draw_holes);
+                        }
+                      }
+                    });
+
+                    // Code for editing/drawing polygons
+                    $('.btn-draw').off('click').on('click', function(evt) {
+                      var answer = $(evt.target).attr("value");
+                      if (typeof answer != 'undefined'){
+                        if (answer == 'draw') {
+                          $("#edit").removeClass("active");
+                          $("#draw").addClass("active");
+                          if ($("#outline").hasClass("active")) {
+                            task.map.removeInteraction(task.modify);
+                            task.map.removeInteraction(task.select);
+                            task.map.addInteraction(task.draw);
+                          }
+                          else {
+                            task.map.removeInteraction(task.modify_holes);
+                            task.map.removeInteraction(task.select_holes);
+                            task.map.addInteraction(task.draw_holes);
+                          }
+                        }
+                        if (answer == 'edit') {
+                          $("#draw").removeClass("active");
+                          $("#edit").addClass("active");
+                          if ($("#outline").hasClass("active")) {
+                            task.map.removeInteraction(task.draw);
+                            task.map.addInteraction(task.select);
+                            task.map.addInteraction(task.modify);
+                          }
+                          else {
+                            task.map.removeInteraction(task.draw_holes);
+                            task.map.addInteraction(task.select_holes);
+                            task.map.addInteraction(task.modify_holes);
+                          }
+                        }
+
+                        if (answer == 'delete') {
+                          if ($("#outline").hasClass("active")) {
+                            $("#draw").removeClass("active");
+                            $("#edit").removeClass("active");
+                            $("#delete").addClass("active");
+                            var features = task.source.getAllFeatures();
+                            for(i=0;i<features.length;i++) {
+                              task.source.removeFeature(features[i]);
+                            }
+                            task.polygon = false;
+                            $("#draw").addClass("active");
+                            $("#delete").removeClass("active");
+                          }
+                          else {
+                            $("#draw").removeClass("active");
+                            $("#edit").removeClass("active");
+                            $("#delete").addClass("active");
+                            var features = task.source_holes.getAllFeatures();
+                            for(i=0;i<features.length;i++) {
+                              task.source_holes.removeFeature(features[i]);
+                            }
+                            task.holes = false;
+                            $("#draw").addClass("active");
+                            $("#delete").removeClass("active");
+                          }
+                        }
+
+                      }});
+
+                      $('.btn-answer').off('click').on('click', function(evt) {
+                        var answer = $(evt.target).attr("value");
+                        if (typeof answer != 'undefined'){
+                          //Log the answer submitted to console
+                          console.log(answer);
+
+                          //console.log(task.map.source.features);
+                          console.log(task.source.features);
+
+                          if (task.polygon) {
+                            var features = task.source.getAllFeatures();
+                            var polygons = [];
+                            for(i=0;i<features.length;i++) {
+                              var g = features[i].getGeometry();
+                              polygons.push(g.getCoordinates());
+                            }
+                            //task.answer = {
+                            //    'task_id': task.id,
+                            //    'polygon': polygons,
+                            //    'img': task.info.url_b};
+                            task.answer.outline = polygons;
+
+                            if (task.holes) {
+                              var features = task.source_holes.getAllFeatures();
+                              var polygons = [];
+                              for(i=0;i<features.length;i++) {
+                                var g = features[i].getGeometry();
+                                polygons.push(g.getCoordinates());
+                              }
+
+                              task.answer.holes = polygons;
+                            }
+
+                            pybossa.saveTask(task.id, task.answer).done(function() {
+                              $("#success").fadeIn(500).fadeOut(5500);
+
+                              deferred.resolve();
+                              $("#map_" + task.id).remove();
+                            });
+                            $("#loading").fadeIn(500);
+
+                          } // end if task.polygon
+                        }
+                        else {
+                          $("#error").show();
+                        }
+                      });
+                      $("#loading").hide();
+                    }
+                    else {
+                      $(".skeleton").hide();
+                      $("#loading").hide();
+                      $("#finish").fadeIn(500);
+                    }
+                    $('#imgLink').tooltip();
+
+
+                  });
+
+                  pybossa.run('{{project.short_name}}');
+                </script>
