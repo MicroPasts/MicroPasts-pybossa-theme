@@ -1,5 +1,5 @@
 <!-- Styles for this task -->
-<link type="text/css" rel="stylesheet" href="http://annotorious.github.io/latest/themes/dark/annotorious-dark.css"/>
+<link type="text/css" rel="stylesheet" href="/static/vendor/annotorious-2.1.5/annotorious.min.css"/>
 <link rel="stylesheet" href="/static/vendor/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <link rel="stylesheet" href="/static/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/static/vendor/select2-3.5.1/select2.css" type="text/css" media="screen" />
@@ -19,8 +19,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript"></script>
 
 <!-- Annotorious -->
-<script src="http://annotorious.github.io/latest/annotorious.min.js" type="text/javascript"></script>
-<script src="http://annotorious.github.io/latest/anno-fancybox.min.js" type="text/javascript"></script>
+<script src="/static/vendor/annotorious-2.1.5/annotorious.min.js" type="text/javascript"></script>
 
 <!-- jquery form serializer -->
 <script src="/static/js/vendor/jquery.serializeJSON.min.js" type="text/javascript"></script>
@@ -874,7 +873,7 @@
 
             img.attr('src', task.info.url_b);
             img.attr('id', 'anno_' + task.id);
-            img.addClass('img-polaroid');
+            img.addClass('img-fluid');
             img.addClass('annotable');
             task.info.image = img;
         }
