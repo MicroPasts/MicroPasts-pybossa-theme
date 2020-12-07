@@ -1,0 +1,972 @@
+<!-- Styles for this task -->
+<link type="text/css" rel="stylesheet" href="http://annotorious.github.io/latest/themes/dark/annotorious-dark.css"/>
+<link rel="stylesheet" href="/static/vendor/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<link rel="stylesheet" href="/static/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/static/vendor/select2-3.5.1/select2.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/static/css/select2-bootstrap.css" type="text/css" media="screen" />
+
+<!-- Multi-select scripts -->
+<script src="/static/vendor/bootstrap-multiselect/js/bootstrap-multiselect.js" type="text/javascript"></script>
+
+<!-- Select 2 script -->
+<script src="/static/vendor/select2-3.5.1/select2.js" type="text/javascript"></script>
+
+
+<!-- Fancy box script -->
+<script src="/static/vendor/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+<!-- jQuery cookie -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript"></script>
+
+<!-- Annotorious -->
+<script src="http://annotorious.github.io/latest/annotorious.min.js" type="text/javascript"></script>
+<script src="http://annotorious.github.io/latest/anno-fancybox.min.js" type="text/javascript"></script>
+
+<!-- jquery form serializer -->
+<script src="/static/js/vendor/jquery.serializeJSON.min.js" type="text/javascript"></script>
+
+<!-- Maps -->
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+<!-- jquery ui -->
+<script src="https://code.jquery.com/ui/1.8.1/jquery-ui.min.js" type="text/javascript"></script>
+
+<!-- Get fancy box selector working -->
+
+<!-- App specific styles -->
+<style>
+    .messageMargin {
+        margin-top: 15px;
+    }
+    .loadingIcon {
+        max-width:100%;
+    }
+    .none {
+        display:none;
+    }
+    .ui-autocomplete {
+        background-color: white;
+        width: 300px;
+        border: 1px solid #cfcfcf;
+        list-style-type: none;
+        padding: 10px;
+
+    }
+    .multiselect-container {
+        max-height: 250px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    #map {
+        height:400px;
+        width:100%;
+        margin-top: 15px;
+    }
+    #keywords .btn-group {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+</style>
+
+<!-- The surveys for Chiara -->
+    <!-- Basic 1 task -->
+    <div id="survey" class="modal fade" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Hello! Do you want to help us?</h4>
+          </div>
+          <div class="modal-body">
+              <p>Thanks for contributing one task for the project. We are
+                  interested in knowing how you found out about us.
+                  <strong>Could you please answer two questions in a short survey?</strong>
+              </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
+            <a class="btn btn-large btn-success" href="https://docs.google.com/forms/d/1lNhBvKqPQlaJpWcvbEMfOGlixf7BHC__9w9JYs0Yw_4/viewform">Of course! Take me to the survey!</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- The complex 25 task -->
+    <div id="survey25" class="modal fade" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Hello! Do you want to help us?</h4>
+          </div>
+          <div class="modal-body">
+              <p>
+                  Thanks for contributing 25 tasks for the project. We are
+                  interested in knowing how you found out about us.
+                  <strong>Could you please answer two questions in a short survey?</strong>
+              </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
+            <a class="btn btn-large btn-success" href="https://docs.google.com/forms/d/1fchE1-eZ-ikceVMSEyXt5SW3-7bsFVLaIaPwBBiDnLA/viewform?embedded=true">Of course! Take me to the survey!</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Success and Error Messages for the user -->
+
+    <div class="messageMargin">
+       <div id="success" class="alert alert-success none">
+          <h2>Well done!</h2>
+          <p>
+              You have successfully submitted your tags. Here is another
+              photograph to try if you wish!
+          </p>
+       </div>
+      <div id="loading" class="alert alert-info" style="display:none;">
+          <img src="/static/img/loading.gif">Loading next task...
+       </div>
+      <div id="taskcompleted" class="alert alert-info" style="display:none;">
+          <h2>The task has been completed!</h2>
+          <p>
+              Thank you for participating!
+          </p>
+       </div>
+      <div id="finish" class="alert alert-success" style="display:none;">
+          <h2>Congratulations!</h2>
+          <p>
+              You have participated in all available tasks!
+          </p>
+          <img src="https://crowdfunded.micropasts.org/assets/logo-head.png"
+               height="200" width="200" alt="The MicroPasts Square Logo"/>
+          <div class="alert-actions">
+             <a class="btn-default btn" href="/">Go back to the home page</a>
+             <a class="btn-default btn" href="/app">or, have a look at our
+                 other applications</a>
+          </div>
+       </div>
+      <div id="error" class="alert alert-error" style="display:none;">
+          <a class="close">×</a>
+          <h2>Error!</h2>
+          <p>
+              Something went wrong, please contact the site administrators via the
+              <a href="http://community.micropasts.org">forum</a>,
+              <a href="https://facebook.com/micropasts">Facebook</a>,
+              <a href="mailto:info@finds.org.uk">email</a> or
+              <a href="https://twitter.com/micropasts">Twitter</a>.
+          </p>
+       </div>
+    </div>
+
+    <!-- End Success and Error Messages for the user -->
+
+    <!--
+        Task DOM for loading the Flickr Images
+        It uses the class="skeleton" to identify the elements that belong to the
+        task.
+    -->
+    <!-- Start Skeleton Row -->
+    <div class="row skeleton">
+       <!-- Start of Question and Submission DIV -->
+       <div class="btn-group pull-right">
+          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-eye-open"></i> Tutorial</button>
+          <a class="btn btn-info btn-sm" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="http://community.micropasts.org/category/crowdsourcing-support"><i class="glyphicon glyphicon-book"></i> Community Help</a>
+          <a id="raw" href="" class="btn btn-sm btn-info fancybox" ><i class="glyphicon glyphicon-picture"></i> Overlay</a>
+          <a id="flickr" rel="tooltip" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="" class="btn btn-sm btn-info"><i class="icon icon-flickr"></i> View on Flickr</a>
+          <!-- a id="down" rel="tooltip" data-toggle="tooltip" data-placement="top" title="Only works for compliant browsers" download="" href="" class="btn btn-sm btn-info" ><i class="glyphicon glyphicon-download"></i> Download</a -->
+       </div>
+
+       <h1 id="step1">
+           Please help us tag this photograph
+       </h1>
+
+       <div class="btn-group">
+           <button id="status" type="button" class="btn btn-default btn-type disabled" name="loading" value="loading">Loading photo</button>
+           <button id="reset" type="button" class="btn btn-default btn-type">Reset annotator</button>
+           <button id="skip" type="button" class="btn btn-default btn-type">Skip to form</button>
+       </div>
+       <div class="col-md-12"><!-- Start of Photo DIV (column) -->
+          <div id="imgContainer" >
+             <span id="photo-link">
+                <img id="photo" src="/static/img/loading.gif" class="loadingIcon">
+             </span>
+          </div>
+       </div><!-- End of Photo DIV (column) -->
+    <form id="phototagging" role="form">
+
+        <div class="col-md-12 text-center">
+            <h1 id="title">
+                Enter some information about the photograph
+            </h1>
+        </div>
+
+        <div class="col-md-6">
+        <div class="form-group">
+           <label class="control-label" for="imageID">Identification number: </label>
+           <input type="text" name="imageID" class="form-control" placeholder="The ID number is usally in the top right corner" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Look for a pencil written identifer such as P2008-20">
+       </div>
+            <a href="#" class="btn btn-default btn-type" id="top">Go back to top of image</a>
+
+            <div class="btn-group" id="keywords">
+
+                 <div class="form-group">
+                <label class="control-label" for="imageLabel">Transcribe the label: </label>
+                <textarea class="form-control" rows="5" id="imageLabel" name="imageLabel" placeholder="Transcribe the white label from the image above. If you can, try and keep the same case and style."></textarea>
+             </div>
+
+
+                <!-- The activities dropdown -->
+                  <h2>
+                Choose keywords:
+            </h2>
+            <p>
+                You can choose multiple keywords for each photograph shown above.
+                These four dropdowns present different keywords for: activities,
+                things, theme of photo, and people displayed. Hold down ctrl and click on the ones you want to use.
+            </p>
+                <select id="activities" class="multiselect" multiple="multiple">
+                    <option value="agriculture">agriculture</option>
+                    <option value="craft">craft</option>
+                    <option value="dance">dance</option>
+                    <option value="excavation">excavation</option>
+                    <option value="field_camp">field camp</option>
+                    <option value="food_preparation">food preparation</option>
+                    <option value="food_serving">food serving</option>
+                    <option value="horticulture">horticulture</option>
+                    <option value="hunting">hunting</option>
+                    <option value="initiation">initiation</option>
+                    <option value="landscape">landscape</option>
+                    <option value="mining">mining</option>
+                    <option value="procession">procession</option>
+                    <option value="reconstruction">reconstruction</option>
+                    <option value="recreation">recreation</option>
+                    <option value="religion">religion</option>
+                    <option value="site_view">site view</option>
+                    <option value="slavery">slavery</option>
+                    <option value="sport">sport</option>
+                    <option value="surveying">surveying</option>
+                    <option value="time_keeping">time keeping</option>
+                    <option value="trade">trade</option>
+                    <option value="transport">transport</option>
+                    <option value="warfare">warfare</option>
+                    <option value="wedding">wedding</option>
+                </select>
+
+                <!-- The things type dropdown -->
+                <select id="things" class="multiselect" multiple="multiple">
+                    <option value="aeroplane">aeroplane</option>
+                    <option value="altar">altar</option>
+                    <option value="animal">animal</option>
+                    <option value="ape">ape</option>
+                    <option value="apse">apse</option>
+                    <option value="aqueduct">aqueduct</option>
+                    <option value="arch">arch</option>
+                    <option value="architrave">architrave</option>
+                    <option value="axe">axe</option>
+                    <option value="bailey">bailey</option>
+                    <option value="basin">basin</option>
+                    <option value="basket">basket</option>
+                    <option value="bell">bell</option>
+                    <option value="bicycle">bicycle</option>
+                    <option value="bird">bird</option>
+                    <option value="boat">boat</option>
+                    <option value="bookcase">bookcase</option>
+                    <option value="bow">bow</option>
+                    <option value="branch">branch</option>
+                    <option value="bridge">bridge</option>
+                    <option value="building">building</option>
+                    <option value="camel">camel</option>
+                    <option value="car">car</option>
+                    <option value="carrying_chair">carrying-chair</option>
+                    <option value="cart">cart</option>
+                    <option value="castle">castle</option>
+                    <option value="cemetery">cemetery</option>
+                    <option value="chair">chair</option>
+                    <option value="chicken">chicken</option>
+                    <option value="church">church</option>
+                    <option value="cistern">cistern</option>
+                    <option value="coffin">coffin</option>
+                    <option value="columbarium">columbarium</option>
+                    <option value="column">column</option>
+                    <option value="column_capital">column capital</option>
+                    <option value="cornice">cornice</option>
+                    <option value="courtyard">courtyard</option>
+                    <option value="cow">cow</option>
+                    <option value="crocodile">crocodile</option>
+                    <option value="dagger">dagger</option>
+                    <option value="dam">dam</option>
+                    <option value="dighouse">dighouse</option>
+                    <option value="dog">dog</option>
+                    <option value="dolmen">dolmen</option>
+                    <option value="donkey">donkey</option>
+                    <option value="door">door</option>
+                    <option value="field">field</option>
+                    <option value="fish">fish</option>
+                    <option value="flag">flag</option>
+                    <option value="fortress">fortress</option>
+                    <option value="frieze">frieze</option>
+                    <option value="furniture">furniture</option>
+                    <option value="garden">garden</option>
+                    <option value="gateway">gateway</option>
+                    <option value="gun">gun</option>
+                    <option value="horse">horse</option>
+                    <option value="house">house</option>
+                    <option value="hut">hut</option>
+                    <option value="inscription">inscription</option>
+                    <option value="island">island</option>
+                    <option value="jewelry">jewelry</option>
+                    <option value="ladder">ladder</option>
+                    <option value="latrine">latrine</option>
+                    <option value="lion">lion</option>
+                    <option value="market">market</option>
+                    <option value="milestone">milestone</option>
+                    <option value="monastery">monastery</option>
+                    <option value="monolith">monolith</option>
+                    <option value="mosaic">mosaic</option>
+                    <option value="mosque">mosque</option>
+                    <option value="mountain">mountain</option>
+                    <option value="museum">museum</option>
+                    <option value="ostrich">ostrich</option>
+                    <option value="ox">ox</option>
+                    <option value="palace">palace</option>
+                    <option value="pediment">pediment</option>
+                    <option value="plant">plant</option>
+                    <option value="pulpit">pulpit</option>
+                    <option value="quadruped">quadruped</option>
+                    <option value="railway">railway</option>
+                    <option value="river">river</option>
+                    <option value="reed">reed</option>
+                    <option value="relief">relief</option>
+                    <option value="reservoir">reservoir</option>
+                    <option value="road">road</option>
+                    <option value="rock">rock</option>
+                    <option value="room">room</option>
+                    <option value="scaffolding">scaffolding</option>
+                    <option value="sceptre">sceptre</option>
+                    <option value="school">school</option>
+                    <option value="scorpion">scorpion</option>
+                    <option value="sea">sea</option>
+                    <option value="shrine">shrine</option>
+                    <option value="skull">skull</option>
+                    <option value="skeleton">skeleton</option>
+                    <option value="slag">slag</option>
+                    <option value="snake">snake</option>
+                    <option value="spear">spear</option>
+                    <option value="spring">spring</option>
+                    <option value="stairs">stairs</option>
+                    <option value="statue">statue</option>
+                    <option value="stela">stela</option>
+                    <option value="street">street</option>
+                    <option value="sundial">sundial</option>
+                    <option value="synagogue">synagogue</option>
+                    <option value="table">table</option>
+                    <option value="temple">temple</option>
+                    <option value="tent">tent</option>
+                    <option value="tetrapylon">tetrapylon</option>
+                    <option value="theatre">theatre</option>
+                    <option value="throne">throne</option>
+                    <option value="tomb">tomb</option>
+                    <option value="tortoise">tortoise</option>
+                    <option value="tower">tower</option>
+                    <option value="tree">tree</option>
+                    <option value="truck">truck</option>
+                    <option value="umbrella">umbrella</option>
+                    <option value="vault">vault</option>
+                    <option value="vessel">vessel</option>
+                    <option value="wall">wall</option>
+                    <option value="wall_painting">wall painting</option>
+                    <option value="water_wheel">water wheel</option>
+                    <option value="weaving">weaving</option>
+                    <option value="well">well</option>
+                    <option value="window">window</option>
+                </select>
+
+                <!-- The theme type dropdown -->
+                <select id="theme" class="multiselect" multiple="multiple">
+                    <option value="animal">animal</option>
+                    <option value="architecture">architecture</option>
+                    <option value="armour">armour</option>
+                    <option value="container">container</option>
+                    <option value="funerary">funerary</option>
+                    <option value="furniture">furniture</option>
+                    <option value="horology">horology</option>
+                    <option value="manufacture">manufacture</option>
+                    <option value="musical_instrument">musical instrument</option>
+                    <option value="panorama">panorama</option>
+                    <option value="personal_accessory">personal accessory</option>
+                    <option value="plant">plant</option>
+                    <option value="recreation">recreation</option>
+                    <option value="sculpture">sculpture</option>
+                    <option value="tool">tool</option>
+                    <option value="transport">transport</option>
+                    <option value="water_management">water management</option>
+                    <option value="weapons">weapons</option>
+                    <option value="writing">writing</option>
+                </select>
+
+                <!-- The people dropdown -->
+                <select id="people" class="multiselect" multiple="multiple">
+                    <option value="American">American</option>
+                    <option value="Arab">Arab</option>
+                    <option value="Bedouin">Bedouin</option>
+                    <option value="Egyptian">Egyptian</option>
+                    <option value="European">European</option>
+                </select>
+            </div>
+
+            <hr />
+            <!-- Allow other keywords to be generated -->
+            <div class="form-group">
+                <label class="control-label" for="keywordsUser">Other keywords:</label>
+                <input type="text" name="keywordsUser" class="form-control" placeholder="If you can think other keywords, enter them here separated by commas" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Our keyword list is not complete, if you think of new ones, just add them here">
+            </div>
+
+            <hr />
+
+
+            <p>&nbsp;</p>
+            <div>
+                <label class="control-label" for="orientation">Image orientation: </label>
+                <select class="form-control" id="orientation" name="orientation">
+                    <option value="">Please choose image orientation: </option>
+                    <option value="landscape" >Landscape</option>
+                    <option value="portrait">Portrait</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <p>&nbsp;</p>
+
+
+             <div class="form-group">
+                <label class="control-label" for="comments">Your Comments</label>
+                <textarea class="form-control" rows="5" id="comments" name="comments" placeholder="Add any comments you may have about the photo or your experience with this task."></textarea>
+             </div>
+
+        </div>
+
+    <div class="col-md-6">
+        <!-- Geographical grouping -->
+        <div class="form-group" id="geo">
+
+            <div>
+                <label class="control-label" for="site" >Geo-reference the site:</label>
+
+                <!-- Note: must not be a button or it will submit form -->
+                <a href="#" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#mapModal"><i class="glyphicon glyphicon-eye-open"></i> Mapping hints</a>
+                <p>&nbsp;</p>
+                <!-- End of help button -->
+
+                <input type="text" class="form-control" id="toSearch" name="toSearch"
+                       placeholder="Locate the photograph on the map" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Type a placename and then select from the suggestions, e.g. Jerash, Amman (Philadelphia) or Petra">
+                <input type="hidden" name="lat" value="" id="lat">
+                <input type="hidden" name="lon" value="" id="lon">
+            </div>
+
+            <!-- The map to show -->
+            <div id="map"></div>
+
+          <h4>About the map layers</h4>
+          <img class="img-circle pull-right" src="https://avatars1.githubusercontent.com/u/867158?v=2&s=50" width="50px" height="50px" />
+          	<p>
+                The Imperium base map is used courtesy of the <a href="http://pelagios-project.blogspot.co.uk/2012/09/a-digital-map-of-roman-empire.html">Pelagios project</a>, and the OpenStreetMap layer is "&copy; OpenStreetMap contributors".
+            </p>
+
+            <!-- Look up a Pleiades ID -->
+            <p>&nbsp;</p>
+            <div>
+                <label class="control-label" for="pleiadesID">Attribute a Pleiades Identifier (if possible): </label>
+                <select class="form-control" id="pleiadesID" name="pleiadesID" rel="tooltip" data-toggle="tooltip" data-placement="top" title="Choose a Pleiades place if you can, not every location is in their system.">
+                    <option value="">Please choose a place</option>
+                    <option value="697728">Amman, Jordan - Amman/Philadelpheia</option>
+                    <option value="697736">Bayir – Qasr Bayir</option>
+                    <option value="687856">Bethlehem</option>
+                    <option value="678378">Beth-Shan - Scythopolis</option>
+                    <option value="678106">Damascus, Syria</option>
+                    <option value="697709">Dead Sea - Mortuum Mare/Asphaltitis L.</option>
+                    <option value="697726">Feinan: Khirbet el Nahas – Phaino</option>
+                    <option value="668261">Homs, Syria - Emesa</option>
+                    <option value="678158">Jerash, Jordan - Gerasa/Antiochia ad Chrysorhoam</option>
+                    <option value="687928">Jerusalem, Israel - Ierusalem/Hierosolyma/Col. Aelia Capitolina</option>
+                    <option value="697725">Petra, Jordan</option>
+                    <option value="688028">Shilo, Israel - Shiloh or Silo</option>
+                    </select>
+
+                <p>&nbsp;</p>
+                <h4>
+                    Why use Pleiades tags
+                </h4>
+              <img class="img-circle pull-right" src="https://pbs.twimg.com/profile_images/378800000226449591/9549b127ba383dde216d8562f1bf9204_bigger.png" width="73px" height="73px" />
+                <p>
+                    <a rel="tooptip" data-placement="top" data-toggle="tooltip" title="" data-original-title="The Pleiades site - opens in a new window" href="http://pleiades.stoa.org/" target="_blank">Pleiades</a> is a community-built gazetteer and graph of ancient places. By adding these identifiers, we can assist their efforts as documented in this <a href="http://sgillies.net/blog/1103/flickr-support-for-ancient-world-places">blog post</a> by Sean Gillies. These data can then be fed
+                  into the Pelagios Project's RDF ecosystem and for linking these images to similar ones that have been tagged in the same way by other collections.
+                </p>
+            </div>
+
+        </div>
+        <!-- End of geo group -->
+    </div>
+    </form>
+
+        <!--id="btn-save"-->
+        <div class="col-md-12">
+            <div class="btn-group">
+                <button class="btn btn-success btn-answer" value='Yes'>
+                    <i class="icon icon-white icon-save"></i> Submit your answer
+                </button>
+
+            </div>
+
+            <!-- Feedback items for the user -->
+            <p>
+                You are working now on task: <span id="task-id" class="label label-warning">#</span>
+            </p>
+
+            <p>
+                You have completed: <span id="done" class="label label-info"></span> tasks from
+            <!-- Progress bar for the user -->
+            <span id="total" class="label label-inverse"></span></p>
+            <div class="progress progress-striped">
+                <div id="progress" class="progress-bar" role="progressbar" title="#" style="width:0%;"></div>
+            </div>
+
+            <div id="answer">
+
+            </div>
+            <!-- DIV for the submission buttons -->
+
+        </div>
+       <!-- End of Question and Submission DIV (column) -->
+    </div><!-- End of Skeleton Row -->
+
+     <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                 <h1 class="lead">
+                     Mapping hints
+                 </h1>
+             </div><!-- Modal header -->
+             <div class="modal-body">
+
+                 <p>
+                     The mapping component of this exercise has three different layers. We are very fortunate to be able to use the fantastic Imperium map layer, produced by Johan Åhfeldt for the <a href="http://pelagios-project.blogspot.co.uk">
+                     Pelagios</a> project. This has ancient place names from the Barrington Atlas of the Classical World displayed and is useful for many reasons. If you find this hard to use change to either satellite layer, the OpenStreetMap layer (labels in Arabic) or the map view.
+                 <p>
+                     To use the geo-coder, type a place name, then as it auto-completes, use your mouse or arrow keys to choose the place (double-click). When it has selected the site, a balloon appears on the map. The image below demonstrates what you should see.
+                 </p>
+                 <img src="http://micropasts.org/wp-content/uploads/2014/09/Jerash_Geocoder.png" width="100%" alt="Geocoder view" />
+                 <p>&nbsp;</p>
+                 <p>
+                     Mapping some of these sites can be hard. Use these tip examples to get the right place:
+                 </p>
+                 <ul>
+                     <li>
+                         For Homs - search for Homs, Syria, on the Imperium map layer, the place was known as Emesa in Antiquity.
+                     </li>
+                     <li>
+                         For Shiloh - search for Shilo.
+                     </li>
+                 </ul>
+                 <h3>
+                     Pleiades Identifiers
+                 </h3>
+                 <p>
+                     Not every place has an identifier, so leave blank if need be.
+                 </p>
+
+             </div>
+           <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal start -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                 <h1 class="lead">
+                     Photo-tagging Tutorial
+                 </h1>
+             </div><!-- Modal header -->
+             <div id="0" class="modal-body" style="display:none">
+                <p>
+                    The application is really simple. It loads a photo from our <a href="http://flickr.com/micropasts">Flickr feed</a> and asks you to <strong>tag all the elements that you recognise</strong>. These can be anything from a <i>column</i> to a <i>camel</i>, an activity taking place such as <i>agriculture</i> or <i>transport</i>, a certain cultural group of people such as <i>Bedouin</i> or <i>European</i> - or even specific individuals, and/or more general themes such as simply <i>architecture</i>.
+                </p>
+                <p>
+                    You then hover the mouse over the elements that you identify, and then by clicking and dragging you will draw a box. A text box will appear, in which you will be able to type the name of that element and save it.
+                </p>
+                <p>
+                   If you recognise a specific person in the photo, this is great! Please tag their names in this way: <i>Last name, first name</i>; for example: Horsfield, George.
+                </p>
+                <p>
+                    <img src="https://farm3.staticflickr.com/2918/14443363844_d99632eb9b.jpg" width="100%" alt="An example of the tagging interface"/>
+                </p>
+                <p>
+                    You can do this as many times as you want. If you wish to edit a tag or delete it altogether, you can do this by hovering over the relevant box, and then selecting either the pencil tool for editing, or the 'x' for deleting.
+                </p>
+
+             </div>
+             <div id="1" class="modal-body" style="display:none">
+                <p>
+                    As you can see, you have four buttons representing four categories of suggested keywords: Activity, Things, Theme and People. Clicking on each one of these will bring up a list of suggested keywords to be used in tagging. You can refer to these lists when tagging each photo, but you can also add your own tags. Both annotating elements on the photograph and selecting keywords from these lists are very helpful.
+                </p>
+                <p>
+                    Additional information incldues the photo's ID (starts with P2008, and appears in almost all photos), the photo's orientation (landscape, portrait, or other if it's a square), as well as comments, if you have anything else you want to mention. If the photo has a caption, please try to transcribe it as accurately as possibly into the transcribe label box.
+                </p>
+                <p>
+                    We would also like your help to give the photograph coordinates and a Pleiades Identifier. If you go to the geo-code section on the right hand side and type a place name (refer to mapping hints for help) you can select the place depicted in the photo. Once you have done this, try choosing a Pleiades Identifier from the drop down list below.
+                </p>
+                <img src="http://micropasts.org/wp-content/uploads/2014/09/Jerash_Geocoder.png" width="100%" alt="Geocoder view" />
+                <p>&nbsp;</p>
+                <p>
+                    During the task, you can always return to this tutorial via the <i class="glyphicon glyphicon-eye-open"></i> Tutorial button.
+                </p>
+                <p>
+                    To find out how the project is progressing, to suggest changes to this application or to propose new research ideas based what you have tagged, please have a look at our <a href="http://community.micropasts.org" title="Community forum">community forum</a>.
+                </p>
+             </div>
+          <!-- End of stepped modal body -->
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+             <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
+             <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+             <button id="startContrib" data-dismiss="modal" class="btn btn-primary" style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Let's start!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal end -->
+    <!-- Enable the multi selects -->
+    <script>
+        $(document).ready(function() {
+            $("#acti").tooltip({
+                placement: $(this).data("placement") || 'top'
+            });
+            $( "#reset" ).on( "click", function() {
+              	anno.removeAll();
+  				console.log('Reset fired');
+			});
+          	$("#pleiadesID").select2();
+            $("#orientation").select2();
+          	$("#skip").click(function() {
+    		$('html, body').animate({
+        		scrollTop: $("#title").offset().top
+    			}, 500);
+			});
+                $("#top").click(function() {
+    		$('html, body').animate({
+        		scrollTop: $("#step1").offset().top
+    			}, 500);
+			});
+
+//            $('.multiselect').multiselect({
+//            numberDisplayed: 2,
+//            enableFiltering: true
+//            });
+        });
+    </script>
+
+    <!-- The modal steps -->
+    <script>
+    var step = -1;
+    function showStep(action) {
+       $("#" + step).hide();
+       if (action == 'next') {
+          step = step + 1;
+       }
+       if (action == 'prev') {
+          step = step - 1;
+       }
+       if (step == 0) {
+          $("#prevBtn").hide();
+       }
+       else {
+          $("#prevBtn").show();
+       }
+       if (step == 1) {
+          $("#nextBtn").hide();
+          $("#startContrib").show();
+       }
+       $("#" + step).show();
+    }
+    showStep('next');
+    $("#modal").modal('show');
+    </script>
+
+    <!-- The geocoder -->
+    <script>
+    var geocoder;
+    var map;
+    var marker;
+
+    function initialize(){
+    //MAP
+      var latlng = new google.maps.LatLng(31.95, 35.94);
+
+      var osm = new google.maps.ImageMapType({
+        getTileUrl: function (coord, zoom) {
+            return "http://tile.openstreetmap.org/" +
+                zoom + "/" + coord.x + "/" + coord.y + ".png";
+
+        },
+        tileSize: new google.maps.Size(256, 256),
+        isPng: true,
+        alt: "OpenStreetMap layer",
+        name: "OSM",
+        maxZoom: 18,
+        minZoom: 1
+        });
+
+      var imperium = new google.maps.ImageMapType({
+        getTileUrl: function (coord, zoom) {
+            return "http://finds.org.uk/imperium/" +
+                zoom + "/" + coord.x + "/" + coord.y + ".png";
+        },
+        tileSize: new google.maps.Size(256, 256),
+        isPng: true,
+        alt: "Imperium layer",
+        name: "Imperium",
+        maxZoom: 11,
+        minZoom:3
+        });
+
+      var options = {
+        zoom: 9,
+        center: latlng,
+        mapTypeControlOptions: {
+          mapTypeIds: [
+          google.maps.MapTypeId.ROADMAP,
+          google.maps.MapTypeId.HYBRID,
+          google.maps.MapTypeId.TERRAIN,
+          google.maps.MapTypeId.SATELLITE,
+          'Imperium',
+          'OSM'
+          ]
+    	  },
+    	  mapTypeControl: true,
+    	  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+          scaleControl: true,
+    	  zoomControl: true,
+          mapTypeId: 'Imperium',
+          scrollwheel: false,
+        };
+
+      map = new google.maps.Map(document.getElementById("map"), options);
+      map.mapTypes.set('OSM', osm);
+      map.mapTypes.set('Imperium',imperium);
+
+      //GEOCODER
+      geocoder = new google.maps.Geocoder();
+
+      marker = new google.maps.Marker({
+        map: map,
+        draggable: true
+      });
+
+    }
+
+    $(document).ready(function() {
+
+      initialize();
+      var bounds;
+      google.maps.event.addListenerOnce(map, 'idle', function(){
+      bounds = map.getBounds();
+      console.log('Map bounds: ' +  bounds);
+      return bounds;
+      });
+
+
+      $(function() {
+
+        $("#toSearch").autocomplete({
+          //This bit uses the geocoder to fetch address values
+          source: function(request, response) {
+            console.log('Map bounds: ' +  bounds);
+            geocoder.geocode( {'address': request.term, 'bounds': bounds, 'region': 'jo'}, function(results, status) {
+              response($.map(results, function(item) {
+                return {
+                  label:  item.formatted_address,
+                  value: item.formatted_address,
+                  latitude: item.geometry.location.lat(),
+                  longitude: item.geometry.location.lng()
+                }
+              }));
+            })
+          },
+          //This bit is executed upon selection of an address
+          select: function(event, ui) {
+            $("#lat").val(ui.item.latitude);
+            $("#lon").val(ui.item.longitude);
+            var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+            console.log('Latitude: ' + ui.item.latitude);
+            console.log('Longitude: ' + ui.item.longitude);
+            console.log(location);
+            marker.setPosition(location);
+            map.setCenter(location);
+          }
+        });
+      });
+
+      //Add listener to marker for reverse geocoding
+      google.maps.event.addListener(marker, 'drag', function() {
+        geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+              $('#toSearch').val(results[0].formatted_address);
+              $('#lat').val(marker.getPosition().lat());
+              $('#lon').val(marker.getPosition().lng());
+              console.log('Longitude: ' + marker.getPosition().lng());
+              console.log('Latitude: ' + marker.getPosition().lat());
+            }
+          }
+        });
+      });
+
+    });
+
+    </script>
+
+
+    <!-- Load user progress -->
+    <script>
+
+    function loadUserProgress() {
+        pybossa.userProgress('{{project.short_name}}').done(function(data){
+
+            console.log("Total answers done for user: " + data.done);
+
+            if ((data.done == 1) && ($.cookie('survey-{{project.short_name}}') == undefined)){
+               $("#survey").modal('show');
+               $.cookie('survey-{{project.short_name}}', 'shown', { path: '/'});
+            }
+            if ((data.done >= 25) && ($.cookie('survey25-{{project.short_name}}') == undefined)){
+                $("#survey25").modal('show');
+                $.cookie('survey25-{{project.short_name}}', 'shown', { path: '/'});
+            }
+            var pct = Math.round((data.done*100)/data.total);
+            $("#progress").css("width", pct.toString() +"%");
+            $("#progress").attr("title", pct.toString() + "% completed!");
+            $("#progress").tooltip({'placement': 'left'});
+            $("#total").text(data.total);
+            $("#done").text(data.done);
+            $('a[rel]').tooltip({'placement': 'left'});
+            $('#pleiadesID').tooltip();
+        });
+    }
+
+    pybossa.taskLoaded(function(task, deferred) {
+        if ( ! $.isEmptyObject(task) ) {
+            loadUserProgress();
+            // load image from flickr
+          var img = $('<img width="100%" style="height:auto;" />');
+            img.load(function() {
+                // continue as soon as the image is loaded
+                deferred.resolve(task);
+                $("#status").text("Photo loaded!");
+
+            });
+
+            img.attr('src', task.info.url_b);
+            img.attr('id', 'anno_' + task.id);
+            img.addClass('img-polaroid');
+            img.addClass('annotable');
+            task.info.image = img;
+        }
+        else {
+            deferred.resolve(task);
+        }
+    });
+      $(window).resize(function(){
+        console.log('Window resized');
+      });
+
+
+    pybossa.presentTask(function(task, deferred) {
+        if ( !$.isEmptyObject(task) ) {
+            $('#photo-link').html('').append(task.info.image);
+            $('#task-id').html(task.id);
+            $("a#raw").attr("href", task.info.url_b);
+            $("a#flickr").attr("href", task.info.link + '/sizes/k/');
+            $("a#down").attr("download", task.id);
+            $("a#down").attr("href", task.info.url_b );
+            $(".fancybox").fancybox();
+            $('#imgLink').tooltip();
+            $("[rel=tooltip]").tooltip();
+            $("#btn-submit").html("<i class='icon-repeat'></i> I don't recognise anything, try next one");
+            $("#btn-submit").removeClass("btn-success");
+
+            anno.makeAnnotatable(document.getElementById('anno_' + task.id));
+
+            anno.addHandler('onAnnotationCreated', function(annotation) {
+                console.log(annotation.text);
+                $("#btn-submit").html("<i class='icon icon-save'></i> Save current annotations");
+                $("#btn-submit").addClass("btn-success");
+            });
+
+
+            $('.btn-answer').off('click').on('click', function(evt) {
+                var answer = $(evt.target).attr("value");
+                if (typeof answer != 'undefined') {
+                    console.log(answer);
+                    task.answer = $("#phototagging").serializeJSON();
+                    task.answer.annotations = anno.getAnnotations();
+                    task.answer.theme = $('#theme').val();
+                    task.answer.people = $('#people').val();
+                    task.answer.things = $('#things').val();
+                    task.answer.activities = $('#activities').val();
+                    var geojson = {
+                       "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                                        $('#lon').val(),
+                                        $('#lat').val()
+                                ]
+                        }
+                    };
+                    console.log(geojson);
+                    task.answer.geojson = geojson;
+                    console.log(task.answer);
+                    pybossa.saveTask(task.id, task.answer).done(function() {
+                        $("html, body").animate({ scrollTop: 0 }, "slow");
+                        $("#success").fadeIn(500).fadeOut(500);
+                        $("#loading").fadeIn(500).fadeOut(500);
+                        deferred.resolve();
+                    });
+
+                    $('input').val('');
+                    $('select').val('');
+
+                    $('#pleiadesID').select2("val", "");
+                    $('#orientation').select2("val", "");
+                    $('#lat').val('');
+                    $('#lon').val('');
+                    $('#imageID').val('');
+                    $('#keywordsUser').val('');
+                    $('#imageLabel').val('');
+                    $('#comments').val('');
+                  	marker.setMap(null);
+                  	marker = new google.maps.Marker({
+        				map: map,
+        				draggable: true
+      				});
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                } else {
+                    $("#error").show();
+                }
+            });
+            $("#loading").hide();
+        } else {
+            $(".skeleton").hide();
+            $("#loading").hide();
+            $("#finish").fadeIn(500);
+        }
+    });
+    pybossa.run('{{project.short_name}}');
+
+    </script>
