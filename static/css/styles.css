@@ -20,6 +20,13 @@ body {
   background-position: center;
   min-height: 300px;
 }
+
+#video {
+  background-image: url(https://live.staticflickr.com/8708/17000758805_5143550379_h.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 h1,
 h2,
 h3,
