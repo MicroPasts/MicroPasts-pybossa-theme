@@ -1,8 +1,8 @@
 <div class="container-fluid mb-3">
   <h1 class="text-center mb-3">Discover more</h1>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner row w-100 mx-auto"  id="category">
-    </div>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" >
+
+
     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
@@ -123,10 +123,10 @@
             }, ''); // The '' is an empty string, it is the initial value result.
 console.log(listItems);
             // Get the element from the DOM in which to display the list, this should be an ul or ol element.
-            resultElement = document.getElementById('category');
+            resultElement = document.getElementById('myCarousel');
 
           // Set the inner HTML
-          resultElement.innerHTML = listItems;
+          resultElement.innerHTML = '<div class="carousel-inner row w-100 mx-auto">'+listItems+'</div>';
 
           $(".carousel-inner .item:first").addClass("active");
           }
