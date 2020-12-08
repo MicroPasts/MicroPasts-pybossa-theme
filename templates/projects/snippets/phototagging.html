@@ -1,68 +1,94 @@
 <!-- Styles for this task -->
-<link type="text/css" rel="stylesheet" href="/static/vendor/annotorious-2.1.5/annotorious.min.css"/>
 
+<link type="text/css" rel="stylesheet" href="/static/vendor/annotorious-2.1.5/annotorious.min.css"/>
+<style>
+  .loadingIcon {
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     width:100px;
+     height: 100px;
+     margin-top: 100px;
+     margin-bottom: 100px;
+     background-color: black;
+  }
+</style>
 <!-- jQuery cookie -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript"></script>
-
-
 <!-- jquery form serializer -->
 <script src="/static/js/vendor/jquery.serializeJSON.min.js" type="text/javascript"></script>
-
+<!-- Annotorious -->
+<script src="/static/vendor/annotorious-2.1.5/annotorious.min.js" type="text/javascript"></script>
 
 <!-- Success and Error Messages for the user -->
 
 <div class="messageMargin">
-  <div id="success" class="alert alert-success none col-md-12" style="display:none;">
-    <h2>Well done!</h2>
-    <p>
-      You have successfully submitted your tags. Here is another
-      photograph to try if you wish!
-    </p>
+
+  <div id="success" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+  data-delay="30000" style="position: absolute; top: 7rem; right: 1.5rem; display:none; z-index: 999;">
+    <div class="toast-header">
+      <strong class="mr-auto">System alert</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      <h2>
+        Well done!
+      </h2>
+      <p>
+        You have successfully submitted your tags. Here is another
+        photograph to try if you wish!
+      </p>
+    </div>
   </div>
+
   <div id="loading" class="alert alert-info" style="display:none;">
-    <img src="/static/img/loading.gif">Loading next task...
+    <img src="/static/img/puff.svg">Loading next task...
   </div>
+
   <div id="taskcompleted" class="alert alert-info" style="display:none;">
     <h2>The task has been completed!</h2>
     <p>
       Thank you for participating!
     </p>
   </div>
+
   <div id="finish" class="alert alert-success" style="display:none;">
     <h2>Congratulations!</h2>
     <p>
       You have participated in all available tasks!
     </p>
 
-    <div class="alert-actions">
-      <a class="btn-default btn" href="/">Go back to the home page</a>
-      <a class="btn-default btn" href="/app">or, have a look at our
-        other applications</a>
+      <div class="alert-actions">
+        <a class="btn-primary btn" href="/">Go back to the home page</a>
+        <a class="btn-primary btn" href="/projects/category/featured/">or, have a look at our
+          other applications</a>
       </div>
-    </div>
-    <div id="error" class="alert alert-error" style="display:none;">
-      <a class="close">×</a>
-      <h2>Error!</h2>
-      <p>
-        Something went wrong, please contact the site administrators via the
-        <a href="http://community.micropasts.org">forum</a>,
-        <a href="https://facebook.com/micropasts">Facebook</a>,
-        <a href="mailto:info@finds.org.uk">email</a> or
-        <a href="https://twitter.com/micropasts">Twitter</a>.
-      </p>
-    </div>
   </div>
 
-  <!-- End Success and Error Messages for the user -->
+  <div id="error" class="alert alert-error" style="display:none;">
+    <a class="close">×</a>
+    <h2>Error!</h2>
+    <p>
+      Something went wrong, please contact the site administrators via the
+      <a href="http://community.micropasts.org">forum</a>,
+      <a href="https://facebook.com/micropasts">Facebook</a>,
+      <a href="https://twitter.com/micropasts">Twitter</a>.
+    </p>
+  </div>
 
-  <!--
+</div>
+<!-- End Success and Error Messages for the user -->
+
+<!--
   Task DOM for loading the Flickr Images
   It uses the class="skeleton" to identify the elements that belong to the
   task.
 -->
+
 <!-- Start Skeleton Row -->
 <div class="skeleton">
-
   <div class="col-md-12 mb-2 mt-2">
     <h2 id="step1" class="mb-2">
       Please help us tag this photograph
@@ -74,248 +100,229 @@
     <button id="status" type="button" class="btn btn-primary btn-sm disabled" name="loading" value="loading">Loading photo</button>
     <button id="skip" type="button" class="btn btn-primary btn-sm">Skip to form</button>
     <a id="nextTask" rel="tooltip"  href="" class="btn btn-sm btn-info"><i class="icon icon-flickr"></i> Next task</a>
-
   </div>
-
-
+  <!-- The magic form -->
   <form id="magicData" role="form">
 
-    <div class="col-md-12"><!-- Start of Photo DIV (column) -->
+    <div class="col-md-12">
       <div id="imgContainer" >
         <span id="photo-link">
-          <img id="photo" src="/static/img/loading.gif" class="loadingIcon">
+          <img id="photo" src="/static/img/puff.svg" class="loadingIcon">
         </span>
       </div>
-    </div><!-- End of Photo DIV (column) -->
-    <div class="col-md-12">
-      <h3 id="title">Enter some information about the photograph</h3>
-
     </div>
+
+    <div class="col-md-12">
+      <h3 id="title">
+        Enter some information about the photograph
+      </h3>
+    </div>
+
     <div class="col-md-12">
       <div class="form-group">
         <label class="control-label" for="comments">Your Comments</label>
-        <textarea class="form-control" rows="5" id="comments" name="comments" placeholder="Add any comments you may have about the photo or your experience with this task."></textarea>
+        <textarea class="form-control" rows="5" id="comments" name="comments"
+        placeholder="Add any comments you may have about the photo or your experience with this task."></textarea>
       </div>
-
     </div>
+
     <div class="col-md-12">
       <button class="btn btn-success btn-answer" id="submitbutton" value="Yes">Submit your thoughts</button>
     </div>
+
   </form>
 
-  <!--id="btn-save"-->
-  <div class="col-md-12">
-    <!-- Feedback items for the user -->
+  <!-- Feedback items for the user -->
+  <div class="col-md-12 mt-3 mb-3">
     <p>
-      You are working now on task: <span id="task-id" class="badge badge-warning badge-large">#</span>
+      You are working now on task: <span id="task-id"
+      class="badge badge-warning badge-large">#</span>
     </p>
 
     <p>
-      You have completed: <span id="done" class="badge badge-large badge-info"></span> tasks from
-      <!-- Progress bar for the user -->
+      You have completed: <span id="done"
+      class="badge badge-large badge-info"></span> tasks from
       <span id="total" class="badge badge-large badge-dark"></span></p>
-      <div class="progress progress-striped">
-        <div id="progress" class="progress-bar" role="progressbar" title="#" style="width:0%;"></div>
+      <!-- Progress bar for the user -->
+      <div class="progress">
+        <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" title="#"
+        style="width:0%;" aria-valuenow=""></div>
       </div>
 
-      <div id="answer">
-
-      </div>
+      <div id="answer"></div>
       <!-- DIV for the submission buttons -->
-
     </div>
-    <!-- End of Question and Submission DIV (column) -->
 
-        <!-- Modal start -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="lead">
-                  Photo-tagging Tutorial
-                </h1>
-              </div><!-- Modal header -->
-              <div id="0" class="modal-body" style="display:none">
-                <p>
-                  The application is really simple. It loads a photo from our <a href="http://flickr.com/micropasts">Flickr feed</a> and asks you to <strong>tag all the elements that you recognise</strong>. These can be anything from a <i>column</i> to a <i>camel</i>, an activity taking place such as <i>agriculture</i> or <i>transport</i>, a certain cultural group of people such as <i>Bedouin</i> or <i>European</i> - or even specific individuals, and/or more general themes such as simply <i>architecture</i>.
-                </p>
-                <p>
-                  You then hover the mouse over the elements that you identify, and then by clicking and dragging you will draw a box. A text box will appear, in which you will be able to type the name of that element and save it.
-                </p>
-                <p>
-                  If you recognise a specific person in the photo, this is great! Please tag their names in this way: <i>Last name, first name</i>; for example: Horsfield, George.
-                </p>
-                <p>
-                  <img src="https://farm3.staticflickr.com/2918/14443363844_d99632eb9b.jpg" width="100%" alt="An example of the tagging interface"/>
-                </p>
-                <p>
-                  You can do this as many times as you want. If you wish to edit a tag or delete it altogether, you can do this by hovering over the relevant box, and then selecting either the pencil tool for editing, or the 'x' for deleting.
-                </p>
+<!-- Modal start -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-              </div>
-              <div id="1" class="modal-body" style="display:none">
-                <p>
-                  As you can see, you have four buttons representing four categories of suggested keywords: Activity, Things, Theme and People. Clicking on each one of these will bring up a list of suggested keywords to be used in tagging. You can refer to these lists when tagging each photo, but you can also add your own tags. Both annotating elements on the photograph and selecting keywords from these lists are very helpful.
-                </p>
-                <p>
-                  Additional information incldues the photo's ID (starts with P2008, and appears in almost all photos), the photo's orientation (landscape, portrait, or other if it's a square), as well as comments, if you have anything else you want to mention. If the photo has a caption, please try to transcribe it as accurately as possibly into the transcribe label box.
-                </p>
-                <p>
-                  We would also like your help to give the photograph coordinates and a Pleiades Identifier. If you go to the geo-code section on the right hand side and type a place name (refer to mapping hints for help) you can select the place depicted in the photo. Once you have done this, try choosing a Pleiades Identifier from the drop down list below.
-                </p>
-                <p>
-                  During the task, you can always return to this tutorial via the <i class="glyphicon glyphicon-eye-open"></i> Tutorial button.
-                </p>
-                <p>
-                  To find out how the project is progressing, to suggest changes to this application or to propose new research ideas based what you have tagged, please have a look at our <a href="http://community.micropasts.org" title="Community forum">community forum</a>.
-                </p>
-              </div>
-              <!-- End of stepped modal body -->
+      <!-- Modal header -->
+      <div class="modal-header">
+        <h1 class="lead">
+          Photo-tagging Tutorial
+        </h1>
+      </div>
+      <!-- end of modal header -->
 
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
-                <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
-                <button id="startContrib" data-dismiss="modal" class="btn btn-primary" style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Let's start!</a>
-                </div>
-              </div>
-            </div>
-          </div>
+      <!-- Modal step 1: REMEMBER ARRAY FIRST ELEMENT IS ZERO (0) -->
+      <div id="0" class="modal-body" style="display:none">
+        <!-- Add your tutorial text in here -->
+      </div>
+      <!-- End of modal step 1 -->
+
+      <!-- Modal step 2 -->
+      <div id="1" class="modal-body" style="display:none">
+        <!-- Add your tutorial text in here -->
+      </div>
+
+
+      <!-- End of stepped modal body -->
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-primary">Previous</a>
+          <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+          <button id="startContrib" data-dismiss="modal" class="btn btn-primary" style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Let's start!</a>
         </div>
-        <!-- Modal end -->
-        <!-- Enable the multi selects -->
+      </div>
+    </div>
+  </div>
+<!-- Modal end -->
+
+</div>
+<!-- End of Skeleton Row -->
 
 
-        <!-- The modal steps -->
+<!-- The modal steps -->
 
-<script src="/static/vendor/annotorious-2.1.5/annotorious.min.js" type="text/javascript"></script>
 
-        <script>
-          var step = -1;
-          function showStep(action) {
-            $("#" + step).hide();
-            if (action == 'next') {
-              step = step + 1;
-            }
-            if (action == 'prev') {
-              step = step - 1;
-            }
-            if (step == 0) {
-              $("#prevBtn").hide();
-            }
-            else {
-              $("#prevBtn").show();
-            }
-            if (step == 1) {
-              $("#nextBtn").hide();
-              $("#startContrib").show();
-            }
-            $("#" + step).show();
-          }
-          showStep('next');
-          $("#modal").modal('show');
-        </script>
+<script>
+  var step = -1;
+  function showStep(action) {
+    $("#" + step).hide();
+    if (action == 'next') {
+      step = step + 1;
+    }
+    if (action == 'prev') {
+      step = step - 1;
+    }
+    if (step == 0) {
+      $("#prevBtn").hide();
+    }
+    else {
+      $("#prevBtn").show();
+    }
+    if (step == 1) {
+      $("#nextBtn").hide();
+      $("#startContrib").show();
+    }
+    $("#" + step).show();
+  }
+  showStep('next');
+  $("#modal").modal('show');
+</script>
 
-        <script>
-          $(document).ready(function() {
 
-            $("#skip").click(function() {
-              $('html, body').animate({
-                scrollTop: $("#title").offset().top
-              }, 500);
-            });
-            $("#top").click(function() {
-              $('html, body').animate({
-                scrollTop: $("#step1").offset().top
-              }, 500);
-            });
+
+<script>
+  // Load user progress
+
+  function loadUserProgress() {
+    pybossa.userProgress('{{project.short_name}}').done(function(data){
+      console.log("Total answers done for user: " + data.done);
+      var pct = Math.round((data.done*100)/data.total);
+      $("#progress").css("width", pct.toString() +"%");
+      $("#progress").attr('aria-valuenow', pct.toString());
+      $("#progress").attr("title", pct.toString() + "% completed!");
+      $("#progress").text(pct.toString() + "%");
+      $("#total").text(data.total);
+      $("#done").text(data.done);
+    });
+  }
+
+  // Actions to dispense when task loadsed
+  pybossa.taskLoaded(function(task, deferred) {
+    if ( ! $.isEmptyObject(task) ) {
+      // Code to manipulate the image div
+      var img = $('<img  />');
+      img.ready(function() {
+        deferred.resolve(task);
+        // Update the status text
+        $("#status").text("Photo loaded!");
+      });
+      img.attr('src', task.info.url_b);
+      img.attr('id', 'anno_' + task.id);
+      img.addClass('img-fluid');
+      task.info.image = img;
+    }
+    else {
+      deferred.resolve(task);
+    }
+  });
+
+  // Present the task to the user and manipulate the answer
+  pybossa.presentTask(function(task, deferred) {
+    if ( !$.isEmptyObject(task) ) {
+      loadUserProgress();
+      console.log(task);
+      // Load the image to the div assigned
+      $('#photo-link').html('').append(task.info.image);
+      // Set the task id
+      $('#task-id').html(task.id);
+      // Set the href for flickr
+      $("a#flickr").attr("href", task.info.link + '/sizes/k/');
+      // Add a next task link
+      $("#nextTask").attr("href", task.id + 1);
+
+      // Set up the annotorious widget
+      var annotateID = 'anno_' + task.id;
+      var config = {
+        image: document.getElementById(annotateID),
+        readOnly: false,
+        widgets: [
+        'COMMENT'
+        ]
+      };
+      var anno = Annotorious.init(config);
+
+      // Log the annotation
+      anno.on('createAnnotation', function(annotation) {
+        console.log('Created!', annotation)
+      });
+
+      // Process the task on click
+      $('.btn-answer').off('click').on('click', function(evt) {
+        evt.preventDefault();
+        var answer = $(evt.target).attr("value");
+        if (typeof answer != 'undefined') {
+          // Process and save task
+          task.answer = $("#magicData").serializeJSON();
+          task.answer.annotations = anno.getAnnotations();
+          console.log(task.answer);
+          pybossa.saveTask(task.id, task.answer).done(function() {
+            deferred.resolve();
           });
-        </script>
-        <!-- Load user progress -->
-        <script>
-          function loadUserProgress() {
-            pybossa.userProgress('{{project.short_name}}').done(function(data){
-              console.log("Total answers done for user: " + data.done);
-              var pct = Math.round((data.done*100)/data.total);
-              $("#progress").css("width", pct.toString() +"%");
-              $("#progress").attr("title", pct.toString() + "% completed!");
-              $("#progress").tooltip({'placement': 'left'});
-              $("#total").text(data.total);
-              $("#done").text(data.done);
-            });
-          }
+          // Reset form and scroll to the top
+          $("html, body").animate({ scrollTop: 0 }, "slow");
+          $("#success").fadeIn(5000).fadeOut(5000);
+          $("#loading").fadeIn(5000).fadeOut(5000);
+          $('#magicData')[0].reset();
+        } else {
+          $("#error").show();
+        }
+      });
+      $("#loading").hide();
+    } else {
+      // If all tasks done load the finished div
+      $(".skeleton").hide();
+      $("#loading").hide();
+      $("#finish").fadeIn(5000);
+    }
 
-          pybossa.taskLoaded(function(task, deferred) {
-            if ( ! $.isEmptyObject(task) ) {
-              var img = $('<img  />');
-              img.load(function() {
-                deferred.resolve(task);
-                $("#status").text("Photo loaded!");
-              });
-              img.attr('src', task.info.url_b);
-              img.attr('id', 'anno_' + task.id);
-              img.addClass('img-fluid');
-              // img.addClass('annotable');
-              task.info.image = img;
-            }
-            else {
-              deferred.resolve(task);
-            }
-          });
-
-
-          pybossa.presentTask(function(task, deferred) {
-            if ( !$.isEmptyObject(task) ) {
-              loadUserProgress();
-
-              console.log(task);
-
-              $('#photo-link').html('').append(task.info.image);
-              $('#task-id').html(task.id);
-              $("a#raw").attr("href", task.info.url_b);
-              $("a#flickr").attr("href", task.info.link + '/sizes/k/');
-              $("#nextTask").attr("href", task.id + 1);
-
-              var annotateID = 'anno_' + task.id;
-              var config = {
-                image: document.getElementById(annotateID),
-                readOnly: false,
-                widgets: [
-                'COMMENT'
-                ]
-              };
-              var anno = Annotorious.init(config);
-              anno.on('createAnnotation', function(annotation) {
-                console.log('Created!', annotation)
-              });
-
-
-              $('.btn-answer').off('click').on('click', function(evt) {
-                evt.preventDefault();
-                var answer = $(evt.target).attr("value");
-                if (typeof answer != 'undefined') {
-                  task.answer = $("#magicData").serializeJSON();
-                  task.answer.annotations = anno.getAnnotations();
-                  console.log(task.answer);
-                  pybossa.saveTask(task.id, task.answer).done(function() {
-                    deferred.resolve();
-                  });
-                  $("html, body").animate({ scrollTop: 0 }, "slow");
-                  $("#success").fadeIn(500).fadeOut(500);
-                  $("#loading").fadeIn(500).fadeOut(500);
-                  $('#magicData')[0].reset();
-                } else {
-                  $("#error").show();
-                }
-              });
-              $("#loading").hide();
-            } else {
-              $(".skeleton").hide();
-              $("#loading").hide();
-              $("#finish").fadeIn(500);
-            }
-
-          });
-          pybossa.run('{{project.short_name}}');
-
-        </script>
+  });
+  // Run the application
+  pybossa.run('{{project.short_name}}');
+</script>
