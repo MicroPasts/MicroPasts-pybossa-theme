@@ -167,8 +167,7 @@
               var array = result;
               listItems = array.reduce((record, item) => {
               // Add a string to the result for the current item. This syntax is using template literals.
-              record += `<li>${item}</li>`;
-
+              record += `<li>${item.name}</li>`;
               // Always return the result in the reduce callback, it will be the value or result in the next iteration.
               return record;
             }, ''); // The '' is an empty string, it is the initial value result.
