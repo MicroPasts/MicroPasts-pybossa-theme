@@ -22,7 +22,7 @@
             <h3><strong>{{ _('Are you sure you want to publish this project?') }}</strong></h3>
             <div class="form-actions">
               <input type="submit" class="btn btn-sm btn-danger" value="{{ _('Yes, publish it') }}"/>
-              <a href="{{ url_for('project.settings', short_name = project.short_name) }}" class="btn btn-lg btn-primary">{{ _('No, do not publish it!') }}</a>
+              <a href="{{ url_for('project.settings', short_name = project.short_name) }}" class="btn btn-warning">{{ _('No, do not publish it!') }}</a>
             </div>
     </div>
   </div>
