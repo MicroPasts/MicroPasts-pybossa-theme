@@ -1,3 +1,4 @@
+<div id="category"></div>
 <div class="container-fluid mb-3">
   <h1 class="text-center mb-3">Discover more</h1>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -163,6 +164,19 @@
           dataType: 'json',
           success: function(result){
               console.log(result);
+              var array = result;
+              listItems = array.reduce((result, item) => {
+              // Add a string to the result for the current item. This syntax is using template literals.
+              results += `<li>${item}</li>`;
+
+              // Always return the result in the reduce callback, it will be the value or result in the next iteration.
+              return results;
+            }, ''); // The '' is an empty string, it is the initial value result.
+            // Get the element from the DOM in which to display the list, this should be an ul or ol element.
+            resultElement = document.getElementById('category');
+
+          // Set the inner HTML
+          resultElement.innerHTML = listItems;
           }
       });
   });
