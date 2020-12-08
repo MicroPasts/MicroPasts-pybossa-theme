@@ -261,7 +261,7 @@
                     <h4>{{f.name}}</h4>
                     <p>{{f.description}}</p>
                     {% if featured %}
-                     {% if f.featured %}
+                    {% if f.featured %}
                      <p class="readmore">
                      <a id="projectBtnDel{{f.id}}" onclick="del({{f.id}})" class="btn btn-danger">{{ _('Remove from Featured') }}</a>
                      <a id="projectBtnAdd{{f.id}}" onclick="add({{f.id}})" style="display:none" class="btn btn-primary">{{ _('Add to Featured') }}</a>
@@ -273,9 +273,10 @@
                      </p>
                      {% endif %}
                     {% else %}
-                    <a class="btn btn-dark d-block" href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'Contribute to this')}}</a>
+                    </div>
+                    <a class="btn btn-dark d-block mr-3 mb-3 ml-3" href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'Contribute to this')}}</a>
                     {% endif %}
-                   </div>
+
                  </div>
                </div>
 
