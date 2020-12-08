@@ -31,7 +31,7 @@
     {{helper.render_contribute_button(project)}}
 
     {% if active_link == 'info' %}
-    <p><strong>{{ overall_progress | round | int }}% {{_('completed')}}</strong></p>
+    <p><span class="badge badge-large badge-warning p-3"><strong>{{ overall_progress | round | int }}% {{_('completed')}}</strong></span></p>
     {% endif %}
 
   {% block projectcontent %}
