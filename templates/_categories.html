@@ -20,7 +20,7 @@
               var array = result;
               listItems = array.reduce((record, item) => {
               // Add a string to the result for the current item. This syntax is using template literals.
-              record += `<div class="col-md-3 mb-3 p-3"><div class="card"><div class="card-body"><h4 class="card-title">${item.name}</h4></div></div></div>`;
+              record += `<div class="col-md-4 mb-3 p-3"><div class="card h-100"><div class="card-body"><h4 class="card-title">${item.name}</h4></div></div></div>`;
               // Always return the result in the reduce callback, it will be the value or result in the next iteration.
               return record;
 
