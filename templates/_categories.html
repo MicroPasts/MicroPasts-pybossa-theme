@@ -1,5 +1,5 @@
 <div class="container-fluid mb-3">
-  <h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>
+  <h1 class="text-center mb-3">Discover more</h1>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner row w-100 mx-auto">
       <div class="carousel-item col-md-4 active">
@@ -153,4 +153,17 @@
     }
   });
 });
+</script>
+<script>
+  $( document ).ready(function() {
+    let endpoint = 'https://crowdsourced.fitz.ms/api/category';
+      $.ajax({
+          url: endpoint,
+          contentType: "application/json",
+          dataType: 'json',
+          success: function(result){
+              console.log(result);
+          }
+      });
+  });
 </script>
