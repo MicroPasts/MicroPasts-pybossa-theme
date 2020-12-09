@@ -362,28 +362,11 @@
 {% endmacro -%}
 
 {%- macro render_project_card_coowner(short_name, user, upload_method, background=False, is_coowner=False, is_creator=False, id=None, icon=None) %}
-<div {%if id%}id="{{id}}"{% endif %} class="thumbnail card">
-    <div class="post-pic" style="background: rgb(0, 151, 167) {%- if background %}url({{account_helper.render_user_avatar_src(user, upload_method)}}){% endif -%} no-repeat center top; background-size: cover;">
-        {% if not background %}
-            {% if icon %}
-            <div class="row">
-                <div class="col-xs-8">
-                    <h3>{{user.fullname}}</h3>
-                </div>
-                <div class="col-xs-3">
-                    <i class="fa fa-{{icon}} fa-fw fa-4x"></i>
-                </div>
-            </div>
-            {% else %}
-                <h3>{{user.fullname}}</h3>
-            {% endif %}
-        {% endif %}
-    </div>
-    <div class="caption">
-        {% if background %}
-        <h3>{{user.fullname}}</h3>
-        {% endif %}
-        <p>{{user.name}}</p>
+
+<div {%if id%}id="{{id}}"{% endif %} class=" card">
+  <img class="card-img-top" src="{{ account_helper..render_user_avatar_src(user, upload_method) }}" alt="Avatar for {{user.fullname}}">
+  <div class="card-body">
+    <h3>{{user.fullname}}</h3>
         {% if is_coowner %}
             {% if is_creator %}
             <p class="readmore"><strong>Project Creator</strong></p>
