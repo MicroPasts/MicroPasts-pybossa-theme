@@ -21,7 +21,7 @@
     </form>
 </div>
 {% if found %}
-<h2 class="mt-2">{{ _('Users') }}</h2>
+<h3 class="mt-2">{{ _('Users') }}</h3>
 <p><em>{{ _('Users that can be added as co-owners to the project') }}</em></p>
 <div class="row">
   <div class="col-sm-3 col-md-3 mb-3">
@@ -31,11 +31,10 @@
 {% endif %}
 
 {% if coowners %}
-<h1>
-<h1>{{ _('Current Co-owners') }}</h1>
+<h3 class="mt-2">{{ _('Current Co-owners') }}</h3>
 <div class="row">
     {% for user in coowners %}
-    <div class="col-sm-4 col-md-4 mb-2">
+    <div class="col-sm-3 col-md-3 mb-2">
     {{ render_project_card_coowner(project.short_name, user, upload_method, background=True, is_coowner=True, is_creator=user.is_creator)}}
     </div>
     {% endfor %}
