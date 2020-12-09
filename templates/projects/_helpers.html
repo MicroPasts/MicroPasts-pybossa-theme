@@ -364,7 +364,7 @@
 {%- macro render_project_card_coowner(short_name, user, upload_method, background=False, is_coowner=False, is_creator=False, id=None, icon=None) %}
 
 <div {%if id%}id="{{id}}"{% endif %} class=" card">
-  <img class="card-img-top" src="{{ account_helper..render_user_avatar_src(user, upload_method) }}" alt="Avatar for {{user.fullname}}">
+  <img class="card-img-top" src="{{ account_helper.render_user_avatar_src(user, upload_method) }}" alt="Avatar for {{user.fullname}}">
   <div class="card-body">
     <h3>{{user.fullname}}</h3>
         {% if is_coowner %}
