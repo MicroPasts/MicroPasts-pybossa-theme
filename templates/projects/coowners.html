@@ -26,9 +26,9 @@
 <h2>{{ _('Users') }}</h2>
 <p><em>{{ _('Users that can be added as co-owners to the project') }}</em></p>
 <div class="row">
-<div class="col-sm-4 col-md-4">
-{{ render_project_card_coowner(project.short_name, found, upload_method, background=True, is_coowner=found.is_coowner, is_creator=found.is_creator)}}
-</div>
+  <div class="col-sm-4 col-md-4 mb-3">
+  {{ render_project_card_coowner(project.short_name, found, upload_method, background=True, is_coowner=found.is_coowner, is_creator=found.is_creator)}}
+  </div>
 </div>
 {% endif %}
 
