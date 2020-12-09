@@ -371,7 +371,7 @@
     </div>
     {% if is_coowner %}
         {% if is_creator %}
-        <p class="readmore text-center ml-2 mr-2 d-block badge badge-dark badge-large"><strong>Project Creator</strong></p>
+        <p class="readmore text-center ml-2 mr-2 d-block badge badge-dark badge-large p-2"><strong>Project Creator</strong></p>
         {% else %}
         <p class="readmore"><a class="btn btn-primary d-block ml-2 mr-2" href="{{url_for('project.del_coowner', short_name=short_name, user_name=user.name)}}">
             {{ _('Remove Co-owner') }}</a>
