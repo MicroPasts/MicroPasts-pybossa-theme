@@ -32,7 +32,6 @@
         {{ render_project_card_option(project, upload_method, title=_('Announcement'), explanation=_('Write new announcement'), link=url_for('admin.announcement'), link_action_text=_('Manage'), icon='user')}}
     </div>
 </div>
-<div class="row">
   <h4>{{_('Latest news from PyBossa')}}</h4>
 
     <div class="col-md-12 shadow-sm mb-2 p-3">
@@ -42,5 +41,4 @@
             {% endfor %}
         </ul>
     </div>
-</div>
 {% endblock %}
