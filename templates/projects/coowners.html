@@ -7,12 +7,12 @@
 <h1>{{ _('Manage Co-owners') }}</h1>
 {% from "_formhelpers.html" import render_field %}
 
-<div class="row">
+<div class="col-md-12 shadow-sm mb-3 p-3">
     <form class="form-search" method="POST">
         {{ form.hidden_tag() }}
         <div class="col-md-12">
             <div class="input-group">
-                <input id="user" name="user" type="text" class="form-control" placeholder="Search user by nick name">
+                <input id="user" name="user" type="text" class="form-control" placeholder="Search user by user name">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary "><i class="fa fa-search"></i> {{ _('Search') }}</button>
                 </span>
