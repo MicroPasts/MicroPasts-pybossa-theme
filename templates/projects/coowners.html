@@ -4,7 +4,6 @@
 {% set active_link  = "settings" %}
 
 {% block projectcontent %}
-<div class="col-md-12" >
 <h1>{{ _('Manage Co-owners') }}</h1>
 {% from "_formhelpers.html" import render_field %}
 
@@ -42,5 +41,4 @@
     {% endfor %}
 </div>
 {% endif %}
-</div>
 {% endblock %}
