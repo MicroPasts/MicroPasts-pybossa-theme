@@ -371,13 +371,13 @@
             {% if is_creator %}
             <p class="readmore"><strong>Project Creator</strong></p>
             {% else %}
-            <p class="readmore"><a href="{{url_for('project.del_coowner', short_name=short_name, user_name=user.name)}}">
+            <p class="readmore"><a class="btn btn-primary" href="{{url_for('project.del_coowner', short_name=short_name, user_name=user.name)}}">
                 {{ _('Remove Co-owner') }}</a>
             </p>
             {% endif %}
         {% else %}
         <p class="readmore">
-        <a href="{{url_for('project.add_coowner', short_name=short_name, user_name=user.name)}}">
+        <a class="btn btn-primary" href="{{url_for('project.add_coowner', short_name=short_name, user_name=user.name)}}">
             {{ _('Add Co-owner') }}</a>
         </p>
         {% endif %}
