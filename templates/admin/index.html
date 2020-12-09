@@ -33,8 +33,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-        <h4>{{_('Latest news from PyBossa')}}</h4>
+  <h4>{{_('Latest news from PyBossa')}}</h4>
+
+    <div class="col-md-12 shadow-sm mb-2 p-3">
         <ul class="news">
             {% for new in news %}
             <li><strong>{{new.updated[0:10]}}</strong> {% if 'github' in new.links[0].href %} <span class="badge badge-info">{{_('New PyBossa version')}}</span> {% else %} <span class="badge badge-primary">{{_('New SciFabric Blog Post')}}</span> {% endif %}<a target="_blank" href="{{new.links[0].href}}">{{new.title}}</a></li>
