@@ -1,23 +1,23 @@
 This is an implementation of the MicroPasts theme for the AHRC funded MicroPasts
-project. [Pybossa
-server](https://github.com/findsorguk/pybossa).
+project.
 
-Funded by
-=========
-![AHRC funded](http://oac.lib.bris.ac.uk/Dserve/images/AHRC%20Logo%20Gray%20LScape2.JPG)
+### Funded by
 
-Funded Partners
-===============
+![AHRC funded](/static/img/AHRC_new.jpg)
+
+### Partners
+
 ![British Museum](http://finds.org.uk/images/logos/bm_logo.png)
 ![UCL](http://crowdsourced.micropasts.org/static/img/black.jpg)
-![Portable Antiquities Scheme](http://www.dayofarchaeology.com/wp-content/uploads/2011/05/pasrgbsize4.jpg)
+![University of Stirling](/static/img/stirling.png)
+![University of Cambridge](/static/img/ucm_logo_black_white.png)
 
-# Creating a new theme
+### Creating a new theme
 
 In order to create a new theme, fork this repository and make all the required
 changes in the **templates** and **static** folder.
 
-# Install theme
+### Install theme
 
 In settings_local.py add the line below or amend if present:
 
@@ -26,12 +26,12 @@ THEME = 'theme name'
 Clone this repo to themes folder and pull changes when made.
 
 
-# Useful Links
+### Useful Links
 
 * [Documentation](http://docs.pybossa.com/)
 * [Mailing List](http://lists.okfn.org/mailman/listinfo/open-science-dev)
 
-## Copyright / License
+### Copyright / License
 
 Copyright 2014 The Trustees of the British Museum/ University College London.
 
