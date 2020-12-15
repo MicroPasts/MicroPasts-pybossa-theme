@@ -33,7 +33,9 @@ Clone this repo to themes folder and pull changes when made.
 
 ### Copyright / License
 
-Copyright 2014 The Trustees of the British Museum/ University College London.
+Theme created by Daniel Pett, University of Cambridge
+
+&copy; MicroPasts 2014 - 2020
 
 Source Code License: The GNU Affero General Public License, either version 3 of the License
 or (at your option) any later version. (see COPYING file)
