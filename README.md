@@ -8,8 +8,11 @@ project.
 ### Partners
 
 ![British Museum](http://finds.org.uk/images/logos/bm_logo.png)
+
 ![UCL](http://crowdsourced.micropasts.org/static/img/black.jpg)
+
 ![University of Stirling](/static/img/stirling.png)
+
 ![University of Cambridge](/static/img/ucm_logo_black_white.png)
 
 ### Creating a new theme
