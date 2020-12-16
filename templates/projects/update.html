@@ -33,7 +33,7 @@
           {{ form.hidden_tag() }}
           {{ render_field(form.name, class_="input-xlarge", placeholder=_('The name of the project')) }}
           {{ render_field(form.short_name, class_="input-xlarge", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
-          {{ render_field(form.description, class_="input-xlarge", placeholder=_('Give some details about the project')) }}
+          {{ render_field(form.description, id="description", class_="input-xlarge", placeholder=_('Give some details about the project')) }}
           {{ render_field(form.long_description, class_="input-xlarge", id="longdesc", placeholder=_('Explain the project (use Markdown!)')) }}
 
           {{ render_field(form.category_id) }}
@@ -125,7 +125,12 @@ $(function() {
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-<script>
-var simplemde = new SimpleMDE({ element: $("#longdesc")[0] });
-</script>
+
+<script type="text/javascript" href="/static/js/jquery.charactercounter.js"></<script>
+  <script>
+  var simplemde = new SimpleMDE({ element: $("#longdesc")[0] });
+  $("#description").characterCounter({
+    limit: '250'
+  });
+  </script>
 {% endblock %}
