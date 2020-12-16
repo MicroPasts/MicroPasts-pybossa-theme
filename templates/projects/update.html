@@ -33,8 +33,8 @@
           {{ form.hidden_tag() }}
           {{ render_field(form.name, class_="input-xlarge", placeholder=_('The name of the project')) }}
           {{ render_field(form.short_name, class_="input-xlarge", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
-          {{ render_field(form.description, maxlength="250", id="description", class_="input-xlarge", placeholder=_('Give some details about the project')) }}
-          <span class="badge badge-large badge-dark mb-2"><span id="chars">250</span> characters remaining</span>
+          {{ render_field(form.description, maxlength="120", id="description", class_="input-xlarge", placeholder=_('Give some details about the project')) }}
+          <span class="badge badge-large badge-dark mb-2 p-3"><span id="chars">120</span> characters remaining</span>
           {{ render_field(form.long_description, class_="input-xlarge", id="longdesc", placeholder=_('Explain the project (use Markdown!)')) }}
 
           {{ render_field(form.category_id) }}
@@ -131,7 +131,7 @@ var simplemde = new SimpleMDE({ element: $("#longdesc")[0] });
 </script>
 
 <script>
-  var maxLength = 250;
+  var maxLength = 120;
   $('#description').keyup(function() {
     var length = $(this).val().length;
     var length = maxLength-length;
