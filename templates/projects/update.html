@@ -125,12 +125,17 @@ $(function() {
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+var simplemde = new SimpleMDE({ element: $("#longdesc")[0] });
+</script>
 
 <script type="text/javascript" href="{{url_for('static', filename='js/jquery.charactercounter.js')}}"></script>
-  <script>
-  var simplemde = new SimpleMDE({ element: $("#longdesc")[0] });
-  $("#description").characterCounter({
-    limit: '250'
-  });
+<script>
+  $(function(){
+    $("#description").characterCounter({
+      limit: '250'  
+      });
+
+		});
   </script>
 {% endblock %}
