@@ -123,25 +123,9 @@ $(function() {
         });
 </script>
 
-<script type="text/javascript" src="https://unpkg.com/marked@0.3.6"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 <script>
-		// Variables
-		var text = document.querySelector('#longdesc');
-		var compiled = document.querySelector('textarea#long_desc');
-		var debounce;
-
-		var render = function () {
-			compiled.innerHTML = marked(text.value, {sanitize: true});
-		};
-
-		// On change event, process text into markdown and render
-		var changeHandler = function () {
-			clearTimeout(debounce);
-			debounce = setTimeout(render, 300);
-		};
-
-		// Listen for changes to textarea
-		render();
-		text.addEventListener('input', changeHandler);
-	</script>
+var simplemde = new SimpleMDE({ element: $("#longdesc")[0] });
+</script>
 {% endblock %}
