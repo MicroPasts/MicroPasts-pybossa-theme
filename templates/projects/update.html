@@ -133,7 +133,7 @@ var simplemde = new SimpleMDE({ element: $("#longdesc")[0] });
 <script>
   var maxLength = 120;
   $(document).ready(function () {
-    var description = $("description").val();
+    var description = $("#description").val();
     var length = description.length;
     var length = maxLength - length;
     $('#chars').text(length);
