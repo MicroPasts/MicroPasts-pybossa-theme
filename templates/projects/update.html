@@ -132,6 +132,11 @@ var simplemde = new SimpleMDE({ element: $("#longdesc")[0] });
 
 <script>
   var maxLength = 120;
+  $('#description').document.onload(function() {
+    var length = $(this).val().length;
+    var length = maxLength-length;
+    $('#chars').text(length);
+  });
   $('#description').keyup(function() {
     var length = $(this).val().length;
     var length = maxLength-length;
