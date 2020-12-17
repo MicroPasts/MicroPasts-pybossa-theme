@@ -260,12 +260,12 @@
                    <div class="card-body">
                     <h4>{{f.name}}</h4>
                     <p>{{f.description}}</p>
-                    {% if f.overall_progress < 100 %}
-                    <span class="badge badge-large badge-warning p-3"><strong>{{ f.overall_progress | round | int }}% completed</strong></span>
-                    {% else %}
-                    <span class="badge badge-large badge-success p-3"><strong>Project complete</strong></span>
-                    {% endif %}
                    </div>
+                   {% if f.overall_progress < 100 %}
+                   <span class="badge badge-large badge-warning p-3"><strong>{{ f.overall_progress | round | int }}% completed</strong></span>
+                   {% else %}
+                   <span class="badge badge-large badge-success p-3"><strong>Project complete</strong></span>
+                   {% endif %}
                    {% if featured %}
                    {% if f.featured %}
                     <p class="readmore">
