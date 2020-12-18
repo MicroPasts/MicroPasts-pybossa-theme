@@ -279,7 +279,11 @@
                     </p>
                     {% endif %}
                    {% else %}
+                   {% if f.overall_progress < 100 %}
                    <a class="btn btn-dark d-block mr-3 mb-3 ml-3 stretched-link" href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'Contribute to this')}}</a>
+                   {% else %}
+                   <a class="btn btn-dark d-block mr-3 mb-3 ml-3 stretched-link" href="{{ url_for('project.details', short_name=f.short_name)}}">View completed project</a>
+                   {% endif %}
                    {% endif %}
                  </div>
                </div>
