@@ -12,11 +12,10 @@
   {{ privacy.render_lock_page() }}
   {% else %}
   <div class="col-md-12 shadow-sm">
-    <div class="row" id="user-data">
+    <div class="" id="user-data">
       {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
     </div>
   </div>
-  <div class="col-md-12 shadow-sm">
     {% if projects_created %}
     <div class="row" id="created-apps" >
       {{render_grid_projects(projects_created, "Created Projects", upload_method)}}
@@ -29,7 +28,6 @@
     {% endif %}
     {% endif %}
   </div>
-</div>
 
 {{ broken_image()}}
 {% endblock %}
