@@ -13,9 +13,7 @@
       current_user.admin)) %}
       {{ privacy.render_lock_page() }}
       {% else %}
-      <div class="btn-group pull-right">
-        <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
-      </div>
+      <a class="btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
       <p>{{total}} registered users on the platform since October 2013</p>
       <p>We only show you people who have contributed to our projects.</p>
 
@@ -41,7 +39,7 @@
       {% endif %}
       {% if pagination.has_next %}
       {{ pagination.info }}
-      <div class="span9">
+      <div class="col-md-9">
         {% if pagination.pages > 2 %}
         {{ helper.render_pagination(pagination) }}
         {% endif %}
@@ -50,5 +48,7 @@
       {% endif %}
     </div>
   </div>
+  
   {{ projecthelper.broken_image()}}
+
   {% endblock %}
