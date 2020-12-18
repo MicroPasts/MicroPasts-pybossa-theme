@@ -262,7 +262,7 @@
                     <p>{{f.description}}</p>
                    </div>
                    {% if f.overall_progress < 100 %}
-                   <span class="badge badge-large badge-warning d-block mr-3 mb-3 ml-3 p-2"><strong>{{ f.overall_progress | round | int }}% completed</strong> {{ f.n_volunteers }} contributors</span>
+                   <span class="badge badge-large badge-warning d-block mr-3 mb-3 ml-3 p-2"><strong>{{ f.overall_progress | round | int }}% completed</strong> / {{ f.n_volunteers }} contributors</span>
                    {% else %}
                    <span class="badge badge-large badge-success d-block mr-3 mb-3 ml-3 p-2"><strong>Project complete</strong> / {{ f.n_volunteers }} contributors</span>
                    {% endif %}
