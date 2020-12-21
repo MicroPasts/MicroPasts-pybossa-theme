@@ -12,7 +12,7 @@
   {{ privacy.render_lock_page() }}
   {% else %}
   <div class="col-md-12 shadow-sm">
-    <div class="" id="user-data">
+    <div id="user-data">
       {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
     </div>
   </div>
@@ -27,7 +27,7 @@
     </div>
     {% endif %}
     {% endif %}
-  </div>
+
 
 {{ broken_image()}}
 {% endblock %}
