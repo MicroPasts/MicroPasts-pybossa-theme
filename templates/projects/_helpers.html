@@ -254,7 +254,7 @@
 
               <div class="row">
                {% for f in projects %}
-               <div class="col-md-4 mb-3" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
+               <div class="col-md-4 mb-3" data-aos="flip-left">
                  <div class="card h-100">
                    <a href="{{ url_for('project.details', short_name=f.short_name)}}"><img class="card-img-top" src="{{render_url_thumbnail(f, upload_method)}}"></a>
                    <div class="card-body">
