@@ -1,0 +1,330 @@
+<!-- Add scripts -->
+<script src="https://code.jquery.com/ui/1.8.1/jquery-ui.min.js" type="text/javascript" xmlns="http://www.w3.org/1999/html"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.12.6/handsontable.full.min.js" type="text/javascript"></script>
+<script src="/static/js/vendor/jquery.serializeJSON.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript"></script>
+<script src="/static/vendor/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+<!-- Add style sheets -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.2.1/ol.css" type="text/css">
+<link rel="stylesheet" href="/static/vendor/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen"/>
+<link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.12.6/handsontable.full.min.css">
+<style type="text/css">
+    #mypdf:-moz-full-screen {
+      height: 100%;
+    }
+    #mypdf:-webkit-full-screen {
+      height: 100%;
+    }
+    #mypdf:-ms-fullscreen {
+      height: 100%;
+    }
+    #mypdf:full-screen {
+      height: 100%;
+    }
+    #rcTable {
+      width: 100%;
+      max-height:300px;
+    }
+
+</style>
+<!-- Browser not compatible message -->
+
+<div style="display:none;margin-top:15px; height:500px;" id="oldbrowser" class="row">
+  <div class="col-md-8 col-md-offset-1 alert alert-info">
+    <p>
+      <strong>
+        Sorry, but your browser does not support the current application.
+      </strong>
+    </p>
+    <p>
+      If you want to contribute, please, upgrade to a modern web browser
+      like the open source and free alternative <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>
+      or <a href="https://www.google.com/intl/en/chrome/browser/">Chrome</a>.
+    </p>
+  </div>
+</div>
+
+<div class="mt-3">
+  <div id="success" class="alert alert-success" style="display:none;">
+    <p>
+      <strong>Well done!</strong> You have successfully submitted your
+      contribution. Here is another to try if you wish!
+    </p>
+  </div>
+
+  <div id="loading" class="alert alert-info" style="display:none;">
+    <img src="/static/img/loading.gif">Loading next task...
+  </div>
+
+  <div id="taskcompleted" class="alert alert-info" style="display:none;">
+    <p>
+      <strong>The task has been completed!</strong> Thanks a lot!
+    </p>
+  </div>
+
+  <div id="finish" class="alert alert-success" style="display:none;">
+    <h2>Congratulations!</h2>
+    <p>
+      You have participated in all available tasks!
+    </p>
+    <div class="alert-actions">
+      <a class="btn-default btn" href="/">Go back to the home page</a>
+      <a class="btn-default btn" href="/project/category/featured/">or,
+        have a look at our other applications</a>
+      </div>
+    </div>
+
+    <div id="error" class="alert alert-error" style="display:none;">
+      <a class="close">×</a>
+      <strong>Error!</strong> Something went wrong, please contact the site administrators
+    </div>
+  </div>
+
+  <!-- End Success and Error Messages for the user -->
+
+
+  <div class="skeleton" id="rcData">
+    <div>
+      <button class="btn btn-info btn-sm mb-2" data-toggle="modal" data-target="#myModal">
+        <i class="glyphicon glyphicon-eye-open"></i> Tutorial
+      </button>
+      <a class="btn btn-info btn-sm mb-2" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="http://community.micropasts.org/"><i class="glyphicon glyphicon-book"></i> Community Help</a>
+      <a id="nextTask" rel="tooltip"  href="#" class="btn btn-info btn-sm mb-2"> Next task</a>
+    </div>
+    <!-- The pdf section -->
+    <div class="col-md-12">
+      <div id="mypdf" class="embed-responsive embed-responsive-16by9">
+        <iframe id="pdfImage"  class="pdf embed-responsive-item" src="" ></iframe>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <h4>
+        Transcribe the summary table of donations
+      </h4>
+
+      <div id="rcTable" class="handsontable mb-2">
+      </div>
+
+      <button class="btn btn-success btn-answer mb-2 mt-2" value='Yes'>Submit transcripts</button>
+
+      <p>
+        You are now working on task: <span id="task-id" class="badge badge-large badge-warning">#</span>
+      </p>
+      <p>
+        You have completed: <span id="done" class="badge badge-large badge-info"></span>
+        tasks from <span id="total" class="badge badge-large badge-dark"></span>
+      </p>
+      <div class="progress progress-striped">
+        <div id="progress" rel="tooltip" title="#" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+      </div>
+      <!-- End of feedback-->
+    </div>
+
+    <!-- End of the section -->
+
+  </div>
+
+  <!-- End of DOM Skeleton row -->
+
+  <!-- Modal start -->
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal header -->
+        <div class="modal-header">
+          <h3>Gathering donor information from reports</h3>
+        </div>
+        <div id="0" class="modal-body" style="display:none">
+          <p>
+            This project is simple to do. Each task is one page of the
+            1902-1903 annual report by the Egypt Exploration Fund. It lists
+            the name of the donor and the amount that they gave that year.
+          </p>
+
+          <p>
+            You can use any web browser to fill in the task.
+          </p>
+        </div>
+        <div id="1" class="modal-body" style="display:none">
+          <p>
+            We are looking for the following information for each
+            donor (if available):
+          </p>
+          <ul>
+            <li>
+              Heading: These will be at the top of the page or group of
+              names in a bold font. If no heading is given, please leave
+              the space blank as it may be on a previous page.
+              For each donor, the heading needs to be explicity written out
+              (eg: don't use 'ditto').
+            </li>
+            <li>
+              Person or institution: For people, please include their
+              salutation (eg: Dr. or Mrs.), forename and surname. For
+              institutions, write what you see.
+            </li>
+            <li>
+              The amount donated: In pounds (£), shillings (s.) and pence (d.)
+              or in dollars (Dols.)
+            </li>
+            <li>
+              Comments: You can make your own remarks here if you like
+              and/or add further information about a particular donor you
+              think is useful.
+            </li>
+
+          </ul>
+        </div>
+
+        <div class="modal-footer">
+          <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
+          <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+          <button id="closeBtn" data-dismiss="modal" onclick="showStep('finish')" class="btn btn-primary"
+          style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Back to task</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<!-- Client side scripts -->
+
+<script>
+	// Quick fix for IE8
+	Modernizr.load({
+		test : window.JSON,
+		nope : '/static/js/vendor/json2.min.js'
+	});
+</script>
+
+<!-- Step through modals -->
+
+<script type="text/javascript">
+	var step = -1;
+
+	function showStep(action) {
+		$("#" + step).hide();
+		if (action == 'next') {
+			step = step + 1;
+		}
+		if (action == 'prev') {
+			step = step - 1;
+		}
+		if (step == 0) {
+			$("#prevBtn").hide();
+		} else {
+			$("#prevBtn").show();
+		}
+		if (step == 1) {
+			$("#nextBtn").hide();
+			$("#closeBtn").show();
+		}
+
+		if (action == 'finish') {
+			step = 0;
+			$("#closeBtn").hide();
+			$("#prevBtn").hide();
+			$("#nextBtn").show();
+		}
+		$("#" + step).show();
+	}
+	showStep('next');
+	$("#modal").modal('show');
+</script>
+
+<!-- Load user progress -->
+
+<script>
+	function loadUserProgress() {
+		pybossa.userProgress('{{project.short_name}}').done(function(data) {
+			console.log(data);
+			console.log("Total answers done for user: " + data.done);
+			var pct = Math.round((data.done * 100) / data.total);
+			$("#progress").css("width", pct.toString() + "%");
+			$("#progress").attr("title", pct.toString() + "% completed!");
+			$("#progress").tooltip({ 'placement' : 'left' });
+			$("#total").text(data.total);
+			$("#done").text(data.done);
+			$('a[rel]').tooltip({'placement' : 'left'});
+		});
+	}
+
+  pybossa.taskLoaded(function(task, deferred) {
+	   if (! $.isEmptyObject(task)) {
+	    loadUserProgress();
+			deferred.resolve(task);
+		} else {
+			deferred.resolve(task);
+		}
+	});
+
+	$(window).resize(function() {
+		console.log('Window resized');
+	});
+
+	pybossa.presentTask(function(task, deferred) {
+
+		if (!$.isEmptyObject(task)) {
+			$("#question").html(task.info.question);
+			$('#task-id').html(task.id);
+			$("#pdfImage").attr('src', task.info.url_b);
+      $("#nextTask").attr("href", task.id + 1);
+			var data = [[]];
+			var config = {
+				data : data,
+              	minRows : 5,
+              	maxRows : 200,
+				        minCols : 7,
+              	maxCols : 7,
+              	colWidths: [100, 100, 40, 40, 40, 40, 100],
+              	width: '100%',
+              	height: '300px',
+              	rowHeights: 23,
+  				      colHeaders: true,
+              	minSpareRows : 1,
+              	stretchH: 'all',
+              	colHeaders : [
+                  'Heading (if any)', 'Person or Institution', 'Pounds',
+                  'Shillings', 'Pence', 'Dollars','Your Comments'
+                ],
+              	contextMenu : [
+                  'row_below', 'remove_row', 'undo',
+                  'redo'
+                  ]
+			};
+
+			$("#rcTable").handsontable(config);
+			$('.btn-answer').off('click').on('click', function(evt) {
+				evt.preventDefault();
+				var answer = $(evt.target).attr("value");
+				if ( typeof answer != 'undefined') {
+					task.answer = $("#rcData").serializeJSON();
+					console.log(task.answer);
+					var handsontable = $("#rcTable").data('handsontable');
+					var data = handsontable.getData();
+					console.log(data);
+					task.answer = data;
+					console.log(task.answer);
+					pybossa.saveTask(task.id, task.answer).done(function() {
+						$("html, body").animate( {scrollTop : 0 }, "slow");
+						$("#success").fadeIn(500).fadeOut(500);
+						$("#loading").fadeIn(500).fadeOut(500);
+						deferred.resolve();
+					});
+				} else {
+					$("#error").show();
+				}
+			});
+			$("#loading").hide();
+		} else {
+			$(".skeleton").hide();
+			$("#loading").hide();
+			$("#finish").fadeIn(500);
+		}
+	});
+	pybossa.run('{{project.short_name}}');
+</script>
