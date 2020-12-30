@@ -1,0 +1,743 @@
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css">
+<style>
+  #map {
+    background-color: grey;
+    border: 2px solid black;
+  }
+  .ol-zoom a, .ol-zoom-extent a, .ol-full-screen a {
+    display: block;
+    margin: 1px;
+    padding: 0;
+    color: white;
+    font-size: 1.14em;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    height: 1.375em;
+    width: 1.375em;
+    line-height: 1.4em;
+    background-color: #7b98bc;
+    background-color: rgba(0,60,136,0.5);
+    border: none;
+  }
+  .ol-zoom a::-moz-focus-inner, .ol-zoom-extent a::-moz-focus-inner, .ol-full-screen a::-moz-focus-inner {
+    border: none;
+    padding: 0;
+  }
+  .ol-zoom-extent a {
+    line-height: 1.4em;
+  }
+  .ol-touch .ol-zoom a, .ol-touch .ol-full-screen a, .ol-touch .ol-zoom-extent a {
+    font-size: 1.5em;
+  }
+  .ol-touch .ol-zoom-extent {
+    top: 5.5em;
+  }
+  .ol-zoom a:hover, .ol-zoom a:focus, .ol-zoom-extent a:hover, .ol-zoom-extent a:focus, .ol-full-screen a:hover, .ol-full-screen a:focus {
+    text-decoration: none;
+    background-color: #4c6079;
+    background-color: rgba(0,60,136,0.7);
+  }
+  .ol-zoom-extent a:after {
+    content: "E";
+  }
+  .ol-zoom-in {
+    border-radius: 2px 2px 0 0;
+  }
+  .ol-zoom-out {
+    border-radius: 0 0 2px 2px;
+  }
+  a.ol-full-screen-false:after {
+    content: "\2194";
+  }
+  a.ol-full-screen-true:after {
+    content: "\00d7";
+  }
+
+  .ol-zoom-extent a, .ol-full-screen a, .ol-scale-line-inner, .ol-zoom a, .ol-has-tooltip [role=tooltip] {
+    font-family: 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+  }
+  .map {
+    height: 500px;
+    width: 100%;
+  }
+
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  input[type=number] {
+    -moz-appearance:textfield;
+  }
+</style>
+
+<!--
+Task DOM for loading the S3 Images using class="skeleton" to identify the elements that belong to the task.
+-->
+<div class="row skeleton">
+  <div class="col-md-12 mt-2 mb-2">
+    <button class="btn btn-info" data-toggle="modal" data-target="#myModal">
+      <i class="glyphicon glyphicon-eye-open"></i> Tutorial
+    </button>
+    <a class="btn btn-info" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="http://community.micropasts.org"><i class="glyphicon glyphicon-book"></i> Community Help</a>
+  </div>
+
+  <div class="col-md-12">
+
+
+
+    <div id="step1">
+      <h2>
+        Step 1 of 3. Draw the front-view outline of the axe:
+      </h2>
+      <div class="btn-group">
+        <button id="status" type="button" class="btn btn-primary btn-type disabled" name="loading" value="loading" title="Whether your task has fully loaded or not.">
+          Loading photo
+        </button>
+        <button id="front" type="button" class="btn btn-primary btn-type active" name="front" value="front" title="The feature you are currently drawing.">
+          Front-view
+        </button>
+      </div>
+      <div class="btn-group">
+        <button id="draw" type="button" class="btn btn-primary btn-draw active" name="draw" value="draw" title="Draw a new feature.">
+          Draw
+        </button>
+        <button id="edit" type="button" class="btn btn-primary btn-draw" name="edit" value="edit" title="Edit an existing feature.">
+          Edit
+        </button>
+        <button id="delete" type="button" class="btn btn-primary btn-draw" name="delete" value="delete" title="Delete any existing features (for this step only).">
+          Delete
+        </button>
+      </div>
+
+      <div class="btn-group">
+        <button id="gotostep2" class="btn btn-success btn-next" value='gotostep2' title="Go to next step.">
+          <i class="icon icon-white icon-save"></i> Next
+        </button>
+      </div>
+    </div>
+
+    <div id="step2" style="display:none;">
+      <h2>Step 2 of 3. Draw the side-view outline of the axe:</h2>
+      <div class="btn-group">
+        <button id="status" type="button" class="btn btn-primary btn-type disabled" name="loading" value="loading" title="Whether your task has fully loaded or not.">
+          Photo loaded
+        </button>
+        <button id="side" type="button" class="btn btn-primary btn-type active" name="side" value="side" title="The feature you are currently drawing.">
+          Side-view
+        </button>
+      </div>
+      <div class="btn-group">
+        <button id="draw" type="button" class="btn btn-primary btn-draw active" name="draw" value="draw" title="Draw a new feature.">
+          Draw
+        </button>
+        <button id="edit" type="button" class="btn btn-primary btn-draw" name="edit" value="edit" title="Edit an existing feature.">
+          Edit
+        </button>
+        <button id="delete" type="button" class="btn btn-primary btn-draw" name="delete" value="delete" title="Delete any existing features (for this step only).">
+          Delete
+        </button>
+      </div>
+      <div class="btn-group">
+        <button id="gotostep3" class="btn btn-success btn-next" value='gotostep3' title="Go to next step.">
+          <i class="icon icon-white icon-save"></i> Next
+        </button>
+      </div>
+    </div>
+
+    <div id="step3" style="display:none;">
+      <h2>Step 3 of 3. Draw blade-width and butt-width (optionally also stopwidth and handle):</h2>
+      <div class="btn-group">
+        <button id="status" type="button" class="btn btn-primary btn-type disabled" name="loading" value="loading" title="Whether your task has fully loaded or not.">
+          Photo loaded
+        </button>
+        <button id="extras" type="button" class="btn btn-primary btn-type active" name="extras" value="extras" title="The feature you are currently drawing.">
+          Extras
+        </button>
+      </div>
+      <div class="btn-group">
+        <button id="draw" type="button" class="btn btn-primary btn-draw active" name="draw" value="draw" title="Draw a new feature.">
+          Draw
+        </button>
+        <button id="edit" type="button" class="btn btn-primary btn-draw" name="edit" value="edit" title="Edit an existing feature.">
+          Edit
+        </button>
+        <button id="delete" type="button" class="btn btn-primary btn-draw" name="delete" value="delete" title="Delete any existing features (for this step only).">
+          Delete
+        </button>
+      </div>
+      <div class="btn-group">
+        <button id="btn-save" class="btn btn-success btn-answer" value='save' title="Submit all steps and complete task.">
+          <i class="icon icon-white icon-save"></i> Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Success and Error Messages for the user -->
+  <div class="col-md-6">
+    <div id="success" class="alert alert-success" style="display:none;">
+      <a class="close">×</a>
+      <strong>Well done!</strong> Your answer has been saved
+    </div>
+    <div id="loading" class="alert alert-info" style="display:none;">
+      <a class="close">×</a>
+      Loading next task...
+    </div>
+    <div id="taskcompleted" class="alert alert-info" style="display:none;">
+      <strong>The task has been completed.</strong> Thanks a lot!
+    </div>
+    <div id="finish" class="alert alert-success" style="display:none;">
+      <strong>Congratulations.</strong> You have participated in all available tasks!
+      <br/>
+      <div class="alert-actions">
+        <a class="btn small" href="/">Go back</a>
+        <a class="btn small" href="/app">or, Check other applications</a>
+      </div>
+    </div>
+    <div id="error" class="alert alert-error" style="display:none;">
+      <a class="close">×</a>
+      <strong>Error!</strong> Something went wrong, please contact the site administrators
+    </div>
+  </div>
+  <!-- End Success and Error Messages for the user -->
+</div>
+<!-- End of Row -->
+
+<div class="row skeleton">
+  <!-- Start Skeleton Row-->
+  <div class="col-md-12">
+    <!-- Start of Photo DIV (column) -->
+    <div id="map" class="img-polaroid"></div>
+  </div><!-- End of Photo DIV (columnt) -->
+  <div class="col-md-12 mt-3">
+    <!-- Start of Question and Submission DIV (column) -->
+    <!-- Feedback items for the user -->
+    <p>
+      You are working now on task: <span id="task-id" class="badge badge-large badge-warning">#</span>
+    </p>
+    <p>
+      You have completed: <span id="done" class="badge badge-large badge-info"></span> tasks from <!-- Progress bar for the user -->
+      <span id="total" class="badge badge-dark badge-large"></span>
+    </p>
+    <div class="progress progress-striped">
+      <div id="progress" class="progress-bar" role="progressbar" rel="tooltip" title="#" class="bar" style="width: 0%;"></div>
+    </div>
+
+    <div id="answer">
+      <!-- Start DIV for the submission buttons -->
+    </div><!-- End of DIV for the submission buttons -->
+
+  </div><!-- End of Question and Submission DIV (column) -->
+
+</div><!-- End of Skeleton Row -->
+
+<!-- Modal start -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3><strong>Tutorial for modelling Bronze Age axe shapes</strong></h3>
+      </div>
+
+      <div id="0" class="modal-body" style="display:none">
+        <p>
+          This application asks you digitise the shape of bronze axes via your browser.
+          It makes use of web GIS functions (Geographic Information Systems) to
+          capture vector outlines that can then be used to arrange the axes into
+          stylistic and chronological groups in a formal, quantitative way.
+          When you participate, the platform will load a scanned drawing or photograph of an
+          axe such as some examples below. These front-facing and side-facing views are typical of
+          how archaeologists have traditionally recorded object shapes
+          (only rarely are they published as 3d models for instance).
+        </p>
+        <p>
+          Once the scanned photograph or drawing has been loaded, you can proceed
+          in a series of three reasonably quick steps as follows:
+          <ul>
+            <li>Find the front-view of the axe and draw an outline polygon of it.</li>
+            <li>After clicking next, find the side-view of the axe and draw an outline polygon of it.</li>
+            <li>After clicking next, draw straight lines for the blade-width and butt-width, optionally adding a lines for the stop (if the axe has a hafting-stop), inner- and outer loop (if the axe has a loop).</li>
+          </ul>
+        </p>
+      </div>
+
+      <div id="1" class="modal-body" style="display:none">
+        <p>
+          In step 1, you will be asked to draw one or more polygons that mark out the
+          original outline of the axe shape in front view. So if there a small bits
+          of the axe missing or broken from the blade or sides,
+          then please use your judgement to fill in the gaps. Some people prefer to draw the outline
+          in a single polygon, whilst others draw multiple overlapping polygons to achive the same
+          coverage (which we will merge later). The image below shows these two alternative ways of doing this.
+        </p>
+        <img src="https://blog.micropasts.org/wp-content/uploads/2020/05/axeshapes_onemulti.png" width="100%" class="img-polaroid"
+        alt="Drawing an axe outline with one or with multiple polygons" />
+      </div>
+
+      <div id="2" class="modal-body" style="display:none">
+        <p>
+          Step 2 asks you to do the same thing for the profile-view of the axe. Again,
+          please use your judgment to reconstruct where small bits of the axe profile
+          are missing or broken. The image below provides two examples, one of a photograph and one of a line-drawing.
+          If the side view is missing from your loaded image,
+          then just click Next without digitising a side-view.
+        </p>
+        <img src="https://blog.micropasts.org/wp-content/uploads/2020/05/axeshapes_side.png" width="100%" class="img-polaroid"
+        alt="Drawing an axe side-view on top of a line drawing or a photograph." />
+      </div>
+
+      <div id="3" class="modal-body" style="display:none">
+        <p>
+          Step 3 is the final one and is slightly more complicated. It asks you to add extra indicative lines
+          to what you have done. Specifically, you need mark lines (not polygons this time) across top
+          of the blade and across the butt of the axe (in that order and extending beyond the axe as in the images below).
+          In those cases where a 'hafting stop' exists, you can also mark that with a third line (curved or straight as you think best).
+          Finally, if the axe is one with a side-loop,
+          we'd like you to draw inner and outer lines to mark the loop
+          (extending clearly inside the axe outline as shown below, so we can edit them later).
+          Once you have digitised lines for blade-width, butt-width and optionally the stop and loop, you are ready, you can then press submit to cmplete the task.
+        </p>
+        <img src="https://blog.micropasts.org/wp-content/uploads/2020/05/axeshapes_extras.png" width="100%" class="img-polaroid"
+        alt="Drawing indicative lines for the blade width, butt-width and optional stop or handle." />
+      </div>
+
+      <div id="4" class="modal-body" style="display:none">
+        <p>
+          How to use the application's digitising toolbar:
+        </p>
+        <img src="https://blog.micropasts.org/wp-content/uploads/2020/05/toolbar_axeshapes.png" width="100%" class="img-polaroid"
+        alt="The digitising toolbar" />
+        <p>
+          <p>
+            <strong>Photo loaded</strong>: This label simply indicates whether or not you are waiting for the scan to be loaded into the application.
+            If it says 'Photo loaded', then you can begin digitising.
+          </p>
+          <p>
+            <strong>Front-view</strong>: This label indicates what part of the object you are currently digitising.
+          </p>
+          <p>
+            <strong>Draw</strong>: This option is selected by default, at the beginning of a task. Click on 'Draw' whenever you want to start drawing a polygon or line. Once you complete your drawing of a feature, the delineating line will turn from blue to a different colour.
+          </p>
+          <p>
+            <strong>Edit</strong>: This option is enabled once there is at least one complete feature drawn. After clicking on 'Edit', choose the line or polygon you wish to edit by clicking once anywhere on it. It will turn blue, and become available for editing such that you will be able to re-position the blue nodes that give the line its shape.
+          </p>
+          <p>
+            <strong>Delete</strong>: Use this option if you wish to delete your existing drawing (for the current step only).
+          </p>
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-primary">Previous</a>
+        <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+        <button id="closeBtn" data-dismiss="modal" onclick="showStep('finish')" class="btn btn-primary" style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Back to task</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->
+
+<script type="text/javascript">
+  var step = -1;
+  function showStep(action) {
+    $("#" + step).hide();
+    if (action == 'next') {
+      step = step + 1;
+    }
+    if (action == 'prev') {
+      step = step - 1;
+    }
+    if (step == 0) {
+      $("#prevBtn").hide();
+    } else {
+      $("#prevBtn").show();
+    }
+    if (step == 4) {
+      $("#nextBtn").hide();
+      $("#closeBtn").show();
+    }
+    if (action == 'finish') {
+      step = 0;
+      $("#closeBtn").hide();
+      $("#prevBtn").hide();
+      $("#nextBtn").show();
+    }
+    $("#" + step).show();
+  }
+  showStep('next');
+  $("#modal").modal('show');
+</script>
+
+<script>
+  function loadUserProgress() {
+    pybossa.userProgress('{{project.short_name}}').done(function(data){
+
+      console.log('Tasks done so far: ' + data.done);
+
+      var pct = Math.round((data.done*100)/data.total);
+      $("#progress").css("width", pct.toString() +"%");
+      $("#progress").attr("title", pct.toString() + "% completed!");
+      $("#progress").tooltip({'placement': 'left'});
+      $("#total").text(data.total);
+      $("#done").text(data.done);
+    });
+  }
+
+  pybossa.taskLoaded(function(task, deferred) {
+    if ( !$.isEmptyObject(task) ) {
+      // load image from flickr
+      var img = $('<img />');
+      var div_map = $('<div/>');
+      div_map.css("height", "500px");
+      div_map.css("width", "100%");
+      $("#draw").addClass("disabled");
+      $("#edit").addClass("disabled");
+      $("#delete").addClass("disabled");
+      $("#front").addClass("disabled");
+      $("#map").append(div_map);
+      div_map.attr("id", "map_" + task.id);
+      img.ready(function() {
+        // continue as soon as the image is loaded
+        deferred.resolve(task);
+        $("#draw").removeClass("disabled");
+        $("#edit").removeClass("disabled");
+        $("#delete").removeClass("disabled");
+        $("#front").removeClass("disabled");
+        $("#status").text("Photo loaded");
+      });
+      img.attr('src', task.info.url_b).css('height', 100);
+
+      //Log the url of image being masked.
+      console.log(task.info.url_b);
+
+      img.addClass('img-polaroid');
+      task.info.image = img;
+
+      // Maps always need a projection, but the static image is not geo-referenced,
+      // and is only measured in pixels.  So, we create a fake projection that the
+      // map can use to properly display the layer using the number of rows and
+      // number of columns of the image as our coordinates.
+      task.pixelProjection = new ol.proj.Projection({
+        code: 'pixel',
+        units: 'pixels',
+        extent: [0, 0, task.info.imcols, task.info.imrows]
+      });
+
+      task.source_front = new ol.source.Vector();
+      task.source_side = new ol.source.Vector();
+      task.source_extras = new ol.source.Vector();
+
+      task.front = new ol.layer.Vector({
+        source: task.source_front,
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.2)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#33ff55',
+            width: 2
+          }),
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: '#33ff55'
+            })
+          })
+        })
+      });
+
+      task.side = new ol.layer.Vector({
+        source: task.source_side,
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.2)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#ffcc33',
+            width: 2
+          }),
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: '#ffcc33'
+            })
+          })
+        })
+      });
+
+      task.extras = new ol.layer.Vector({
+        source: task.source_extras,
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.2)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#800000',
+            width: 2
+          }),
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: '#800000'
+            })
+          })
+        })
+      });
+
+      // Select and modify features (currently not filtered by active layer)
+      select = new ol.interaction.Select({
+        // layer: [ task.front ]
+      });
+
+      modify = new ol.interaction.Modify({
+        features: select.getFeatures()
+      });
+
+
+      // Set up map
+      task.map = new ol.Map({
+        // interactions: ol.interaction.defaults().extend([select, modify]),
+        layers: [
+        new ol.layer.Image({
+          source: new ol.source.ImageStatic({
+            url: task.info.url_b,
+            imageSize: [parseInt(task.info.imcols), parseInt(task.info.imrows)],
+            projection: task.pixelProjection,
+            imageExtent: task.pixelProjection.getExtent()
+          })
+        })
+        ,
+        task.front,
+        task.side,
+        task.extras,
+        ],
+        renderer: 'canvas',
+        target: 'map_' + task.id,
+        view: new ol.View({
+          projection: task.pixelProjection,
+          center: ol.extent.getCenter(task.pixelProjection.getExtent()),
+          zoom: 1
+        })
+      });
+      div_map.css("display", "none");
+
+      var typeSelect = document.getElementById('type');
+
+      // Global task.draw so it can be removed later
+      task.draw_front = new ol.interaction.Draw({
+        source: task.source_front,
+        type: 'Polygon',
+      });
+      task.draw_side = new ol.interaction.Draw({
+        source: task.source_side,
+        type: 'Polygon',
+      });
+      task.draw_extras = new ol.interaction.Draw({
+        source: task.source_extras,
+        type: 'LineString',
+      });
+
+      // When the first  polygon or line is completed, remove the drawInteraction
+      task.draw_front.on('drawend', function(evt) {
+        task.front = true;
+      });
+      task.draw_side.on('drawend', function(evt) {
+        task.side = true;
+      });
+      task.draw_extras.on('drawend', function(evt) {
+        task.extras = true;
+      });
+
+      // Enable front-view drawing from start
+      task.map.addInteraction(task.draw_front);
+
+      task.answer = {
+        'task_id': task.id,
+        'front': [],
+        'side': [],
+        'extras': [],
+        'img': task.info.url_b};
+        task.front = false;
+        task.side = false;
+        task.extras = false;
+      }
+      else {
+        deferred.resolve(task);
+      }
+    });
+
+    pybossa.presentTask(function(task, deferred) {
+      if ( !$.isEmptyObject(task) ) {
+        loadUserProgress();
+        $("#step1").show();
+        $("#dimension").val("");
+        $(':input','#comments')
+        .not(':button, :submit, :reset, :hidden, :radio')
+        .val('');
+        $('#task-id').html(task.id);
+        $("#map_" + task.id).show();
+
+        // Code for drawing polygons and lines
+        $('.btn-draw').off('click').on('click', function(evt) {
+          var answer = $(evt.target).attr("value");
+          if (typeof answer != 'undefined'){
+            if (answer == 'draw') {
+              $("#edit").removeClass("active");
+              $("#delete").removeClass("active");
+              $("#draw").addClass("active");
+              task.map.removeInteraction(modify);
+              task.map.removeInteraction(select);
+              if ($("#front").hasClass("active")) {
+                task.map.addInteraction(task.draw_front);
+              } else if ($("#side").hasClass("active")) {
+                task.map.addInteraction(task.draw_side);
+              } else {
+                task.map.addInteraction(task.draw_extras);
+              }
+
+            } else if (answer == 'edit') {
+              $("#draw").removeClass("active");
+              $("#delete").removeClass("active");
+              $("#edit").addClass("active");
+              if ($("#front").hasClass("active")) {
+                task.map.removeInteraction(task.draw_front);
+              } else if ($("#side").hasClass("active")) {
+                task.map.removeInteraction(task.draw_side);
+              } else {
+                task.map.removeInteraction(task.draw_extras);
+              }
+              task.map.addInteraction(select);
+              task.map.addInteraction(modify);
+
+            } else if (answer == 'delete') {
+              $("#draw").removeClass("active");
+              $("#edit").removeClass("active");
+              $("#delete").addClass("active");
+              if ($("#front").hasClass("active")) {
+                task.map.removeInteraction(task.draw_front);
+                task.map.removeInteraction(select);
+                task.map.removeInteraction(modify);
+                var features = task.source_front.getFeatures();
+                for(i=0;i<features.length;i++) {
+                  task.source_front.removeFeature(features[i]);
+                }
+                task.map.addInteraction(task.draw_front);
+                task.front = false;
+              } else if ($("#side").hasClass("active")) {
+                task.map.removeInteraction(task.draw_side);
+                task.map.removeInteraction(select);
+                task.map.removeInteraction(modify);
+                var features = task.source_side.getFeatures();
+                for(i=0;i<features.length;i++) {
+                  task.source_side.removeFeature(features[i]);
+                }
+                task.map.addInteraction(task.draw_side);
+                task.side = false;
+              } else {
+                task.map.removeInteraction(task.draw_extras);
+                task.map.removeInteraction(select);
+                task.map.removeInteraction(modify);
+                var features = task.source_extras.getFeatures();
+                for(i=0;i<features.length;i++) {
+                  task.source_extras.removeFeature(features[i]);
+                }
+                task.map.addInteraction(task.draw_extras);
+                task.extras = false;
+              }
+              $("#draw").addClass("active");
+              $("#delete").removeClass("active");
+            }
+          }});
+
+          $('.btn-next').off('click').on('click', function(evt) {
+            var answer = $(evt.target).attr("value");
+            if (typeof answer != 'undefined'){
+
+              if (answer == 'gotostep2') {
+                $("#step1").toggle();
+                $("#step2").toggle();
+                $("#front").removeClass("active");
+                $("#side").addClass("active");
+                task.map.removeInteraction(task.draw_front);
+                task.map.addInteraction(task.draw_side);
+              } else {
+                $("#side").removeClass("active");
+                $("#extras").addClass("active");
+                $("#step2").toggle();
+                $("#step3").toggle();
+                task.map.removeInteraction(task.draw_side);
+                task.map.addInteraction(task.draw_extras);
+              }
+            }});
+
+            $('.btn-answer').off('click').on('click', function(evt) {
+              var answer = $(evt.target).attr("value");
+              if (typeof answer != 'undefined'){
+                //Log the answer submitted to console
+                console.log(answer);
+                //console.log(task.source.features);
+
+                if (task.front) {
+                  var features = task.source_front.getFeatures();
+                  var polygons = [];
+                  for(i=0;i<features.length;i++) {
+                    var g = features[i].getGeometry();
+                    polygons.push(g.getCoordinates());
+                  }
+                  task.answer.front = polygons;
+                }
+
+                if (task.side) {
+                  var features = task.source_side.getFeatures();
+                  var polygons = [];
+                  for(i=0;i<features.length;i++) {
+                    var g = features[i].getGeometry();
+                    polygons.push(g.getCoordinates());
+                  }
+                  task.answer.side = polygons;
+                }
+
+                if (task.extras) {
+                  var features = task.source_extras.getFeatures();
+                  var lines = [];
+                  for(i=0;i<features.length;i++) {
+                    var g = features[i].getGeometry();
+                    lines.push(g.getCoordinates());
+                  }
+                  task.answer.extras = lines;
+                }
+
+                pybossa.saveTask(task.id, task.answer).done(function() {
+                  $("#success").fadeIn(500).fadeOut(5500);
+                  deferred.resolve();
+                  $("#step3").hide();
+                  $("#map_" + task.id).remove();
+                });
+                $("#loading").fadeIn(500);
+
+              } else {
+                $("#error").show();
+              }
+            });
+            $("#loading").hide();
+          }
+          else {
+            $(".skeleton").hide();
+            $("#loading").hide();
+            $("#finish").fadeIn(500);
+          }
+          $('#imgLink').tooltip();
+
+        });
+        pybossa.run('{{project.short_name}}');
+      </script>
