@@ -98,8 +98,14 @@
     <a class="btn btn-info btn-sm" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="https://community.micropasts.org/category/crowdsourcing-support"><i class="glyphicon glyphicon-book"></i> Community Help</a>
     <a id="flickr" rel="tooltip" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="" class="btn btn-sm btn-info"><i class="icon icon-flickr"></i> View in IIIF format on CUDL</a>
     <button id="status" type="button" class="btn btn-primary btn-sm disabled" name="loading" value="loading">Loading photo</button>
-    <button id="skip" type="button" class="btn btn-primary btn-sm">Skip to form</button>
     <a id="nextTask" rel="tooltip"  href="" class="btn btn-sm btn-info"><i class="icon icon-flickr"></i> Next task</a>
+    <br />
+    <div>
+      <label>Rotate Image:</label>
+      <input type="button" class="btnRotate" value="90" onclick="rotateImage(this.value);">
+      <input type="button" class="btnRotate" value="-90" onclick="rotateImage(this.value);">
+      <input type="button" class="btnRotate" value="180" onclick="rotateImage(this.value);">
+    </div>
   </div>
 
     <!-- The magic form -->
@@ -219,6 +225,17 @@ aria-labelledby="myModalLabel" aria-hidden="true">
   }
   showStep('next');
   $("#modal").modal('show');
+  function rotateImage(degree) {
+	$('#photo-link').animate({  transform: degree }, {
+    step: function(now,fx) {
+        $(this).css({
+            '-webkit-transform':'rotate('+now+'deg)',
+            '-moz-transform':'rotate('+now+'deg)',
+            'transform':'rotate('+now+'deg)'
+        });
+    }
+    });
+}
 </script>
 
 
@@ -269,7 +286,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       // Set the task id
       $('#task-id').html(task.id);
       // Set the href for flickr
-      $("a#flickr").attr("href", task.info.link + '/sizes/k/');
+      $("a#flickr").attr("href", task.info.link);
       // Add a next task link
       $("#nextTask").attr("href", task.id + 1);
 
