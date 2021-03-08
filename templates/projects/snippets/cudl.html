@@ -82,7 +82,7 @@
 <!-- End Success and Error Messages for the user -->
 
 <!--
-  Task DOM for loading the Flickr Images
+  Task DOM for loading the cudl Images
   It uses the class="skeleton" to identify the elements that belong to the
   task.
 -->
@@ -96,9 +96,9 @@
     <!-- Start of Question and Submission DIV -->
     <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-eye-open"></i> Tutorial</button>
     <a class="btn btn-info btn-sm" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="https://community.micropasts.org/category/crowdsourcing-support"><i class="glyphicon glyphicon-book"></i> Community Help</a>
-    <a id="flickr" rel="tooltip" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="" class="btn btn-sm btn-info"><i class="icon icon-flickr"></i> View in IIIF format on CUDL</a>
+    <a id="cudl" rel="tooltip" target="_blank" data-toggle="tooltip" data-placement="top" title="Opens in a new window" href="" class="btn btn-sm btn-info"><i class="icon icon-cudl"></i> View in IIIF format on CUDL</a>
     <button id="status" type="button" class="btn btn-primary btn-sm disabled" name="loading" value="loading">Loading photo</button>
-    <a id="nextTask" rel="tooltip"  href="" class="btn btn-sm btn-info"><i class="icon icon-flickr"></i> Next task</a>
+    <a id="nextTask" rel="tooltip"  href="" class="btn btn-sm btn-info">Next task</a>
     <br />
     <div>
       <label>Rotate Image:</label>
@@ -285,8 +285,8 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       $('#photo-link').html('').append(task.info.image);
       // Set the task id
       $('#task-id').html(task.id);
-      // Set the href for flickr
-      $("a#flickr").attr("href", task.info.link);
+      // Set the href for cudl
+      $("a#cudl").attr("href", task.info.link);
       // Add a next task link
       $("#nextTask").attr("href", task.id + 1);
 
