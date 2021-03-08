@@ -101,35 +101,35 @@
     <button id="skip" type="button" class="btn btn-primary btn-sm">Skip to form</button>
     <a id="nextTask" rel="tooltip"  href="" class="btn btn-sm btn-info"><i class="icon icon-flickr"></i> Next task</a>
   </div>
-  <div class="row">
-  <!-- The magic form -->
-  <form id="magicData" role="form">
 
-    <div class="col-md-8">
-      <div id="imgContainer" >
-        <span id="photo-link">
-          <img id="photo" src="/static/img/puff.svg" class="loadingIcon">
-        </span>
+    <!-- The magic form -->
+    <form id="magicData" role="form">
+      <div class="row">
+        <div class="col-md-8">
+          <div id="imgContainer" >
+            <span id="photo-link">
+              <img id="photo" src="/static/img/puff.svg" class="loadingIcon">
+            </span>
+          </div>
+        </div>
+          <h4 id="title">
+            Please transcribe what you see in the image from one of Rackham's diaries.
+          </h4>
+
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="control-label" for="comments">Your Comments</label>
+            <textarea class="form-control" rows="5" id="comments" name="comments"
+            placeholder="Add any comments you may have about the photo or your experience with this task."></textarea>
+          </div>
+        </div>
       </div>
-    </div>
-      <h3 id="title">
-        Please transcribe what you see in the image from one of Rackham's diaries.
-      </h3>
-    </div>
-
-    <div class="col-md-4">
-      <div class="form-group">
-        <label class="control-label" for="comments">Your Comments</label>
-        <textarea class="form-control" rows="5" id="comments" name="comments"
-        placeholder="Add any comments you may have about the photo or your experience with this task."></textarea>
+      <div class="col-md-12">
+        <button class="btn btn-success btn-answer" id="submitbutton" value="Yes">Submit your thoughts</button>
       </div>
-    </div>
 
-    <div class="col-md-12">
-      <button class="btn btn-success btn-answer" id="submitbutton" value="Yes">Submit your thoughts</button>
-    </div>
-
-  </form>
+    </form>
   </div>
   <!-- Feedback items for the user -->
   <div class="col-md-12 mt-3 mb-3">
