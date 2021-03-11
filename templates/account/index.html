@@ -7,7 +7,7 @@
 {% block content %}
 <h1 class="mt-3">{{ _('Community') }}</h1>
 
-<div class="container">
+<div class="container-fluid">
   <div class="col-md-12">
     {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not
       current_user.admin)) %}
@@ -48,7 +48,7 @@
       {% endif %}
     </div>
   </div>
-  
+
   {{ projecthelper.broken_image()}}
 
   {% endblock %}
