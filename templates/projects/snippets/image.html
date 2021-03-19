@@ -138,7 +138,7 @@ pybossa.taskLoaded(function(task, deferred) {
     if ( !$.isEmptyObject(task) ) {
         // load image from flickr
         var img = $('<img />');
-        img.load(function() {
+        img.ready(function() {
             // continue as soon as the image is loaded
             deferred.resolve(task);
             pybossaNotify("", false, "loading");
