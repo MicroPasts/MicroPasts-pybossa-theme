@@ -1,0 +1,466 @@
+<!-- Add scripts etc -->
+<script src="/static/js/vendor/jquery.serializeJSON.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js" type="text/javascript"></script>
+<script src="/static/vendor/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+<!-- Add style sheets -->
+<link rel="stylesheet" href="/static/vendor/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen"/>
+
+<!-- Browser not compatible message -->
+<div style="display:none;margin-top:15px; height:500px;" id="oldbrowser" class="row">
+  <!-- Success and Error Messages for the user -->
+  <div class="col-md-8 col-md-offset-1 alert alert-info">
+    <strong>Sorry, but your browser does not support the current application. If you want to contribute, please,
+      upgrade to a modern web browser like the open source and free alternative <a
+      href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> or <a
+      href="https://www.google.com/intl/en/chrome/browser/">Chrome</a></strong>.
+    </div>
+  </div>
+  <!-- End of Row -->
+  <!-- end of browser -->
+
+  <!-- Start of messages -->
+  <div style="margin-top:15px;">
+    <div id="success" class="alert alert-success" style="display:none;">
+      <strong>Well done!</strong> <br />
+      You have successfully submitted your contribution.
+      Here is another to try if you wish.
+    </div>
+    <div id="loading" class="alert alert-info" style="display:none;">
+      <img src="/static/img/loading.gif">Loading next task...
+    </div>
+    <div id="taskcompleted" class="alert alert-info" style="display:none;">
+      <strong>The task has been completed!</strong> Thank you for helping us.
+    </div>
+    <div id="finish" class="alert alert-success" style="display:none;">
+      <h2>Congratulations!</h2>
+      <p>
+        You have participated in all available tasks in our project.
+      </p>
+      <div class="alert-actions">
+        <a class="btn-default btn" href="/">Go back to the home page</a>
+        <a class="btn-default btn" href="/app">or, have a look at our
+          other applications</a>
+        </div>
+      </div>
+      <div id="error" class="alert alert-danger" style="display:none;">
+        <a class="close">×</a>
+        <strong>Error!</strong> <br />
+        Something went wrong, please contact the site administrators
+      </div>
+    </div>
+    <!-- End Success and Error Messages for the user -->
+
+    <!--
+    Task DOM for loading the S3 Images
+    It uses the class="skeleton" to identify the elements that belong to the
+    task.
+  -->
+
+  <div class="row skeleton">
+
+    <div class="col-md-12">
+      <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+        <i class="glyphicon glyphicon-eye-open"></i> Tutorial
+      </button>
+      <a class="btn btn-info btn-xs" id="imgLink" target="_blank" data-toggle="tooltip" data-placement="top"
+      title="Opens in a new window" href="http://community.micropasts.org/"><i
+      class="glyphicon glyphicon-book"></i> Community Help</a>
+      <!-- Overlay image -->
+      <a id="raw" href="" class="btn btn-xs btn-info fancybox"><i class="glyphicon glyphicon-picture"></i>
+        Overlay</a>
+        <!-- Link to flickr -->
+        <a id="flickr" rel="tooltip" target="_blank" data-toggle="tooltip" data-placement="top"
+        title="Opens in a new window" href="" class="btn btn-xs btn-info"><i class="icon icon-flickr"></i>
+        View on Flickr</a>
+        <a id="toggle" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-repeat"></i> Rotate image</a>
+      </div>
+
+      <!-- The pdf section -->
+      <div class="col-md-12">
+          <h4>Please help us to transcribe this card.</h4>
+      </div>
+
+
+      <div class="col-md-12">
+        <div class="row">
+
+          <form id="magicData" role="form">
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label class="control-label" for="FieldNum">Field Number</label>
+                <input type="text" class="form-control" name="FieldNum" id="FieldNum"></input>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label" for="Findspot">Field Context</label>
+                <input type="text" class="form-control" name="Findspot" id="Findspot"></input>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label" for="Material">Material</label>
+                <input type="text" class="form-control" name="Material" id="Material"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label"
+                for="ObjectType">Object Type</label>
+                <input type="text" class="form-control" name="ObjectType" id="ObjectType"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label" for="Dimensions">Dimensions</label>
+                <textarea class="form-control" rows="1" id="Dimensions" name="Dimensions"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label" for="CardTranscript">Card Transcript</label>
+                <textarea class="form-control" rows="4" id="CardTranscript" name="CardTranscript"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label" for="comments">Transcriber's Comments</label>
+                <textarea class="form-control" rows="1" id="comments" name="comments"
+                placeholder="Add any comments you have"></textarea>
+              </div>
+
+              <button class="btn btn-success btn-answer" value='Yes'>
+                Submit your transcription
+              </button>
+            </div>
+
+          </form>
+
+          <div id="imgContainer" class="col-md-6">
+            <span id="postcardImage">
+              <img id="photo" src="/static/img/loading.gif" class="loadingIcon img-fluid">
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End of pdf section -->
+    <!-- The data entry section using html table -->
+    <div class="row">
+
+      <!-- Feedback items for the user -->
+      <p>
+        You are working now on task: <span id="task-id" class="label label-warning">#</span>
+      </p>
+      <p>
+        You have completed: <span id="done" class="label label-info"></span> tasks from
+        <!-- Progress bar for the user -->
+        <span id="total" class="label label-inverse"></span>
+      </p>
+      <div class="progress progress-striped">
+        <div id="progress" rel="tooltip" title="#" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+      </div>
+      <!-- End of feedback row -->
+    </div>
+    <!-- End of the section -->
+  </div>
+  <!-- End of DOM Skeleton row -->
+
+  <!-- Modal start -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal header -->
+        <div class="modal-header">
+          <h3>How to transcribe the Atchana catalogue cards</h3>
+        </div>
+
+        <!-- Step 1 of the tutorial -->
+        <div id="0" class="modal-body" style="display:none">
+          <p>
+            <strong>Transcription rules</strong><br>
+            In this guide, example text appears within inverted
+            commas.
+          </p>
+
+          <ul>
+            <li>
+              <b>Transcribe text as you see it.</b>
+              — including the case used (capital letters or lower case) and
+              spelling errors.
+            </li>
+
+            <li>
+              <b>Use square brackets for editorial comments.</b>
+              E.g.: 'Brown slipped bowl [last word has been crossed out, replaced
+              with] plate'; 'Tuggle [sic, toggle] pin'. 'Sic' is used to show that
+              the mistake was in the original text.
+            </li>
+
+            <li>
+              <b>If the card has an image</b>, add '[object sketch]' or
+              '[object photo]' at the appropriate place in your transcription.
+            </li>
+
+            <li>
+              <b>Use '[...]' to show unreadable text.</b> e.g.: 'Carinated bowl with [...] slip'.
+                    This can be done even if only a few letters are illegible, e.g.: 'Car[...]ted bowl'.
+            </li>
+
+            <li>
+              <b>Explain any problems</b> in the transcription notes field.
+            </li>
+
+        </ul>
+
+  </div>
+
+<!-- Step 2 of the tutorial -->
+<div id="1" class="modal-body" style="display:none">
+<p>
+There are a few exceptions to the rule of transcribing text as you see it:
+</p>
+<ul>
+<li><b>Replace square brackets in the original text with round brackets.</b>
+This avoids confusion with editorial comments. E.g.: Toggle [no. 21]
+would be transcribed as 'Toggle (no. 21)'.</li>
+
+<li><b>Replace " marks with the word 'ditto'.</b>
+This distinguishes between a ditto (indicating that the content of the
+text is the same as that immediately above it on the card), and the same mark
+being used as an inverted comma, or as the shorthand for 'inches'. Follow 'ditto'
+with an editorial comment on the copied text (e.g.: 'ditto [bronze arrow-head]',
+so the intended meaning is clear.</li>
+
+<li><b>Use line breaks to separate different blocks of text.</b></li>
+
+<li><b>Insert punctuation where it is needed to make the text clear.</b>
+  E.g.: add full stops at the end of sentences, or to separate out tabulated columns of information.</li>
+
+  <li><b>Write list entries on separate lines.</b></li>
+
+  <li><b>But if sentence runs over several lines, write it as continuous text.</b></li>
+
+</ul>
+
+</div>
+
+<!-- Step 3 of the tutorial -->
+<div id="2" class="modal-body" style="display:none">
+<p>
+  <b>Recording later annotations to the cards</b><br>
+  Some cards were annotated after the original field information was recorded.
+  Annotations can take a variety of forms, such as:
+</p>
+
+<ol>
+  <li><b>Additions in blue pen.</b> These may record different types of information
+    - some add commentary to the card (e.g.: 'no photo'), information on disposition
+    (e.g.: 'discarded'), type (e.g.: 'type 291') or context (e.g.: 'Level I').</li>
+
+    <li><b>Additions in blue or red pencil.</b> These typically are to add an 'A' or 'B' to the card.</li>
+
+    <li><b>Ticks, crosses, or lines drawn across the card.</b> These will not be included in the transcript:
+      you can however make some comment on them in the transcription notes (e.g.: 'the card has a pencil line
+      drawn obliquely over the whole text').</li>
+    </ol>
+    <p>
+      To transcribe these:
+    </p>
+    <ul>
+      <li><b>Frame the annotation</b> to make it clear that it is an addition to the text.
+        This is done by adding the word '[insert]' before the new text, and '[end insert]' afterwards.</li>
+
+        <li><b>Indicate the annotation medium.</b>
+          E.g.: 'blue pencil', 'red pencil', 'pencil', or 'black pen', 'blue pen' etc.</li>
+
+        </ul>
+        <p>
+          For example: '[insert, blue pen] Level IV [end insert].
+        </p>
+
+      </div>
+
+      <!-- Step 4 of the tutorial -->
+      <div id="3" class="modal-body" style="display:none">
+        <p>
+          <b>Transcription order</b><br>
+        </p>
+        <ul>
+          <li>Start with the field number of the object or
+            vessel. This appears typically at the top right corner
+            of the card, e.g. ATP/1, AT/39/25.</li>
+            <li>Continue from top left corner of the card.</li>
+            <li>Insert annotations where they appear in the text</li>
+          </ul>
+
+          <p>
+            <b>Troubleshooting</b><br>
+          </p>
+          <p>
+            <i>Q: What do I do if I have two cards with the same
+              field number?</i><br>
+              Copy the number as it appears, and note the problem in the transcribers notes' field.
+            </p>
+            <p>
+              <i>Q: I've got a non-standard card format.</i><br>
+              Occasionally the card series contains a note or summary
+              card that has been inserted into the file. Complete the transcription,
+              and fill out whatever other fields seem relevant.
+            </p>
+            <p>
+              <i>Q: My card doesn't have all the necessary information.</i><br>
+              Fill out whatever fields you can, and leave the rest blank.
+            </p>
+
+          </div>
+
+          <!-- End of stepped modal body -->
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
+            <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+            <button id="closeBtn" data-dismiss="modal" onclick="showStep('finish')" class="btn btn-primary"
+            style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Back to task
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client side scripts -->
+  <script>
+    // Quick fix for IE8
+    Modernizr.load({
+      test : window.JSON,
+      nope : '/static/js/vendor/json2.min.js'
+    });
+
+
+
+
+  </script>
+
+  <!-- Step through modals -->
+  <script type="text/javascript">
+    var step = -1;
+    function showStep(action) {
+      $("#" + step).hide();
+      if (action == 'next') {
+        step = step + 1;
+      }
+      if (action == 'prev') {
+        step = step - 1;
+      }
+      if (step == 0) {
+        $("#prevBtn").hide();
+      } else {
+        $("#prevBtn").show();
+      }
+
+      // this line below needs to match the id of the last modal div. If you have 4 divs, you need to
+      // change this to step = 3 and if you have 2 you would say step = 1. Id starts at 0.
+
+      if (step == 3) {
+        $("#nextBtn").hide();
+        $("#closeBtn").show();
+      }
+      if (action == 'finish') {
+        step = 0;
+        $("#closeBtn").hide();
+        $("#prevBtn").hide();
+        $("#nextBtn").show();
+      }
+      $("#" + step).show();
+    }
+    showStep('next');
+    $("#modal").modal('show');
+
+
+
+
+  </script>
+
+  <!-- Load user progress -->
+  <script>
+
+    // This part of the script loads the user's progress through the project
+
+    function loadUserProgress() {
+      pybossa.userProgress('At39Obj').done(function(data) {
+        console.log(data);
+        console.log("Total answers done for user: " + data.done);
+        var pct = Math.round((data.done * 100) / data.total);
+        $("#progress").css("width", pct.toString() + "%");
+        $("#progress").attr("title", pct.toString() + "% completed!");
+        $("#progress").tooltip({ 'placement' : 'left' });
+        $("#total").text(data.total);
+        $("#done").text(data.done);
+        $('a[rel]').tooltip({'placement' : 'left'});
+      });
+    }
+
+    //This part loads the script
+
+    pybossa.taskLoaded(function(task, deferred) {
+      if (! $.isEmptyObject(task)) {
+        loadUserProgress();
+        deferred.resolve(task);
+      } else {
+        deferred.resolve(task);
+      }
+    });
+
+    // This part presents the task and then saves the answers
+
+    pybossa.presentTask(function(task, deferred) {
+      if (!$.isEmptyObject(task)) {
+        console.log(task)
+        $("#question").html(task.info.question);
+        $('#task-id').html(task.id);
+        $("#photo").attr('src', task.info.url_b);
+        $("a#raw").attr("href", task.info.url_b);
+        $(".fancybox").fancybox();
+        $( "#toggle" ).click( function() {
+          $("#photo").toggleClass('flip');
+        });
+        $("a#flickr").attr("href", task.info.link + '/sizes/k/');
+        var data = [[]];
+        $('.btn-answer').off('click').on('click', function(evt) {
+          evt.preventDefault();
+          var answer = $(evt.target).attr("value");
+          if ( typeof answer != 'undefined') {
+            task.answer = $("#magicData").serializeJSON();
+            console.log(task.answer);
+            pybossa.saveTask(task.id, task.answer).done(function() {
+              $("html, body").animate( {scrollTop : 0 }, "slow");
+              $("#success").fadeIn(500).fadeOut(500);
+              $("#loading").fadeIn(500).fadeOut(500);
+              $('#magicData')[0].reset();
+              deferred.resolve();
+            });
+          } else {
+            $("#error").show();
+          }
+        });
+        $("#loading").hide();
+      } else {
+        $(".skeleton").hide();
+        $("#loading").hide();
+        $("#finish").fadeIn(500);
+      }
+    });
+    pybossa.run('At39Obj');
+
+  </script>
+
+  <style type="text/css">
+    .btn-answer {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .btn-group {
+      margin-bottom: 0px
+    }
+
+    .flip { transform: rotate(-90deg);}
+
+  </style>
