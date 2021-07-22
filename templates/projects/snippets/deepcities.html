@@ -157,7 +157,7 @@ crossorigin=""></script>
       <div class="modal-footer">
         <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
         <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
-        <a id="startContrib" data-dismiss="modal" href="../Urblan/newtask" class="btn btn-primary"
+        <a id="startContrib" data-dismiss="modal" href="../{{project.short_name}}/newtask" class="btn btn-primary"
         style="display:none"/><i class="glyphicon glyphicon-thumbs-up"></i> Let's start!</a>
       </div>
     </div>
@@ -231,7 +231,7 @@ crossorigin=""></script>
   // This part of the script loads the user's progress through the project
 
   function loadUserProgress() {
-    pybossa.userProgress('Urblan').done(function(data) {
+    pybossa.userProgress('{{project.short_name}}').done(function(data) {
       console.log(data);
       console.log("Total answers done for user: " + data.done);
       var pct = Math.round((data.done * 100) / data.total);
@@ -296,5 +296,5 @@ crossorigin=""></script>
       $("#finish").fadeIn(500);
     }
   });
-  pybossa.run('Urblan');
+  pybossa.run('{{project.short_name}}');
 </script>
