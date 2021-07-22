@@ -275,7 +275,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.12.6/handsontable.fu
   <!-- Load user progress -->
   <script>
     function loadUserProgress() {
-      pybossa.userProgress('montpelierFaunal').done(function(data) {
+      pybossa.userProgress('{{project.short_name}}').done(function(data) {
         console.log("Total answers done for user: " + data.done);
         var pct = Math.round((data.done * 100) / data.total);
         $("#progress").css("width", pct.toString() + "%");
@@ -352,7 +352,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.12.6/handsontable.fu
         $("#finish").fadeIn(500);
       }
     });
-    pybossa.run('montpelierFaunal');
+    pybossa.run('{{project.short_name}}');
   </script>
 
   <style type="text/css">
