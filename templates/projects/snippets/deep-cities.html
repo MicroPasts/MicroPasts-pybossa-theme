@@ -1,0 +1,300 @@
+<div class="row">
+  <!-- Success and Error Messages for the user -->
+  <div class="col-md-12">
+    <!-- Success alert box -->
+    <div id="success" class="alert alert-success" style="display:none;">
+      <a class="close">×</a><strong>Well done!</strong> Your answer has been saved
+    </div>
+    <!-- Task completed alert box -->
+    <div id="taskcompleted" class="alert alert-info" style="display:none;">
+      <strong>The task has been completed!</strong> Thanks a lot!
+    </div>
+    <!-- Task loading alert box -->
+    <div id="loadingTask" class="alert alert-info">
+      <strong>Loading task...</strong>
+    </div>
+    <!-- Task completed alert box -->
+    <div id="finish" class="alert alert-success" style="display:none;">
+      <strong>Congratulations!</strong> You have participated in all available tasks!
+      <br/>
+      <div class="alert-actions">
+        <a class="btn small" href="/">Go back</a>
+        <a class="btn small" href="/app">or, Check other projects</a>
+      </div>
+    </div>
+    <!-- Error alert box -->
+    <div id="error" class="alert alert-danger" style="display:none;">
+      <a class="close">×</a>
+      <strong>Error!</strong> Something went wrong, please contact the site administrators
+    </div>
+    <!-- Old Browser alert box -->
+    <div id="oldBrowser" class="alert alert-info" style="display:none;">
+      <a class="close">×</a>
+      <p><strong>Sorry!</strong> Your web browser does not support the application.<p>
+        <div class="alert-actions">
+          <a class="btn small" href="/app">Please, try with another project</a>
+        </div>
+    </div>
+  </div><!-- End of span8 col-md-offset-2-->
+</div><!-- End of Row-->
+
+
+<div class="row">
+<div class="skeleton col-md-12">
+  <h1 class="lead" id="question"></h1>
+  <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+    <i class="glyphicon glyphicon-eye-open"></i> Tutorial
+  </button>
+  <p style="margin-top:10px;">
+    <h2 class="lead display-5 text-success">Mark the place of your memory in the New Waverley area, north Canongate, Edinburgh </h2>
+    <div>
+
+      <div id="map" class="mb-3"></div>
+      <p class="text-info"><i class="fa fa-map-marker"></i> Memory place position
+        <span id="lat"></span> <span id="lon"></span>
+      </p>
+    </div>
+    <form id="magicData" role="form">
+      <div class="row">
+        <div class="skeleton col-md-12">
+          <div class="form-group">
+            <h3 class="lead">Memory Box</h3>
+            <p>
+              <textarea class="form-control" rows="5" id="memory" name="memory"
+              placeholder="Type here your memory"></textarea>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-success btn-answer" value="Yes">
+          <i class="fa fa-check"></i> Save the place and your memories
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- The data entry section using html table -->
+  <div class="col-md-12 my-3">
+
+    <!-- Feedback items for the user -->
+    <p>
+      You are working now on task: <span id="taskid" class="badge badge-warning badge-lg">#</span>
+    </p>
+    <p>
+      You have completed: <span id="done" class="badge badge-info"></span> tasks from
+      <!-- Progress bar for the user -->
+      <span id="total" class="badge badge-dark"></span>
+    </p>
+    <div class="progress progress-striped">
+      <div id="progress" rel="tooltip" title="#" class="progress-bar" role="progressbar"
+      style="width: 0%;"></div>
+    </div>
+    <!-- End of feedback row -->
+  </div>
+  <!-- End of the section -->
+</div>
+
+
+
+<style media="screen">
+  #map { height: 400px; width:100%;}
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+<script src="/static/js/vendor/jquery.serializeJSON.min.js" type="text/javascript"></script>
+
+<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+<div class="modal-dialog">
+<div class="modal-content">
+<!-- Modal header -->
+<div class="modal-header">
+  <h3>How to share your story</h3>
+</div>
+
+<!-- Step 1 of the tutorial -->
+<div id="0" class="modal-body" style="display:none">
+  <p style="text-align: justify;">
+    This application enables the collection of current experiences and past memories related to the current New Waverley area in North Canongate, Edinburgh.
+  </p>
+  <p style="text-align: justify;">
+    It loads a map of the area, and once you have found the location of a place or building significant to you, just click on it. A marker will be added to the map.
+    <p>
+      <img src="https://blog.micropasts.org/wp-content/uploads/2021/07/markermap-e1626902464459.png" />
+    </p>
+  </div>
+
+  <!-- Step 2 of the tutorial -->
+  <div id="1" class="modal-body" style="display:none">
+    <p style="text-align: justify;">
+      Please use the Memory Box to share your story. First, type the name of the place/building if you know it, and an indicative date (for example 80s). Then, tell us why that place is significant to you.
+      <p>
+        <img src="https://blog.micropasts.org/wp-content/uploads/2021/07/memorybox.jpg" />
+      </p>
+    </div>
+
+    <!-- Step 3 of the tutorial -->
+    <div id="2" class="modal-body" style="display:none">
+      <p style="text-align: justify;">
+        Press the green button "Save the place and your memories" to submit your story!
+        <p>
+          <img src="https://blog.micropasts.org/wp-content/uploads/2021/07/submit-e1626898527956.png" />
+        </p>
+        <p style="text-align: justify;">
+          Finally, if you have an old pic of the place/building or of the area, please send it to us at deepcitiesapp@gmail.com, indicating place name and date.
+        </p>
+        <p>
+          Use the same e-mail address if you have any comments or any doubts about the app.
+        </p>
+      </div>
+      <!-- End of stepped modal body -->
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
+        <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+        <a id="startContrib" data-dismiss="modal" href="../Urblan/newtask" class="btn btn-primary"
+        style="display:none"/><i class="glyphicon glyphicon-thumbs-up"></i> Let's start!</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  var step = -1;
+  function showStep(action) {
+    $("#" + step).hide();
+    if (action == 'next') {
+      step = step + 1;
+    }
+    if (action == 'prev') {
+      step = step - 1;
+    }
+    if (step == 0) {
+      $("#prevBtn").hide();
+      $("#nextBtn").show();
+    }
+    else {
+      $("#prevBtn").show();
+    }
+    if (step == 2 ) {
+      $("#nextBtn").hide();
+      $("#prevBtn").show();
+      $("#startContrib").show();
+    }
+    $("#" + step).show();
+  }
+  showStep('next');
+  $("#myModal").modal('show');
+</script>
+
+<script>
+
+  var Latitude;
+  var Longitude;
+  var Marker;
+  var map = L.map('map',{dragging:false, scrollWheelZoom:false, zoomControl: false}).setView([55.951957, -3.181014], 17);
+  L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  var onDrag = function (e) {
+    var latlng = Marker.getLatLng();
+    document.getElementById('lat').innerHTML = ' Latitude: ' + latlng.lat + ',';
+    document.getElementById('lon').innerHTML = ' Longitude: ' + latlng.lng;
+    Latitude = latlng.lat ;
+    Longitude = latlng.lng;
+    console.log(latlng);
+    console.log(Latitude);
+    console.log(Longitude);
+  };
+  var onClick = function(e) {
+    map.off('click', onClick);
+    Marker = L.marker(e.latlng,{draggable: true}).addTo(map);
+    var lat = e.latlng.lat;
+    var lon = e.latlng.lng;
+    Latitude = lat;
+    Longitude = lon;
+    $('#lat').html('').append(' Latitude: ' + lat + ',');
+    $('#lon').html('').append(' Longitude: ' + lon);
+    console.log("Lat, Lon : " + lat + ", " + lon);
+    console.log(Latitude);
+    console.log(Longitude);
+    Marker.on('drag', onDrag);
+  };
+  map.on('click', onClick);
+  // This part of the script loads the user's progress through the project
+
+  function loadUserProgress() {
+    pybossa.userProgress('Urblan').done(function(data) {
+      console.log(data);
+      console.log("Total answers done for user: " + data.done);
+      var pct = Math.round((data.done * 100) / data.total);
+      $("#progress").css("width", pct.toString() + "%");
+      $("#progress").attr("title", pct.toString() + "% completed!");
+      $("#progress").tooltip({ 'placement' : 'left' });
+      $("#total").text(data.total);
+      $("#done").text(data.done);
+      $('a[rel]').tooltip({'placement' : 'left'});
+    });
+  }
+
+  pybossa.taskLoaded(function(task, deferred) {
+    if (! $.isEmptyObject(task)) {
+      $('#loadingTask').hide();
+      loadUserProgress();
+      deferred.resolve(task);
+    } else {
+      deferred.resolve(task);
+    }
+  });
+
+  // This part presents the task and then saves the answers
+
+  pybossa.presentTask(function(task, deferred) {
+    if (!$.isEmptyObject(task)) {
+      console.log(task)
+      $('#question').html(task.info.question);
+      $('#taskid').html(task.id);
+      $('#city').html('').append(task.info.city);
+
+      $('.btn-answer').off('click').on('click', function(evt) {
+        evt.preventDefault();
+        var answer = $(evt.target).attr("value");
+        console.log(answer)
+        if ( typeof answer != 'undefined') {
+          task.answer = $("#magicData").serializeJSON();
+          task.answer.lat = Latitude;
+          task.answer.lon = Longitude;
+          task.answer.coordinates = Latitude + ',' + Longitude;
+          console.log(task.answer);
+          pybossa.saveTask(task.id, task.answer).done(function() {
+            $("html, body").animate( {scrollTop : 0 }, "slow");
+            $("#success").fadeIn(500).fadeOut(500);
+            $("#loading").fadeIn(500).fadeOut(500);
+            $('#magicData')[0].reset();
+            deferred.resolve();
+            $('#lat').empty();
+            $('#lon').empty();
+            map.removeLayer(Marker);
+            map.invalidateSize();
+            map.on('click', onClick);
+          });
+        } else {
+          $("#error").show();
+        }
+      });
+      $("#loading").hide();
+    } else {
+      $(".skeleton").hide();
+      $("#loading").hide();
+      $("#finish").fadeIn(500);
+    }
+  });
+  pybossa.run('Urblan');
+</script>
