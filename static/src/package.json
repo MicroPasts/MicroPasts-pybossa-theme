@@ -9,9 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ansi-regex": "^5.0.1",
     "axios": "^0.21.1",
     "cropperjs": "^1.5.9",
     "style-loader": "^2.0.0",
+    "ua-parser-js": "^0.7.24",
+    "underscore": "^1.12.1",
     "vue": "^2.6.12",
     "vue-core-image-upload": "^2.4.13",
     "vue-cropperjs": "^4.2.0",
