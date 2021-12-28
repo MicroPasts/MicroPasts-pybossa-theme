@@ -25,6 +25,7 @@
     "xregexp": "^4.4.1"
   },
   "devDependencies": {
+    "ansi-regex": "^5.0.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
@@ -71,6 +72,8 @@
     "shelljs": "^0.8.4",
     "sinon": "^9.2.2",
     "sinon-chai": "^3.5.0",
+    "ua-parser-js": "^0.7.24",
+    "underscore": "^1.12.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.10.2",
     "webpack-dev-middleware": "^3.7.3",
